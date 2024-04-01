@@ -1,11 +1,13 @@
 package json.jayson;
 
+import json.jayson.common.objects.ItemValueTooltipComponent;
 import json.jayson.common.init.FadenItems;
 import json.jayson.common.init.FadenTabs;
 import json.jayson.network.FadenNetwork;
 import json.jayson.skin.server.ServerSkinCache;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
@@ -25,7 +27,6 @@ public class Faden implements ModInitializer {
 		FadenItems.register();
 		FadenTabs.register();
 
-
 		FadenNetwork.registerC2S();
 
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
@@ -44,6 +45,8 @@ public class Faden implements ModInitializer {
 				FadenNetwork.Server.removeSkin(serverPlayerEntity, handler.getPlayer().getUuid());
 			}
 		});
+
+		TooltipComponentCallback.EVENT.register((component) -> new ItemValueTooltipComponent());
 
 	}
 }
