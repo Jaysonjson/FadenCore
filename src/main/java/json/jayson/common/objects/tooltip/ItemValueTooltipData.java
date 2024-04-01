@@ -1,4 +1,4 @@
-package json.jayson.common.objects;
+package json.jayson.common.objects.tooltip;
 
 import net.minecraft.client.item.TooltipData;
 

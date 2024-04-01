@@ -1,6 +1,6 @@
 package json.jayson;
 
-import json.jayson.common.objects.ItemValueTooltipComponent;
+import json.jayson.common.objects.tooltip.ItemValueTooltipComponent;
 import json.jayson.common.init.FadenItems;
 import json.jayson.common.init.FadenTabs;
 import json.jayson.network.FadenNetwork;

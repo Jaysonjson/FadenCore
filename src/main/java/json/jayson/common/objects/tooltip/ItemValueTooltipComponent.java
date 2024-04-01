@@ -1,4 +1,4 @@
-package json.jayson.common.objects;
+package json.jayson.common.objects.tooltip;
 
 import json.jayson.common.init.FadenItems;
 import net.minecraft.client.font.TextRenderer;

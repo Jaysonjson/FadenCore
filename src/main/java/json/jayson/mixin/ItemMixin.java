@@ -1,7 +1,7 @@
 package json.jayson.mixin;
 
 
-import json.jayson.common.objects.ItemValueTooltipData;
+import json.jayson.common.objects.tooltip.ItemValueTooltipData;
 import net.minecraft.client.item.TooltipData;
 import net.minecraft.item.BundleItem;
 import net.minecraft.item.Item;
