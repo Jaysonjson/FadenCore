@@ -1,0 +1,10 @@
+{
+	"item.faden.copper_coin": "Are Coin",
+	"item.faden.iron_coin": "Iron Coin",
+	"item.faden.silver_coin": "Silver Coin",
+	"item.faden.gold_coin": "Gold Coin",
+	"item.faden.amethyst_coin": "Drunklack Coin",
+	"item.faden.silver_ingot": "Silver Ingot",
+	"item.faden.random_coin_giver": "Hitormiss Coin Giver",
+	"itemgroup.faden.misc": "Faden Misc"
+}

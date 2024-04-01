@@ -1,0 +1,10 @@
+{
+	"item.faden.copper_coin": "Copper piece",
+	"item.faden.iron_coin": "Iron piece",
+	"item.faden.silver_coin": "Silver piece",
+	"item.faden.gold_coin": "Gold piece",
+	"item.faden.amethyst_coin": "Amethyst piece",
+	"item.faden.silver_ingot": "Bullion o' silver",
+	"item.faden.random_coin_giver": "Lots o' money",
+	"itemgroup.faden.misc": "Faden Trinkets"
+}
