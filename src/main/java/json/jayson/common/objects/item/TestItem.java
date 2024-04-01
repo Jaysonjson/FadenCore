@@ -24,7 +24,7 @@ public class TestItem extends Item {
 
         if(!world.isClient) {
             user.sendMessage(Text.literal("Amount in Inventory: " + CoinMap.countCurrency(user.getInventory())));
-            CoinMap.removeCurrency(user.getInventory(), 753);
+            CoinMap.removeCurrency(user.getInventory(), 753, true);
             user.sendMessage(Text.literal("Amount in Inventory: " + CoinMap.countCurrency(user.getInventory())));
         }
         user.sendMessage(Text.literal("Amount in Inventory: " + CoinMap.countCurrency(user.getInventory())));
