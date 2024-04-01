@@ -48,7 +48,6 @@ public class ItemValueTooltipComponent implements TooltipComponent {
         }
     }
 
-
     public static LinkedHashMap<Item, Integer> generateMap(int amount) {
         int toAdd = amount;
         LinkedHashMap<Item, Integer> itemStacks = new LinkedHashMap<>();
