@@ -2,6 +2,7 @@ package json.jayson.common.objects;
 
 import json.jayson.common.init.FadenItems;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -42,5 +43,22 @@ public class CoinMap {
             player.getInventory().insertStack(itemStack);
 
         }
+    }
+
+    public static int countCurrency(Inventory inventory) {
+        int amount = 0;
+        for (Item value : COINS.values()) {
+            amount += inventory.count(value) * getCoinValue(value);
+        }
+        return amount;
+    }
+
+    public static Integer getCoinValue(Item value) {
+        for (Map.Entry<Integer, Item> entry : COINS.entrySet()) {
+                if(entry.getValue().equals(value)) {
+                    return entry.getKey();
+                }
+        }
+        return 0;
     }
 }

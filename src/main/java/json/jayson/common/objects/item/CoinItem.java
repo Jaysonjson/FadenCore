@@ -18,11 +18,12 @@ public class CoinItem extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        if(!world.isClient) {
+        /*if(!world.isClient) {
             Integer amount = new Random().nextInt(5000);
             CoinMap.addCurrency(user, amount);
             user.sendMessage(Text.literal("Gave Amount: " + amount));
-        }
+        }*/
+        user.sendMessage(Text.literal("Amount in Inventory: " + CoinMap.countCurrency(user.getInventory())));
         return super.use(world, user, hand);
     }
 }
