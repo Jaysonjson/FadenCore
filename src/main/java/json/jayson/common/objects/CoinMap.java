@@ -27,21 +27,16 @@ public class CoinMap {
     public static void addCurrency(PlayerEntity player, int amount) {
         int toAdd = amount;
         Map<Item, Integer> itemStacks = new HashMap<>();
-        System.out.println("START");
-        int h = 0;
         while(toAdd > 0) {
             for (Integer i : COINS.keySet()) {
-                System.out.println(i + "_" + toAdd + ":" + h);
                 if(i <= toAdd) {
                     itemStacks.put(COINS.get(i), itemStacks.getOrDefault(COINS.get(i), 0) + 1);
                     toAdd -= i;
                     break;
                 }
             }
-            ++h;
         }
         for (Item item : itemStacks.keySet()) {
-            System.out.println(item.toString() + ":" + itemStacks.get(item));
             ItemStack itemStack = item.getDefaultStack();
             itemStack.setCount(itemStacks.get(item));
             player.getInventory().insertStack(itemStack);
