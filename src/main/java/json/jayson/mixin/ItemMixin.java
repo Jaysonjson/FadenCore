@@ -1,6 +1,7 @@
 package json.jayson.mixin;
 
 
+import json.jayson.common.objects.tooltip.ItemValueTooltipComponent;
 import json.jayson.common.objects.tooltip.ItemValueTooltipData;
 import net.minecraft.client.item.TooltipData;
 import net.minecraft.item.BundleItem;
@@ -12,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Optional;
+import java.util.Random;
 
 @Mixin(Item.class)
 public class ItemMixin {
@@ -19,10 +21,11 @@ public class ItemMixin {
 
     @Inject(at = @At("HEAD"), method = "getTooltipData", cancellable = true)
     private void getTooltipData(ItemStack stack, CallbackInfoReturnable<Optional<TooltipData>> cir) {
+        int value = 4325;
         if(cir.getReturnValue() == null && !(stack.getItem() instanceof BundleItem)) {
-            cir.setReturnValue(Optional.of(new ItemValueTooltipData()));
+            cir.setReturnValue(Optional.of(new ItemValueTooltipData(ItemValueTooltipComponent.generateMap(value))));
         } else if(!cir.getReturnValue().isPresent()) {
-            cir.setReturnValue(Optional.of(new ItemValueTooltipData()));
+            cir.setReturnValue(Optional.of(new ItemValueTooltipData(ItemValueTooltipComponent.generateMap(value))));
         }
     }
 

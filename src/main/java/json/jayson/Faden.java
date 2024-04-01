@@ -4,6 +4,7 @@ import json.jayson.common.objects.CoinMap;
 import json.jayson.common.objects.tooltip.ItemValueTooltipComponent;
 import json.jayson.common.init.FadenItems;
 import json.jayson.common.init.FadenTabs;
+import json.jayson.common.objects.tooltip.ItemValueTooltipData;
 import json.jayson.network.FadenNetwork;
 import json.jayson.skin.server.ServerSkinCache;
 import net.fabricmc.api.ModInitializer;
@@ -47,7 +48,12 @@ public class Faden implements ModInitializer {
 			}
 		});
 
-		TooltipComponentCallback.EVENT.register((component) -> new ItemValueTooltipComponent());
+		TooltipComponentCallback.EVENT.register((component) -> {
+			if(component instanceof ItemValueTooltipData data) {
+				return new ItemValueTooltipComponent(data);
+			}
+			return null;
+		});
 
 	}
 }

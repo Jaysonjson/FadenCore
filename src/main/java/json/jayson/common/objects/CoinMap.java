@@ -10,7 +10,7 @@ import java.util.*;
 
 public class CoinMap {
 
-    public static Map<Integer, Item> COINS = new LinkedHashMap<>();
+    public static LinkedHashMap<Integer, Item> COINS = new LinkedHashMap<>();
 
 
     public static void addCoins() {
