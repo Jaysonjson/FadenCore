@@ -21,6 +21,12 @@ public class TestItem extends Item {
             CoinMap.addCurrency(user, amount);
             user.sendMessage(Text.literal("Gave Amount: " + amount));
         }*/
+
+        if(!world.isClient) {
+            user.sendMessage(Text.literal("Amount in Inventory: " + CoinMap.countCurrency(user.getInventory())));
+            CoinMap.removeCurrency(user.getInventory(), 753);
+            user.sendMessage(Text.literal("Amount in Inventory: " + CoinMap.countCurrency(user.getInventory())));
+        }
         user.sendMessage(Text.literal("Amount in Inventory: " + CoinMap.countCurrency(user.getInventory())));
         return super.use(world, user, hand);
     }
