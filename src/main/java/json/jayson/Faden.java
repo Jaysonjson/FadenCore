@@ -1,5 +1,6 @@
 package json.jayson;
 
+import json.jayson.common.objects.CoinMap;
 import json.jayson.common.objects.tooltip.ItemValueTooltipComponent;
 import json.jayson.common.init.FadenItems;
 import json.jayson.common.init.FadenTabs;
@@ -26,7 +27,7 @@ public class Faden implements ModInitializer {
 		CONTAINER = FabricLoader.getInstance().getModContainer(MOD_ID).get();
 		FadenItems.register();
 		FadenTabs.register();
-
+		CoinMap.addCoins();
 		FadenNetwork.registerC2S();
 
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {

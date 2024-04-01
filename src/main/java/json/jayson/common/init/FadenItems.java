@@ -1,5 +1,6 @@
 package json.jayson.common.init;
 
+import json.jayson.common.objects.item.CoinItem;
 import json.jayson.datagen.DataItemModel;
 import json.jayson.datagen.FadenDataItem;
 import json.jayson.util.FadenIdentifier;
@@ -22,6 +23,7 @@ public class FadenItems {
     public static Item GOLD_COIN = registerItem("gold_coin", new Item(new FabricItemSettings()), "coins/gold_coin");
     public static Item AMETHYST_COIN = registerItem("amethyst_coin", new Item(new FabricItemSettings()), "coins/amethyst_coin");
     public static Item SILVER_INGOT = registerItem("silver_ingot", new Item(new FabricItemSettings()), "ingots/silver_ingot");
+    public static Item RANDOM_COIN_GIVER = registerItem("random_coin_giver", new CoinItem(new FabricItemSettings()), "");
 
     private static Item registerItem(String name, Item item, String texture, DataItemModel itemModel) {
         Item i = Registry.register(Registries.ITEM, FadenIdentifier.create(name), item);
