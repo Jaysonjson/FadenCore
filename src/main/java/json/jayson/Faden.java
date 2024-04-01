@@ -27,7 +27,7 @@ public class Faden implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		CONTAINER = FabricLoader.getInstance().getModContainer(MOD_ID).get();
-		FadenItems.register();//F
+		FadenItems.register();
 		FadenTabs.register();
 		CoinMap.addCoins();
 		FadenNetwork.registerC2S();
