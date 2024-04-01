@@ -57,17 +57,27 @@ public class CoinMap {
                 }
             }
         }
+        boolean drop = false;
         for (Item item : itemStacks.keySet()) {
             ItemStack itemStack = item.getDefaultStack();
             itemStack.setCount(itemStacks.get(item));
             if(inventory instanceof PlayerInventory playerInventory) {
+                //TODO: CHECK IF PLAYER INVENTORY IS FULL AND THEN SET DROP TO TRUE
                 playerInventory.insertStack(itemStack);
             } else {
                 for (int i = 0; i < inventory.size(); i++) {
+                    if(i >= inventory.size()) {
+                        drop = true;
+                    }
                     if (inventory.getStack(i) == null || inventory.getStack(i).getItem() == Items.AIR) {
                         inventory.setStack(i, itemStack);
+                        break;
                     }
                 }
+            }
+
+            if(drop) {
+                //TODO DROP CODE
             }
         }
     }
