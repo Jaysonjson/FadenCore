@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "json.jayson.client.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "ItemRendererAccessor",
+    "ItemRendererMixin",
+    "ModelLoaderMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
