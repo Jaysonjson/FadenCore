@@ -2,7 +2,6 @@ package json.jayson.common.objects;
 
 import json.jayson.common.init.FadenItems;
 import json.jayson.common.objects.item.CoinItem;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
@@ -39,8 +38,35 @@ public class CoinMap {
                 }
             }
             addCurrency(inventory, currentAmount - amount);
-        } else {
-            //DO THE UNORDERED PART HERE LATER
+        }
+        else {
+            for (int i = 0; i < inventory.size(); i++) {
+                if (inventory.getStack(i).getItem() instanceof CoinItem coinItem) {
+                    ItemStack itemStack = inventory.getStack(i);
+                    int value = coinItem.value;
+                    int count = itemStack.getCount();
+                    int total = value * count;
+
+                    if(amount > total){
+                        inventory.setStack(i, Items.AIR.getDefaultStack());
+                        amount -= total;
+                    }
+                    else if(amount == total){
+                        inventory.setStack(i, Items.AIR.getDefaultStack());
+                        break;
+                    }
+                    else{
+                        int take = Math.floorDiv(amount, value);
+                        int refund = amount % value;
+                        itemStack.setCount(itemStack.getCount()-(take+1));
+                        inventory.setStack(i, itemStack);
+                        // One more coin is taken than is calculated, the line below gives back the change.
+                        // If not run the player will overpay :P
+                        addCurrency(inventory, refund);
+                        break;
+                    }
+                }
+            }
         }
     }
 
@@ -97,5 +123,22 @@ public class CoinMap {
                 }
         }
         return 0;
+    }
+
+    public static LinkedHashMap<Item, Integer> countCoins(Inventory inventory){
+        LinkedHashMap<Item, Integer> coinCounts = new LinkedHashMap<>();
+        for (int i = 0; i < inventory.size(); i++) {
+            ItemStack itemStack = inventory.getStack(i);
+            Item item = itemStack.getItem();
+            if (item instanceof CoinItem) {
+                if(coinCounts.containsKey(item)){
+                    coinCounts.put(item, coinCounts.get(item)+itemStack.getCount());
+                }
+                else{
+                    coinCounts.put(item, itemStack.getCount());
+                }
+            }
+        }
+        return coinCounts;
     }
 }

@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import java.util.Optional;
 
 public class CoinItem extends Item {
-    int value;
+    public final int value;
     public CoinItem(Settings settings, int value) {
         super(settings);
         this.value = value;
