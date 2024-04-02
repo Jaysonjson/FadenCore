@@ -70,6 +70,67 @@ public class CoinMap {
         }
     }
 
+    public static void removeCurrency_BROKEN(Inventory inventory, int amount, boolean order) {
+        if(order) {
+            int currentAmount = countCurrency(inventory);
+            for (int i = 0; i < inventory.size(); i++) {
+                if (inventory.getStack(i).getItem() instanceof CoinItem) {
+                    inventory.setStack(i, Items.AIR.getDefaultStack());
+                }
+            }
+            addCurrency(inventory, currentAmount - amount);
+        }
+        else {
+            int total = 0;
+            int count = 0;
+            int value = 0;
+            for (int i = 0; i < inventory.size(); i++) {
+                if (inventory.getStack(i).getItem() instanceof CoinItem coinItem) {
+                    ItemStack itemStack = inventory.getStack(i);
+                    count = itemStack.getCount();
+                    value = coinItem.value;
+                    total = value * count;
+                    System.out.println(total + "_" + amount);
+                    if(amount >= total){
+                        inventory.setStack(i, Items.AIR.getDefaultStack());
+                        amount -= total;
+                    } else {
+                        float newCount = (float) amount / (float) total * 64.0f;
+                        int cnt = (int) newCount;
+                        System.out.println(itemStack.getCount() - cnt);
+                        itemStack.setCount(itemStack.getCount() - (cnt + 1));
+                        inventory.setStack(i, itemStack);
+                        total = 0;
+                        amount -= (cnt + 1) * value;
+                        break;
+                    }
+                }
+            }
+
+            if(amount != 0) {
+                addCurrency(inventory, total - amount);
+            }
+
+            /*while (amount != 0) {
+                if (total != 0) {
+                    System.out.println(total - Math.abs(amount) + "!");
+                    addCurrency(inventory, total - Math.abs(amount));
+                    amount -= total - Math.abs(amount);
+                } else {
+                    System.out.println(Math.abs(amount) + "__" + value);
+                    if (value >= Math.abs(amount)) {
+                        addCurrency(inventory, Math.abs(value));
+                        amount -= value;
+                    } else {
+                        addCurrency(inventory, Math.abs(amount));
+                        amount = 0;
+                        System.out.println("CALLED");
+                    }
+                }
+            }*/
+        }
+    }
+
 
     public static void addCurrency(Inventory inventory, int amount) {
         int toAdd = amount;
