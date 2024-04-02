@@ -32,7 +32,9 @@ public class CoinItem extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.translatable("lore.faden.coin_value").withColor(Colors.GRAY));
+        if(context.isAdvanced()) {
+            tooltip.add(Text.translatable("lore.faden.coin_value").withColor(Colors.GRAY));
+        }
         super.appendTooltip(stack, world, tooltip, context);
     }
 }
