@@ -9,6 +9,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 public class TestItem extends Item {
     public TestItem(Settings settings) {
         super(settings);
@@ -23,9 +25,11 @@ public class TestItem extends Item {
         }*/
 
         if(!world.isClient) {
-            user.sendMessage(Text.literal("Amount in Inventory: " + CoinMap.countCurrency(user.getInventory())));
-            CoinMap.removeCurrency(world, user.getBlockPos(), user.getInventory(), 753, false);
-            user.sendMessage(Text.literal("Amount in Inventory: " + CoinMap.countCurrency(user.getInventory())));
+            int b = CoinMap.countCurrency(user.getInventory());
+            int d = new Random().nextInt(5000);
+            user.sendMessage(Text.literal("Amount in Inventory: " + b));
+            CoinMap.removeCurrency(world, user.getBlockPos(), user.getInventory(), d, false);
+            user.sendMessage(Text.literal("Amount in Inventory: " + CoinMap.countCurrency(user.getInventory()) + "::Should be: " + (b - d)));
         }
         user.sendMessage(Text.literal("Amount in Inventory: " + CoinMap.countCurrency(user.getInventory())));
         return super.use(world, user, hand);
