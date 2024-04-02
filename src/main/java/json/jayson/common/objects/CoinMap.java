@@ -48,38 +48,35 @@ public class CoinMap {
 			for (int i = 0; i < inventory.size(); i++) {
 				if (amount == 0) {
 					break;
-				} else {
+				}
+				if (inventory.getStack(i).getItem() instanceof CoinItem coinItem) {
+					ItemStack itemStack = inventory.getStack(i);
+					int value = coinItem.value;
+					int count = itemStack.getCount();
+					int total = value * count;
+					if (amount >= total) {
+						inventory.setStack(i, Items.AIR.getDefaultStack());
+						amount -= total;
+					} else {
+						int numCoins = Math.floorDiv(amount, value);
+						itemStack.setCount(count - numCoins);
+						inventory.setStack(i, itemStack);
+						amount -= (numCoins*value);
+					}
+				}
+			}
+			if(amount > 0){
+				for (int i = 0; i < inventory.size(); i++) {
 					if (inventory.getStack(i).getItem() instanceof CoinItem coinItem) {
 						ItemStack itemStack = inventory.getStack(i);
 						int value = coinItem.value;
 						int count = itemStack.getCount();
-						int total = value * count;
-						if (amount >= total) {
-							inventory.setStack(i, Items.AIR.getDefaultStack());
-							amount -= total;
-						} else {
-							int itemCount = count;
-							while (itemCount > 0) {
-								// this if statement is probably unnecessary but I'm not risking anything
-								if (amount == 0) {
-									break;
-								} else {
-									int currentTotal = value * itemCount;
-									if (amount >= currentTotal) {
-										itemStack.setCount(itemStack.getCount() - itemCount);
-										inventory.setStack(i, itemStack);
-										amount -= currentTotal;
-									}
-								}
-								itemCount--;
-							}
-							if (amount > 0) {
-								itemStack.setCount(itemStack.getCount() - 1);
-								inventory.setStack(i, itemStack);
-								int refund = value - amount;
-								addCurrency(world, pos, inventory, refund);
-								break;
-							}
+						if (amount < value) {
+							itemStack.setCount(count - 1);
+							inventory.setStack(i, itemStack);
+							amount -= value;
+							addCurrency(world, pos, inventory, -amount);
+							break;
 						}
 					}
 				}
