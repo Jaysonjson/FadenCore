@@ -41,31 +41,41 @@ public class CoinMap {
 			addCurrency(inventory, currentAmount - amount);
 		} else {
 			for (int i = 0; i < inventory.size(); i++) {
-				if (inventory.getStack(i).getItem() instanceof CoinItem coinItem) {
-					ItemStack itemStack = inventory.getStack(i);
-					int value = coinItem.value;
-					int count = itemStack.getCount();
-					int total = value * count;
-					if (amount >= total) {
-						inventory.setStack(i, Items.AIR.getDefaultStack());
-						amount -= total;
-					} else {
-						int itemCount = count;
-						while (itemCount > 0) {
-							int currentTotal = value * itemCount;
-							if (amount >= currentTotal) {
-								itemStack.setCount(itemCount);
-								inventory.setStack(i, itemStack);
-								amount -= currentTotal;
+				if(amount == 0) {
+					break;
+				}
+				else {
+					if (inventory.getStack(i).getItem() instanceof CoinItem coinItem) {
+						ItemStack itemStack = inventory.getStack(i);
+						int value = coinItem.value;
+						int count = itemStack.getCount();
+						int total = value * count;
+						if (amount >= total) {
+							inventory.setStack(i, Items.AIR.getDefaultStack());
+							amount -= total;
+						} else {
+							int itemCount = count;
+							while (itemCount > 0) {
+								if (amount == 0) {
+									break;
+								}
+								else {
+									int currentTotal = value * itemCount;
+									if (amount >= currentTotal) {
+										itemStack.setCount(itemStack.getCount() - itemCount);
+										inventory.setStack(i, itemStack);
+										amount -= currentTotal;
+									}
+								}
+								itemCount--;
 							}
-							itemCount--;
-						}
-						if (amount > 0) {
-							itemStack.setCount(itemStack.getCount() - 1);
-							inventory.setStack(i, itemStack);
-							int refund = value - amount;
-							addCurrency(inventory, refund);
-							break;
+							if (amount > 0) {
+								itemStack.setCount(itemStack.getCount() - 1);
+								inventory.setStack(i, itemStack);
+								int refund = value - amount;
+								addCurrency(inventory, refund);
+								break;
+							}
 						}
 					}
 				}
