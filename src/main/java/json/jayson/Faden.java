@@ -5,6 +5,7 @@ import json.jayson.common.objects.tooltip.ItemValueTooltipComponent;
 import json.jayson.common.init.FadenItems;
 import json.jayson.common.init.FadenTabs;
 import json.jayson.common.objects.tooltip.ItemValueTooltipData;
+import json.jayson.data.ItemValues;
 import json.jayson.network.FadenNetwork;
 import json.jayson.skin.server.ServerSkinCache;
 import net.fabricmc.api.ModInitializer;
@@ -31,6 +32,7 @@ public class Faden implements ModInitializer {
 		FadenTabs.register();
 		CoinMap.addCoins();
 		FadenNetwork.registerC2S();
+		ItemValues.add();
 
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
 			ServerPlayerEntity serverPlayerEntity = handler.getPlayer();

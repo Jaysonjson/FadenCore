@@ -11,6 +11,9 @@ public class ItemValues {
     public static HashMap<Item, Integer> VALUES = new HashMap<>();
 
 
+    /*
+    * TEMPORARY UNTIL JSON DATA IS DONE, BUT TBH, WE DONT NEED TO EXPECT ADDONS, SO WE COULD KJUST KEEP IT HERE
+    * */
     public static void add() {
         VALUES.put(Items.DIAMOND, 750);
     }
