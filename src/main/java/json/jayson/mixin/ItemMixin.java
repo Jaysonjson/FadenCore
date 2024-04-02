@@ -3,6 +3,7 @@ package json.jayson.mixin;
 
 import json.jayson.common.objects.tooltip.ItemValueTooltipComponent;
 import json.jayson.common.objects.tooltip.ItemValueTooltipData;
+import json.jayson.data.ItemValues;
 import net.minecraft.client.item.TooltipData;
 import net.minecraft.item.BundleItem;
 import net.minecraft.item.Item;
@@ -21,11 +22,13 @@ public class ItemMixin {
 
     @Inject(at = @At("HEAD"), method = "getTooltipData", cancellable = true)
     private void getTooltipData(ItemStack stack, CallbackInfoReturnable<Optional<TooltipData>> cir) {
-        int value = 4325;
-        if(cir.getReturnValue() == null && !(stack.getItem() instanceof BundleItem)) {
-            cir.setReturnValue(Optional.of(new ItemValueTooltipData(ItemValueTooltipComponent.generateMap(value))));
-        } else if(!cir.getReturnValue().isPresent()) {
-            cir.setReturnValue(Optional.of(new ItemValueTooltipData(ItemValueTooltipComponent.generateMap(value))));
+        int value = ItemValues.VALUES.getOrDefault(stack.getItem(), 0);
+        if(value != 0) {
+            if (cir.getReturnValue() == null && !(stack.getItem() instanceof BundleItem)) {
+                cir.setReturnValue(Optional.of(new ItemValueTooltipData(ItemValueTooltipComponent.generateMap(value))));
+            } else if (!cir.getReturnValue().isPresent()) {
+                cir.setReturnValue(Optional.of(new ItemValueTooltipData(ItemValueTooltipComponent.generateMap(value))));
+            }
         }
     }
 
