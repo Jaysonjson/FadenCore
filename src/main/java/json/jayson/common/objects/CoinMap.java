@@ -56,6 +56,7 @@ public class CoinMap {
 						} else {
 							int itemCount = count;
 							while (itemCount > 0) {
+								// this if statement is probably unnecessary but I'm not risking anything
 								if (amount == 0) {
 									break;
 								}
