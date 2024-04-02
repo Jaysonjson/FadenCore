@@ -6,11 +6,14 @@ import java.util.Map;
 
 import json.jayson.common.init.FadenItems;
 import json.jayson.common.objects.item.CoinItem;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class CoinMap {
 
@@ -30,7 +33,7 @@ public class CoinMap {
 	/*
 	 * This is so stupid, but I couldnt care to make an actual remove currency
 	 */
-	public static void removeCurrency(Inventory inventory, int amount, boolean order) {
+	public static void removeCurrency(World world, BlockPos pos, Inventory inventory, int amount, boolean order) {
 		if (order) {
 			int currentAmount = countCurrency(inventory);
 			for (int i = 0; i < inventory.size(); i++) {
@@ -38,7 +41,7 @@ public class CoinMap {
 					inventory.setStack(i, Items.AIR.getDefaultStack());
 				}
 			}
-			addCurrency(inventory, currentAmount - amount);
+			addCurrency(world, pos, inventory, currentAmount - amount);
 		} else {
 			for (int i = 0; i < inventory.size(); i++) {
 				if (amount == 0) {
@@ -72,7 +75,7 @@ public class CoinMap {
 								itemStack.setCount(itemStack.getCount() - 1);
 								inventory.setStack(i, itemStack);
 								int refund = value - amount;
-								addCurrency(inventory, refund);
+								addCurrency(world, pos, inventory, refund);
 								break;
 							}
 						}
@@ -82,74 +85,78 @@ public class CoinMap {
 		}
 	}
 
-	public static void addCurrency(Inventory inventory, int amount) {
-        int toAdd = amount;
-        Map<Item, Integer> itemStacks = new HashMap<>();
-        while(toAdd > 0) {
-            for (Integer i : COINS.keySet()) {
-                if(i <= toAdd) {
-                    itemStacks.put(COINS.get(i), itemStacks.getOrDefault(COINS.get(i), 0) + 1);
-                    toAdd -= i;
-                    break;
-                }
-            }
-        }
-        boolean drop = false;
-        for (Item item : itemStacks.keySet()) {
-            ItemStack itemStack = item.getDefaultStack();
-            itemStack.setCount(itemStacks.get(item));
-            if(inventory instanceof PlayerInventory playerInventory) {
-                //TODO: CHECK IF PLAYER INVENTORY IS FULL AND THEN SET DROP TO TRUE
-                playerInventory.insertStack(itemStack);
-            } else {
-                for (int i = 0; i < inventory.size(); i++) {
-                    if(i >= inventory.size()) {
-                        drop = true;
-                    }
-                    if (inventory.getStack(i) == null || inventory.getStack(i).getItem() == Items.AIR) {
-                        inventory.setStack(i, itemStack);
-                        break;
-                    }
-                }
-            }
 
-            if(drop) {
-                //TODO DROP CODE
-            }
-        }
-    }
+	public static void addCurrency(World world, BlockPos pos, Inventory inventory, int amount) {
+		int toAdd = amount;
+		Map<Item, Integer> itemStacks = new HashMap<>();
+		while(toAdd > 0) {
+			for (Integer i : COINS.keySet()) {
+				if(i <= toAdd) {
+					itemStacks.put(COINS.get(i), itemStacks.getOrDefault(COINS.get(i), 0) + 1);
+					toAdd -= i;
+					break;
+				}
+			}
+		}
+		boolean drop = false;
+		for (Item item : itemStacks.keySet()) {
+			ItemStack itemStack = item.getDefaultStack();
+			itemStack.setCount(itemStacks.get(item));
+			if(inventory instanceof PlayerInventory playerInventory) {
+				//TODO: CHECK IF PLAYER INVENTORY IS FULL AND THEN SET DROP TO TRUE
+				drop = playerInventory.getEmptySlot() == -1;
+				if(!drop) {
+					playerInventory.insertStack(itemStack);
+				}
+			} else {
+				for (int i = 0; i < inventory.size(); i++) {
+					if(i >= inventory.size()) {
+						drop = true;
+					}
+					if (inventory.getStack(i) == null || inventory.getStack(i).getItem() == Items.AIR) {
+						inventory.setStack(i, itemStack);
+						break;
+					}
+				}
+			}
+			System.out.println(drop);
+			if(drop && world != null & pos != null) {
+				world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), itemStack));
+			}
+		}
+	}
 
-    public static int countCurrency(Inventory inventory) {
-        int amount = 0;
-        for (Item value : COINS.values()) {
-            amount += inventory.count(value) * getCoinValue(value);
-        }
-        return amount;
-    }
+	public static int countCurrency(Inventory inventory) {
+		int amount = 0;
+		for (Item value : COINS.values()) {
+			amount += inventory.count(value) * getCoinValue(value);
+		}
+		return amount;
+	}
 
-    public static Integer getCoinValue(Item value) {
-        for (Map.Entry<Integer, Item> entry : COINS.entrySet()) {
-                if(entry.getValue().equals(value)) {
-                    return entry.getKey();
-                }
-        }
-        return 0;
-    }
+	public static Integer getCoinValue(Item value) {
+		for (Map.Entry<Integer, Item> entry : COINS.entrySet()) {
+			if(entry.getValue().equals(value)) {
+				return entry.getKey();
+			}
+		}
+		return 0;
+	}
 
-    public static LinkedHashMap<Item, Integer> countCoins(Inventory inventory){
-        LinkedHashMap<Item, Integer> coinCounts = new LinkedHashMap<>();
-        for (int i = 0; i < inventory.size(); i++) {
-            ItemStack itemStack = inventory.getStack(i);
-            Item item = itemStack.getItem();
-            if (item instanceof CoinItem) {
-                if(coinCounts.containsKey(item)){
-                    coinCounts.put(item, coinCounts.get(item)+itemStack.getCount());
-                }
-                else{
-                    coinCounts.put(item, itemStack.getCount());
-                }
-            }
-        }
-        return coinCounts;
-    }
+	public static LinkedHashMap<Item, Integer> countCoins(Inventory inventory){
+		LinkedHashMap<Item, Integer> coinCounts = new LinkedHashMap<>();
+		for (int i = 0; i < inventory.size(); i++) {
+			ItemStack itemStack = inventory.getStack(i);
+			Item item = itemStack.getItem();
+			if (item instanceof CoinItem) {
+				if(coinCounts.containsKey(item)){
+					coinCounts.put(item, coinCounts.get(item)+itemStack.getCount());
+				}
+				else{
+					coinCounts.put(item, itemStack.getCount());
+				}
+			}
+		}
+		return coinCounts;
+	}
 }
