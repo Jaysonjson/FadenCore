@@ -50,13 +50,5 @@ public class Faden implements ModInitializer {
 				FadenNetwork.Server.removeSkin(serverPlayerEntity, handler.getPlayer().getUuid());
 			}
 		});
-
-		TooltipComponentCallback.EVENT.register((component) -> {
-			if(component instanceof ItemValueTooltipData data) {
-				return new ItemValueTooltipComponent(data);
-			}
-			return null;
-		});
-
 	}
 }

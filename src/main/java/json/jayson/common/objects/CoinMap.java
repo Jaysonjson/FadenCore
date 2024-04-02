@@ -23,9 +23,11 @@ public class CoinMap {
 		/*
 		 * COINS OF MORE VALUE FIRST!
 		 */
+		COINS.put(1000, FadenItems.NETHERITE_COIN);
 		COINS.put(500, FadenItems.AMETHYST_COIN);
 		COINS.put(100, FadenItems.GOLD_COIN);
 		COINS.put(50, FadenItems.SILVER_COIN);
+		COINS.put(10, FadenItems.ENDER_COIN);
 		COINS.put(5, FadenItems.IRON_COIN);
 		COINS.put(1, FadenItems.COPPER_COIN);
 	}
