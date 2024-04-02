@@ -1,24 +1,16 @@
 package json.jayson.common.objects.tooltip;
 
-import com.sun.source.tree.Tree;
+import java.util.LinkedHashMap;
+
+import org.joml.Matrix4f;
+
 import json.jayson.common.init.FadenItems;
 import json.jayson.common.objects.CoinMap;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.tooltip.BundleTooltipComponent;
 import net.minecraft.client.gui.tooltip.TooltipComponent;
-import net.minecraft.client.item.BundleTooltipData;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import org.joml.Matrix4f;
-
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.TreeMap;
 
 public class ItemValueTooltipComponent implements TooltipComponent {
 

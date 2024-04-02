@@ -1,21 +1,8 @@
 package json.jayson.skin.provider;
 
-import com.google.gson.Gson;
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.properties.Property;
-import json.jayson.Faden;
-import json.jayson.network.FadenNetwork;
-import json.jayson.skin.client.ClientSkinCache;
-import json.jayson.skin.server.ServerSkinCache;
-import json.jayson.util.FadenIdentifier;
-import json.jayson.util.FadenNBT;
-import net.fabricmc.loader.api.ModContainer;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.Identifier;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -27,6 +14,22 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Base64;
 import java.util.UUID;
+
+import javax.imageio.ImageIO;
+
+import com.google.gson.Gson;
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
+
+import json.jayson.Faden;
+import json.jayson.network.FadenNetwork;
+import json.jayson.skin.client.ClientSkinCache;
+import json.jayson.skin.server.ServerSkinCache;
+import json.jayson.util.FadenIdentifier;
+import net.fabricmc.loader.api.ModContainer;
+import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Identifier;
 
 public class SkinProvider {
 

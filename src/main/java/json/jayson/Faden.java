@@ -1,22 +1,19 @@
 package json.jayson;
 
-import json.jayson.common.objects.CoinMap;
-import json.jayson.common.objects.tooltip.ItemValueTooltipComponent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import json.jayson.common.init.FadenItems;
 import json.jayson.common.init.FadenTabs;
-import json.jayson.common.objects.tooltip.ItemValueTooltipData;
+import json.jayson.common.objects.CoinMap;
 import json.jayson.data.ItemValues;
 import json.jayson.network.FadenNetwork;
 import json.jayson.skin.server.ServerSkinCache;
 import net.fabricmc.api.ModInitializer;
-
-import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.server.network.ServerPlayerEntity;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class Faden implements ModInitializer {
 	public static final String MOD_ID = "faden";
