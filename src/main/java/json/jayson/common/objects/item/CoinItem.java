@@ -6,6 +6,7 @@ import net.minecraft.client.item.TooltipData;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import java.util.LinkedHashMap;
 import java.util.Optional;
 
 public class CoinItem extends Item {
@@ -18,6 +19,8 @@ public class CoinItem extends Item {
 
     @Override
     public Optional<TooltipData> getTooltipData(ItemStack stack) {
-        return Optional.of(new ItemValueTooltipData(ItemValueTooltipComponent.generateMap(value)));
+        LinkedHashMap<Item, Integer> itemStacks = new LinkedHashMap<>();
+        itemStacks.put(this, value);
+        return Optional.of(new ItemValueTooltipData(itemStacks));
     }
 }
