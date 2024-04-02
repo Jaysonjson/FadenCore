@@ -1,6 +1,8 @@
 package json.jayson.network;
 
-import json.jayson.Faden;
+import java.util.Base64;
+import java.util.UUID;
+
 import json.jayson.network.c2s.SendNewSkinC2S;
 import json.jayson.network.s2c.RemoveSkinS2C;
 import json.jayson.network.s2c.SendNewSkinS2C;
@@ -12,9 +14,6 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
-
-import java.util.Base64;
-import java.util.UUID;
 
 public class FadenNetwork {
 
