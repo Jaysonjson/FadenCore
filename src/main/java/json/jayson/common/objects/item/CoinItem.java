@@ -1,5 +1,6 @@
 package json.jayson.common.objects.item;
 
+import json.jayson.common.init.FadenItems;
 import json.jayson.common.objects.tooltip.ItemValueTooltipComponent;
 import json.jayson.common.objects.tooltip.ItemValueTooltipData;
 import net.minecraft.client.item.TooltipContext;
@@ -26,14 +27,15 @@ public class CoinItem extends Item {
     @Override
     public Optional<TooltipData> getTooltipData(ItemStack stack) {
         LinkedHashMap<Item, Integer> itemStacks = new LinkedHashMap<>();
-        itemStacks.put(this, value);
+        itemStacks.put(FadenItems.COPPER_COIN, value * stack.getCount());
         return Optional.of(new ItemValueTooltipData(itemStacks));
     }
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        //tooltip.add(Text.literal(Text.translatable("lore.faden.coin_value").withColor(Colors.GRAY).getString().replaceAll("%v", String.valueOf(stack.getCount() * value))));
         if(context.isAdvanced()) {
-            tooltip.add(Text.translatable("lore.faden.coin_value").withColor(Colors.GRAY));
+            tooltip.add(Text.translatable("tooltip.faden.coin_value").withColor(Colors.GRAY));
         }
         super.appendTooltip(stack, world, tooltip, context);
     }
