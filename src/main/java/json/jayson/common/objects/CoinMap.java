@@ -119,7 +119,6 @@ public class CoinMap {
 					}
 				}
 			}
-			System.out.println(drop);
 			if(drop && world != null & pos != null) {
 				world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), itemStack));
 			}
