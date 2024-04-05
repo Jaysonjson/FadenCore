@@ -1,11 +1,16 @@
 package json.jayson.common.objects;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
+
+import com.mojang.datafixers.types.templates.List;
 
 import json.jayson.common.init.FadenItems;
 import json.jayson.common.objects.item.CoinItem;
+import json.jayson.datagen.FadenDataItem;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -17,19 +22,14 @@ import net.minecraft.world.World;
 
 public class CoinMap {
 
-	public static LinkedHashMap<Integer, Item> COINS = new LinkedHashMap<>();
+	public static TreeMap<Integer, Item> COINS = new TreeMap<>(Collections.reverseOrder());
 
 	public static void addCoins() {
-		/*
-		 * COINS OF MORE VALUE FIRST!
-		 */
-		COINS.put(1000, FadenItems.NETHERITE_COIN);
-		COINS.put(500, FadenItems.AMETHYST_COIN);
-		COINS.put(100, FadenItems.GOLD_COIN);
-		COINS.put(50, FadenItems.SILVER_COIN);
-		COINS.put(10, FadenItems.ENDER_COIN);
-		COINS.put(5, FadenItems.IRON_COIN);
-		COINS.put(1, FadenItems.COPPER_COIN);
+		for (FadenDataItem item : FadenItems.ITEMS) {
+			if(item.item() instanceof CoinItem coinItem) {
+				COINS.put(coinItem.getValue(), item.item());
+			}
+		}
 	}
 
 	/*
@@ -51,7 +51,7 @@ public class CoinMap {
 				}
 				if (inventory.getStack(i).getItem() instanceof CoinItem coinItem) {
 					ItemStack itemStack = inventory.getStack(i);
-					int value = coinItem.value;
+					int value = coinItem.getValue();
 					int count = itemStack.getCount();
 					int total = value * count;
 					if (amount >= total) {
@@ -69,7 +69,7 @@ public class CoinMap {
 				for (int i = 0; i < inventory.size(); i++) {
 					if (inventory.getStack(i).getItem() instanceof CoinItem coinItem) {
 						ItemStack itemStack = inventory.getStack(i);
-						int value = coinItem.value;
+						int value = coinItem.getValue();
 						int count = itemStack.getCount();
 						if (amount < value) {
 							itemStack.setCount(count - 1);
