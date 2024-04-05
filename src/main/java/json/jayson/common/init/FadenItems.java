@@ -25,7 +25,6 @@ public class FadenItems {
     public static CoinItem AMETHYST_COIN = registerItem("amethyst_coin", new CoinItem(new FabricItemSettings(), 500), "coins/amethyst_coin");
     public static CoinItem NETHERITE_COIN = registerItem("netherite_coin", new CoinItem(new FabricItemSettings(), 1000), "coins/netherite_coin");
     public static Item SILVER_INGOT = registerItem("silver_ingot", new Item(new FabricItemSettings()), "ingots/silver_ingot");
-    public static Item RANDOM_COIN_GIVER = registerItem("random_coin_giver", new TestItem(new FabricItemSettings()), "");
 
     private static <T extends Item> T registerItem(String name, T item, String texture, DataItemModel itemModel) {
         T i = Registry.register(Registries.ITEM, FadenIdentifier.create(name), item);
