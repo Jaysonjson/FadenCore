@@ -20,7 +20,7 @@ public class CurrencyCommand {
 
                 .then(CommandManager.literal("give")
                         .then(CommandManager.argument("player", EntityArgumentType.player())
-                                .then(CommandManager.argument("amount", IntegerArgumentType.integer(0))
+                                .then(CommandManager.argument("amount", IntegerArgumentType.integer(0, 99999))
                                         .executes(context -> giveCurrency(context)))))
 
                 .then(CommandManager.literal("remove")
