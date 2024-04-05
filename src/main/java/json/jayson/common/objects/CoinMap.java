@@ -33,7 +33,7 @@ public class CoinMap {
 	}
 
 	/*
-	 * This is so stupid, but I couldnt care to make an actual remove currency
+	 * ordered is faster, but gives higher coins
 	 */
 	public static void removeCurrency(World world, BlockPos pos, Inventory inventory, int amount, boolean order) {
 		if (order) {
@@ -86,6 +86,7 @@ public class CoinMap {
 
 
 	public static void addCurrency(World world, BlockPos pos, Inventory inventory, int amount) {
+		if(amount < 1) return;
 		int toAdd = amount;
 		Map<Item, Integer> itemStacks = new HashMap<>();
 		while(toAdd > 0) {
