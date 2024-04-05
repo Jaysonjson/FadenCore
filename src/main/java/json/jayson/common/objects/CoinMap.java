@@ -88,17 +88,7 @@ public class CoinMap {
 
 	public static void addCurrency(World world, BlockPos pos, Inventory inventory, int amount) {
 		if(amount < 1) return;
-		int toAdd = amount;
-		Map<Item, Integer> itemStacks = new HashMap<>();
-		while(toAdd > 0) {
-			for (Integer i : COINS.keySet()) {
-				if(i <= toAdd) {
-					itemStacks.put(COINS.get(i), itemStacks.getOrDefault(COINS.get(i), 0) + 1);
-					toAdd -= i;
-					break;
-				}
-			}
-		}
+		Map<Item, Integer> itemStacks = generateCoinItemStacks(amount);
 		boolean drop = false;
 		for (Item item : itemStacks.keySet()) {
 			ItemStack itemStack = item.getDefaultStack();
@@ -120,9 +110,33 @@ public class CoinMap {
 				}
 			}
 			if(drop && world != null & pos != null) {
-				world.spawnEntity(new ItemEntity(world, pos.getX(), pos.gestY(), pos.getZ(), itemStack));
+				world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), itemStack));
 			}
 		}
+	}
+	
+	public static void dropCoins(World world, BlockPos pos, int amount) {
+		if(amount < 1) return;
+		Map<Item, Integer> itemStacks = generateCoinItemStacks(amount);
+		for (Item item : itemStacks.keySet()) {
+			ItemStack itemStack = item.getDefaultStack();
+			itemStack.setCount(itemStacks.get(item));
+			world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), itemStack));
+		}
+	}
+
+	public static Map<Item, Integer> generateCoinItemStacks(int amount) {
+		Map<Item, Integer> itemStacks = new HashMap<>();
+		while(amount > 0) {
+			for (Integer i : COINS.keySet()) {
+				if(i <= amount) {
+					itemStacks.put(COINS.get(i), itemStacks.getOrDefault(COINS.get(i), 0) + 1);
+					amount -= i;
+					break;
+				}
+			}
+		}
+		return itemStacks;
 	}
 
 	public static int countCurrency(Inventory inventory) {
@@ -142,8 +156,8 @@ public class CoinMap {
 		return 0;
 	}
 
-	public static LinkedHashMap<Item, Integer> countCoins(Inventory inventory){
-		LinkedHashMap<Item, Integer> coinCounts = new LinkedHashMap<>();
+	public static TreeMap<Item, Integer> countCoins(Inventory inventory){
+		TreeMap<Item, Integer> coinCounts = new TreeMap<>(Collections.reverseOrder());
 		for (int i = 0; i < inventory.size(); i++) {
 			ItemStack itemStack = inventory.getStack(i);
 			Item item = itemStack.getItem();
