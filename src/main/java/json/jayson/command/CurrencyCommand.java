@@ -17,9 +17,21 @@ public class CurrencyCommand {
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         LiteralArgumentBuilder<ServerCommandSource> literalCommandNode = CommandManager.literal("currency").requires((source) -> source.hasPermissionLevel(2))
-                .then(CommandManager.literal("give").then(CommandManager.argument("player", EntityArgumentType.player()).then(CommandManager.argument("amount", IntegerArgumentType.integer())).executes(context -> giveCurrency(context))))
-                .then(CommandManager.literal("remove").then(CommandManager.argument("player", EntityArgumentType.player()).then(CommandManager.argument("amount", IntegerArgumentType.integer())).executes(context -> removeCurrency(context))))
-                .then(CommandManager.literal("count").then(CommandManager.argument("player", EntityArgumentType.player()).executes(context -> countCurrency(context))));
+
+                .then(CommandManager.literal("give")
+                        .then(CommandManager.argument("player", EntityArgumentType.player())
+                                .then(CommandManager.argument("amount", IntegerArgumentType.integer(0))
+                                        .executes(context -> giveCurrency(context)))))
+
+                .then(CommandManager.literal("remove")
+                        .then(CommandManager.argument("player", EntityArgumentType.player())
+                                .then(CommandManager.argument("amount", IntegerArgumentType.integer())
+                                        .executes(context -> removeCurrency(context)))))
+
+                .then(CommandManager.literal("count")
+                        .then(CommandManager.argument("player", EntityArgumentType.player())
+                                .executes(context -> countCurrency(context))));
+
         dispatcher.register(literalCommandNode);
     }
 
