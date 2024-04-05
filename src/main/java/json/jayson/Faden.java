@@ -33,10 +33,9 @@ public class Faden implements ModInitializer {
 		CONTAINER = FabricLoader.getInstance().getModContainer(MOD_ID).get();
 		FadenItems.register();
 		FadenTabs.register();
-		CoinMap.addCoins();
+		CoinMap.reloadCoins();
 		FadenNetwork.registerC2S();
 		ItemValues.add();
-
 		CommandRegistrationCallback.EVENT.register(new FadenCommands());
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
 			ServerPlayerEntity serverPlayerEntity = handler.getPlayer();

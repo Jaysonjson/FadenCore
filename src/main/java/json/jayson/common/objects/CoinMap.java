@@ -24,7 +24,8 @@ public class CoinMap {
 
 	public static TreeMap<Integer, Item> COINS = new TreeMap<>(Collections.reverseOrder());
 
-	public static void addCoins() {
+	public static void reloadCoins() {
+		COINS.clear();
 		for (FadenDataItem item : FadenItems.ITEMS) {
 			if(item.item() instanceof CoinItem coinItem) {
 				COINS.put(coinItem.getValue(), item.item());
@@ -103,7 +104,6 @@ public class CoinMap {
 			ItemStack itemStack = item.getDefaultStack();
 			itemStack.setCount(itemStacks.get(item));
 			if(inventory instanceof PlayerInventory playerInventory) {
-				//TODO: CHECK IF PLAYER INVENTORY IS FULL AND THEN SET DROP TO TRUE
 				drop = playerInventory.getEmptySlot() == -1;
 				if(!drop) {
 					playerInventory.insertStack(itemStack);
@@ -120,7 +120,7 @@ public class CoinMap {
 				}
 			}
 			if(drop && world != null & pos != null) {
-				world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), itemStack));
+				world.spawnEntity(new ItemEntity(world, pos.getX(), pos.gestY(), pos.getZ(), itemStack));
 			}
 		}
 	}
