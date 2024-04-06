@@ -1,7 +1,10 @@
-// 1.20.4	2024-04-01T15:47:51.2907179	Faden Server/Model Definitions
+// 1.20.4	2024-04-02T16:20:07.4818542	Faden Server/Model Definitions
 353bcfc7bed1338cc2e9ea31473ac8c8843b63f5 assets\faden\models\item\copper_coin.json
 c2f8d1155edcfaa53e2003b6dd04afb3a3fb5659 assets\faden\models\item\silver_coin.json
 7351ee8fc79e23ae0dfc7b73f47efac8f9102dd3 assets\faden\models\item\amethyst_coin.json
 76040a434765203980b1be9b4a4194e92101bd1f assets\faden\models\item\silver_ingot.json
-6bc23c3afefa58c1b848b884927cb7d16c6d283d assets\faden\models\item\gold_coin.json
+ba535598ba5ae570720bae0f372a355f44185d92 assets\faden\models\item\random_coin_giver.json
+df1ee992d9eeb32377fea41b8b41b91549c19b2b assets\faden\models\item\netherite_coin.json
 985c1695e7009c078873da2e9b053530239c9f31 assets\faden\models\item\iron_coin.json
+6bc23c3afefa58c1b848b884927cb7d16c6d283d assets\faden\models\item\gold_coin.json
+ba25d3493f244dbaef34209837570f861e58b82f assets\faden\models\item\ender_coin.json

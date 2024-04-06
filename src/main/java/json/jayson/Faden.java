@@ -1,25 +1,30 @@
 package json.jayson;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import json.jayson.command.FadenCommands;
 import json.jayson.common.objects.CoinMap;
 import json.jayson.common.objects.tooltip.ItemValueTooltipComponent;
 import json.jayson.common.init.FadenItems;
 import json.jayson.common.init.FadenTabs;
-import json.jayson.common.objects.tooltip.ItemValueTooltipData;
+import json.jayson.common.objects.CoinMap;
+import json.jayson.data.ItemValues;
 import json.jayson.network.FadenNetwork;
 import json.jayson.skin.server.ServerSkinCache;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.server.network.ServerPlayerEntity;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class Faden implements ModInitializer {
 	public static final String MOD_ID = "faden";
 	public static final String MC_VERSION = "1.20.4";
+	public static final String FADEN_VERSION = "0.0.1";
     public static final Logger LOGGER = LoggerFactory.getLogger("faden");
 	public static ModContainer CONTAINER;
 
@@ -28,9 +33,10 @@ public class Faden implements ModInitializer {
 		CONTAINER = FabricLoader.getInstance().getModContainer(MOD_ID).get();
 		FadenItems.register();
 		FadenTabs.register();
-		CoinMap.addCoins();
+		CoinMap.reloadCoins();
 		FadenNetwork.registerC2S();
-
+		ItemValues.add();
+		CommandRegistrationCallback.EVENT.register(new FadenCommands());
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
 			ServerPlayerEntity serverPlayerEntity = handler.getPlayer();
 			/*
@@ -47,13 +53,5 @@ public class Faden implements ModInitializer {
 				FadenNetwork.Server.removeSkin(serverPlayerEntity, handler.getPlayer().getUuid());
 			}
 		});
-
-		TooltipComponentCallback.EVENT.register((component) -> {
-			if(component instanceof ItemValueTooltipData data) {
-				return new ItemValueTooltipComponent(data);
-			}
-			return null;
-		});
-
 	}
 }
