@@ -1,4 +1,4 @@
-package json.jayson.common.objects.item;
+package net.fuchsia.common.objects.item;
 
 import json.jayson.common.init.FadenItems;
 import json.jayson.common.objects.CoinMap;
@@ -61,7 +61,7 @@ public class PouchItem extends Item {
                     break;
                 }
                 CoinItem checkCoin = (CoinItem)compoundStack.getItem();
-                if(checkCoin.value < coinItem.value){
+                if(checkCoin.getValue() < coinItem.getValue()){
                     NbtCompound newCoinCompound = new NbtCompound();
                     coinStack.writeNbt(newCoinCompound);
                     coinList.add(i, newCoinCompound);
