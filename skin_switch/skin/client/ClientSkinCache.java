@@ -86,7 +86,7 @@ public class ClientSkinCache {
      * Skin that gets saved when you close the game
      * */
     private static NbtCompound SAVED_SKINS = new NbtCompound();
-    private static final Path SAVED_SKINS_PATH = new File(FabricLoader.getInstance().getGameDir().toString() + "/dalekmod/cache/" + Faden.MC_VERSION + "/skin.nbt").toPath();
+    private static final Path SAVED_SKINS_PATH = new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/skin.nbt").toPath();
     /*
      * Can be used if we should ever change the data
      * */
@@ -118,7 +118,7 @@ public class ClientSkinCache {
                 SAVED_SKINS.put(id, tag);
                 SAVED_SKINS.putString("prot", SAVED_SKINS_VERSION);
             }
-            new File(FabricLoader.getInstance().getGameDir().toString() + "/dalekmod/cache/" + Faden.MC_VERSION + "/").mkdirs();
+            new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/").mkdirs();
             try {
                 NbtIo.writeCompressed(SAVED_SKINS,  SAVED_SKINS_PATH);
             } catch (Exception e) {

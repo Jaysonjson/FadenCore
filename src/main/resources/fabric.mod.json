@@ -26,7 +26,8 @@
 		]
 	},
 	"mixins": [
-		"faden.mixins.json"
+		"faden.mixins.json",
+		"faden.client.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.15.7",

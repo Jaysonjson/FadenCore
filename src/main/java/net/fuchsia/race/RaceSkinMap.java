@@ -1,17 +1,23 @@
 package net.fuchsia.race;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.fuchsia.Faden;
 import net.fuchsia.race.skin.provider.SkinProvider;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.util.SkinTextures;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtIo;
+import net.minecraft.nbt.NbtSizeTracker;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.UUID;
 
 public class RaceSkinMap {
 
@@ -20,10 +26,49 @@ public class RaceSkinMap {
 	public static HashMap<String, byte[]> RABBIT_SKINS = new HashMap<>();
 
 
+
+
 	public static void addSkins() {
 		ELF_SKINS = loadSkin(Race.ELF);
 		HUMAN_SKINS = loadSkin(Race.HUMAN);
 		RABBIT_SKINS = loadSkin(Race.RABBIT);
+	}
+
+	public static NbtCompound CACHE = new NbtCompound();
+	private static final Path CACHE_PATH = new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/skin.nbt").toPath();
+
+	public static void loadCache() {
+		try {
+			if(CACHE_PATH.toFile().exists()) {
+				CACHE = NbtIo.readCompressed(CACHE_PATH, NbtSizeTracker.ofUnlimitedBytes());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void addToCache(UUID uuid, String id) {
+		new Thread(() -> {
+			if(CACHE.contains(id)) CACHE.remove(id);
+			NbtCompound tag = new NbtCompound();
+			tag.putString("id", id);
+			CACHE.put(uuid.toString(), tag);
+			new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/").mkdirs();
+			try {
+				NbtIo.writeCompressed(CACHE,  CACHE_PATH);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}).start();
+	}
+
+	public static void saveCache() {
+		new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/").mkdirs();
+		try {
+			NbtIo.writeCompressed(CACHE,  CACHE_PATH);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private static HashMap<String, byte[]>  loadSkin(Race race) {
@@ -35,7 +80,14 @@ public class RaceSkinMap {
 			Path[] ar = Files.list(skins).toArray(Path[]::new);
 			for (int i = 0; i < ar.length; i++) {
 				InputStream inputStream = Files.newInputStream(ar[i]);
-				map.put(ar.toString().substring(ar.toString().lastIndexOf("/" + race.name().toLowerCase() + "/")), SkinProvider.readSkin(inputStream));
+				String id = ar[i].toString();
+				if(id.contains("/")) {
+					id = id.substring(ar[i].toString().lastIndexOf("/") + 1);
+				} else {
+					id = id.substring(ar[i].toString().lastIndexOf("\\") + 1);
+				}
+				id = id.substring(0, id.length() - 4);
+				map.put(id, SkinProvider.readSkin(inputStream));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

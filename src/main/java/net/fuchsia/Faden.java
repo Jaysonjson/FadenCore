@@ -1,6 +1,10 @@
 package net.fuchsia;
 
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.event.server.ServerStartCallback;
 import net.fuchsia.race.RaceSkinMap;
+import net.fuchsia.race.skin.server.ServerSkinCache;
+import net.minecraft.nbt.NbtCompound;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,13 +42,28 @@ public class Faden implements ModInitializer {
 		CommandRegistrationCallback.EVENT.register(new FadenCommands());
 		RaceSkinMap.addSkins();
 
+		ServerLifecycleEvents.SERVER_STARTING.register(server -> {
+			RaceSkinMap.loadCache();
+		});
+
+		ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
+			RaceSkinMap.saveCache();
+		});
+
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
 			ServerPlayerEntity serverPlayerEntity = handler.getPlayer();
 			FadenNetwork.Server.sendAllRaces(serverPlayerEntity);
+			if(RaceSkinMap.CACHE.contains(serverPlayerEntity.getUuid().toString())) {
+				NbtCompound compound = RaceSkinMap.CACHE.getCompound(serverPlayerEntity.getUuid().toString());
+				for (ServerPlayerEntity playerEntity : server.getPlayerManager().getPlayerList()) {
+					FadenNetwork.Server.sendRaceSkin(playerEntity, serverPlayerEntity.getUuid(), compound.getString("id"));
+				}
+			}
 		});
 
 
 		ServerPlayConnectionEvents.DISCONNECT.register((handler, sender) -> {
+			ServerSkinCache.PLAYER_SKINS.remove(handler.getPlayer());
 			for (ServerPlayerEntity serverPlayerEntity : sender.getPlayerManager().getPlayerList()) {
 				FadenNetwork.Server.removeSkin(serverPlayerEntity, handler.getPlayer().getUuid());
 			}

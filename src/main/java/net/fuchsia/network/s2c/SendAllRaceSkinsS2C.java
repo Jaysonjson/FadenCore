@@ -9,6 +9,7 @@ import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.network.PacketByteBuf;
 
 import java.io.*;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -16,7 +17,7 @@ public class SendAllRaceSkinsS2C {
 
     public static void receive(MinecraftClient client, ClientPlayNetworkHandler clientPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
         try {
-            ByteArrayInputStream byteOut = new ByteArrayInputStream(packetByteBuf.readByteArray());
+            ByteArrayInputStream byteOut = new ByteArrayInputStream(Base64.getDecoder().decode(packetByteBuf.readString()));
             ObjectInputStream out = new ObjectInputStream(byteOut);
             HashMap<UUID, String> map = (HashMap<UUID, String>) out.readObject();
             byteOut.close();

@@ -12,17 +12,20 @@ import java.util.UUID;
 public class ClientRaceSkinCache {
     private static HashMap<UUID, Identifier> PLAYER_SKINS = new HashMap<>();
     private static HashMap<String, Identifier> SKINS = new HashMap<>();
-
+    private static boolean added = false;
     public static void add() {
-        HashMap<String, byte[]> maps = RaceSkinMap.getAllMaps();
-        for (String s : maps.keySet()) {
-            byte[] data = maps.get(s);
-            Identifier id = SkinProvider.getSkinIdentifier(s);
-            SkinTexture skinTexture = new SkinTexture(id);
-            skinTexture.setSkinData(data);
-            MinecraftClient.getInstance().getTextureManager().registerTexture(id, skinTexture);
-            MinecraftClient.getInstance().getTextureManager().bindTexture(id);
-            SKINS.put(s, id);
+        if(!added) {
+            HashMap<String, byte[]> maps = RaceSkinMap.getAllMaps();
+            for (String s : maps.keySet()) {
+                byte[] data = maps.get(s);
+                Identifier id = SkinProvider.getSkinIdentifier(s);
+                SkinTexture skinTexture = new SkinTexture(id);
+                skinTexture.setSkinData(data);
+                MinecraftClient.getInstance().getTextureManager().registerTexture(id, skinTexture);
+                MinecraftClient.getInstance().getTextureManager().bindTexture(id);
+                SKINS.put(s, id);
+            }
+            added = true;
         }
     }
 

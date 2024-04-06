@@ -2,6 +2,7 @@ package net.fuchsia.network;
 
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;
+import java.util.Base64;
 import java.util.UUID;
 
 import net.fuchsia.network.s2c.RemoveSkinS2C;
@@ -59,7 +60,7 @@ public class FadenNetwork {
                 byte[] data = byteOut.toByteArray();
                 byteOut.close();
                 out.close();
-                byteBufs.writeBytes(data);
+                byteBufs.writeString(new String(Base64.getEncoder().encode(data)));
                 ServerPlayNetworking.send(player, SEND_ALL_RACE_SKIN, byteBufs);
             } catch (Exception e) {
                 e.printStackTrace();

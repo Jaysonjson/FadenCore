@@ -1,6 +1,7 @@
 package net.fuchsia.common.init;
 
 import net.fuchsia.common.objects.item.CoinItem;
+import net.fuchsia.common.objects.item.TestItem;
 import net.fuchsia.datagen.DataItemModel;
 import net.fuchsia.datagen.FadenDataItem;
 import net.fuchsia.util.FadenIdentifier;
@@ -24,6 +25,7 @@ public class FadenItems {
     public static CoinItem AMETHYST_COIN = registerItem("amethyst_coin", new CoinItem(new FabricItemSettings(), 500), "coins/amethyst_coin");
     public static CoinItem NETHERITE_COIN = registerItem("netherite_coin", new CoinItem(new FabricItemSettings(), 1000), "coins/netherite_coin");
     public static Item SILVER_INGOT = registerItem("silver_ingot", new Item(new FabricItemSettings()), "ingots/silver_ingot");
+    public static Item TEST = registerItem("test_item", new TestItem(new FabricItemSettings()), "ingots/silver_ingot");
 
     private static <T extends Item> T registerItem(String name, T item, String texture, DataItemModel itemModel) {
         T i = Registry.register(Registries.ITEM, FadenIdentifier.create(name), item);
