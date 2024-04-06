@@ -17,12 +17,15 @@ import net.minecraft.util.Colors;
 import net.minecraft.world.World;
 
 public class CoinItem extends Item {
-    public final int value;
+    private final int value;
     public CoinItem(Settings settings, int value) {
         super(settings);
         this.value = value;
     }
 
+    public int getValue() {
+        return this.value;
+    }
 
     @Override
     public Optional<TooltipData> getTooltipData(ItemStack stack) {

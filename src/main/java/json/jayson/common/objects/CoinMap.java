@@ -1,11 +1,16 @@
 package json.jayson.common.objects;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
+
+import com.mojang.datafixers.types.templates.List;
 
 import json.jayson.common.init.FadenItems;
 import json.jayson.common.objects.item.CoinItem;
+import json.jayson.datagen.FadenDataItem;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -17,23 +22,19 @@ import net.minecraft.world.World;
 
 public class CoinMap {
 
-	public static LinkedHashMap<Integer, Item> COINS = new LinkedHashMap<>();
+	public static TreeMap<Integer, Item> COINS = new TreeMap<>(Collections.reverseOrder());
 
-	public static void addCoins() {
-		/*
-		 * COINS OF MORE VALUE FIRST!
-		 */
-		COINS.put(1000, FadenItems.NETHERITE_COIN);
-		COINS.put(500, FadenItems.AMETHYST_COIN);
-		COINS.put(100, FadenItems.GOLD_COIN);
-		COINS.put(50, FadenItems.SILVER_COIN);
-		COINS.put(10, FadenItems.ENDER_COIN);
-		COINS.put(5, FadenItems.IRON_COIN);
-		COINS.put(1, FadenItems.COPPER_COIN);
+	public static void reloadCoins() {
+		COINS.clear();
+		for (FadenDataItem item : FadenItems.ITEMS) {
+			if(item.item() instanceof CoinItem coinItem) {
+				COINS.put(coinItem.getValue(), item.item());
+			}
+		}
 	}
 
 	/*
-	 * This is so stupid, but I couldnt care to make an actual remove currency
+	 * ordered is faster, but gives higher coins
 	 */
 	public static void removeCurrency(World world, BlockPos pos, Inventory inventory, int amount, boolean order) {
 		if (order) {
@@ -51,7 +52,7 @@ public class CoinMap {
 				}
 				if (inventory.getStack(i).getItem() instanceof CoinItem coinItem) {
 					ItemStack itemStack = inventory.getStack(i);
-					int value = coinItem.value;
+					int value = coinItem.getValue();
 					int count = itemStack.getCount();
 					int total = value * count;
 					if (amount >= total) {
@@ -69,7 +70,7 @@ public class CoinMap {
 				for (int i = 0; i < inventory.size(); i++) {
 					if (inventory.getStack(i).getItem() instanceof CoinItem coinItem) {
 						ItemStack itemStack = inventory.getStack(i);
-						int value = coinItem.value;
+						int value = coinItem.getValue();
 						int count = itemStack.getCount();
 						if (amount < value) {
 							itemStack.setCount(count - 1);
@@ -86,23 +87,13 @@ public class CoinMap {
 
 
 	public static void addCurrency(World world, BlockPos pos, Inventory inventory, int amount) {
-		int toAdd = amount;
-		Map<Item, Integer> itemStacks = new HashMap<>();
-		while(toAdd > 0) {
-			for (Integer i : COINS.keySet()) {
-				if(i <= toAdd) {
-					itemStacks.put(COINS.get(i), itemStacks.getOrDefault(COINS.get(i), 0) + 1);
-					toAdd -= i;
-					break;
-				}
-			}
-		}
+		if(amount < 1) return;
+		Map<Item, Integer> itemStacks = generateCoinItemStacks(amount);
 		boolean drop = false;
 		for (Item item : itemStacks.keySet()) {
 			ItemStack itemStack = item.getDefaultStack();
 			itemStack.setCount(itemStacks.get(item));
 			if(inventory instanceof PlayerInventory playerInventory) {
-				//TODO: CHECK IF PLAYER INVENTORY IS FULL AND THEN SET DROP TO TRUE
 				drop = playerInventory.getEmptySlot() == -1;
 				if(!drop) {
 					playerInventory.insertStack(itemStack);
@@ -123,6 +114,30 @@ public class CoinMap {
 			}
 		}
 	}
+	
+	public static void dropCoins(World world, BlockPos pos, int amount) {
+		if(amount < 1) return;
+		Map<Item, Integer> itemStacks = generateCoinItemStacks(amount);
+		for (Item item : itemStacks.keySet()) {
+			ItemStack itemStack = item.getDefaultStack();
+			itemStack.setCount(itemStacks.get(item));
+			world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), itemStack));
+		}
+	}
+
+	public static Map<Item, Integer> generateCoinItemStacks(int amount) {
+		Map<Item, Integer> itemStacks = new HashMap<>();
+		while(amount > 0) {
+			for (Integer i : COINS.keySet()) {
+				if(i <= amount) {
+					itemStacks.put(COINS.get(i), itemStacks.getOrDefault(COINS.get(i), 0) + 1);
+					amount -= i;
+					break;
+				}
+			}
+		}
+		return itemStacks;
+	}
 
 	public static int countCurrency(Inventory inventory) {
 		int amount = 0;
@@ -141,8 +156,8 @@ public class CoinMap {
 		return 0;
 	}
 
-	public static LinkedHashMap<Item, Integer> countCoins(Inventory inventory){
-		LinkedHashMap<Item, Integer> coinCounts = new LinkedHashMap<>();
+	public static TreeMap<Item, Integer> countCoins(Inventory inventory){
+		TreeMap<Item, Integer> coinCounts = new TreeMap<>(Collections.reverseOrder());
 		for (int i = 0; i < inventory.size(); i++) {
 			ItemStack itemStack = inventory.getStack(i);
 			Item item = itemStack.getItem();

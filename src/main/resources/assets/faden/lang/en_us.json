@@ -5,7 +5,8 @@
 	"item.faden.gold_coin": "Gold Coin",
 	"item.faden.amethyst_coin": "Amethyst Coin",
 	"item.faden.silver_ingot": "Silver Ingot",
-	"item.faden.random_coin_giver": "Random Coin Giver",
+	"item.faden.ender_coin": "Ender Coin",
+	"item.faden.netherite_coin": "Netherite Coin",
 	"itemgroup.faden.misc": "Faden Misc",
 	"lore.faden.coin_value": "(Actual Coin Value)"
 }
