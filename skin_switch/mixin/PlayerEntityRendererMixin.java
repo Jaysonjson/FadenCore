@@ -1,6 +1,6 @@
 package net.fuchsia.client.mixin;
 
-import net.fuchsia.race.skin.client.ClientRaceSkinCache;
+import net.fuchsia.old.skin.client.ClientSkinCache;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -17,16 +17,16 @@ public abstract class PlayerEntityRendererMixin {
 
     @Inject(at = @At("HEAD"), method = "getTexture(Lnet/minecraft/client/network/AbstractClientPlayerEntity;)Lnet/minecraft/util/Identifier;", cancellable = true)
     private void getTextureAbstractPlayer(AbstractClientPlayerEntity abstractClientPlayerEntity, CallbackInfoReturnable<Identifier> cir) {
-        if(ClientRaceSkinCache.getPlayerSkins().containsKey(abstractClientPlayerEntity.getUuid())) {
-            cir.setReturnValue(ClientRaceSkinCache.getPlayerSkins().get(abstractClientPlayerEntity.getUuid()));
+        if(ClientSkinCache.getClientSkins().containsKey(abstractClientPlayerEntity.getUuid())) {
+            cir.setReturnValue(ClientSkinCache.getClientSkins().get(abstractClientPlayerEntity.getUuid()));
         }
     }
 
     @ModifyVariable(method = "renderArm", at = @At("STORE"), ordinal = 0)
     private Identifier injected(Identifier x) {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
-        if(ClientRaceSkinCache.getPlayerSkins().containsKey(player.getUuid())) {
-            return ClientRaceSkinCache.getPlayerSkins().get(player.getUuid());
+        if(ClientSkinCache.getClientSkins().containsKey(player.getUuid())) {
+            return ClientSkinCache.getClientSkins().get(player.getUuid());
         }
         return x;
     }

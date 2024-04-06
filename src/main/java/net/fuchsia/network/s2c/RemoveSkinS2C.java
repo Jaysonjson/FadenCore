@@ -1,7 +1,7 @@
 package net.fuchsia.network.s2c;
 
-import net.fuchsia.old.skin.client.ClientSkinCache;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import net.fuchsia.race.skin.client.ClientRaceSkinCache;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.network.PacketByteBuf;
@@ -12,7 +12,7 @@ public class RemoveSkinS2C {
 
     public static void receive(MinecraftClient client, ClientPlayNetworkHandler clientPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
         UUID uuid = packetByteBuf.readUuid();
-        ClientSkinCache.removeClientSkin(uuid);
+        ClientRaceSkinCache.getPlayerSkins().remove(uuid);
     }
 
 }

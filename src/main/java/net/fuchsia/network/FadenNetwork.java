@@ -1,12 +1,14 @@
 package net.fuchsia.network;
 
-import java.util.Base64;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.UUID;
 
-import net.fuchsia.network.c2s.SendNewSkinC2S;
 import net.fuchsia.network.s2c.RemoveSkinS2C;
+import net.fuchsia.network.s2c.SendAllRaceSkinsS2C;
 import net.fuchsia.network.s2c.SendNewSkinS2C;
-import net.fuchsia.old.skin.server.ServerSkinCache;
+import net.fuchsia.race.skin.provider.SkinProvider;
+import net.fuchsia.race.skin.server.ServerSkinCache;
 import net.fuchsia.util.FadenIdentifier;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -17,31 +19,23 @@ import net.minecraft.util.Identifier;
 
 public class FadenNetwork {
 
-    public static final Identifier SEND_SINGLETON_SKIN = FadenIdentifier.create("send_singleton_skin");
-    public static final Identifier SEND_SINGLETON_SKIN_C2S = FadenIdentifier.create("send_singleton_skin_c2s");
+    public static final Identifier SEND_RACE_SKIN = FadenIdentifier.create("send_race_skin");
+    public static final Identifier SEND_ALL_RACE_SKIN = FadenIdentifier.create("send_all_race_skin");
     public static final Identifier REMOVE_SKIN = FadenIdentifier.create("remove_skin");
 
     public static void registerS2C() {
-        ClientPlayNetworking.registerGlobalReceiver(SEND_SINGLETON_SKIN, SendNewSkinS2C::receive);
+        ClientPlayNetworking.registerGlobalReceiver(SEND_RACE_SKIN, SendNewSkinS2C::receive);
+        ClientPlayNetworking.registerGlobalReceiver(SEND_ALL_RACE_SKIN, SendAllRaceSkinsS2C::receive);
         ClientPlayNetworking.registerGlobalReceiver(REMOVE_SKIN, RemoveSkinS2C::receive);
     }
 
     public static void registerC2S() {
-        ServerPlayNetworking.registerGlobalReceiver(SEND_SINGLETON_SKIN_C2S, SendNewSkinC2S::receive);
     }
 
     /*
      * Client to Server
      * */
     public static class Client {
-        public static void sendSingletonSkin(UUID uuid, byte[] skinData) {
-            if(skinData != null) {
-                PacketByteBuf byteBufs = PacketByteBufs.create();
-                byteBufs.writeUuid(uuid);
-                byteBufs.writeString(new String(Base64.getEncoder().encode(skinData)));
-                ClientPlayNetworking.send(SEND_SINGLETON_SKIN_C2S, byteBufs);
-            }
-        }
     }
 
     /*
@@ -49,26 +43,29 @@ public class FadenNetwork {
      * */
     public static class Server {
 
-        public static void sendSingletonSkin(ServerPlayerEntity player) {
-            ServerSkinCache.ServerSkin serverSkin = ServerSkinCache.getServerSkin(player.getUuid());
-            if(serverSkin != null) {
+        public static void sendRaceSkin(ServerPlayerEntity player, UUID uuid, String id) {
+            PacketByteBuf byteBufs = PacketByteBufs.create();
+            byteBufs.writeUuid(uuid);
+            byteBufs.writeIdentifier(SkinProvider.getSkinIdentifier(id));
+            ServerPlayNetworking.send(player, SEND_RACE_SKIN, byteBufs);
+        }
+
+        public static void sendAllRaces(ServerPlayerEntity player) {
+            try {
                 PacketByteBuf byteBufs = PacketByteBufs.create();
-                byteBufs.writeUuid(serverSkin.uuid);
-                byteBufs.writeIdentifier(serverSkin.identifier);
-                byteBufs.writeBytes(serverSkin.skinData);
-                ServerPlayNetworking.send(player, SEND_SINGLETON_SKIN, byteBufs);
+                ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
+                ObjectOutputStream out = new ObjectOutputStream(byteOut);
+                out.writeObject(ServerSkinCache.PLAYER_SKINS);
+                byte[] data = byteOut.toByteArray();
+                byteOut.close();
+                out.close();
+                byteBufs.writeBytes(data);
+                ServerPlayNetworking.send(player, SEND_ALL_RACE_SKIN, byteBufs);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 
-        public static void sendSingletonSkin(ServerPlayerEntity player, ServerSkinCache.ServerSkin serverSkin) {
-            if(serverSkin != null) {
-                PacketByteBuf byteBufs = PacketByteBufs.create();
-                byteBufs.writeUuid(serverSkin.uuid);
-                byteBufs.writeIdentifier(serverSkin.identifier);
-                byteBufs.writeString(new String(Base64.getEncoder().encode(serverSkin.skinData)));
-                ServerPlayNetworking.send(player, SEND_SINGLETON_SKIN, byteBufs);
-            }
-        }
 
         public static void removeSkin(ServerPlayerEntity player, UUID uuid) {
             PacketByteBuf byteBufs = PacketByteBufs.create();

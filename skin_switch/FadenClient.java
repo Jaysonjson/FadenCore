@@ -5,10 +5,10 @@ import net.fuchsia.client.registry.FadenItemModelRegistry;
 import net.fuchsia.common.objects.tooltip.ItemValueTooltipComponent;
 import net.fuchsia.common.objects.tooltip.ItemValueTooltipData;
 import net.fuchsia.network.FadenNetwork;
+import net.fuchsia.old.skin.client.ClientSkinCache;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
-import net.fuchsia.race.skin.client.ClientRaceSkinCache;
 
 public class FadenClient implements ClientModInitializer {
 
@@ -17,14 +17,20 @@ public class FadenClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         FadenNetwork.registerS2C();
-        ClientRaceSkinCache.add();
+
+        ClientSkinCache.retrieveLocalSkins();
+        ClientSkinCache.loadSavedSkins();
 
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
-
+            byte[] cachedSkin = ClientSkinCache.getSavedSkin();
+            if(cachedSkin != null) {
+                FadenNetwork.Client.sendSingletonSkin(client.player.getUuid(), cachedSkin);
+            }
         });
 
 
         ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
+            ClientSkinCache.removeClientSkin(client.player.getUuid());
         });
 
         TooltipComponentCallback.EVENT.register((component) -> {
