@@ -12,7 +12,7 @@ public class RaceUtil {
         ServerSkinCache.PLAYER_SKINS.remove(player.getUuid());
         ServerSkinCache.PLAYER_SKINS.put(player.getUuid(), id);
         for (ServerPlayerEntity serverPlayerEntity : player.getServer().getPlayerManager().getPlayerList()) {
-            FadenNetwork.Server.sendAllRaces(serverPlayerEntity);
+            FadenNetwork.Server.sendRaceSkin(serverPlayerEntity, player.getUuid(), id);
         }
     }
 
