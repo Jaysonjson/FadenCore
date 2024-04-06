@@ -16,13 +16,13 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-          "json.jayson.Faden"
+          "net.fuchsia.Faden"
 		],
 		"fabric-datagen": [
-			"json.jayson.datagen.FadenDataGen"
+			"net.fuchsia.datagen.FadenDataGen"
 		],
 		"client": [
-			"json.jayson.client.FadenClient"
+			"net.fuchsia.client.FadenClient"
 		]
 	},
 	"mixins": [
