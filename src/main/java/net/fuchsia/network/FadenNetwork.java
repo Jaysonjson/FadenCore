@@ -6,7 +6,7 @@ import java.util.UUID;
 import net.fuchsia.network.c2s.SendNewSkinC2S;
 import net.fuchsia.network.s2c.RemoveSkinS2C;
 import net.fuchsia.network.s2c.SendNewSkinS2C;
-import net.fuchsia.skin.server.ServerSkinCache;
+import net.fuchsia.old.skin.server.ServerSkinCache;
 import net.fuchsia.util.FadenIdentifier;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;

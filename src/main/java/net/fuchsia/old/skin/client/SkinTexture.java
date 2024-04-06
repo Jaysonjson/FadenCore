@@ -1,4 +1,4 @@
-package net.fuchsia.skin.client;
+package net.fuchsia.old.skin.client;
 
 import com.mojang.blaze3d.platform.TextureUtil;
 import com.mojang.blaze3d.systems.RenderSystem;

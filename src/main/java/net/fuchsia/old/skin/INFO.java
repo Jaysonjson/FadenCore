@@ -1,4 +1,4 @@
-package net.fuchsia.skin;
+package net.fuchsia.old.skin;
 
 public class INFO {
     /*

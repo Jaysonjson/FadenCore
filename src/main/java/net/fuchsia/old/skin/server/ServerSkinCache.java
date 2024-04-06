@@ -1,4 +1,4 @@
-package net.fuchsia.skin.server;
+package net.fuchsia.old.skin.server;
 
 import net.minecraft.util.Identifier;
 

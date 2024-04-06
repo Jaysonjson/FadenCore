@@ -1,7 +1,7 @@
-package net.fuchsia.skin.client;
+package net.fuchsia.old.skin.client;
 
 import net.fuchsia.Faden;
-import net.fuchsia.skin.provider.SkinProvider;
+import net.fuchsia.old.skin.provider.SkinProvider;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.client.MinecraftClient;

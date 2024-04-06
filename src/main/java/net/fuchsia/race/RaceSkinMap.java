@@ -1,5 +1,7 @@
 package net.fuchsia.race;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.Random;
 
@@ -11,6 +13,14 @@ public class RaceSkinMap {
 	
 	public static void loadSkins() {
 		
+	}
+
+	@Nullable
+	public static byte[] getSkin(String name) {
+		if(ELF_SKINS.containsKey(name)) return ELF_SKINS.get(name);
+		if(HUMAN_SKINS.containsKey(name)) return HUMAN_SKINS.get(name);
+		if(RABBIT_SKINS.containsKey(name)) return RABBIT_SKINS.get(name);
+		return null;
 	}
 	
 	/*
@@ -24,11 +34,11 @@ public class RaceSkinMap {
 			}
 
 			case HUMAN -> {
-				return HUMAN_SKINS.keySet().toArray(new String[] {})[random.nextInt(ELF_SKINS.size())];
+				return HUMAN_SKINS.keySet().toArray(new String[] {})[random.nextInt(HUMAN_SKINS.size())];
 			}
 
 			case RABBIT -> {
-				return RABBIT_SKINS.keySet().toArray(new String[] {})[random.nextInt(ELF_SKINS.size())];
+				return RABBIT_SKINS.keySet().toArray(new String[] {})[random.nextInt(RABBIT_SKINS.size())];
 			}
 		}
 		return "";

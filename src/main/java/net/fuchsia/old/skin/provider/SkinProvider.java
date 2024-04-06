@@ -1,4 +1,4 @@
-package net.fuchsia.skin.provider;
+package net.fuchsia.old.skin.provider;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
@@ -23,8 +23,8 @@ import com.mojang.authlib.properties.Property;
 
 import net.fuchsia.Faden;
 import net.fuchsia.network.FadenNetwork;
-import net.fuchsia.skin.client.ClientSkinCache;
-import net.fuchsia.skin.server.ServerSkinCache;
+import net.fuchsia.old.skin.client.ClientSkinCache;
+import net.fuchsia.old.skin.server.ServerSkinCache;
 import net.fuchsia.util.FadenIdentifier;
 import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.client.network.ClientPlayerEntity;

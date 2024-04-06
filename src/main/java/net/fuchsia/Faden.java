@@ -9,7 +9,7 @@ import net.fuchsia.common.init.FadenItems;
 import net.fuchsia.common.init.FadenTabs;
 import net.fuchsia.data.ItemValues;
 import net.fuchsia.network.FadenNetwork;
-import net.fuchsia.skin.server.ServerSkinCache;
+import net.fuchsia.old.skin.server.ServerSkinCache;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;

@@ -1,8 +1,8 @@
 package net.fuchsia.network.c2s;
 
 import net.fuchsia.network.FadenNetwork;
-import net.fuchsia.skin.provider.SkinProvider;
-import net.fuchsia.skin.server.ServerSkinCache;
+import net.fuchsia.old.skin.provider.SkinProvider;
+import net.fuchsia.old.skin.server.ServerSkinCache;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;

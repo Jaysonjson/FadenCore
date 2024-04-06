@@ -5,7 +5,7 @@ import net.fuchsia.client.registry.FadenItemModelRegistry;
 import net.fuchsia.common.objects.tooltip.ItemValueTooltipComponent;
 import net.fuchsia.common.objects.tooltip.ItemValueTooltipData;
 import net.fuchsia.network.FadenNetwork;
-import net.fuchsia.skin.client.ClientSkinCache;
+import net.fuchsia.old.skin.client.ClientSkinCache;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;

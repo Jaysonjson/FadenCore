@@ -1,6 +1,6 @@
 package net.fuchsia.client.mixin;
 
-import net.fuchsia.skin.client.ClientSkinCache;
+import net.fuchsia.old.skin.client.ClientSkinCache;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
