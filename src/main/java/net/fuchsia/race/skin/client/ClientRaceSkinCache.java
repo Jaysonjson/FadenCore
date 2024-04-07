@@ -1,13 +1,12 @@
 package net.fuchsia.race.skin.client;
 
-import net.fuchsia.race.RaceSkinMap;
-import net.fuchsia.race.skin.provider.SkinProvider;
-import net.fuchsia.util.FadenIdentifier;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.util.Identifier;
-
 import java.util.HashMap;
 import java.util.UUID;
+
+import net.fuchsia.race.RaceSkinMap;
+import net.fuchsia.race.skin.provider.SkinProvider;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.util.Identifier;
 
 public class ClientRaceSkinCache {
     private static HashMap<UUID, Identifier> PLAYER_SKINS = new HashMap<>();

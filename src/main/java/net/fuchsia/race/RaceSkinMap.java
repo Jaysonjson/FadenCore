@@ -1,15 +1,5 @@
 package net.fuchsia.race;
 
-import net.fabricmc.loader.api.FabricLoader;
-import net.fuchsia.Faden;
-import net.fuchsia.race.skin.provider.SkinProvider;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.util.SkinTextures;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtIo;
-import net.minecraft.nbt.NbtSizeTracker;
-import org.jetbrains.annotations.Nullable;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,6 +8,15 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.UUID;
+
+import org.jetbrains.annotations.Nullable;
+
+import net.fabricmc.loader.api.FabricLoader;
+import net.fuchsia.Faden;
+import net.fuchsia.race.skin.provider.SkinProvider;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtIo;
+import net.minecraft.nbt.NbtSizeTracker;
 
 public class RaceSkinMap {
 

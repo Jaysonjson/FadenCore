@@ -1,15 +1,15 @@
 package net.fuchsia.race.skin.client;
 
+import org.jetbrains.annotations.Nullable;
+
 import com.mojang.blaze3d.platform.TextureUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
+
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.texture.NativeImage;
 import net.minecraft.client.texture.ResourceTexture;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.UUID;
 
 public class SkinTexture extends ResourceTexture {
     byte[] skinData = null;
