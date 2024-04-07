@@ -2,16 +2,16 @@
 	"schemaVersion": 1,
 	"id": "faden",
 	"version": "${version}",
-	"name": "Faden Server",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "Faden Core",
+	"description": "Faden Core",
 	"authors": [
-		"Me!"
+		"Fuchsia, Jayson.json, Ginger, Frogrilla, Derpy_7, animecheeze"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://discord.gg/8kUVUTHapX",
+		"sources": "https://github.com/FuchsiaTeam/FadenServer"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/faden/icon.png",
 	"environment": "*",
 	"entrypoints": {
