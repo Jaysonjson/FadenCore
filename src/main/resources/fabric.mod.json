@@ -23,6 +23,9 @@
 		],
 		"client": [
 			"net.fuchsia.client.FadenClient"
+		],
+		"modmenu": [
+			"net.fuchsia.compat.FadenModMenu"
 		]
 	},
 	"mixins": [

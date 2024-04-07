@@ -1,5 +1,7 @@
 package net.fuchsia;
 
+import net.fuchsia.config.FadenConfigScreen;
+import net.minecraft.client.gui.screen.Screen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -64,4 +66,12 @@ public class Faden implements ModInitializer {
 			}
 		});
 	}
+
+	public static Screen openConfig(Screen parent) {
+		if (FabricLoader.getInstance().isModLoaded("cloth-config2")) {
+			return FadenConfigScreen.create(parent);
+		}
+		return null;
+	}
+
 }
