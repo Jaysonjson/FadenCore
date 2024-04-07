@@ -13,13 +13,10 @@ import org.jetbrains.annotations.Nullable;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.fuchsia.Faden;
-import net.fuchsia.network.FadenNetwork;
 import net.fuchsia.race.skin.provider.SkinProvider;
-import net.fuchsia.race.skin.server.ServerSkinCache;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.NbtSizeTracker;
-import net.minecraft.server.network.ServerPlayerEntity;
 
 public class RaceSkinMap {
 
@@ -32,43 +29,6 @@ public class RaceSkinMap {
 		ELF_SKINS = loadSkin(Race.ELF);
 		HUMAN_SKINS = loadSkin(Race.HUMAN);
 		RABBIT_SKINS = loadSkin(Race.RABBIT);
-	}
-
-	public static NbtCompound CACHE = new NbtCompound();
-	private static final Path CACHE_PATH = new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/skin.nbt").toPath();
-
-	public static void loadCache() {
-		try {
-			if(CACHE_PATH.toFile().exists()) {
-				CACHE = NbtIo.readCompressed(CACHE_PATH, NbtSizeTracker.ofUnlimitedBytes());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static void addToCache(UUID uuid, String id) {
-		new Thread(() -> {
-			if(CACHE.contains(id)) CACHE.remove(id);
-			NbtCompound tag = new NbtCompound();
-			tag.putString("id", id);
-			CACHE.put(uuid.toString(), tag);
-			new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/").mkdirs();
-			try {
-				NbtIo.writeCompressed(CACHE,  CACHE_PATH);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}).start();
-	}
-
-	public static void saveCache() {
-		new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/").mkdirs();
-		try {
-			NbtIo.writeCompressed(CACHE,  CACHE_PATH);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	private static HashMap<String, byte[]>  loadSkin(Race race) {
@@ -101,22 +61,12 @@ public class RaceSkinMap {
 		return "assets/" + modid + "/textures/skins/" + race.name().toLowerCase() + "/";
 	}
 
-
 	@Nullable
 	public static byte[] getSkin(String name) {
 		if(ELF_SKINS.containsKey(name)) return ELF_SKINS.get(name);
 		if(HUMAN_SKINS.containsKey(name)) return HUMAN_SKINS.get(name);
 		if(RABBIT_SKINS.containsKey(name)) return RABBIT_SKINS.get(name);
 		return null;
-	}
-	
-	public static void setPlayerRaceSkin(ServerPlayerEntity player, String id) {
-		RaceSkinMap.addToCache(player.getUuid(), id);
-		ServerSkinCache.PLAYER_SKINS.remove(player.getUuid());
-		ServerSkinCache.PLAYER_SKINS.put(player.getUuid(), id);
-		for (ServerPlayerEntity serverPlayerEntity : player.getServer().getPlayerManager().getPlayerList()) {
-			FadenNetwork.Server.sendRaceSkin(serverPlayerEntity, player.getUuid(), id);
-		}
 	}
 
 	public static HashMap<String, byte[]> getAllMaps() {
@@ -146,6 +96,57 @@ public class RaceSkinMap {
 			}
 		}
 		return "";
+	}
+	
+	public static class Cache {
+		private static NbtCompound CACHE = new NbtCompound();
+		private static final Path CACHE_PATH = new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/skin.nbt").toPath();
+
+		public static void load() {
+			try {
+				if(CACHE_PATH.toFile().exists()) {
+					CACHE = NbtIo.readCompressed(CACHE_PATH, NbtSizeTracker.ofUnlimitedBytes());
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		public static NbtCompound get() {
+			return CACHE;
+		}
+
+		public static void add(UUID uuid, String id) {
+			new Thread(() -> {
+				if(CACHE.contains(id)) CACHE.remove(id);
+				NbtCompound tag = new NbtCompound();
+				tag.putString("id", id);
+				CACHE.put(uuid.toString(), tag);
+				new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/").mkdirs();
+				try {
+					NbtIo.writeCompressed(CACHE,  CACHE_PATH);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}).start();
+		}
+
+		public static void save() {
+			new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/").mkdirs();
+			try {
+				NbtIo.writeCompressed(CACHE,  CACHE_PATH);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		public static String getId(UUID uuid) {
+			if(get().contains(uuid.toString())) {
+				NbtCompound compound = get().getCompound(uuid.toString());
+				return compound.getString("id");
+			}
+			return "";
+		}
 	}
 	
 }

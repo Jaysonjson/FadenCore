@@ -1,28 +1,23 @@
 package net.fuchsia;
 
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.fabricmc.fabric.api.event.server.ServerStartCallback;
-import net.fuchsia.race.RaceSkinMap;
-import net.fuchsia.race.skin.server.ServerSkinCache;
-import net.minecraft.nbt.NbtCompound;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.fuchsia.command.FadenCommands;
-import net.fuchsia.common.objects.CoinMap;
-import net.fuchsia.common.init.FadenItems;
-import net.fuchsia.common.init.FadenTabs;
-import net.fuchsia.data.ItemValues;
-import net.fuchsia.network.FadenNetwork;
 import net.fabricmc.api.ModInitializer;
-
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
+import net.fuchsia.command.FadenCommands;
+import net.fuchsia.common.init.FadenItems;
+import net.fuchsia.common.init.FadenTabs;
+import net.fuchsia.common.objects.CoinMap;
+import net.fuchsia.data.ItemValues;
+import net.fuchsia.network.FadenNetwork;
+import net.fuchsia.race.RaceSkinMap;
+import net.fuchsia.race.skin.server.ServerSkinCache;
 import net.minecraft.server.network.ServerPlayerEntity;
-
-import java.util.UUID;
 
 public class Faden implements ModInitializer {
 	public static final String MOD_ID = "faden";
@@ -43,20 +38,20 @@ public class Faden implements ModInitializer {
 		RaceSkinMap.addSkins();
 
 		ServerLifecycleEvents.SERVER_STARTING.register(server -> {
-			RaceSkinMap.loadCache();
+			RaceSkinMap.Cache.load();
 		});
 
 		ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
-			RaceSkinMap.saveCache();
+			RaceSkinMap.Cache.save();
 		});
 
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
 			ServerPlayerEntity serverPlayerEntity = handler.getPlayer();
 			FadenNetwork.Server.sendAllRaces(serverPlayerEntity);
-			if(RaceSkinMap.CACHE.contains(serverPlayerEntity.getUuid().toString())) {
-				NbtCompound compound = RaceSkinMap.CACHE.getCompound(serverPlayerEntity.getUuid().toString());
+			String id = RaceSkinMap.Cache.getId(serverPlayerEntity.getUuid());
+			if(!id.isEmpty()) {
 				for (ServerPlayerEntity playerEntity : server.getPlayerManager().getPlayerList()) {
-					FadenNetwork.Server.sendRaceSkin(playerEntity, serverPlayerEntity.getUuid(), compound.getString("id"));
+					FadenNetwork.Server.sendRaceSkin(playerEntity, serverPlayerEntity.getUuid(), id);
 				}
 			}
 		});
