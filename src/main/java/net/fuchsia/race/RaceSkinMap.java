@@ -13,18 +13,19 @@ import org.jetbrains.annotations.Nullable;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.fuchsia.Faden;
+import net.fuchsia.network.FadenNetwork;
 import net.fuchsia.race.skin.provider.SkinProvider;
+import net.fuchsia.race.skin.server.ServerSkinCache;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.NbtSizeTracker;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 public class RaceSkinMap {
 
 	public static HashMap<String, byte[]> ELF_SKINS = new HashMap<>();
 	public static HashMap<String, byte[]> HUMAN_SKINS = new HashMap<>();
 	public static HashMap<String, byte[]> RABBIT_SKINS = new HashMap<>();
-
-
 
 
 	public static void addSkins() {
@@ -107,6 +108,15 @@ public class RaceSkinMap {
 		if(HUMAN_SKINS.containsKey(name)) return HUMAN_SKINS.get(name);
 		if(RABBIT_SKINS.containsKey(name)) return RABBIT_SKINS.get(name);
 		return null;
+	}
+	
+	public static void setPlayerRaceSkin(ServerPlayerEntity player, String id) {
+		RaceSkinMap.addToCache(player.getUuid(), id);
+		ServerSkinCache.PLAYER_SKINS.remove(player.getUuid());
+		ServerSkinCache.PLAYER_SKINS.put(player.getUuid(), id);
+		for (ServerPlayerEntity serverPlayerEntity : player.getServer().getPlayerManager().getPlayerList()) {
+			FadenNetwork.Server.sendRaceSkin(serverPlayerEntity, player.getUuid(), id);
+		}
 	}
 
 	public static HashMap<String, byte[]> getAllMaps() {
