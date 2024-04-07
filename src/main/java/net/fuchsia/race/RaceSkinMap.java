@@ -68,8 +68,12 @@ public class RaceSkinMap {
 		return skins;
 	}
 
+	/**
+	 * Returns an empty string if no skin could be found
+	 */
 	public static String getRandomSkin(Race race) {
 		Random random = new Random();
+		if(race.getSkinMap().isEmpty()) return "";
 		return race.getSkinMap().keySet().toArray(new String[] {})[random.nextInt(race.getSkinMap().size())];
 	}
 	
