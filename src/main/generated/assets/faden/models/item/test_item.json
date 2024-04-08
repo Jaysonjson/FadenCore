@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "faden:item/"
+    "layer0": "faden:item/ingots/silver_ingot"
   }
 }

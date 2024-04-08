@@ -19,4 +19,9 @@ public enum Race implements IRace {
 	public HashMap<String, byte[]> getSkinMap() {
 		return skinMap;
 	}
+
+	@Override
+	public String getId() {
+		return name();
+	}
 }

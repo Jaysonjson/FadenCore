@@ -26,7 +26,7 @@ public class RaceSkinMap {
 		}
 	}
 
-	private static void loadSkin(Race race) {
+	private static void loadSkin(IRace race) {
 		String skinPath = getSkinPath(race, Faden.MOD_ID);
 		Path skins = Faden.CONTAINER.findPath(skinPath).get();
 		try {
@@ -48,8 +48,8 @@ public class RaceSkinMap {
 	}
 
 
-	public static String getSkinPath(Race race, String modid) {
-		return "assets/" + modid + "/textures/skins/" + race.name().toLowerCase() + "/";
+	public static String getSkinPath(IRace race, String modid) {
+		return "assets/" + modid + "/textures/skins/" + race.getId().toLowerCase() + "/";
 	}
 
 	@Nullable
@@ -71,7 +71,7 @@ public class RaceSkinMap {
 	/**
 	 * Returns an empty string if no skin could be found
 	 */
-	public static String getRandomSkin(Race race) {
+	public static String getRandomSkin(IRace race) {
 		Random random = new Random();
 		if(race.getSkinMap().isEmpty()) return "";
 		return race.getSkinMap().keySet().toArray(new String[] {})[random.nextInt(race.getSkinMap().size())];

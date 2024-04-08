@@ -1,5 +1,6 @@
 package net.fuchsia;
 
+import net.fuchsia.common.init.FadenSoundEvents;
 import net.fuchsia.config.FadenConfigScreen;
 import net.minecraft.client.gui.screen.Screen;
 import org.slf4j.Logger;
@@ -31,6 +32,7 @@ public class Faden implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		CONTAINER = FabricLoader.getInstance().getModContainer(MOD_ID).get();
+		FadenSoundEvents.register();
 		FadenItems.register();
 		FadenTabs.register();
 		CoinMap.reloadCoins();

@@ -8,5 +8,7 @@
 	"item.faden.ender_coin": "Ender Coin",
 	"item.faden.netherite_coin": "Netherite Coin",
 	"itemgroup.faden.misc": "Faden Misc",
-	"lore.faden.coin_value": "(Actual Coin Value)"
+	"lore.faden.coin_value": "(Actual Coin Value)",
+	"item.faden.music_disc_faden": "Faden Music Disc",
+	"item.faden.music_disc_faden.desc": "Lucas Burnett - Faden"
 }
