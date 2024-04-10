@@ -12,14 +12,14 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
-import net.fuchsia.command.FadenCommands;
+import net.fuchsia.common.objects.command.FadenCommands;
 import net.fuchsia.common.init.FadenItems;
 import net.fuchsia.common.init.FadenTabs;
 import net.fuchsia.common.objects.CoinMap;
-import net.fuchsia.data.ItemValues;
+import net.fuchsia.common.data.ItemValues;
 import net.fuchsia.network.FadenNetwork;
-import net.fuchsia.race.RaceSkinMap;
-import net.fuchsia.race.skin.server.ServerSkinCache;
+import net.fuchsia.common.race.RaceSkinMap;
+import net.fuchsia.common.race.skin.server.ServerSkinCache;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 public class Faden implements ModInitializer {

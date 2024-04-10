@@ -1,9 +1,8 @@
 package net.fuchsia.network.s2c;
 
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
-import net.fuchsia.race.skin.client.ClientRaceSkinCache;
-import net.fuchsia.race.skin.provider.SkinProvider;
-import net.fuchsia.race.skin.server.ServerSkinCache;
+import net.fuchsia.common.race.skin.client.ClientRaceSkinCache;
+import net.fuchsia.common.race.skin.provider.SkinProvider;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.network.PacketByteBuf;

@@ -1,18 +1,14 @@
 package net.fuchsia.common.objects.item;
 
-import net.fuchsia.common.objects.CoinMap;
-import net.fuchsia.race.Race;
-import net.fuchsia.race.RaceUtil;
+import net.fuchsia.common.race.Race;
+import net.fuchsia.common.race.RaceUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 public class TestItem extends Item {
     public TestItem(Settings settings) {

@@ -1,4 +1,4 @@
-package net.fuchsia.race;
+package net.fuchsia.common.race;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.fuchsia.Faden;
-import net.fuchsia.race.skin.provider.SkinProvider;
+import net.fuchsia.common.race.skin.provider.SkinProvider;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.NbtSizeTracker;

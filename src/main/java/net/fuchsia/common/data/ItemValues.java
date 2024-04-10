@@ -1,4 +1,4 @@
-package net.fuchsia.data;
+package net.fuchsia.common.data;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;

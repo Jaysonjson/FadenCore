@@ -1,11 +1,11 @@
-package net.fuchsia.race.skin.client;
+package net.fuchsia.common.race.skin.client;
 
 import java.util.HashMap;
 import java.util.UUID;
 
 import net.fuchsia.config.FadenConfig;
-import net.fuchsia.race.RaceSkinMap;
-import net.fuchsia.race.skin.provider.SkinProvider;
+import net.fuchsia.common.race.RaceSkinMap;
+import net.fuchsia.common.race.skin.provider.SkinProvider;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.Identifier;
 

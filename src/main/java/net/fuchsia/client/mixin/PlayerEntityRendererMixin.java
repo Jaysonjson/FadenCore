@@ -1,7 +1,7 @@
 package net.fuchsia.client.mixin;
 
 import net.fuchsia.config.FadenConfig;
-import net.fuchsia.race.skin.client.ClientRaceSkinCache;
+import net.fuchsia.common.race.skin.client.ClientRaceSkinCache;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;

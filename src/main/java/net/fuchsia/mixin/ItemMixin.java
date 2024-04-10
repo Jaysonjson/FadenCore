@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import net.fuchsia.common.objects.item.IValue;
 import net.fuchsia.common.objects.tooltip.ItemValueTooltipComponent;
 import net.fuchsia.common.objects.tooltip.ItemValueTooltipData;
-import net.fuchsia.data.ItemValues;
+import net.fuchsia.common.data.ItemValues;
 import net.minecraft.client.item.TooltipData;
 import net.minecraft.item.BundleItem;
 import net.minecraft.item.Item;

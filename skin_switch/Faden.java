@@ -3,11 +3,11 @@ package net.fuchsia;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.fuchsia.command.FadenCommands;
+import net.fuchsia.common.objects.command.FadenCommands;
 import net.fuchsia.common.objects.CoinMap;
 import net.fuchsia.common.init.FadenItems;
 import net.fuchsia.common.init.FadenTabs;
-import net.fuchsia.data.ItemValues;
+import net.fuchsia.common.data.ItemValues;
 import net.fuchsia.network.FadenNetwork;
 import net.fuchsia.old.skin.server.ServerSkinCache;
 import net.fabricmc.api.ModInitializer;

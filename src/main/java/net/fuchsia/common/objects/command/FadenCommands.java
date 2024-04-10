@@ -1,4 +1,4 @@
-package net.fuchsia.command;
+package net.fuchsia.common.objects.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;

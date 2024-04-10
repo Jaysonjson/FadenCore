@@ -1,4 +1,4 @@
-package net.fuchsia.race;
+package net.fuchsia.common.race;
 
 import net.minecraft.server.network.ServerPlayerEntity;
 
