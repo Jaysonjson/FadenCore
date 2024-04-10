@@ -1,6 +1,7 @@
 plugins {
 	id 'fabric-loom' version '1.6-SNAPSHOT'
 	id 'maven-publish'
+	id 'java'
 }
 
 version = project.mod_version
@@ -49,7 +50,7 @@ repositories {
 			includeGroup "maven.modrinth"
 		}
 	}
-
+	maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 }
 
 fabricApi {
@@ -70,6 +71,19 @@ dependencies {
 	modCompileOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rei_version}"
 	modApi("me.shedaniel.cloth:cloth-config-fabric:${config_version}") {
 		exclude(group: "net.fabricmc.fabric-api")
+	}
+	annotationProcessor 'systems.manifold:manifold-preprocessor:2024.1.12'
+	testAnnotationProcessor 'systems.manifold:manifold-preprocessor:2024.1.12'
+}
+
+if (JavaVersion.current() != JavaVersion.VERSION_1_8 &&
+		sourceSets.main.allJava.files.any {it.name == "module-info.java"}) {
+	tasks.withType(JavaCompile) {
+		options.compilerArgs += ['-Xplugin:Manifold', '--module-path', it.classpath.asPath]
+	}
+} else {
+	tasks.withType(JavaCompile) {
+		options.compilerArgs += ['-Xplugin:Manifold']
 	}
 }
 

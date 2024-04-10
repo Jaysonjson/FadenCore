@@ -26,7 +26,7 @@ public class Faden implements ModInitializer {
 	public static final String MOD_ID = "faden";
 	public static final String MC_VERSION = "1.20.4";
 	public static final String FADEN_VERSION = "0.0.1";
-    public static final Logger LOGGER = LoggerFactory.getLogger("faden");
+    public static final Logger LOGGER = LoggerFactory.getLogger("Faden");
 	public static ModContainer CONTAINER;
 
 	@Override
