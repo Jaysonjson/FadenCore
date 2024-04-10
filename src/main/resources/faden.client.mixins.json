@@ -6,7 +6,8 @@
     "ItemRendererAccessor",
     "ItemRendererMixin",
     "ModelLoaderMixin",
-    "PlayerEntityRendererMixin"
+    "PlayerEntityRendererMixin",
+    "TitlescreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
