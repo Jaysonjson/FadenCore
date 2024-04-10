@@ -25,7 +25,7 @@ public class TitlescreenMixin {
     * */
     @Inject(method = "render", at = @At(value = "TAIL"))
     public void init(CallbackInfo ci) {
-        MinecraftClient.getInstance().getSoundManager().stop(PositionedSoundInstance.music(SoundEvents.MUSIC_MENU.value()));
+        //MinecraftClient.getInstance().getSoundManager().stop(PositionedSoundInstance.music(SoundEvents.MUSIC_MENU.value()));
         if(!MinecraftClient.getInstance().getSoundManager().isPlaying(music)) {
             MinecraftClient.getInstance().getSoundManager().play(music);
         }
