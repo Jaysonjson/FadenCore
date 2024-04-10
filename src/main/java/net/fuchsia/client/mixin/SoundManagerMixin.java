@@ -14,11 +14,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class SoundManagerMixin {
     @Inject(at = @At("HEAD"), method = "play(Lnet/minecraft/client/sound/SoundInstance;)V", cancellable = true)
     private void injectPlayDirect(SoundInstance sound, CallbackInfo ci) {
-        if(MinecraftClient.getInstance().currentScreen instanceof TitleScreen && sound.getId().equals(SoundEvents.MUSIC_MENU.registryKey().getValue())) ci.cancel();
+        if(MinecraftClient.getInstance().currentScreen instanceof TitleScreen && sound.getId().equals(SoundEvents.MUSIC_MENU.registryKey().getValue())) {
+            ci.cancel();
+        }
     }
 
     @Inject(at = @At("HEAD"), method = "play(Lnet/minecraft/client/sound/SoundInstance;I)V", cancellable = true)
     private void injectPlayDelayed(SoundInstance sound, int delay, CallbackInfo ci) {
-        if(MinecraftClient.getInstance().currentScreen instanceof TitleScreen && sound.getId().equals(SoundEvents.MUSIC_MENU.registryKey().getValue())) ci.cancel();
+        if(MinecraftClient.getInstance().currentScreen instanceof TitleScreen && sound.getId().equals(SoundEvents.MUSIC_MENU.registryKey().getValue())) {
+            ci.cancel();
+        }
     }
 }
