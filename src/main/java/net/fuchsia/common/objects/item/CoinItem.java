@@ -34,12 +34,12 @@ public class CoinItem extends Item {
         return Optional.of(new ItemValueTooltipData(itemStacks));
     }
 
-    @Override
+    /*@Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        //tooltip.add(Text.literal(Text.translatable("lore.faden.coin_value").withColor(Colors.GRAY).getString().replaceAll("%v", String.valueOf(stack.getCount() * value))));
+        tooltip.add(Text.literal(Text.translatable("lore.faden.coin_value").withColor(Colors.GRAY).getString().replaceAll("%v", String.valueOf(stack.getCount() * value))));
         if(context.isAdvanced()) {
             tooltip.add(Text.translatable("tooltip.faden.coin_value").withColor(Colors.GRAY));
         }
         super.appendTooltip(stack, world, tooltip, context);
-    }
+    }*/
 }
