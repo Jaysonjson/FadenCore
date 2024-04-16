@@ -82,6 +82,12 @@ public class CoinMap {
 		}
 	}
 
+	public static void sortCurrency(World world, BlockPos pos, Inventory inventory) {
+		int amount = countCurrency(inventory);
+		removeCurrency(world, pos, inventory, amount, true);
+		addCurrency(world, pos, inventory, amount);
+	}
+
 
 	public static void addCurrency(World world, BlockPos pos, Inventory inventory, int amount) {
 		if(amount < 1) return;
@@ -122,6 +128,9 @@ public class CoinMap {
 		}
 	}
 
+	/*
+	* Generates the ItemStacks of Coins given the Currency Amount
+	* */
 	public static Map<Item, Integer> generateCoinItemStacks(int amount) {
 		Map<Item, Integer> itemStacks = new HashMap<>();
 		while(amount > 0) {
@@ -136,6 +145,9 @@ public class CoinMap {
 		return itemStacks;
 	}
 
+	/*
+	* Counts Currency Value of the Inventory
+	* */
 	public static int countCurrency(Inventory inventory) {
 		int amount = 0;
 		for (Item value : COINS.values()) {
@@ -144,6 +156,9 @@ public class CoinMap {
 		return amount;
 	}
 
+	/*
+	* Returns Currency Value of the Coin
+	* */
 	public static Integer getCoinValue(Item value) {
 		for (Map.Entry<Integer, Item> entry : COINS.entrySet()) {
 			if(entry.getValue().equals(value)) {
@@ -153,7 +168,11 @@ public class CoinMap {
 		return 0;
 	}
 
-	public static TreeMap<Item, Integer> countCoins(Inventory inventory){
+
+	/*
+	* Counts which Coints and which Amount the player has in Inventory
+	* */
+	public static TreeMap<Item, Integer> countCoinItems(Inventory inventory){
 		TreeMap<Item, Integer> coinCounts = new TreeMap<>(Collections.reverseOrder());
 		for (int i = 0; i < inventory.size(); i++) {
 			ItemStack itemStack = inventory.getStack(i);
