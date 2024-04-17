@@ -57,7 +57,7 @@ public class Faden implements ModInitializer {
 
 
 		ServerPlayConnectionEvents.DISCONNECT.register((handler, sender) -> {
-			ServerSkinCache.PLAYER_SKINS.remove(handler.getPlayer());
+			ServerSkinCache.PLAYER_SKINS.remove(handler.getPlayer().getUuid());
 			for (ServerPlayerEntity serverPlayerEntity : sender.getPlayerManager().getPlayerList()) {
 				FadenNetwork.Server.removeSkin(serverPlayerEntity, handler.getPlayer().getUuid());
 			}
