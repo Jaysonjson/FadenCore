@@ -52,12 +52,7 @@ public class Faden implements ModInitializer {
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
 			ServerPlayerEntity serverPlayerEntity = handler.getPlayer();
 			FadenNetwork.Server.sendAllRaces(serverPlayerEntity);
-			String id = RaceSkinMap.Cache.getId(serverPlayerEntity.getUuid());
-			if(!id.isEmpty()) {
-				for (ServerPlayerEntity playerEntity : server.getPlayerManager().getPlayerList()) {
-					FadenNetwork.Server.sendRaceSkin(playerEntity, serverPlayerEntity.getUuid(), id);
-				}
-			}
+			RaceSkinMap.Cache.sendUpdate(serverPlayerEntity, server);
 		});
 
 
