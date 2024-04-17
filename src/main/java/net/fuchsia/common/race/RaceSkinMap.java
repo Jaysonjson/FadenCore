@@ -9,9 +9,6 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.UUID;
 
-import net.fuchsia.network.FadenNetwork;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.network.ServerPlayerEntity;
 import org.jetbrains.annotations.Nullable;
 
 import net.fabricmc.loader.api.FabricLoader;
@@ -128,15 +125,6 @@ public class RaceSkinMap {
 				return compound.getString("id");
 			}
 			return "";
-		}
-
-		public static void sendUpdate(ServerPlayerEntity updatedPlayer, MinecraftServer server) {
-			String id = RaceSkinMap.Cache.getId(updatedPlayer.getUuid());
-			if(!id.isEmpty()) {
-				for (ServerPlayerEntity playerEntity : server.getPlayerManager().getPlayerList()) {
-					FadenNetwork.Server.sendRaceSkin(playerEntity, updatedPlayer.getUuid(), id);
-				}
-			}
 		}
 	}
 	

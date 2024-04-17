@@ -7,7 +7,6 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.fuchsia.common.objects.CoinMap;
-import net.fuchsia.util.CurrencyUtil;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.CommandManager;
@@ -38,14 +37,14 @@ public class CurrencyCommand {
 
     public static int countCurrency(CommandContext<ServerCommandSource> source) throws CommandSyntaxException {
         PlayerEntity player = EntityArgumentType.getPlayer(source, "player");
-        source.getSource().sendFeedback(() -> Text.literal("Amount: " + CurrencyUtil.Currency.count(player.getInventory())), false);
+        source.getSource().sendFeedback(() -> Text.literal("Amount: " + CoinMap.countCurrency(player.getInventory())), false);
         return 0;
     }
 
     public static int removeCurrency(CommandContext<ServerCommandSource> source) throws CommandSyntaxException {
         PlayerEntity player = EntityArgumentType.getPlayer(source, "player");
         int amount = IntegerArgumentType.getInteger(source, "amount");
-        CurrencyUtil.Currency.remove(player.getWorld(), player.getBlockPos(), player.getInventory(), amount, false);
+        CoinMap.removeCurrency(player.getWorld(), player.getBlockPos(), player.getInventory(), amount, false);
         source.getSource().sendFeedback(() -> Text.literal("Removed: " + amount), false);
         return 0;
     }
@@ -53,7 +52,7 @@ public class CurrencyCommand {
     public static int giveCurrency(CommandContext<ServerCommandSource> source) throws CommandSyntaxException {
         PlayerEntity player = EntityArgumentType.getPlayer(source, "player");
         int amount = IntegerArgumentType.getInteger(source, "amount");
-        CurrencyUtil.Currency.add(player.getWorld(), player.getBlockPos(), player.getInventory(), amount);
+        CoinMap.addCurrency(player.getWorld(), player.getBlockPos(), player.getInventory(), amount);
         source.getSource().sendFeedback(() -> Text.literal("Gave: " + amount), false);
         return 0;
     }
