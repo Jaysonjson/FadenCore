@@ -1,6 +1,7 @@
 package net.fuchsia.client.mixin;
 
 import net.fuchsia.client.render.feature.ChestFeatureRenderer;
+import net.fuchsia.client.render.feature.HeadFeatureRenderer;
 import net.fuchsia.config.FadenConfig;
 import net.fuchsia.common.race.skin.client.ClientRaceSkinCache;
 import net.minecraft.client.MinecraftClient;
@@ -24,6 +25,7 @@ public abstract class PlayerEntityRendererMixin {
     @Inject(method = "<init>*", at = @At("TAIL"))
     public void constructorHead(EntityRendererFactory.Context ctx, boolean slim, CallbackInfo ci) {
         renderer.addFeature(new ChestFeatureRenderer(renderer));
+        renderer.addFeature(new HeadFeatureRenderer(renderer));
     }
 
     @Inject(at = @At("HEAD"), method = "getTexture(Lnet/minecraft/client/network/AbstractClientPlayerEntity;)Lnet/minecraft/util/Identifier;", cancellable = true)

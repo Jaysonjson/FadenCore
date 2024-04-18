@@ -32,6 +32,8 @@ public abstract class ModelLoaderMixin {
             FadenItemModelRegistry.ModelData data = FadenClient.getItemModels().getModel(item);
             this.addModel(new ModelIdentifier(itemId.getNamespace(), data.getPath().isEmpty() ? "model/" + itemId.getPath() : data.getPath(), data.getVariant()));
         }
+
+        this.addModel(new ModelIdentifier(new Identifier("faden", "bunny_ears"), "inventory"));
     }
 
 }
