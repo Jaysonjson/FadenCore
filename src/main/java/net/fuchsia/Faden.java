@@ -1,7 +1,7 @@
 package net.fuchsia;
 
 import net.fuchsia.common.init.FadenSoundEvents;
-import net.fuchsia.common.race.cosmetic.RaceCosmetics;
+import net.fuchsia.common.race.RaceCosmetics;
 import net.fuchsia.common.race.data.ServerRaceCache;
 import net.fuchsia.config.FadenConfigScreen;
 import net.minecraft.client.gui.screen.Screen;

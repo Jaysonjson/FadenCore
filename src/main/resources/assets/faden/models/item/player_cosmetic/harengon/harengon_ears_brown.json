@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "faden:item/test",
-		"particle": "faden:item/test"
+		"0": "faden:item/player_cosmetic/harengon/brown/ears",
+		"particle": "faden:item/player_cosmetic/harengon/brown/ears"
 	},
 	"elements": [
 		{

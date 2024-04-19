@@ -1,7 +1,6 @@
 package net.fuchsia.common.race;
 
 import net.fuchsia.common.race.cosmetic.RaceCosmeticPalette;
-import net.fuchsia.common.race.cosmetic.RaceCosmetics;
 
 import java.util.HashMap;
 
@@ -9,7 +8,7 @@ public enum Race implements IRace {
 	
 	
 	HUMAN, 
-	HARENGON(RaceCosmetics.HARENGON, new String[]{"brown"}),
+	HARENGON(RaceCosmetics.HARENGON, new String[]{"brown", "black", "gold", "salt", "toast", "white", "white_splotched"}),
 	TABAXI,
 	ELF;
 
