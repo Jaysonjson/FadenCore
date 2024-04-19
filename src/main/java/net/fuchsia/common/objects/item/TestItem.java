@@ -24,7 +24,7 @@ public class TestItem extends Item {
         }*/
 
         if(!world.isClient) {
-            RaceUtil.setPlayerRace((ServerPlayerEntity) user, Race.ELF);
+            RaceUtil.setPlayerRace((ServerPlayerEntity) user, Race.HARENGON);
         }
         return super.use(world, user, hand);
     }

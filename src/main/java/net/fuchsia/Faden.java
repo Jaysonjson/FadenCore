@@ -1,6 +1,8 @@
 package net.fuchsia;
 
 import net.fuchsia.common.init.FadenSoundEvents;
+import net.fuchsia.common.race.cosmetic.RaceCosmetics;
+import net.fuchsia.common.race.data.ServerRaceCache;
 import net.fuchsia.config.FadenConfigScreen;
 import net.minecraft.client.gui.screen.Screen;
 import org.slf4j.Logger;
@@ -32,6 +34,7 @@ public class Faden implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		CONTAINER = FabricLoader.getInstance().getModContainer(MOD_ID).get();
+		RaceCosmetics.add();
 		FadenSoundEvents.register();
 		FadenItems.register();
 		FadenTabs.register();
@@ -43,16 +46,19 @@ public class Faden implements ModInitializer {
 
 		ServerLifecycleEvents.SERVER_STARTING.register(server -> {
 			RaceSkinMap.Cache.load();
+			ServerRaceCache.Cache.load();
 		});
 
 		ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
 			RaceSkinMap.Cache.save();
+			ServerRaceCache.Cache.save();
 		});
 
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
 			ServerPlayerEntity serverPlayerEntity = handler.getPlayer();
 			FadenNetwork.Server.sendAllRaces(serverPlayerEntity);
 			RaceSkinMap.Cache.sendUpdate(serverPlayerEntity, server);
+			ServerRaceCache.Cache.sendUpdate(serverPlayerEntity, server, false);
 		});
 
 
@@ -61,6 +67,7 @@ public class Faden implements ModInitializer {
 			for (ServerPlayerEntity serverPlayerEntity : sender.getPlayerManager().getPlayerList()) {
 				FadenNetwork.Server.removeSkin(serverPlayerEntity, handler.getPlayer().getUuid());
 			}
+			ServerRaceCache.Cache.sendUpdate(handler.getPlayer(), handler.getPlayer().server, true);
 		});
 	}
 

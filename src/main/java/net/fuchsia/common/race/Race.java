@@ -1,6 +1,7 @@
 package net.fuchsia.common.race;
 
 import net.fuchsia.common.race.cosmetic.RaceCosmeticPalette;
+import net.fuchsia.common.race.cosmetic.RaceCosmetics;
 
 import java.util.HashMap;
 
@@ -8,14 +9,23 @@ public enum Race implements IRace {
 	
 	
 	HUMAN, 
-	HARENGON,
+	HARENGON(RaceCosmetics.HARENGON, new String[]{"brown"}),
 	TABAXI,
 	ELF;
 
 	private HashMap<String, byte[]> skinMap;
-	
+	private RaceCosmeticPalette palette;
+	private String[] subIds;
+	Race(RaceCosmeticPalette palette, String[] subIds) {
+		skinMap = new HashMap<>();
+		this.palette = palette;
+		this.subIds = subIds;
+	}
+
 	Race() {
 		skinMap = new HashMap<>();
+		this.palette = new RaceCosmeticPalette();
+		this.subIds = new String[]{};
 	}
 	
 	@Override
@@ -30,6 +40,11 @@ public enum Race implements IRace {
 
 	@Override
 	public RaceCosmeticPalette getCosmeticPalette() {
-		return new RaceCosmeticPalette();
+		return palette;
+	}
+
+	@Override
+	public String[] subIds() {
+		return subIds;
 	}
 }

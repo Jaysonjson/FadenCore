@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.UUID;
@@ -25,13 +26,16 @@ public class RaceSkinMap {
 
 	public static void addSkins() {
 		for (Race value : Race.values()) {
-			loadSkin(value);
+			for (String s : value.subIds()) {
+				if(!s.isEmpty()) loadSkin(value, s);
+			}
 		}
 	}
 
-	private static void loadSkin(IRace race) {
+	private static void loadSkin(IRace race, String subId) {
 		String skinPath = getSkinPath(race, Faden.MOD_ID);
-		Path skins = Faden.CONTAINER.findPath(skinPath).get();
+		System.out.println(skinPath + subId + "/");
+		Path skins = Faden.CONTAINER.findPath(skinPath + subId + "/").get();
 		try {
 			Path[] ar = Files.list(skins).toArray(Path[]::new);
 			for (int i = 0; i < ar.length; i++) {
@@ -43,7 +47,7 @@ public class RaceSkinMap {
 					id = id.substring(ar[i].toString().lastIndexOf("\\") + 1);
 				}
 				id = id.substring(0, id.length() - 4);
-				race.getSkinMap().put(id, SkinProvider.readSkin(inputStream));
+				race.getSkinMap().put(subId + "/" + id, SkinProvider.readSkin(inputStream));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -74,10 +78,17 @@ public class RaceSkinMap {
 	/**
 	 * Returns an empty string if no skin could be found
 	 */
-	public static String getRandomSkin(IRace race) {
+	public static String getRandomSkin(IRace race, String subId) {
 		Random random = new Random();
+		ArrayList<String> buffer = new ArrayList<>();
+		for (String s : race.getSkinMap().keySet()) {
+			if(s.contains(subId)) {
+				buffer.add(s);
+			}
+		}
 		if(race.getSkinMap().isEmpty()) return "";
-		return race.getSkinMap().keySet().toArray(new String[] {})[random.nextInt(race.getSkinMap().size())];
+		//return race.getSkinMap().keySet().toArray(new String[] {})[random.nextInt(race.getSkinMap().size())];
+		return buffer.get(random.nextInt(buffer.size()));
 	}
 	
 	public static class Cache {
@@ -136,6 +147,7 @@ public class RaceSkinMap {
 				for (ServerPlayerEntity playerEntity : server.getPlayerManager().getPlayerList()) {
 					FadenNetwork.Server.sendRaceSkin(playerEntity, updatedPlayer.getUuid(), id);
 				}
+				FadenNetwork.Server.sendRaceSkin(updatedPlayer, updatedPlayer.getUuid(), id);
 			}
 		}
 	}

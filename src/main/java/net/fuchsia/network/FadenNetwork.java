@@ -54,10 +54,11 @@ public class FadenNetwork {
             ServerPlayNetworking.send(player, SEND_RACE_SKIN, byteBufs);
         }
 
-        public static void sendRace(ServerPlayerEntity player, UUID uuid, String id, boolean remove) {
+        public static void sendRace(ServerPlayerEntity player, UUID uuid, String id, String sub_id, boolean remove) {
             PacketByteBuf byteBufs = PacketByteBufs.create();
             byteBufs.writeUuid(uuid);
             byteBufs.writeString(id);
+            byteBufs.writeString(sub_id);
             byteBufs.writeBoolean(remove);
             ServerPlayNetworking.send(player, SEND_RACE, byteBufs);
         }

@@ -9,4 +9,5 @@ public interface IRace {
 	HashMap<String, byte[]> getSkinMap();
 	String getId();
 	RaceCosmeticPalette getCosmeticPalette();
+	String[] subIds();
 }
