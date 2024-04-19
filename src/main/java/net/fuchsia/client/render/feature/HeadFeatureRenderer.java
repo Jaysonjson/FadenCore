@@ -37,7 +37,7 @@ public class HeadFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEnt
                         matrices.multiply(RotationAxis.of(model.getTransformation().head.rotation).rotationDegrees(0));
                         matrices.scale(head.scale.x - 0.5f, head.scale.y - 0.5f, head.scale.z - 0.5f);
                         matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(180));
-                        FadenRenderUtil.renderBakedModel(matrices, vertexConsumers, model, light);
+                        FadenRenderUtil.renderBakedModel(matrices, vertexConsumers, model, (int) (light * 0.5f));
                     }
                 }
             }
