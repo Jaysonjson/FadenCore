@@ -33,7 +33,9 @@ public abstract class ModelLoaderMixin {
             this.addModel(new ModelIdentifier(itemId.getNamespace(), data.getPath().isEmpty() ? "model/" + itemId.getPath() : data.getPath(), data.getVariant()));
         }
 
+        this.addModel(new ModelIdentifier(new Identifier("faden", "player_cosmetic/race/harengon/harengon_ears"), "inventory"));
         this.addModel(new ModelIdentifier(new Identifier("faden", "bunny_ears"), "inventory"));
+        this.addModel(new ModelIdentifier(new Identifier("faden", "harengon_ears"), "inventory"));
     }
 
 }
