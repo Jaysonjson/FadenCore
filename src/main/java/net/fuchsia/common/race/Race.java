@@ -6,7 +6,7 @@ public enum Race implements IRace {
 	
 	
 	HUMAN, 
-	RABBIT, 
+	HARENGON,
 	ELF;
 
 	private HashMap<String, byte[]> skinMap;
