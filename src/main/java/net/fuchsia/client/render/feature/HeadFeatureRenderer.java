@@ -38,11 +38,10 @@ public class HeadFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEnt
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
         matrices.push();
         BakedModel model = MinecraftClient.getInstance().getBakedModelManager().getModel(new ModelIdentifier(new Identifier("faden", "bunny_ears"), "inventory"));
-        //matrices.translate(-model.getTransformation().head.translation.x, -model.getTransformation().head.translation.y, -model.getTransformation().head.translation.z);
-        //matrices.scale(model.getTransformation().head.scale.x, model.getTransformation().head.scale.y, model.getTransformation().head.scale.z);
-        //matrices.multiply(RotationAxis.of(model.getTransformation().head.rotation).rotationDegrees(0));
         ((ModelWithHead)this.getContextModel()).getHead().rotate(matrices);
-        
+        matrices.translate(-model.getTransformation().head.translation.x - (1.05f - model.getTransformation().head.scale.x), -model.getTransformation().head.translation.y - (1.05f - model.getTransformation().head.scale.y), -model.getTransformation().head.translation.z - (1.05f - model.getTransformation().head.scale.z));
+        matrices.multiply(RotationAxis.of(model.getTransformation().head.rotation).rotationDegrees(0));
+        matrices.scale(model.getTransformation().head.scale.x - 0.15f, model.getTransformation().head.scale.y - 0.15f, model.getTransformation().head.scale.z - 0.15f);
         net.minecraft.util.math.random.Random random = net.minecraft.util.math.random.Random.create();
         Direction[] var10 = Direction.values();
 
