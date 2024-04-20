@@ -58,7 +58,7 @@ public abstract class PlayerEntityRendererMixin {
         matrixStack.push();
         if(ClientRaceCache.getCache().containsKey(abstractClientPlayerEntity.getUuid())) {
             RaceData data = ClientRaceCache.get(abstractClientPlayerEntity.getUuid());
-            matrixStack.scale(data.getRace().size(), data.getRace().size(), data.getRace().size());
+            matrixStack.scale(data.getRace().size().x, data.getRace().size().y, data.getRace().size().z);
         }
     }
 

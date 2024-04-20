@@ -1,6 +1,7 @@
 package net.fuchsia.common.race;
 
 import net.fuchsia.common.race.cosmetic.RaceCosmeticPalette;
+import org.joml.Vector3f;
 
 import java.util.HashMap;
 
@@ -8,21 +9,21 @@ public enum Race implements IRace {
 	
 	
 	HUMAN, 
-	HARENGON(RaceCosmetics.HARENGON, new String[]{"brown", "black", "gold", "salt", "toast", "white", "white_splotched"}, 0.85f),
+	HARENGON(RaceCosmetics.HARENGON, new String[]{"brown", "black", "gold", "salt", "toast", "white", "white_splotched"}, new Vector3f(0.85f, 0.85f, 0.85f)),
 	TABAXI,
 	ELF;
 
 	private HashMap<String, byte[]> skinMap;
 	private RaceCosmeticPalette palette;
 	private String[] subIds;
-	private float size = 1;
+	private Vector3f size = new Vector3f(1, 1, 1);
 	Race(RaceCosmeticPalette palette, String[] subIds) {
 		skinMap = new HashMap<>();
 		this.palette = palette;
 		this.subIds = subIds;
 	}
 
-	Race(RaceCosmeticPalette palette, String[] subIds, float size) {
+	Race(RaceCosmeticPalette palette, String[] subIds, Vector3f size) {
 		skinMap = new HashMap<>();
 		this.palette = palette;
 		this.subIds = subIds;
@@ -56,7 +57,7 @@ public enum Race implements IRace {
 	}
 
 	@Override
-	public float size() {
+	public Vector3f size() {
 		return size;
 	}
 }

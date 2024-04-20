@@ -1,6 +1,7 @@
 package net.fuchsia.common.race;
 
 import net.fuchsia.common.race.cosmetic.RaceCosmeticPalette;
+import org.joml.Vector3f;
 
 import java.util.HashMap;
 
@@ -10,5 +11,5 @@ public interface IRace {
 	String getId();
 	RaceCosmeticPalette getCosmeticPalette();
 	String[] subIds();
-	float size();
+	Vector3f size();
 }
