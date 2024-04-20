@@ -13,6 +13,7 @@ import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.ModelWithHead;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.render.model.BakedModel;
+import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.render.model.json.Transformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.RotationAxis;
@@ -32,16 +33,21 @@ public class HeadFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEnt
                         matrices.push();
                         BakedModel model = MinecraftClient.getInstance().getBakedModelManager().getModel(cosmetic.getModel());
                         ((ModelWithHead) this.getContextModel()).getHead().rotate(matrices);
-                        Transformation head = model.getTransformation().head;
-                        matrices.translate(-head.translation.x + 0.63, -head.translation.y - 0.42f, -head.translation.z - 1);
-                        matrices.multiply(RotationAxis.of(model.getTransformation().head.rotation).rotationDegrees(0));
-                        matrices.scale(head.scale.x - 0.5f, head.scale.y - 0.5f, head.scale.z - 0.5f);
-                        matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(180));
+                        model.getTransformation().getTransformation(ModelTransformationMode.HEAD).apply(false, matrices);
+                        translate(matrices);
                         FadenRenderUtil.renderBakedModel(matrices, vertexConsumers, model, (int) (light * 0.5f));
+                        matrices.pop();
                     }
                 }
             }
         }
+    }
+
+
+    public static void translate(MatrixStack matrices) {
+        matrices.translate(0.31F, -0.99F, -0.30F);
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0F));
+        matrices.scale(0.625F, -0.625F, -0.625F);
     }
 }
 

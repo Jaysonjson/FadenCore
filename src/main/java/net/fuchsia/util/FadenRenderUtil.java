@@ -25,7 +25,6 @@ public class FadenRenderUtil {
 
         random.setSeed(42L);
         renderModelQuads(matrices, vertexConsumers.getBuffer(RenderLayer.getCutout()), model.getQuads(null, null, random), light);
-        matrices.pop();
     }
 
     public static void renderModelQuads(MatrixStack matrices, VertexConsumer vertices, List<BakedQuad> quads, int light) {
