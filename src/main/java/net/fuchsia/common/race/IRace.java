@@ -10,4 +10,5 @@ public interface IRace {
 	String getId();
 	RaceCosmeticPalette getCosmeticPalette();
 	String[] subIds();
+	float size();
 }

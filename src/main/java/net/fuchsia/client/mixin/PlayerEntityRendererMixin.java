@@ -2,14 +2,18 @@ package net.fuchsia.client.mixin;
 
 import net.fuchsia.client.render.feature.ChestFeatureRenderer;
 import net.fuchsia.client.render.feature.HeadFeatureRenderer;
+import net.fuchsia.common.race.data.ClientRaceCache;
+import net.fuchsia.common.race.data.RaceData;
 import net.fuchsia.config.FadenConfig;
 import net.fuchsia.common.race.skin.client.ClientRaceSkinCache;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -47,4 +51,20 @@ public abstract class PlayerEntityRendererMixin {
     	}
         return x;
     }
+
+
+    @Inject(at = @At("HEAD"), method = "render(Lnet/minecraft/client/network/AbstractClientPlayerEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", cancellable = true)
+    private void size(AbstractClientPlayerEntity abstractClientPlayerEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
+        matrixStack.push();
+        if(ClientRaceCache.getCache().containsKey(abstractClientPlayerEntity.getUuid())) {
+            RaceData data = ClientRaceCache.get(abstractClientPlayerEntity.getUuid());
+            matrixStack.scale(data.getRace().size(), data.getRace().size(), data.getRace().size());
+        }
+    }
+
+    @Inject(at = @At("TAIL"), method = "render(Lnet/minecraft/client/network/AbstractClientPlayerEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", cancellable = true)
+    private void sizeEnd(AbstractClientPlayerEntity abstractClientPlayerEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
+        matrixStack.pop();
+    }
+
 }
