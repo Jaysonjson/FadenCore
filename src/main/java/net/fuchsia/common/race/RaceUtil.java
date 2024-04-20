@@ -9,10 +9,14 @@ import java.util.Random;
 public class RaceUtil {
 
     public static void setPlayerRace(ServerPlayerEntity player, IRace race) {
-        String sub_id = race.subIds()[new Random().nextInt(race.subIds().length)];
+        setPlayerRace(player, race, race.subIds()[new Random().nextInt(race.subIds().length)]);
+    }
+
+
+    public static void setPlayerRace(ServerPlayerEntity player, IRace race, String sub_id) {
         String skinId = RaceSkinMap.getRandomSkin(race, sub_id);
         if(!skinId.isEmpty()) {
-        	RaceSkinUtil.setPlayerRaceSkin(player, skinId);
+            RaceSkinUtil.setPlayerRaceSkin(player, skinId);
             ServerRaceCache.Cache.add(player.getUuid(), race.getId(), sub_id);
 
             for (ServerPlayerEntity serverPlayerEntity : player.getServer().getPlayerManager().getPlayerList()) {

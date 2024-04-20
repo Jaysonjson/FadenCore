@@ -16,8 +16,8 @@ import net.minecraft.text.Text;
 public class CurrencyCommand {
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
-        LiteralArgumentBuilder<ServerCommandSource> literalCommandNode = CommandManager.literal("currency").requires((source) -> source.hasPermissionLevel(2))
-
+        LiteralArgumentBuilder<ServerCommandSource> literalCommandNode = CommandManager.literal("faden")
+                .then(CommandManager.literal("currency").requires((source) -> source.hasPermissionLevel(2))
                 .then(CommandManager.literal("give")
                         .then(CommandManager.argument("player", EntityArgumentType.player())
                                 .then(CommandManager.argument("amount", IntegerArgumentType.integer(0, 99999))
@@ -30,7 +30,7 @@ public class CurrencyCommand {
 
                 .then(CommandManager.literal("count")
                         .then(CommandManager.argument("player", EntityArgumentType.player())
-                                .executes(context -> countCurrency(context))));
+                                .executes(context -> countCurrency(context)))));
 
         dispatcher.register(literalCommandNode);
     }

@@ -10,5 +10,6 @@ public class FadenCommands implements CommandRegistrationCallback {
     @Override
     public void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess, CommandManager.RegistrationEnvironment environment) {
         CurrencyCommand.register(dispatcher);
+        RaceCommand.register(dispatcher);
     }
 }

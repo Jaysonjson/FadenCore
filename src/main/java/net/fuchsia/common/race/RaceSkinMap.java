@@ -34,7 +34,6 @@ public class RaceSkinMap {
 
 	private static void loadSkin(IRace race, String subId) {
 		String skinPath = getSkinPath(race, Faden.MOD_ID);
-		System.out.println(skinPath + subId + "/");
 		Path skins = Faden.CONTAINER.findPath(skinPath + subId + "/").get();
 		try {
 			Path[] ar = Files.list(skins).toArray(Path[]::new);
