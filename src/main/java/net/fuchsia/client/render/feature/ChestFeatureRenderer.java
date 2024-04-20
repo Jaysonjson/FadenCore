@@ -37,11 +37,17 @@ public class ChestFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEn
                             matrices.translate(-0.31, 0.82f, 0.45);
                             matrices.scale(0.625F, -0.625F, -0.625F);
                         } else {
-                            model.getTransformation().getTransformation(ModelTransformationMode.HEAD).apply(false, matrices);
-                            matrices.translate(-0.31, 0.82f, 0.45);
-                            matrices.scale(0.625F, -0.625F, -0.625F);
-                            matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(25));
-                            matrices.translate(0, 0.11, -0.32);
+                            if(entity.isOnGround()) {
+                                model.getTransformation().getTransformation(ModelTransformationMode.HEAD).apply(false, matrices);
+                                matrices.translate(-0.31, 0.82f, 0.45);
+                                matrices.scale(0.625F, -0.625F, -0.625F);
+                                matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(25));
+                                matrices.translate(0, 0.11, -0.32);
+                            } else {
+                                model.getTransformation().getTransformation(ModelTransformationMode.HEAD).apply(false, matrices);
+                                matrices.translate(-0.31, 0.82f, 0.45);
+                                matrices.scale(0.625F, -0.625F, -0.625F);
+                            }
                         }
                         FadenRenderUtil.renderBakedModel(matrices, vertexConsumers, model, (int) (light * 0.5f));
                         matrices.pop();
