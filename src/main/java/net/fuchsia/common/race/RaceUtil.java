@@ -22,6 +22,7 @@ public class RaceUtil {
             for (ServerPlayerEntity serverPlayerEntity : player.getServer().getPlayerManager().getPlayerList()) {
                 FadenNetwork.Server.sendRace(serverPlayerEntity, player.getUuid(), race.getId(), sub_id, false);
             }
+            //FadenNetwork.Server.sendRace(player, player.getUuid(), race.getId(), sub_id, false);
         }
     }
 
