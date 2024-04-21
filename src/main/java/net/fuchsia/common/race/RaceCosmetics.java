@@ -20,6 +20,13 @@ public class RaceCosmetics {
         HARENGON.addCosmetic("white_splotched", new RaceCosmetic(FadenIdentifier.modelId("player_cosmetic/harengon/ears/harengon_ears_white_splotched"), RaceCosmeticType.HEAD));
 
         HARENGON.addCosmetic("brown", new RaceCosmetic(FadenIdentifier.modelId("player_cosmetic/harengon/tail/harengon_tail_brown"), RaceCosmeticType.CHEST));
+        HARENGON.addCosmetic("black", new RaceCosmetic(FadenIdentifier.modelId("player_cosmetic/harengon/tail/harengon_tail_black"), RaceCosmeticType.CHEST));
+        HARENGON.addCosmetic("gold", new RaceCosmetic(FadenIdentifier.modelId("player_cosmetic/harengon/tail/harengon_tail_gold"), RaceCosmeticType.CHEST));
+        HARENGON.addCosmetic("salt", new RaceCosmetic(FadenIdentifier.modelId("player_cosmetic/harengon/tail/harengon_tail_salt"), RaceCosmeticType.CHEST));
+        HARENGON.addCosmetic("toast", new RaceCosmetic(FadenIdentifier.modelId("player_cosmetic/harengon/tail/harengon_tail_toast"), RaceCosmeticType.CHEST));
+        HARENGON.addCosmetic("white", new RaceCosmetic(FadenIdentifier.modelId("player_cosmetic/harengon/tail/harengon_tail_white"), RaceCosmeticType.CHEST));
+        HARENGON.addCosmetic("white_splotched", new RaceCosmetic(FadenIdentifier.modelId("player_cosmetic/harengon/tail/harengon_tail_white_splotched"), RaceCosmeticType.CHEST));
+
     }
 
 }

@@ -1,0 +1,28 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "faden:item/player_cosmetic/harengon/salt/tail",
+		"particle": "faden:item/player_cosmetic/harengon/salt/tail"
+	},
+	"elements": [
+		{
+			"name": "tail",
+			"from": [6.5, 0, 9],
+			"to": [9.5, 3, 11],
+			"faces": {
+				"north": {"uv": [2, 2, 5, 5], "texture": "#0"},
+				"east": {"uv": [0, 2, 2, 5], "texture": "#0"},
+				"south": {"uv": [7, 2, 10, 5], "texture": "#0"},
+				"west": {"uv": [5, 2, 7, 5], "texture": "#0"},
+				"up": {"uv": [5, 2, 2, 0], "texture": "#0"},
+				"down": {"uv": [8, 0, 5, 2], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"head": {
+			"translation": [0, -11.75, 1],
+			"scale": [1.8, 1.8, 1.8]
+		}
+	}
+}
