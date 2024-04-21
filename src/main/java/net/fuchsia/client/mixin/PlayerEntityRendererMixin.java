@@ -13,6 +13,10 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
+import net.minecraft.client.render.entity.model.EntityModel;
+import net.minecraft.client.render.entity.model.EntityModelLayers;
+import net.minecraft.client.render.entity.model.PlayerEntityModel;
+import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,21 +27,47 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntityRenderer.class)
-public abstract class PlayerEntityRendererMixin {
+public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixin<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
     private PlayerEntityRenderer renderer = ((PlayerEntityRenderer) ((Object) this));
+    private PlayerEntityModel slimModel = null;
+    private PlayerEntityModel wideModel = null;
+    private AbstractClientPlayerEntity player = null;
+
+    protected PlayerEntityRendererMixin(EntityRendererFactory.Context ctx) {
+        super(ctx);
+    }
 
     @Inject(method = "<init>*", at = @At("TAIL"))
     public void constructorHead(EntityRendererFactory.Context ctx, boolean slim, CallbackInfo ci) {
         renderer.addFeature(new ChestFeatureRenderer(renderer));
         renderer.addFeature(new HeadFeatureRenderer(renderer));
+        this.slimModel = new PlayerEntityModel(ctx.getPart(EntityModelLayers.PLAYER_SLIM), true);
+        this.wideModel = new PlayerEntityModel(ctx.getPart(EntityModelLayers.PLAYER), false);
     }
 
     @Inject(at = @At("HEAD"), method = "getTexture(Lnet/minecraft/client/network/AbstractClientPlayerEntity;)Lnet/minecraft/util/Identifier;", cancellable = true)
     private void getTextureAbstractPlayer(AbstractClientPlayerEntity abstractClientPlayerEntity, CallbackInfoReturnable<Identifier> cir) {
+        player = abstractClientPlayerEntity;
         if(FadenConfig.ENABLE_PLAYER_RACE_SKINS) {
         	if(ClientRaceSkinCache.getPlayerSkins().containsKey(abstractClientPlayerEntity.getUuid())) {
         		cir.setReturnValue(ClientRaceSkinCache.getPlayerSkins().get(abstractClientPlayerEntity.getUuid()));
         	}
+        }
+    }
+
+    @Override
+    public void getModel(CallbackInfoReturnable<EntityModel> cir) {
+        if(player != null) {
+            RaceData data = ClientRaceCache.get(player.getUuid());
+            if(data.getRace() != null) {
+                if(data.getRace().slim()) {
+                    this.model = slimModel;
+                    cir.setReturnValue(slimModel);
+                } else {
+                    this.model = wideModel;
+                    cir.setReturnValue(wideModel);
+                }
+            }
         }
     }
 
@@ -51,7 +81,6 @@ public abstract class PlayerEntityRendererMixin {
     	}
         return x;
     }
-
 
     @Inject(at = @At("HEAD"), method = "render(Lnet/minecraft/client/network/AbstractClientPlayerEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", cancellable = true)
     private void size(AbstractClientPlayerEntity abstractClientPlayerEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {

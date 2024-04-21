@@ -8,8 +8,8 @@ import java.util.HashMap;
 public enum Race implements IRace {
 	
 	
-	HUMAN, 
-	HARENGON(RaceCosmetics.HARENGON, new String[]{"brown", "black", "gold", "salt", "toast", "white", "white_splotched"}, new Vector3f(0.85f, 0.85f, 0.85f)),
+	HUMAN(new RaceCosmeticPalette(), new String[]{"default"}),
+	HARENGON(RaceCosmetics.HARENGON, new String[]{"brown", "black", "gold", "salt", "toast", "white", "white_splotched"}, new Vector3f(0.85f, 0.85f, 0.85f), true),
 	TABAXI,
 	ELF;
 
@@ -17,17 +17,19 @@ public enum Race implements IRace {
 	private RaceCosmeticPalette palette;
 	private String[] subIds;
 	private Vector3f size = new Vector3f(1, 1, 1);
+	private boolean slim = false;
 	Race(RaceCosmeticPalette palette, String[] subIds) {
 		skinMap = new HashMap<>();
 		this.palette = palette;
 		this.subIds = subIds;
 	}
 
-	Race(RaceCosmeticPalette palette, String[] subIds, Vector3f size) {
+	Race(RaceCosmeticPalette palette, String[] subIds, Vector3f size, boolean slim) {
 		skinMap = new HashMap<>();
 		this.palette = palette;
 		this.subIds = subIds;
 		this.size = size;
+		this.slim = slim;
 	}
 
 	Race() {
@@ -59,5 +61,10 @@ public enum Race implements IRace {
 	@Override
 	public Vector3f size() {
 		return size;
+	}
+
+	@Override
+	public boolean slim() {
+		return slim;
 	}
 }

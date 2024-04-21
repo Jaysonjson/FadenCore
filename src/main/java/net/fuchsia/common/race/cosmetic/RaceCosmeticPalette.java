@@ -5,11 +5,11 @@ import java.util.HashMap;
 
 public class RaceCosmeticPalette {
 
-    public HashMap<String, ArrayList<RaceCosmetic>> cosmetics = new HashMap<>();
+    private HashMap<String, ArrayList<RaceCosmetic>> cosmetics = new HashMap<>();
 
 
     public RaceCosmeticPalette() {
-
+        cosmetics = new HashMap<>();
     }
 
 
@@ -24,6 +24,9 @@ public class RaceCosmeticPalette {
     }
 
     public ArrayList<RaceCosmetic> getCosmetics(String id) {
-        return getCosmetics().get(id);
+        if(getCosmetics().containsKey(id)) {
+            return getCosmetics().get(id);
+        }
+        return new ArrayList<>();
     }
 }

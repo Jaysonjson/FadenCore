@@ -5,6 +5,7 @@
   "client": [
     "ItemRendererAccessor",
     "ItemRendererMixin",
+    "LivingEntityRendererMixin",
     "ModelLoaderMixin",
     "PlayerEntityRendererMixin",
     "SoundManagerMixin",
