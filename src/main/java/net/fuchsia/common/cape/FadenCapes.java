@@ -19,6 +19,7 @@ public class FadenCapes {
     public static final FadenCape MUSIC_ARTIST = register("music_artist");
     public static final FadenCape TRANSLATOR = register("translator");
     public static final FadenCape STAFF = register("staff");
+    public static final FadenCape DONATOR = register("donator");
 
     private static FadenCape register(String id) {
         FadenCape cape = new FadenCape(id);
