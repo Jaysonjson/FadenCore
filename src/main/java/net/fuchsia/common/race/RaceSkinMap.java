@@ -81,8 +81,12 @@ public class RaceSkinMap {
 		Random random = new Random();
 		ArrayList<String> buffer = new ArrayList<>();
 		for (String s : race.getSkinMap().keySet()) {
-			if(s.contains(subId)) {
-				buffer.add(s);
+			if(s.contains("/")) {
+				int i = s.indexOf('/');
+				String skinId = s.substring(0, i);
+				if (skinId.equalsIgnoreCase(subId)) {
+					buffer.add(s);
+				}
 			}
 		}
 		if(race.getSkinMap().isEmpty()) return "";
