@@ -30,19 +30,6 @@ public class ClientRaceSkinCache {
                 MinecraftClient.getInstance().getTextureManager().bindTexture(id);
                 SKINS.put(s, id);
             }
-
-            //FUCHSIA CAPE
-            try {
-                byte[] data = SkinProvider.readSkin(Faden.CONTAINER.findPath("assets/faden/textures/capes/fuchsia.png").get().toFile());
-                Identifier id = FadenIdentifier.create("cape/fuchsia");
-                SkinTexture skinTexture = new SkinTexture(id);
-                skinTexture.setSkinData(data);
-                MinecraftClient.getInstance().getTextureManager().registerTexture(id, skinTexture);
-                MinecraftClient.getInstance().getTextureManager().bindTexture(id);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            //END FUCHSIA CAPE
             added = true;
         }
     }

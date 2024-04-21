@@ -1,5 +1,7 @@
 package net.fuchsia.client;
 
+import net.fuchsia.common.cape.FadenCape;
+import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.client.handler.FadenItemModelHandler;
 import net.fuchsia.client.registry.FadenItemModelRegistry;
 import net.fuchsia.common.objects.tooltip.ItemValueTooltipComponent;
@@ -20,6 +22,9 @@ public class FadenClient implements ClientModInitializer {
 
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
             ClientRaceSkinCache.add();
+            for (FadenCape cape : FadenCapes.getCapes()) {
+                cape.load();
+            }
         });
 
 

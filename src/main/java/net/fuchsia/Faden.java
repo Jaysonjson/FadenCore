@@ -1,5 +1,8 @@
 package net.fuchsia;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.common.init.FadenSoundEvents;
 import net.fuchsia.common.race.RaceCosmetics;
 import net.fuchsia.common.race.data.ServerRaceCache;
@@ -30,10 +33,12 @@ public class Faden implements ModInitializer {
 	public static final String FADEN_VERSION = "0.0.1";
     public static final Logger LOGGER = LoggerFactory.getLogger("Faden");
 	public static ModContainer CONTAINER;
+	public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
 	@Override
 	public void onInitialize() {
 		CONTAINER = FabricLoader.getInstance().getModContainer(MOD_ID).get();
+		FadenCapes.init();
 		RaceCosmetics.add();
 		FadenSoundEvents.register();
 		FadenItems.register();
