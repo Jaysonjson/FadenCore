@@ -63,7 +63,7 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	modApi "com.terraformersmc:modmenu:9.0.0"
+	modApi "com.terraformersmc:modmenu:10.0.0-beta.1"
 
 	//RE-ADD ONCE 1.20.5 VERSIONS RE OUT!
 	//modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${rei_version}"
