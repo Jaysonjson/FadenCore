@@ -8,7 +8,6 @@ import org.jetbrains.annotations.Nullable;
 
 import net.fuchsia.common.init.FadenItems;
 import net.fuchsia.common.objects.tooltip.ItemValueTooltipData;
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.item.TooltipData;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

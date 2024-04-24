@@ -12,10 +12,4 @@ public class FadenDataAttachements {
             .copyOnDeath()
             .initializer(() -> 10.0f)
             .buildAndRegister(FadenIdentifier.data("mana"));
-
-    public static final AttachmentType<Integer> SOULS = AttachmentRegistry.<Integer>builder()
-            .persistent(Codec.INT)
-            .initializer(() -> 0)
-            .buildAndRegister(FadenIdentifier.data("souls"));
-
 }
