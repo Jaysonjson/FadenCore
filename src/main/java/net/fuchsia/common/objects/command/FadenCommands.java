@@ -11,5 +11,6 @@ public class FadenCommands implements CommandRegistrationCallback {
     public void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess, CommandManager.RegistrationEnvironment environment) {
         CurrencyCommand.register(dispatcher);
         RaceCommand.register(dispatcher);
+        ReloadCommand.register(dispatcher);
     }
 }

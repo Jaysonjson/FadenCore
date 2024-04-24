@@ -21,8 +21,13 @@ public class ItemValues {
     * TEMPORARY UNTIL JSON DATA IS DONE, BUT TBH, WE DONT NEED TO EXPECT ADDONS, SO WE COULD KJUST KEEP IT HERE
     * */
     public static void add() {
+        HashMap<String, Integer> map = Faden.GSON.fromJson(FadenOnlineUtil.getJSONData("https://raw.githubusercontent.com/FuchsiaTeam/FadenData/main/item_values.json"), new TypeToken<HashMap<String, Integer>>(){}.getType());
+        reload(map);
+        System.out.println("JSON: " + FadenOnlineUtil.getJSONData("https://raw.githubusercontent.com/FuchsiaTeam/FadenData/main/item_values.json"));
+    }
+
+    public static void reload(HashMap<String, Integer> map) {
         VALUES.clear();
-        HashMap<String, Integer> map =  Faden.GSON.fromJson(FadenOnlineUtil.getJSONData("https://raw.githubusercontent.com/FuchsiaTeam/FadenData/main/item_values.json"), new TypeToken<HashMap<String, Integer>>(){}.getType());
         for (String s : map.keySet()) {
             Identifier id = new Identifier(s);
             if(Registries.ITEM.containsId(id)) {

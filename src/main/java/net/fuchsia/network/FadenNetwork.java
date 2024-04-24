@@ -6,6 +6,9 @@ import java.util.Base64;
 import java.util.UUID;
 
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fuchsia.Faden;
+import net.fuchsia.common.cape.FadenCapes;
+import net.fuchsia.common.data.ItemValues;
 import net.fuchsia.network.s2c.*;
 import net.fuchsia.common.race.skin.provider.SkinProvider;
 import net.fuchsia.common.race.skin.server.ServerSkinCache;
@@ -24,11 +27,13 @@ public class FadenNetwork {
         PayloadTypeRegistry.playS2C().register(RemoveSkinS2CPacket.ID, RemoveSkinS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(SendSkinS2CPacket.ID, SendSkinS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(SendAllRaceSkinsS2CPacket.ID, SendAllRaceSkinsS2CPacket.CODEC);
+        PayloadTypeRegistry.playS2C().register(ReloadServerJSONS2CPacket.ID, ReloadServerJSONS2CPacket.CODEC);
 
         ClientPlayNetworking.registerGlobalReceiver(SendRaceUpdateS2CPacket.ID, SendRaceUpdateS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(RemoveSkinS2CPacket.ID, RemoveSkinS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(SendSkinS2CPacket.ID, SendSkinS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(SendAllRaceSkinsS2CPacket.ID, SendAllRaceSkinsS2CPacket::receive);
+        ClientPlayNetworking.registerGlobalReceiver(ReloadServerJSONS2CPacket.ID, ReloadServerJSONS2CPacket::receive);
     }
 
     public static void registerC2S() {
@@ -59,6 +64,14 @@ public class FadenNetwork {
 
         public static void removeSkin(ServerPlayerEntity player, UUID uuid) {
             ServerPlayNetworking.send(player, new RemoveSkinS2CPacket(uuid));
+        }
+
+        public static void reloadCapes(ServerPlayerEntity player) {
+            ServerPlayNetworking.send(player, new ReloadServerJSONS2CPacket("cape", Faden.GSON.toJson(FadenCapes.getPlayerCapes())));
+        }
+
+        public static void reloadItemValues(ServerPlayerEntity player) {
+            ServerPlayNetworking.send(player, new ReloadServerJSONS2CPacket("item_values", Faden.GSON.toJson(ItemValues.VALUES)));
         }
     }
 

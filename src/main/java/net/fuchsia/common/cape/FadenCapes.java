@@ -21,6 +21,10 @@ public class FadenCapes {
     public static final FadenCape STAFF = register("staff");
     public static final FadenCape DONATOR = register("donator");
 
+    public static void setPlayerCapes(HashMap<UUID, String> playerCapes) {
+        PLAYER_CAPES = playerCapes;
+    }
+
     private static FadenCape register(String id) {
         FadenCape cape = new FadenCape(id);
         CAPES.add(cape);
@@ -29,6 +33,10 @@ public class FadenCapes {
 
     public static ArrayList<FadenCape> getCapes() {
         return CAPES;
+    }
+
+    public static HashMap<UUID, String> getPlayerCapes() {
+        return PLAYER_CAPES;
     }
 
     public static FadenCape getCapeForPlayer(UUID uuid) {
