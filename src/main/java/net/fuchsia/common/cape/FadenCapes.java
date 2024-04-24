@@ -20,6 +20,7 @@ public class FadenCapes {
     public static final FadenCape TRANSLATOR = register("translator");
     public static final FadenCape STAFF = register("staff");
     public static final FadenCape DONATOR = register("donator");
+    public static final FadenCape DATA = register("data");
 
     public static void setPlayerCapes(HashMap<UUID, String> playerCapes) {
         PLAYER_CAPES = playerCapes;
