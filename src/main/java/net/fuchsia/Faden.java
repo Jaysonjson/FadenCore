@@ -2,12 +2,17 @@ package net.fuchsia;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import net.fabricmc.fabric.api.command.v2.ArgumentTypeRegistry;
 import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.common.init.FadenSoundEvents;
+import net.fuchsia.common.objects.command.types.RaceArgumentType;
+import net.fuchsia.common.objects.command.types.RaceSubIdArgumentType;
 import net.fuchsia.common.race.RaceCosmetics;
 import net.fuchsia.common.race.data.ServerRaceCache;
 import net.fuchsia.config.FadenConfigScreen;
+import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.command.argument.serialize.ConstantArgumentSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,6 +42,8 @@ public class Faden implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		ArgumentTypeRegistry.registerArgumentType(FadenIdentifier.create("race_argument"), RaceArgumentType.class, ConstantArgumentSerializer.of(RaceArgumentType::empty));
+		ArgumentTypeRegistry.registerArgumentType(FadenIdentifier.create("race_sub_id_argument"), RaceSubIdArgumentType.class, ConstantArgumentSerializer.of(RaceSubIdArgumentType::empty));
 		CONTAINER = FabricLoader.getInstance().getModContainer(MOD_ID).get();
 		FadenCapes.init();
 		RaceCosmetics.add();

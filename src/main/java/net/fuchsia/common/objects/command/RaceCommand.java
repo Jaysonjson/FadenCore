@@ -8,6 +8,7 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.fuchsia.common.objects.CoinMap;
 import net.fuchsia.common.objects.command.types.RaceArgumentType;
+import net.fuchsia.common.objects.command.types.RaceSubIdArgumentType;
 import net.fuchsia.common.race.IRace;
 import net.fuchsia.common.race.Race;
 import net.fuchsia.common.race.RaceSkinUtil;
@@ -30,7 +31,7 @@ public class RaceCommand {
                 .then(CommandManager.literal("race").requires((source) -> source.hasPermissionLevel(2))
                         .then(CommandManager.literal("set")
                                 .then(CommandManager.argument("player", EntityArgumentType.player())
-                                        .then(CommandManager.argument("race", RaceArgumentType.of(false)).then(CommandManager.argument("sub_id", RaceArgumentType.of(true))
+                                        .then(CommandManager.argument("race", RaceArgumentType.empty()).then(CommandManager.argument("sub_id", RaceSubIdArgumentType.empty())
                                                 .executes(context -> setRace(context))))))
 
                         .then(CommandManager.literal("get")

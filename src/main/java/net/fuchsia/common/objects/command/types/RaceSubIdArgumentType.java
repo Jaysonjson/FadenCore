@@ -4,30 +4,24 @@ import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.arguments.ArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
-import com.mojang.brigadier.context.StringRange;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.mojang.brigadier.suggestion.Suggestion;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import net.fuchsia.common.race.Race;
-import net.minecraft.command.CommandSource;
-import net.minecraft.util.StringIdentifiable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.stream.Collectors;
 
-public class RaceArgumentType implements ArgumentType<String> {
+public class RaceSubIdArgumentType implements ArgumentType<String> {
 
-    public RaceArgumentType() {
+    public RaceSubIdArgumentType() {
     }
 
-    public static RaceArgumentType empty() {
-        return new RaceArgumentType();
+    public static RaceSubIdArgumentType empty() {
+        return new RaceSubIdArgumentType();
     }
+
 
     @Override
     public String parse(final StringReader reader) throws CommandSyntaxException {
@@ -35,18 +29,14 @@ public class RaceArgumentType implements ArgumentType<String> {
     }
 
     @Override
-    public Collection<String> getExamples() {
-        Collection<String> ex = new ArrayList<>();
-        for (Race value : Race.values()) {
-            ex.add(value.getId());
-        }
-        return ex;
-    }
-
-    @Override
     public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> context, SuggestionsBuilder builder) {
+        String id = StringArgumentType.getString(context, "race");
         for (Race value : Race.values()) {
-            builder.suggest(value.getId());
+            if(value.getId().equalsIgnoreCase(id)) {
+                for (String s : value.subIds()) {
+                    builder.suggest(s);
+                }
+            }
         }
         return builder.buildFuture();
     }
