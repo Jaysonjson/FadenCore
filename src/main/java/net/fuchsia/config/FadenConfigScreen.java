@@ -22,8 +22,19 @@ public class FadenConfigScreen {
                 .setDefaultValue(FadenConfig.ENABLE_PLAYER_RACE_SKINS)
                 .build();
 
+        BooleanListEntry enableVanillaBlur = configEntryBuilder
+                .startBooleanToggle(Text.translatable("config.faden.enable_vanilla_blur"), FadenConfig.ENABLE_PLAYER_RACE_SKINS)
+                .setDefaultValue(FadenConfig.ENABLE_PLAYER_RACE_SKINS)
+                .build();
+
         ConfigCategory race = builder.getOrCreateCategory(Text.translatable("config.faden.category.race"));
         race.addEntry(enablePlayerRaceSkins);
+
+        ConfigCategory inter = builder.getOrCreateCategory(Text.translatable("config.faden.category.interface"));
+        inter.addEntry(enableVanillaBlur);
+
+        ConfigCategory vanilla = builder.getOrCreateCategory(Text.translatable("config.faden.category.vanilla"));
+        vanilla.addEntry(enableVanillaBlur);
 
         return builder.build();
     }

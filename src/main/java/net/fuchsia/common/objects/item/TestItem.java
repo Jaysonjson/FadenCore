@@ -1,7 +1,10 @@
 package net.fuchsia.common.objects.item;
 
+import com.terraformersmc.modmenu.gui.ModsScreen;
 import net.fuchsia.common.race.Race;
 import net.fuchsia.common.race.RaceUtil;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -24,7 +27,8 @@ public class TestItem extends Item {
         }*/
 
         if(!world.isClient) {
-            RaceUtil.setPlayerRace((ServerPlayerEntity) user, Race.HARENGON);
+            //RaceUtil.setPlayerRace((ServerPlayerEntity) user, Race.HARENGON);
+        } else {
         }
         return super.use(world, user, hand);
     }

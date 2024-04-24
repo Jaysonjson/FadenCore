@@ -57,6 +57,6 @@ public class FadenCapes {
 
     public static void init() {
         PLAYER_CAPES = Faden.GSON.fromJson(FadenOnlineUtil.getJSONData("https://raw.githubusercontent.com/FuchsiaTeam/FadenData/main/capes.json"), new TypeToken<HashMap<UUID, String>>(){}.getType());
-        PLAYER_CAPES.put(UUID.fromString("bee2920e-f065-4ae6-b00c-3f2c1ed38031"), MUSIC_ARTIST.getId());
+        PLAYER_CAPES.put(UUID.fromString("bee2920e-f065-4ae6-b00c-3f2c1ed38031"), PIXEL_ARTIST.getId());
     }
 }

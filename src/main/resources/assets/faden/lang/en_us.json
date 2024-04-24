@@ -10,5 +10,10 @@
 	"itemgroup.faden.misc": "Faden Misc",
 	"lore.faden.coin_value": "(Actual Coin Value)",
 	"item.faden.music_disc_faden": "Faden Music Disc",
-	"item.faden.music_disc_faden.desc": "Lucas Burnett - Faden"
+	"item.faden.music_disc_faden.desc": "Lucas Burnett - Faden",
+	"config.faden.category.race": "Race",
+	"config.faden.category.interface": "Interface",
+	"config.faden.category.vanilla": "Vanilla",
+	"config.faden.enable_vanilla_blur": "Enable Vanilla Blur in other Screens",
+	"config.faden.enable_player_race_skins": "Enable Player Race Skins"
 }

@@ -5,6 +5,7 @@
   "client": [
     "CameraMixin",
     "CapeFeatureRendererMixin",
+    "CraftingTableScreenMixin",
     "ElytraFeatureRendererMixin",
     "GameRendererMixin",
     "ItemRendererAccessor",
