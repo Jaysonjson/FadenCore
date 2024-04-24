@@ -23,7 +23,6 @@ public class ItemValues {
     public static void add() {
         HashMap<String, Integer> map = Faden.GSON.fromJson(FadenOnlineUtil.getJSONData("https://raw.githubusercontent.com/FuchsiaTeam/FadenData/main/item_values.json"), new TypeToken<HashMap<String, Integer>>(){}.getType());
         reload(map);
-        System.out.println("JSON: " + FadenOnlineUtil.getJSONData("https://raw.githubusercontent.com/FuchsiaTeam/FadenData/main/item_values.json"));
     }
 
     public static void reload(HashMap<String, Integer> map) {
