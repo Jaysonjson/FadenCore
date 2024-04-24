@@ -38,7 +38,7 @@ public abstract class EntityMixin {
         if(entity instanceof PlayerEntity) {
             RaceData data = ClientRaceCache.get(uuid);
             if (data.getRace() != null && data.getRace().size().y != 1f) {
-                cir.setReturnValue(this.standingEyeHeight - (1 - data.getRace().size().y * data.getRace().size().y - 0.1f));
+                cir.setReturnValue(this.standingEyeHeight - (1 - data.getRace().size().y * data.getRace().size().y - data.getRace().size().y / 10.0f));
             }
         }
     }
@@ -49,7 +49,7 @@ public abstract class EntityMixin {
         if(entity instanceof PlayerEntity) {
             RaceData data = ServerRaceCache.getCache().get(uuid);
             if (data.getRace() != null && data.getRace().size().y != 1f) {
-                cir.setReturnValue(this.standingEyeHeight - (1 - data.getRace().size().y * data.getRace().size().y - 0.1f));
+                cir.setReturnValue(this.standingEyeHeight - (1 - data.getRace().size().y * data.getRace().size().y - data.getRace().size().y / 10.0f));
             }
         }
     }
