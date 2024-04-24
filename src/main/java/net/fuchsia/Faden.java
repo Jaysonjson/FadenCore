@@ -45,8 +45,6 @@ public class Faden implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		ArgumentTypeRegistry.registerArgumentType(FadenIdentifier.create("race_argument"), RaceArgumentType.class, ConstantArgumentSerializer.of(RaceArgumentType::empty));
-		ArgumentTypeRegistry.registerArgumentType(FadenIdentifier.create("race_sub_id_argument"), RaceSubIdArgumentType.class, ConstantArgumentSerializer.of(RaceSubIdArgumentType::empty));
 		CONTAINER = FabricLoader.getInstance().getModContainer(MOD_ID).get();
 		FadenCapes.init();
 		RaceCosmetics.add();
@@ -84,6 +82,8 @@ public class Faden implements ModInitializer {
 			}
 			ServerRaceCache.Cache.sendUpdate(handler.getPlayer(), handler.getPlayer().server, true);
 		});
+		ArgumentTypeRegistry.registerArgumentType(FadenIdentifier.create("race_sub_id_argument"), RaceSubIdArgumentType.class, ConstantArgumentSerializer.of(RaceSubIdArgumentType::empty));
+		ArgumentTypeRegistry.registerArgumentType(FadenIdentifier.create("race_argument"), RaceArgumentType.class, ConstantArgumentSerializer.of(RaceArgumentType::empty));
 	}
 
 	public static Screen openConfig(Screen parent) {
