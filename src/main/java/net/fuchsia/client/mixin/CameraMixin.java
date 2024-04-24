@@ -17,7 +17,8 @@ import java.util.UUID;
 @Mixin(Camera.class)
 public class CameraMixin {
 
-    @Shadow private Vec3d pos;
+    //MOVED TO ENTITY MIXIN
+    /*@Shadow private Vec3d pos;
 
     @Inject(at = @At("HEAD"), method = "getPos", cancellable = true)
     public void getModel(CallbackInfoReturnable<Vec3d> cir) {
@@ -26,6 +27,6 @@ public class CameraMixin {
         if(data.getRace() != null) {
             cir.setReturnValue(new Vec3d(this.pos.x, this.pos.y - (1 - data.getRace().size().y), this.pos.z));
         }
-    }
+    }*/
 
 }
