@@ -7,6 +7,7 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.fuchsia.common.objects.CoinMap;
+import net.fuchsia.common.objects.command.types.RaceArgumentType;
 import net.fuchsia.common.race.IRace;
 import net.fuchsia.common.race.Race;
 import net.fuchsia.common.race.RaceSkinUtil;
@@ -29,13 +30,12 @@ public class RaceCommand {
                 .then(CommandManager.literal("race").requires((source) -> source.hasPermissionLevel(2))
                         .then(CommandManager.literal("set")
                                 .then(CommandManager.argument("player", EntityArgumentType.player())
-                                        .then(CommandManager.argument("race", StringArgumentType.string()).then(CommandManager.argument("sub_id", StringArgumentType.string())
+                                        .then(CommandManager.argument("race", RaceArgumentType.of(false)).then(CommandManager.argument("sub_id", RaceArgumentType.of(true))
                                                 .executes(context -> setRace(context))))))
 
                         .then(CommandManager.literal("get")
                                 .then(CommandManager.argument("player", EntityArgumentType.player())
                                         .executes(context -> getRace(context)))));
-
         dispatcher.register(literalCommandNode);
     }
 
