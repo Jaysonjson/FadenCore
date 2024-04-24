@@ -12,5 +12,5 @@ public interface IRace {
 	RaceCosmeticPalette getCosmeticPalette();
 	String[] subIds();
 	Vector3f size();
-	boolean slim();
+	RaceModelType model();
 }

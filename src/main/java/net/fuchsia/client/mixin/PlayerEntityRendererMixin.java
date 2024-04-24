@@ -2,6 +2,7 @@ package net.fuchsia.client.mixin;
 
 import net.fuchsia.client.render.feature.ChestFeatureRenderer;
 import net.fuchsia.client.render.feature.HeadFeatureRenderer;
+import net.fuchsia.common.race.RaceModelType;
 import net.fuchsia.common.race.data.ClientRaceCache;
 import net.fuchsia.common.race.data.RaceData;
 import net.fuchsia.config.FadenConfig;
@@ -60,12 +61,28 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
         if(player != null) {
             RaceData data = ClientRaceCache.get(player.getUuid());
             if(data.getRace() != null) {
-                if(data.getRace().slim()) {
-                    this.model = slimModel;
-                    cir.setReturnValue(slimModel);
-                } else {
-                    this.model = wideModel;
-                    cir.setReturnValue(wideModel);
+                switch (data.getRace().model()) {
+                    case SLIM -> {
+                        this.model = slimModel;
+                        cir.setReturnValue(slimModel);
+                    }
+
+                    case WIDE -> {
+                        this.model = wideModel;
+                        cir.setReturnValue(wideModel);
+                    }
+
+                    case BOTH -> {
+                        Identifier id = ClientRaceSkinCache.getPlayerSkins().getOrDefault(player.getUuid(), new Identifier("empty"));
+                        if(id.toString().toLowerCase().contains("_slim")) {
+                            this.model = slimModel;
+                            cir.setReturnValue(slimModel);
+                        } else if(id.toString().toLowerCase().contains("_wide")) {
+                            this.model = wideModel;
+                            cir.setReturnValue(wideModel);
+                        }
+                    }
+
                 }
             }
         }

@@ -9,7 +9,7 @@ public enum Race implements IRace {
 	
 	
 	HUMAN(new RaceCosmeticPalette(), new String[]{"default"}),
-	HARENGON(RaceCosmetics.HARENGON, new String[]{"brown", "black", "gold", "salt", "toast", "white", "white_splotched"}, new Vector3f(0.80f, 0.80f, 0.80f), true),
+	HARENGON(RaceCosmetics.HARENGON, new String[]{"brown", "black", "gold", "salt", "toast", "white", "white_splotched"}, new Vector3f(0.80f, 0.80f, 0.80f), RaceModelType.SLIM),
 	TABAXI,
 	ELF;
 
@@ -17,19 +17,19 @@ public enum Race implements IRace {
 	private RaceCosmeticPalette palette;
 	private String[] subIds;
 	private Vector3f size = new Vector3f(1, 1, 1);
-	private boolean slim = false;
+	private RaceModelType modelType = RaceModelType.BOTH;
 	Race(RaceCosmeticPalette palette, String[] subIds) {
 		skinMap = new HashMap<>();
 		this.palette = palette;
 		this.subIds = subIds;
 	}
 
-	Race(RaceCosmeticPalette palette, String[] subIds, Vector3f size, boolean slim) {
+	Race(RaceCosmeticPalette palette, String[] subIds, Vector3f size, RaceModelType slim) {
 		skinMap = new HashMap<>();
 		this.palette = palette;
 		this.subIds = subIds;
 		this.size = size;
-		this.slim = slim;
+		this.modelType = slim;
 	}
 
 	Race() {
@@ -64,7 +64,7 @@ public enum Race implements IRace {
 	}
 
 	@Override
-	public boolean slim() {
-		return slim;
+	public RaceModelType model() {
+		return modelType;
 	}
 }
