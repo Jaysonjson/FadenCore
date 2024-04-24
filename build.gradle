@@ -65,10 +65,12 @@ dependencies {
 
 	modApi "com.terraformersmc:modmenu:9.0.0"
 
-	modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${rei_version}"
-	modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rei_version}"
-	modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${rei_version}"
-	modCompileOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rei_version}"
+	//RE-ADD ONCE 1.20.5 VERSIONS RE OUT!
+	//modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${rei_version}"
+	//modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rei_version}"
+	//modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${rei_version}"
+	//modCompileOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rei_version}"
+
 	modApi("me.shedaniel.cloth:cloth-config-fabric:${config_version}") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
