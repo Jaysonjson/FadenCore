@@ -9,7 +9,7 @@ public enum Race implements IRace {
 	
 	
 	HUMAN(new RaceCosmeticPalette(), new String[]{"default"}),
-	HARENGON(RaceCosmetics.HARENGON, new String[]{"brown", "black", "gold", "salt", "toast", "white", "white_splotched"}, new Vector3f(0.78f, 0.78f, 0.78f), true),
+	HARENGON(RaceCosmetics.HARENGON, new String[]{"brown", "black", "gold", "salt", "toast", "white", "white_splotched"}, new Vector3f(0.85f, 0.85f, 0.85f), true),
 	TABAXI,
 	ELF;
 
