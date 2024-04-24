@@ -27,9 +27,8 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Inject(at = @At("HEAD"), method = "isPartVisible", cancellable = true)
     public void isPartVisible(PlayerModelPart modelPart, CallbackInfoReturnable<Boolean> cir) {
-        if(FadenCapes.playerHasCape(uuid)) {
+        if (FadenCapes.playerHasCape(uuid)) {
             cir.setReturnValue(true);
         }
     }
-
 }

@@ -11,8 +11,11 @@ import net.fuchsia.common.race.RaceCosmetics;
 import net.fuchsia.common.race.data.ServerRaceCache;
 import net.fuchsia.config.FadenConfigScreen;
 import net.fuchsia.util.FadenIdentifier;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.command.argument.serialize.ConstantArgumentSerializer;
+import net.minecraft.server.command.LocateCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
