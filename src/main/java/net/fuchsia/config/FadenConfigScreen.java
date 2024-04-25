@@ -31,6 +31,11 @@ public class FadenConfigScreen {
                 .setDefaultValue(FadenOptions.getConfig().ENABLE_PLAYER_RACE_SKINS)
                 .build();
 
+        BooleanListEntry enableCustomCapes = configEntryBuilder
+                .startBooleanToggle(Text.translatable("config.faden.enable_custom_capes\n"), FadenOptions.getConfig().CUSTOM_CAPES)
+                .setDefaultValue(FadenOptions.getConfig().CUSTOM_CAPES)
+                .build();
+
         BooleanListEntry enableVanillaBlur = configEntryBuilder
                 .startBooleanToggle(Text.translatable("config.faden.enable_vanilla_blur"), FadenOptions.getConfig().VANILLA_BLUR)
                 .setDefaultValue(FadenOptions.getConfig().VANILLA_BLUR)
@@ -45,9 +50,13 @@ public class FadenConfigScreen {
         ConfigCategory vanilla = builder.getOrCreateCategory(Text.translatable("config.faden.category.vanilla"));
         vanilla.addEntry(enableVanillaBlur);
 
+        ConfigCategory faden = builder.getOrCreateCategory(Text.literal("Faden"));
+        faden.addEntry(enablePlayerRaceSkins);
+        faden.addEntry(enableCustomCapes);
+
 
         builder.setSavingRunnable(() -> {
-            FadenOptions.setConfig(new FadenConfig(enablePlayerRaceSkins.getValue(),  enableVanillaBlur.getValue()));
+            FadenOptions.setConfig(new FadenConfig(enablePlayerRaceSkins.getValue(),  enableVanillaBlur.getValue(), enableCustomCapes.getValue()));
             try {
                 FileUtils.writeStringToFile(new File(FabricLoader.getInstance().getConfigDir().toFile() + "/faden.json"), Faden.GSON.toJson(FadenOptions.getConfig()), StandardCharsets.UTF_8);
             } catch (IOException e) {

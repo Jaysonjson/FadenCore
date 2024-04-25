@@ -15,5 +15,7 @@
 	"config.faden.category.interface": "Interface",
 	"config.faden.category.vanilla": "Vanilla",
 	"config.faden.enable_vanilla_blur": "Enable Vanilla Blur in other Screens",
-	"config.faden.enable_player_race_skins": "Enable Player Race Skins"
+	"config.faden.enable_player_race_skins": "Enable Player Race Skins",
+	"config.faden.enable_custom_capes": "Enable Custom Capes",
+	"config.faden.title": "Faden Configuration"
 }

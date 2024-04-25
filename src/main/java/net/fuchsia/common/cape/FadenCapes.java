@@ -2,6 +2,8 @@ package net.fuchsia.common.cape;
 
 import com.google.gson.reflect.TypeToken;
 import net.fuchsia.Faden;
+import net.fuchsia.config.FadenConfig;
+import net.fuchsia.config.FadenOptions;
 import net.fuchsia.util.FadenOnlineUtil;
 import net.minecraft.client.MinecraftClient;
 
@@ -56,7 +58,9 @@ public class FadenCapes {
     }
 
     public static void init() {
-        PLAYER_CAPES = Faden.GSON.fromJson(FadenOnlineUtil.getJSONData("https://raw.githubusercontent.com/FuchsiaTeam/FadenData/main/capes.json"), new TypeToken<HashMap<UUID, String>>(){}.getType());
-        PLAYER_CAPES.put(UUID.fromString("bee2920e-f065-4ae6-b00c-3f2c1ed38031"), PIXEL_ARTIST.getId());
+        if(FadenOptions.getConfig().CUSTOM_CAPES) {
+            PLAYER_CAPES = Faden.GSON.fromJson(FadenOnlineUtil.getJSONData("https://raw.githubusercontent.com/FuchsiaTeam/FadenData/main/capes.json"), new TypeToken<HashMap<UUID, String>>() {}.getType());
+            //PLAYER_CAPES.put(UUID.fromString("bee2920e-f065-4ae6-b00c-3f2c1ed38031"), PIXEL_ARTIST.getId());
+        }
     }
 }

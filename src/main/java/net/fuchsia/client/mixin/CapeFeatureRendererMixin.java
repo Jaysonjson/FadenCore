@@ -2,6 +2,7 @@ package net.fuchsia.client.mixin;
 
 import net.fuchsia.common.cape.FadenCape;
 import net.fuchsia.common.cape.FadenCapes;
+import net.fuchsia.config.FadenOptions;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
@@ -21,9 +22,11 @@ public class CapeFeatureRendererMixin {
 
     @ModifyVariable(method = "render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/client/network/AbstractClientPlayerEntity;FFFFFF)V", at = @At("STORE"), ordinal = 0)
     private VertexConsumer injected(VertexConsumer x, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, AbstractClientPlayerEntity abstractClientPlayerEntity, float f, float g, float h, float j, float k, float l) {
-        FadenCape cape = FadenCapes.getCapeForPlayer(abstractClientPlayerEntity.getUuid());
-        if(cape != null) {
-            return vertexConsumerProvider.getBuffer(RenderLayer.getEntitySolid(cape.getTexture()));
+        if(FadenOptions.getConfig().CUSTOM_CAPES) {
+            FadenCape cape = FadenCapes.getCapeForPlayer(abstractClientPlayerEntity.getUuid());
+            if (cape != null) {
+                return vertexConsumerProvider.getBuffer(RenderLayer.getEntitySolid(cape.getTexture()));
+            }
         }
         return x;
     }
@@ -31,9 +34,11 @@ public class CapeFeatureRendererMixin {
 
     @ModifyVariable(method = "render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/client/network/AbstractClientPlayerEntity;FFFFFF)V", at = @At("STORE"), ordinal = 0)
     private SkinTextures injected(SkinTextures x, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, AbstractClientPlayerEntity abstractClientPlayerEntity, float f, float g, float h, float j, float k, float l) {
-        FadenCape cape = FadenCapes.getCapeForPlayer(abstractClientPlayerEntity.getUuid());
-        if(cape != null) {
-            return new SkinTextures(cape.getTexture(), null, cape.getTexture(), null, null, false);
+        if(FadenOptions.getConfig().CUSTOM_CAPES) {
+            FadenCape cape = FadenCapes.getCapeForPlayer(abstractClientPlayerEntity.getUuid());
+            if (cape != null) {
+                return new SkinTextures(cape.getTexture(), null, cape.getTexture(), null, null, false);
+            }
         }
         return x;
     }
