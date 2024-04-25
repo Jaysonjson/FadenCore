@@ -32,7 +32,7 @@ public class FadenConfigScreen {
                 .build();
 
         BooleanListEntry enableCustomCapes = configEntryBuilder
-                .startBooleanToggle(Text.translatable("config.faden.enable_custom_capes\n"), FadenOptions.getConfig().CUSTOM_CAPES)
+                .startBooleanToggle(Text.translatable("config.faden.enable_custom_capes"), FadenOptions.getConfig().CUSTOM_CAPES)
                 .setDefaultValue(FadenOptions.getConfig().CUSTOM_CAPES)
                 .build();
 
