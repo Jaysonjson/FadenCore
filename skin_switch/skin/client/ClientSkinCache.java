@@ -86,7 +86,7 @@ public class ClientSkinCache {
      * Skin that gets saved when you close the game
      * */
     private static NbtCompound SAVED_SKINS = new NbtCompound();
-    private static final Path SAVED_SKINS_PATH = new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/skin.nbt").toPath();
+    private static final Path SAVED_SKINS_PATH = new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/Fskin.nbt").toPath();
     /*
      * Can be used if we should ever change the data
      * */

@@ -4,6 +4,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
 
+import net.fuchsia.common.quest.TestQuest;
+import net.fuchsia.common.quest.data.QuestCache;
+import net.fuchsia.util.FadenIdentifier;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
 import org.jetbrains.annotations.Nullable;
 
 import net.fuchsia.common.init.FadenItems;
@@ -32,6 +38,17 @@ public class CoinItem extends Item {
         itemStacks.put(FadenItems.COPPER_COIN, value * stack.getCount());
         return Optional.of(new ItemValueTooltipData(itemStacks));
     }
+
+    @Override
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        if(!world.isClient) {
+            //QUESTS SHOULD BE IN A STATIC CONTEXT LATER, JUST FOR TESTING
+            TestQuest test = new TestQuest();
+            test.checkAndRewardStep(user, FadenIdentifier.create("use_coin"));
+        }
+        return super.use(world, user, hand);
+    }
+
 
     /*@Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {

@@ -7,6 +7,8 @@ import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.common.init.FadenSoundEvents;
 import net.fuchsia.common.objects.command.types.RaceArgumentType;
 import net.fuchsia.common.objects.command.types.RaceSubIdArgumentType;
+import net.fuchsia.common.quest.TestQuest;
+import net.fuchsia.common.quest.data.QuestCache;
 import net.fuchsia.common.race.RaceCosmetics;
 import net.fuchsia.common.race.data.ServerRaceCache;
 import net.fuchsia.config.FadenConfig;
@@ -46,7 +48,7 @@ import java.io.IOException;
 
 public class Faden implements ModInitializer {
 	public static final String MOD_ID = "faden";
-	public static final String MC_VERSION = "1.20.4";
+	public static final String MC_VERSION = "1.20.5";
 	public static final String FADEN_VERSION = "0.0.1";
     public static final Logger LOGGER = LoggerFactory.getLogger("Faden");
 	public static ModContainer CONTAINER;
@@ -96,11 +98,13 @@ public class Faden implements ModInitializer {
 		ServerLifecycleEvents.SERVER_STARTING.register(server -> {
 			RaceSkinMap.Cache.load();
 			ServerRaceCache.Cache.load();
+			QuestCache.load();
 		});
 
 		ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
 			RaceSkinMap.Cache.save();
 			ServerRaceCache.Cache.save();
+			QuestCache.save();
 		});
 
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
@@ -108,6 +112,9 @@ public class Faden implements ModInitializer {
 			FadenNetwork.Server.sendAllRaces(serverPlayerEntity);
 			RaceSkinMap.Cache.sendUpdate(serverPlayerEntity, server);
 			ServerRaceCache.Cache.sendUpdate(serverPlayerEntity, server, false);
+
+			//TODO REMVOE: QUEST TESTING
+			QuestCache.addOrUpdate(serverPlayerEntity.getUuid(), new TestQuest(), new TestQuest().getSteps().get(0));
 		});
 
 
