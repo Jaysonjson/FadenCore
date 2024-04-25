@@ -9,7 +9,9 @@ import net.fuchsia.common.objects.command.types.RaceArgumentType;
 import net.fuchsia.common.objects.command.types.RaceSubIdArgumentType;
 import net.fuchsia.common.race.RaceCosmetics;
 import net.fuchsia.common.race.data.ServerRaceCache;
+import net.fuchsia.config.FadenConfig;
 import net.fuchsia.config.FadenConfigScreen;
+import net.fuchsia.config.FadenOptions;
 import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.GameMenuScreen;
@@ -37,6 +39,11 @@ import net.fuchsia.common.race.RaceSkinMap;
 import net.fuchsia.common.race.skin.server.ServerSkinCache;
 import net.minecraft.server.network.ServerPlayerEntity;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Faden implements ModInitializer {
 	public static final String MOD_ID = "faden";
 	public static final String MC_VERSION = "1.20.4";
@@ -48,6 +55,26 @@ public class Faden implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		CONTAINER = FabricLoader.getInstance().getModContainer(MOD_ID).get();
+		init();
+        loadConfig();
+		serverEvents();
+		argumentTypes();
+	}
+
+	public static void loadConfig() {
+		try {
+			if(new File(FabricLoader.getInstance().getConfigDir().toFile() + "/faden.json").exists()) {
+				FadenOptions.setConfig(GSON.fromJson(new FileReader(FabricLoader.getInstance().getConfigDir().toFile() + "/faden.json"), FadenConfig.class));
+			} else {
+				FadenOptions.setConfig(new FadenConfig());
+			}
+		} catch (IOException e) {
+			FadenOptions.setConfig(new FadenConfig());
+			throw new RuntimeException(e);
+		}
+	}
+
+	public static void init() {
 		FadenCapes.init();
 		RaceCosmetics.add();
 		FadenSoundEvents.register();
@@ -58,7 +85,14 @@ public class Faden implements ModInitializer {
 		ItemValues.add();
 		CommandRegistrationCallback.EVENT.register(new FadenCommands());
 		RaceSkinMap.addSkins();
+	}
 
+	public static void argumentTypes() {
+		ArgumentTypeRegistry.registerArgumentType(FadenIdentifier.create("race_sub_id_argument"), RaceSubIdArgumentType.class, ConstantArgumentSerializer.of(RaceSubIdArgumentType::empty));
+		ArgumentTypeRegistry.registerArgumentType(FadenIdentifier.create("race_argument"), RaceArgumentType.class, ConstantArgumentSerializer.of(RaceArgumentType::empty));
+	}
+
+	public static void serverEvents() {
 		ServerLifecycleEvents.SERVER_STARTING.register(server -> {
 			RaceSkinMap.Cache.load();
 			ServerRaceCache.Cache.load();
@@ -84,8 +118,6 @@ public class Faden implements ModInitializer {
 			}
 			ServerRaceCache.Cache.sendUpdate(handler.getPlayer(), handler.getPlayer().server, true);
 		});
-		ArgumentTypeRegistry.registerArgumentType(FadenIdentifier.create("race_sub_id_argument"), RaceSubIdArgumentType.class, ConstantArgumentSerializer.of(RaceSubIdArgumentType::empty));
-		ArgumentTypeRegistry.registerArgumentType(FadenIdentifier.create("race_argument"), RaceArgumentType.class, ConstantArgumentSerializer.of(RaceArgumentType::empty));
 	}
 
 	public static Screen openConfig(Screen parent) {

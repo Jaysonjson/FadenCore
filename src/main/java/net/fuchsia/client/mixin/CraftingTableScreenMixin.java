@@ -3,6 +3,7 @@ package net.fuchsia.client.mixin;
 import net.fuchsia.common.race.data.ClientRaceCache;
 import net.fuchsia.common.race.data.RaceData;
 import net.fuchsia.config.FadenConfig;
+import net.fuchsia.config.FadenOptions;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.CraftingScreen;
@@ -24,7 +25,7 @@ public class CraftingTableScreenMixin extends Screen {
 
     @Inject(at = @At("HEAD"), method = "render", cancellable = true)
     private void size(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
-        if(FadenConfig.VANILLA_BLUR) {
+        if(FadenOptions.getConfig().VANILLA_BLUR) {
             applyBlur(delta);
         }
     }

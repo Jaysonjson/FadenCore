@@ -7,6 +7,7 @@ import net.fuchsia.common.race.data.ClientRaceCache;
 import net.fuchsia.common.race.data.RaceData;
 import net.fuchsia.config.FadenConfig;
 import net.fuchsia.common.race.skin.client.ClientRaceSkinCache;
+import net.fuchsia.config.FadenOptions;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -49,7 +50,7 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
     @Inject(at = @At("HEAD"), method = "getTexture(Lnet/minecraft/client/network/AbstractClientPlayerEntity;)Lnet/minecraft/util/Identifier;", cancellable = true)
     private void getTextureAbstractPlayer(AbstractClientPlayerEntity abstractClientPlayerEntity, CallbackInfoReturnable<Identifier> cir) {
         player = abstractClientPlayerEntity;
-        if(FadenConfig.ENABLE_PLAYER_RACE_SKINS) {
+        if(FadenOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
         	if(ClientRaceSkinCache.getPlayerSkins().containsKey(abstractClientPlayerEntity.getUuid())) {
         		cir.setReturnValue(ClientRaceSkinCache.getPlayerSkins().get(abstractClientPlayerEntity.getUuid()));
         	}
@@ -90,7 +91,7 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
 
     @ModifyVariable(method = "renderArm", at = @At("STORE"), ordinal = 0)
     private Identifier injected(Identifier x) {
-    	if(FadenConfig.ENABLE_PLAYER_RACE_SKINS) {
+    	if(FadenOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
     		ClientPlayerEntity player = MinecraftClient.getInstance().player;
     		if(ClientRaceSkinCache.getPlayerSkins().containsKey(player.getUuid())) {
     			return ClientRaceSkinCache.getPlayerSkins().get(player.getUuid());
