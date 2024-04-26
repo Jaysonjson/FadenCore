@@ -39,18 +39,13 @@ public abstract class FadenQuest implements IQuest {
     public void checkAndRewardStep(PlayerEntity player, Identifier stepId) {
         IQuestStep step = null;
         for (IQuestStep iQuestStep : getSteps()) {
-            System.out.println(iQuestStep.id().toString() + "_" + stepId.toString());
             if(iQuestStep.id().toString().equalsIgnoreCase(stepId.toString())) {
                 step = iQuestStep;
-                System.out.println("FOUND");
                 break;
             }
         }
-        System.out.println("STEP PRE CHECK");
         if(step != null) {
-            System.out.println("STEP NOT NULL");
             if(QuestCache.stepActive(player.getUuid(), this, step)) {
-                System.out.println("STEP ACTIVE");
                 step.rewardAndFinish(player);
                 for (IQuestStep iQuestStep : getSteps()) {
                     if(step.nextStep() == null) {
@@ -70,8 +65,5 @@ public abstract class FadenQuest implements IQuest {
     @Override
     public void startQuest(UUID player) {
         QuestCache.addOrUpdate(player, this, getSteps().get(0));
-        if(!QuestCache.getPlayerCache().onGoing.contains(id().getPath())) {
-            QuestCache.getPlayerCache().onGoing.add(id().getPath());
-        }
     }
 }

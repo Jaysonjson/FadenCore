@@ -14,6 +14,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.UUID;
 
 public class QuestCache {
@@ -64,13 +66,27 @@ public class QuestCache {
                 if(questTag.contains("step")) {
                     if(questTag.getString("step").equalsIgnoreCase(step.id().toString())) {
                         questTag.remove("step");
-                        PLAYER_CACHE.done.add(quest.id().toString());
                     }
                 }
                 playerTag.put(quest.id().toString(), questTag);
             }
 
             CACHE.put(uuid.toString(), playerTag);
+            ArrayList<String> done = QuestCache.getPlayerCache().done.getOrDefault(uuid, new ArrayList<>());
+            if(!done.contains(quest.id().toString())) {
+                done.add(quest.id().toString());
+            }
+            QuestCache.getPlayerCache().done.put(uuid, done);
+
+            ArrayList<String> onGoing = QuestCache.getPlayerCache().onGoing.getOrDefault(uuid, new ArrayList<>());
+            Iterator<String> iterator = onGoing.iterator();
+            while(iterator.hasNext()) {
+                String str = iterator.next();
+                if(str.equalsIgnoreCase(quest.id().toString())) {
+                    iterator.remove();
+                }
+            }
+            QuestCache.getPlayerCache().onGoing.put(uuid, onGoing);
 
             new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/").mkdirs();
             try {
@@ -89,6 +105,11 @@ public class QuestCache {
             questTag.putString("step", step.id().toString());
             tag.put(quest.id().toString(), questTag);
             CACHE.put(uuid.toString(), tag);
+            ArrayList<String> onGoing = QuestCache.getPlayerCache().onGoing.getOrDefault(uuid, new ArrayList<>());
+            if(!onGoing.contains(quest.id().toString())) {
+                onGoing.add(quest.id().toString());
+            }
+            QuestCache.getPlayerCache().onGoing.put(uuid, onGoing);
         }).start();
     }
 
