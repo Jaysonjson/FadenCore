@@ -114,7 +114,7 @@ public class Faden implements ModInitializer {
 			ServerRaceCache.Cache.sendUpdate(serverPlayerEntity, server, false);
 
 			//TODO REMVOE: QUEST TESTING
-			QuestCache.addOrUpdate(serverPlayerEntity.getUuid(), new TestQuest(), new TestQuest().getSteps().get(0));
+			new TestQuest().startQuest(serverPlayerEntity.getUuid());
 		});
 
 

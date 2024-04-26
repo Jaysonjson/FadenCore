@@ -64,13 +64,13 @@ public class QuestCache {
                 if(questTag.contains("step")) {
                     if(questTag.getString("step").equalsIgnoreCase(step.id().toString())) {
                         questTag.remove("step");
+                        PLAYER_CACHE.done.add(quest.id().toString());
                     }
                 }
                 playerTag.put(quest.id().toString(), questTag);
             }
 
             CACHE.put(uuid.toString(), playerTag);
-            PLAYER_CACHE.done.add(quest.id().toString());
 
             new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/").mkdirs();
             try {
