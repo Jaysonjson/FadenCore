@@ -15,5 +15,5 @@ public interface IQuest {
     List<IQuestStep> getSteps();
     IQuestStep getCurrentStep(UUID player);
     void renderRewardList(DrawContext context);
-
+    void startQuest(UUID player);
 }
