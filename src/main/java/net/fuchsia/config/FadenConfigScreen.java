@@ -41,11 +41,17 @@ public class FadenConfigScreen {
                 .setDefaultValue(FadenOptions.getConfig().VANILLA_BLUR)
                 .build();
 
+        BooleanListEntry fadenHealth = configEntryBuilder
+                .startBooleanToggle(Text.translatable("config.faden.faden_health_ui"), FadenOptions.getConfig().FADEN_HEALTH)
+                .setDefaultValue(FadenOptions.getConfig().FADEN_HEALTH)
+                .build();
+
         ConfigCategory race = builder.getOrCreateCategory(Text.translatable("config.faden.category.race"));
         race.addEntry(enablePlayerRaceSkins);
 
         ConfigCategory inter = builder.getOrCreateCategory(Text.translatable("config.faden.category.interface"));
         inter.addEntry(enableVanillaBlur);
+        inter.addEntry(fadenHealth);
 
         ConfigCategory vanilla = builder.getOrCreateCategory(Text.translatable("config.faden.category.vanilla"));
         vanilla.addEntry(enableVanillaBlur);
@@ -53,10 +59,17 @@ public class FadenConfigScreen {
         ConfigCategory faden = builder.getOrCreateCategory(Text.literal("Faden"));
         faden.addEntry(enablePlayerRaceSkins);
         faden.addEntry(enableCustomCapes);
+        faden.addEntry(fadenHealth);
 
+
+        ConfigCategory client = builder.getOrCreateCategory(Text.literal("Client"));
+        client.addEntry(enablePlayerRaceSkins);
+        client.addEntry(enableCustomCapes);
+        client.addEntry(fadenHealth);
+        client.addEntry(enableVanillaBlur);
 
         builder.setSavingRunnable(() -> {
-            FadenOptions.setConfig(new FadenConfig(enablePlayerRaceSkins.getValue(),  enableVanillaBlur.getValue(), enableCustomCapes.getValue()));
+            FadenOptions.setConfig(new FadenConfig(enablePlayerRaceSkins.getValue(),  enableVanillaBlur.getValue(), enableCustomCapes.getValue(), fadenHealth.getValue()));
             try {
                 FileUtils.writeStringToFile(new File(FabricLoader.getInstance().getConfigDir().toFile() + "/faden.json"), Faden.GSON.toJson(FadenOptions.getConfig()), StandardCharsets.UTF_8);
             } catch (IOException e) {

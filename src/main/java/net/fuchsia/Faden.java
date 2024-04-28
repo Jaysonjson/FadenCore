@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.fabricmc.fabric.api.command.v2.ArgumentTypeRegistry;
 import net.fuchsia.common.cape.FadenCapes;
+import net.fuchsia.common.init.FadenDataComponents;
 import net.fuchsia.common.init.FadenSoundEvents;
 import net.fuchsia.common.objects.command.types.RaceArgumentType;
 import net.fuchsia.common.objects.command.types.RaceSubIdArgumentType;
@@ -87,6 +88,7 @@ public class Faden implements ModInitializer {
 		ItemValues.add();
 		CommandRegistrationCallback.EVENT.register(new FadenCommands());
 		RaceSkinMap.addSkins();
+		FadenDataComponents.init();
 	}
 
 	public static void argumentTypes() {

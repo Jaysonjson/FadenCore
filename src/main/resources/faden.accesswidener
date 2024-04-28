@@ -1,3 +1,7 @@
 accessWidener v1 named
 accessible field net/minecraft/data/client/ItemModelGenerator writer Ljava/util/function/BiConsumer;
 accessible method net/minecraft/client/render/entity/LivingEntityRenderer addFeature (Lnet/minecraft/client/render/entity/feature/FeatureRenderer;)Z
+accessible field net/minecraft/client/render/GameRenderer blurPostProcessor Lnet/minecraft/client/gl/PostEffectProcessor;
+accessible method net/minecraft/client/gui/hud/InGameHud renderArmor (Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/entity/player/PlayerEntity;IIII)V
+accessible field net/minecraft/client/gui/hud/InGameHud AIR_TEXTURE Lnet/minecraft/util/Identifier;
+accessible field net/minecraft/client/gui/hud/InGameHud AIR_BURSTING_TEXTURE Lnet/minecraft/util/Identifier;

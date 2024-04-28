@@ -3,6 +3,8 @@ package net.fuchsia.mixin;
 
 import java.util.Optional;
 
+import net.fuchsia.common.init.FadenDataComponents;
+import net.minecraft.component.DataComponentTypes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -36,8 +38,16 @@ public class ItemMixin implements IValue {
 	@Override
 	public int getValue(ItemStack stack) {
 		int initialValue = ItemValues.VALUES.getOrDefault(stack.getItem(), 0);
+        //sstack.set(FadenDataComponents.EXTRA_VALUE, 35343);
+        initialValue += stack.getOrDefault(FadenDataComponents.EXTRA_VALUE, 0);
+        initialValue = (int) ((float)stack.getOrDefault(DataComponentTypes.DAMAGE, 0) / (float)stack.getOrDefault(DataComponentTypes.MAX_DAMAGE, 1) * (float) initialValue);
 		//TODO: OTHER CALCULATIONS HERE
 		return initialValue;
 	}
+
+    @Override
+    public int getBuyValue(ItemStack stack) {
+        return getValue(stack) * 9;
+    }
 
 }

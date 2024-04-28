@@ -1,5 +1,7 @@
 package net.fuchsia.client;
 
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.fuchsia.client.overlay.StatsOverlay;
 import net.fuchsia.common.cape.FadenCape;
 import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.client.handler.FadenItemModelHandler;
@@ -37,6 +39,8 @@ public class FadenClient implements ClientModInitializer {
             }
             return null;
         });
+
+        HudRenderCallback.EVENT.register(new StatsOverlay());
     }
 
     public void registerModels() {

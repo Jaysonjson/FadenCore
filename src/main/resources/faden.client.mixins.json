@@ -8,6 +8,7 @@
     "CraftingTableScreenMixin",
     "ElytraFeatureRendererMixin",
     "GameRendererMixin",
+    "InGameHudMixin",
     "ItemRendererAccessor",
     "ItemRendererMixin",
     "LivingEntityRendererMixin",
