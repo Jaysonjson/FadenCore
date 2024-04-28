@@ -40,7 +40,9 @@ public class ItemMixin implements IValue {
 		int initialValue = ItemValues.VALUES.getOrDefault(stack.getItem(), 0);
         //sstack.set(FadenDataComponents.EXTRA_VALUE, 35343);
         initialValue += stack.getOrDefault(FadenDataComponents.EXTRA_VALUE, 0);
-        initialValue = (int) ((float)stack.getOrDefault(DataComponentTypes.DAMAGE, 0) / (float)stack.getOrDefault(DataComponentTypes.MAX_DAMAGE, 1) * (float) initialValue);
+        if(stack.contains(DataComponentTypes.DAMAGE)) {
+            initialValue = (int) ((float) stack.getOrDefault(DataComponentTypes.DAMAGE, 0) / (float) stack.getOrDefault(DataComponentTypes.MAX_DAMAGE, 1) * (float) initialValue);
+        }
 		//TODO: OTHER CALCULATIONS HERE
 		return initialValue;
 	}
