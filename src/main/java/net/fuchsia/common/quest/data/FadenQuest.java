@@ -64,6 +64,8 @@ public abstract class FadenQuest implements IQuest {
 
     @Override
     public void startQuest(UUID player) {
-        QuestCache.addOrUpdate(player, this, getSteps().get(0));
+        if(QuestCache.getPlayerCache().newQuestForPlayer(player, this)) {
+            QuestCache.addOrUpdate(player, this, getSteps().get(0));
+        }
     }
 }

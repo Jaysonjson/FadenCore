@@ -106,7 +106,7 @@ public class QuestCache {
             tag.put(quest.id().toString(), questTag);
             CACHE.put(uuid.toString(), tag);
             ArrayList<String> onGoing = QuestCache.getPlayerCache().onGoing.getOrDefault(uuid, new ArrayList<>());
-            if(!onGoing.contains(quest.id().toString())) {
+            if (!onGoing.contains(quest.id().toString())) {
                 onGoing.add(quest.id().toString());
             }
             QuestCache.getPlayerCache().onGoing.put(uuid, onGoing);

@@ -1,5 +1,6 @@
 package net.fuchsia.common.objects.item;
 
+import com.mojang.authlib.GameProfile;
 import com.terraformersmc.modmenu.gui.ModsScreen;
 import net.fuchsia.common.quest.TestQuest;
 import net.fuchsia.common.race.Race;
@@ -10,10 +11,16 @@ import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.message.ChatVisibility;
+import net.minecraft.network.packet.c2s.common.SyncedClientOptions;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Arm;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
+
+import java.util.UUID;
 
 public class TestItem extends Item {
     public TestItem(Settings settings) {

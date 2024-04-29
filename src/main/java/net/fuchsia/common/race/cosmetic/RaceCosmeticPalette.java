@@ -7,7 +7,6 @@ public class RaceCosmeticPalette {
 
     private HashMap<String, ArrayList<RaceCosmetic>> cosmetics = new HashMap<>();
 
-
     public RaceCosmeticPalette() {
         cosmetics = new HashMap<>();
     }
