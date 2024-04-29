@@ -1,6 +1,7 @@
 package net.fuchsia.client.mixin;
 
 import net.fuchsia.client.render.feature.ChestFeatureRenderer;
+import net.fuchsia.client.render.feature.ClothFeatureRenderer;
 import net.fuchsia.client.render.feature.HeadFeatureRenderer;
 import net.fuchsia.common.race.RaceModelType;
 import net.fuchsia.common.race.data.ClientRaceCache;
@@ -15,6 +16,8 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
+import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer;
+import net.minecraft.client.render.entity.model.ArmorEntityModel;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
@@ -34,7 +37,7 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
     private PlayerEntityModel slimModel = null;
     private PlayerEntityModel wideModel = null;
     private AbstractClientPlayerEntity player = null;
-
+    private ClothFeatureRenderer clothFeatureRenderer;
     protected PlayerEntityRendererMixin(EntityRendererFactory.Context ctx) {
         super(ctx);
     }
@@ -45,6 +48,8 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
         renderer.addFeature(new HeadFeatureRenderer(renderer));
         this.slimModel = new PlayerEntityModel(ctx.getPart(EntityModelLayers.PLAYER_SLIM), true);
         this.wideModel = new PlayerEntityModel(ctx.getPart(EntityModelLayers.PLAYER), false);
+        clothFeatureRenderer = new ClothFeatureRenderer(this, slimModel, ctx.getModelManager());
+        renderer.addFeature(clothFeatureRenderer);
     }
 
     @Inject(at = @At("HEAD"), method = "getTexture(Lnet/minecraft/client/network/AbstractClientPlayerEntity;)Lnet/minecraft/util/Identifier;", cancellable = true)
@@ -65,11 +70,13 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
                 switch (data.getRace().model()) {
                     case SLIM -> {
                         this.model = slimModel;
+                        clothFeatureRenderer.setInnerModel(this.model);
                         cir.setReturnValue(slimModel);
                     }
 
                     case WIDE -> {
                         this.model = wideModel;
+                        clothFeatureRenderer.setInnerModel(this.model);
                         cir.setReturnValue(wideModel);
                     }
 
@@ -77,9 +84,11 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
                         Identifier id = ClientRaceSkinCache.getPlayerSkins().getOrDefault(player.getUuid(), new Identifier("empty"));
                         if(id.toString().toLowerCase().contains("_slim")) {
                             this.model = slimModel;
+                            clothFeatureRenderer.setInnerModel(this.model);
                             cir.setReturnValue(slimModel);
                         } else if(id.toString().toLowerCase().contains("_wide")) {
                             this.model = wideModel;
+                            clothFeatureRenderer.setInnerModel(this.model);
                             cir.setReturnValue(wideModel);
                         }
                     }

@@ -21,6 +21,7 @@ import net.minecraft.client.gui.screen.GameMenuScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.render.WorldRenderer;
+import net.minecraft.client.render.entity.model.ArmorEntityModel;
 import net.minecraft.command.argument.serialize.ConstantArgumentSerializer;
 import net.minecraft.server.command.LocateCommand;
 import org.slf4j.Logger;
