@@ -64,35 +64,37 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
 
     @Override
     public void getModel(CallbackInfoReturnable<EntityModel> cir) {
-        if(player != null) {
-            RaceData data = ClientRaceCache.get(player.getUuid());
-            if(data.getRace() != null) {
-                switch (data.getRace().model()) {
-                    case SLIM -> {
-                        this.model = slimModel;
-                        clothFeatureRenderer.setInnerModel(this.model);
-                        cir.setReturnValue(slimModel);
-                    }
-
-                    case WIDE -> {
-                        this.model = wideModel;
-                        clothFeatureRenderer.setInnerModel(this.model);
-                        cir.setReturnValue(wideModel);
-                    }
-
-                    case BOTH -> {
-                        Identifier id = ClientRaceSkinCache.getPlayerSkins().getOrDefault(player.getUuid(), new Identifier("empty"));
-                        if(id.toString().toLowerCase().contains("_slim")) {
+        if(FadenOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
+            if (player != null) {
+                RaceData data = ClientRaceCache.get(player.getUuid());
+                if (data.getRace() != null) {
+                    switch (data.getRace().model()) {
+                        case SLIM -> {
                             this.model = slimModel;
                             clothFeatureRenderer.setInnerModel(this.model);
                             cir.setReturnValue(slimModel);
-                        } else if(id.toString().toLowerCase().contains("_wide")) {
+                        }
+
+                        case WIDE -> {
                             this.model = wideModel;
                             clothFeatureRenderer.setInnerModel(this.model);
                             cir.setReturnValue(wideModel);
                         }
-                    }
 
+                        case BOTH -> {
+                            Identifier id = ClientRaceSkinCache.getPlayerSkins().getOrDefault(player.getUuid(), new Identifier("empty"));
+                            if (id.toString().toLowerCase().contains("_slim")) {
+                                this.model = slimModel;
+                                clothFeatureRenderer.setInnerModel(this.model);
+                                cir.setReturnValue(slimModel);
+                            } else if (id.toString().toLowerCase().contains("_wide")) {
+                                this.model = wideModel;
+                                clothFeatureRenderer.setInnerModel(this.model);
+                                cir.setReturnValue(wideModel);
+                            }
+                        }
+
+                    }
                 }
             }
         }
