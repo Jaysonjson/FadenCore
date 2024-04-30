@@ -28,7 +28,7 @@ public class HeadFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEnt
             RaceData raceData = ClientRaceCache.get(entity.getUuid());
             if (raceData.getRace() != null) {
                 for (RaceCosmetic cosmetic : raceData.getRace().getCosmeticPalette().getCosmetics(raceData.getSubId())) {
-                    if (cosmetic.getType() == RaceCosmeticType.HEAD) {
+                    if (cosmetic.getType() == RaceCosmeticType.HEAD && cosmetic.getId().equalsIgnoreCase(raceData.getHeadCosmeticId())) {
                         matrices.push();
                         BakedModel model = MinecraftClient.getInstance().getBakedModelManager().getModel(cosmetic.getModel());
                         ((ModelWithHead) this.getContextModel()).getHead().rotate(matrices);

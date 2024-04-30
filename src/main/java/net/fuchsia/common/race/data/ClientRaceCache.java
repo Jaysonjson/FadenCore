@@ -15,6 +15,6 @@ public class ClientRaceCache {
     }
 
     public static RaceData get(UUID uuid) {
-        return getCache().getOrDefault(uuid, new RaceData(null, ""));
+        return getCache().getOrDefault(uuid, new RaceData(null, "", ""));
     }
 }

@@ -12,13 +12,13 @@ import net.minecraft.network.packet.CustomPayload;
 
 import java.util.UUID;
 
-public record SendRaceUpdateS2CPacket(UUID uuid, String id, String sub_id, boolean remove) implements CustomPayload {
+public record SendRaceUpdateS2CPacket(UUID uuid, String id, String sub_id, String head_cosmetic, boolean remove) implements CustomPayload {
 
     public static final CustomPayload.Id<SendRaceUpdateS2CPacket> ID = new CustomPayload.Id<>(FadenIdentifier.create("send_race"));
     public static final PacketCodec<RegistryByteBuf, SendRaceUpdateS2CPacket> CODEC =new PacketCodec<RegistryByteBuf, SendRaceUpdateS2CPacket>() {
         @Override
         public SendRaceUpdateS2CPacket decode(RegistryByteBuf buf) {
-            return new SendRaceUpdateS2CPacket(buf.readUuid(), buf.readString(), buf.readString(), buf.readBoolean());
+            return new SendRaceUpdateS2CPacket(buf.readUuid(), buf.readString(), buf.readString(), buf.readString(), buf.readBoolean());
         }
 
         @Override
@@ -26,6 +26,7 @@ public record SendRaceUpdateS2CPacket(UUID uuid, String id, String sub_id, boole
             buf.writeUuid(value.uuid);
             buf.writeString(value.id);
             buf.writeString(value.sub_id);
+            buf.writeString(value.head_cosmetic);
             buf.writeBoolean(value.remove);
         }
     };
@@ -38,7 +39,7 @@ public record SendRaceUpdateS2CPacket(UUID uuid, String id, String sub_id, boole
     public void receive(ClientPlayNetworking.Context context) {
         if(!remove) {
             IRace race1 = Race.valueOf(id);
-            ClientRaceCache.getCache().put(uuid, new RaceData(race1, sub_id));
+            ClientRaceCache.getCache().put(uuid, new RaceData(race1, sub_id, head_cosmetic));
         } else {
             ClientRaceCache.getCache().remove(uuid);
         }

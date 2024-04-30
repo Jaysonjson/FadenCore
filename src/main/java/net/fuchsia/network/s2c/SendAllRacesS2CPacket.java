@@ -49,7 +49,7 @@ public record SendAllRacesS2CPacket(ArrayList<RacePacket> packets) implements Cu
                 ObjectOutputStream out = new ObjectOutputStream(byteOut);
                 ArrayList<RacePacket> packets1 = new ArrayList<>();
                 for (UUID uuid : ServerRaceCache.getCache().keySet()) {
-                    packets1.add(new RacePacket(uuid, ServerRaceCache.getCache().get(uuid).getRace().getId(), ServerRaceCache.getCache().get(uuid).getSubId()));
+                    packets1.add(new RacePacket(uuid, ServerRaceCache.getCache().get(uuid).getRace().getId(), ServerRaceCache.getCache().get(uuid).getSubId(), ServerRaceCache.getCache().get(uuid).getHeadCosmeticId()));
                 }
                 out.writeObject(packets1);
                 byte[] data = byteOut.toByteArray();
@@ -69,7 +69,7 @@ public record SendAllRacesS2CPacket(ArrayList<RacePacket> packets) implements Cu
 
     public void receive(ClientPlayNetworking.Context context) {
         for (RacePacket packet : packets) {
-            ClientRaceCache.getCache().put(packet.uuid(), new RaceData(Race.valueOf(packet.id()), packet.sub_id()));
+            ClientRaceCache.getCache().put(packet.uuid(), new RaceData(Race.valueOf(packet.id()), packet.sub_id(), packet.head_cosmetic()));
         }
     }
 }

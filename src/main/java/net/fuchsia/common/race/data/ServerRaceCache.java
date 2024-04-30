@@ -41,12 +41,13 @@ public class ServerRaceCache {
             return CACHE;
         }
 
-        public static void add(UUID uuid, String id, String sub_id) {
+        public static void add(UUID uuid, String id, String sub_id, String head_cosmetic) {
             new Thread(() -> {
                 if(CACHE.contains(uuid.toString())) CACHE.remove(uuid.toString());
                 NbtCompound tag = new NbtCompound();
                 tag.putString("id", id);
                 tag.putString("sub_id", sub_id);
+                tag.putString("head_cosmetic", head_cosmetic);
                 CACHE.put(uuid.toString(), tag);
                 new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/").mkdirs();
                 try {
@@ -82,14 +83,23 @@ public class ServerRaceCache {
             return "";
         }
 
+        public static String getHeadCosmetic(UUID uuid) {
+            if(get().contains(uuid.toString())) {
+                NbtCompound compound = get().getCompound(uuid.toString());
+                return compound.getString("head_cosmetic");
+            }
+            return "";
+        }
+
         public static void sendUpdate(ServerPlayerEntity updatedPlayer, MinecraftServer server, boolean remove) {
             String id = ServerRaceCache.Cache.getId(updatedPlayer.getUuid());
             String sub_id = ServerRaceCache.Cache.getSubId(updatedPlayer.getUuid());
+            String head_cosmetic = ServerRaceCache.Cache.getHeadCosmetic(updatedPlayer.getUuid());
             if(!id.isEmpty()) {
                 for (ServerPlayerEntity playerEntity : server.getPlayerManager().getPlayerList()) {
-                    FadenNetwork.Server.sendRace(playerEntity, updatedPlayer.getUuid(), id, sub_id, remove);
+                    FadenNetwork.Server.sendRace(playerEntity, updatedPlayer.getUuid(), id, sub_id, head_cosmetic, remove);
                 }
-                FadenNetwork.Server.sendRace(updatedPlayer, updatedPlayer.getUuid(), id, sub_id, remove);
+                FadenNetwork.Server.sendRace(updatedPlayer, updatedPlayer.getUuid(), id, sub_id, head_cosmetic, remove);
             }
             FadenNetwork.Server.sendRaces(updatedPlayer);
         }
