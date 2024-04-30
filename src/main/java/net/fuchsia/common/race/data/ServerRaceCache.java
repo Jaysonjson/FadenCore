@@ -91,6 +91,7 @@ public class ServerRaceCache {
                 }
                 FadenNetwork.Server.sendRace(updatedPlayer, updatedPlayer.getUuid(), id, sub_id, remove);
             }
+            FadenNetwork.Server.sendRaces(updatedPlayer);
         }
     }
 
