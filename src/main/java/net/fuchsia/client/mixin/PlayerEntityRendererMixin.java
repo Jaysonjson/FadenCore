@@ -14,6 +14,8 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.render.OverlayTexture;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
@@ -27,6 +29,7 @@ import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Arm;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -145,6 +148,64 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
             }
         }
         return x;
+    }
+
+    @Inject(at = @At("HEAD"), method = "renderArm", cancellable = true)
+    private void renderArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve, CallbackInfo ci) {
+
+        if(FadenOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
+            RaceData data = ClientRaceCache.get(MinecraftClient.getInstance().player.getUuid());
+            PlayerEntityModel<AbstractClientPlayerEntity> playerEntityModel = null;
+            if (data.getRace() != null) {
+                switch (data.getRace().model()) {
+                    case SLIM -> {
+                        playerEntityModel = slimModel;
+                    }
+
+                    case WIDE -> {
+                        playerEntityModel = wideModel;
+                    }
+
+                    case BOTH -> {
+                        Identifier id = ClientRaceSkinCache.getPlayerSkins().getOrDefault(MinecraftClient.getInstance().player.getUuid(), new Identifier("empty"));
+                        if (id.toString().toLowerCase().contains("_slim")) {
+                            playerEntityModel = slimModel;
+                        } else if (id.toString().toLowerCase().contains("_wide")) {
+                            playerEntityModel = wideModel;
+                        }
+                    }
+
+                }
+            }
+            if(playerEntityModel != null) {
+                playerEntityModel.handSwingProgress = 0.0F;
+                playerEntityModel.sneaking = false;
+                playerEntityModel.leaningPitch = 0.0F;
+                playerEntityModel.setAngles(player, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
+                Arm playerArm = MinecraftClient.getInstance().options.getMainArm().getValue();
+                if(playerArm == Arm.RIGHT) {
+                    playerEntityModel.rightArm.pitch = 0.0F;
+                } else {
+                    playerEntityModel.leftArm.pitch = 0.0F;
+                }
+                Identifier identifier = player.getSkinTextures().texture();
+                if (ClientRaceSkinCache.getPlayerSkins().containsKey(MinecraftClient.getInstance().player.getUuid())) {
+                    identifier = ClientRaceSkinCache.getPlayerSkins().get(MinecraftClient.getInstance().player.getUuid());
+                }
+
+                if(playerArm == Arm.RIGHT) {
+                    playerEntityModel.rightArm.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntitySolid(identifier)), light, OverlayTexture.DEFAULT_UV);
+                    playerEntityModel.rightSleeve.pitch = 0.0F;
+                    playerEntityModel.rightSleeve.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(identifier)), light, OverlayTexture.DEFAULT_UV);
+                } else {
+                    playerEntityModel.leftArm.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntitySolid(identifier)), light, OverlayTexture.DEFAULT_UV);
+                    playerEntityModel.leftSleeve.pitch = 0.0F;
+                    playerEntityModel.leftArm.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(identifier)), light, OverlayTexture.DEFAULT_UV);
+                }
+
+                ci.cancel();
+            }
+        }
     }
 
     @Inject(at = @At("HEAD"), method = "render(Lnet/minecraft/client/network/AbstractClientPlayerEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", cancellable = true)
