@@ -51,7 +51,7 @@ public record SendAllRacesS2CPacket(ArrayList<RacePacket> packets) implements Cu
                 for (UUID uuid : ServerRaceCache.getCache().keySet()) {
                     packets1.add(new RacePacket(uuid, ServerRaceCache.getCache().get(uuid).getRace().getId(), ServerRaceCache.getCache().get(uuid).getSubId()));
                 }
-                out.writeObject(ServerSkinCache.PLAYER_SKINS);
+                out.writeObject(packets1);
                 byte[] data = byteOut.toByteArray();
                 byteOut.close();
                 out.close();

@@ -21,7 +21,6 @@ public class FadenClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         FadenNetwork.registerS2C();
-
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
             ClientRaceSkinCache.add();
             for (FadenCape cape : FadenCapes.getCapes()) {
