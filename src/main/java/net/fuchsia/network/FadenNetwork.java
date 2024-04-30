@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fuchsia.Faden;
 import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.common.data.ItemValues;
+import net.fuchsia.common.race.data.RaceData;
 import net.fuchsia.common.race.data.ServerRaceCache;
 import net.fuchsia.network.s2c.*;
 import net.fuchsia.common.race.skin.provider.SkinProvider;
@@ -59,7 +60,11 @@ public class FadenNetwork {
         }
 
         public static void sendRace(ServerPlayerEntity player, UUID uuid, String id, String sub_id, String head_cosmetic, boolean remove) {
-            ServerPlayNetworking.send(player, new SendRaceUpdateS2CPacket(uuid, id, sub_id, head_cosmetic, remove));
+            ServerPlayNetworking.send(player, new SendRaceUpdateS2CPacket(uuid, new RaceData(id, sub_id, head_cosmetic), remove));
+        }
+
+        public static void sendRace(ServerPlayerEntity player, UUID uuid, RaceData data, boolean remove) {
+            ServerPlayNetworking.send(player, new SendRaceUpdateS2CPacket(uuid, data, remove));
         }
 
         public static void sendAllRaces(ServerPlayerEntity player) {
@@ -69,7 +74,7 @@ public class FadenNetwork {
         public static void sendRaces(ServerPlayerEntity player) {
             ArrayList<RacePacket> packets1 = new ArrayList<>();
             for (UUID uuid : ServerRaceCache.getCache().keySet()) {
-                packets1.add(new RacePacket(uuid, ServerRaceCache.getCache().get(uuid).getRace().getId(), ServerRaceCache.getCache().get(uuid).getSubId(), ServerRaceCache.getCache().get(uuid).getHeadCosmeticId()));
+                packets1.add(new RacePacket(uuid, ServerRaceCache.getCache().get(uuid)));
             }
             ServerPlayNetworking.send(player, new SendAllRacesS2CPacket(packets1));
         }

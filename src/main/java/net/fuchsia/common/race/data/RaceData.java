@@ -14,6 +14,12 @@ public class RaceData implements Serializable {
     private String race_id = "";
     private String head_cosmetic_id = "";
 
+    public RaceData() {
+        this.race = null;
+        this.sub_id = "";
+        this.race_id = "";
+        this.head_cosmetic_id = "";
+    }
 
     public RaceData(IRace race, String sub_id, String head_cosmetic) {
         this.race = race;
@@ -21,6 +27,14 @@ public class RaceData implements Serializable {
         if(race != null) {
             this.race_id = race.getId();
         }
+        this.head_cosmetic_id = head_cosmetic;
+    }
+
+
+    public RaceData(String race, String sub_id, String head_cosmetic) {
+        this.sub_id = sub_id;
+        this.race_id = race;
+        this.race = Race.valueOf(race);
         this.head_cosmetic_id = head_cosmetic;
     }
 

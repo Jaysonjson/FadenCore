@@ -42,7 +42,7 @@ public class RaceCommand {
 
     public static int getRace(CommandContext<ServerCommandSource> source) throws CommandSyntaxException {
         PlayerEntity player = EntityArgumentType.getPlayer(source, "player");
-        RaceData data = ClientRaceCache.getCache().getOrDefault(player.getUuid(), new RaceData(null, "", ""));
+        RaceData data = ClientRaceCache.getCache().getOrDefault(player.getUuid(), new RaceData());
         if(data.getRace() != null) {
             source.getSource().sendFeedback(() -> Text.literal("Race: " + data.getRace().getId() + " with SubId:" + data.getSubId()), false);
         } else {
