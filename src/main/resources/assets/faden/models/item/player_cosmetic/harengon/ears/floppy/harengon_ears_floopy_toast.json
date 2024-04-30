@@ -1,0 +1,7 @@
+{
+  "parent": "faden:item/playesr_cosmetic/harengon/ears/floppy/harengon_ears_floopy_brown",
+  "textures": {
+    "0": "faden:item/player_cosmetic/harengon/toast/ears_floppy",
+    "particle": "faden:item/player_cosmetic/harengon/toast/ears_floppy"
+  }
+}
