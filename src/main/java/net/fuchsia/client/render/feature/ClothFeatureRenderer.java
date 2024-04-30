@@ -82,7 +82,10 @@ public class ClothFeatureRenderer <T extends LivingEntity, M extends BipedEntity
 
     private void renderArmorParts(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, A model, float red, float green, float blue, Identifier overlay) {
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(overlay));
+        matrices.push();
+        matrices.scale(1.025f, 1.025f, 1.025f);
         model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, red, green, blue, 1.0F);
+        matrices.pop();
     }
 
     private A getModel() {
