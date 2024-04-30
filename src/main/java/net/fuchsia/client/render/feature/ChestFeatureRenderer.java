@@ -30,7 +30,7 @@ public class ChestFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEn
             RaceData raceData = ClientRaceCache.get(entity.getUuid());
             if (raceData.getRace() != null) {
                 for (RaceCosmetic cosmetic : raceData.getRace().getCosmeticPalette().getCosmetics(raceData.getSubId())) {
-                    if (cosmetic.getType() == RaceCosmeticType.CHEST) {
+                    if (cosmetic.getType() == RaceCosmeticType.CHEST && cosmetic.getId().equalsIgnoreCase(raceData.getCosmetics().getChestCosmeticId())) {
                         matrices.push();
                         BakedModel model = MinecraftClient.getInstance().getBakedModelManager().getModel(cosmetic.getModel());
                         if(!entity.isSneaking()) {

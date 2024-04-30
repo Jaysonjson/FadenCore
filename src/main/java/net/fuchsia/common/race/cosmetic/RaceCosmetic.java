@@ -6,7 +6,7 @@ public class RaceCosmetic {
 
     private ModelIdentifier model;
     private RaceCosmeticType type;
-    private String id = "";
+    private String id = "default";
 
     public RaceCosmetic(ModelIdentifier model, RaceCosmeticType type) {
         this.model = model;

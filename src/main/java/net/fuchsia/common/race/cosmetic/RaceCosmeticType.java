@@ -2,6 +2,6 @@ package net.fuchsia.common.race.cosmetic;
 
 public enum RaceCosmeticType {
 
-    HEAD, CHEST, LEG
+    HEAD, CHEST, LEG, BOOTS
 
 }

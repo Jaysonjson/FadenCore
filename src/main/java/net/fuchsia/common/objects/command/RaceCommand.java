@@ -52,11 +52,15 @@ public class RaceCommand {
     }
 
     public static int setRace(CommandContext<ServerCommandSource> source) throws CommandSyntaxException {
-        PlayerEntity player = EntityArgumentType.getPlayer(source, "player");
-        String race = StringArgumentType.getString(source, "race");
-        String sub_id = StringArgumentType.getString(source, "sub_id");
-        RaceUtil.setPlayerRace((ServerPlayerEntity) player, Race.valueOf(race.toUpperCase()), sub_id);
-        source.getSource().sendFeedback(() -> Text.literal("Set Race to : " + race + " with SubId: " + sub_id), false);
+        try {
+            PlayerEntity player = EntityArgumentType.getPlayer(source, "player");
+            String race = StringArgumentType.getString(source, "race");
+            String sub_id = StringArgumentType.getString(source, "sub_id");
+            RaceUtil.setPlayerRace((ServerPlayerEntity) player, Race.valueOf(race.toUpperCase()), sub_id);
+            source.getSource().sendFeedback(() -> Text.literal("Set Race to : " + race + " with SubId: " + sub_id), false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 

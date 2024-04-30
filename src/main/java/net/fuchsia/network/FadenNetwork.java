@@ -59,8 +59,8 @@ public class FadenNetwork {
             ServerPlayNetworking.send(player, new SendSkinS2CPacket(uuid, SkinProvider.getSkinIdentifier(id)));
         }
 
-        public static void sendRace(ServerPlayerEntity player, UUID uuid, String id, String sub_id, String head_cosmetic, boolean remove) {
-            ServerPlayNetworking.send(player, new SendRaceUpdateS2CPacket(uuid, new RaceData(id, sub_id, head_cosmetic), remove));
+        public static void sendRace(ServerPlayerEntity player, UUID uuid, String id, String sub_id, RaceData.RaceDataCosmetics cosmetics, boolean remove) {
+            ServerPlayNetworking.send(player, new SendRaceUpdateS2CPacket(uuid, new RaceData(id, sub_id, cosmetics), remove));
         }
 
         public static void sendRace(ServerPlayerEntity player, UUID uuid, RaceData data, boolean remove) {

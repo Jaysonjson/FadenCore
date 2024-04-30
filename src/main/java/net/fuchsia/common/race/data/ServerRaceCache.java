@@ -41,13 +41,16 @@ public class ServerRaceCache {
             return CACHE;
         }
 
-        public static void add(UUID uuid, String id, String sub_id, String head_cosmetic) {
+        public static void add(UUID uuid, String id, String sub_id, RaceData.RaceDataCosmetics cosmetics) {
             new Thread(() -> {
                 if(CACHE.contains(uuid.toString())) CACHE.remove(uuid.toString());
                 NbtCompound tag = new NbtCompound();
                 tag.putString("id", id);
                 tag.putString("sub_id", sub_id);
-                tag.putString("head_cosmetic", head_cosmetic);
+                tag.putString("head_cosmetic", cosmetics.getHeadCosmeticId());
+                tag.putString("chest_cosmetic", cosmetics.getChestCosmeticId());
+                tag.putString("leg_cosmetic", cosmetics.getLegCosmeticId());
+                tag.putString("boots_cosmetic", cosmetics.getBootsCosmeticId());
                 CACHE.put(uuid.toString(), tag);
                 new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/").mkdirs();
                 try {
@@ -91,15 +94,42 @@ public class ServerRaceCache {
             return "";
         }
 
+        public static String getChestCosmetic(UUID uuid) {
+            if(get().contains(uuid.toString())) {
+                NbtCompound compound = get().getCompound(uuid.toString());
+                return compound.getString("chest_cosmetic");
+            }
+            return "";
+        }
+
+        public static String getLegCosmetic(UUID uuid) {
+            if(get().contains(uuid.toString())) {
+                NbtCompound compound = get().getCompound(uuid.toString());
+                return compound.getString("leg_cosmetic");
+            }
+            return "";
+        }
+
+        public static String getBootsCosmetic(UUID uuid) {
+            if(get().contains(uuid.toString())) {
+                NbtCompound compound = get().getCompound(uuid.toString());
+                return compound.getString("boots_cosmetic");
+            }
+            return "";
+        }
+
         public static void sendUpdate(ServerPlayerEntity updatedPlayer, MinecraftServer server, boolean remove) {
             String id = ServerRaceCache.Cache.getId(updatedPlayer.getUuid());
             String sub_id = ServerRaceCache.Cache.getSubId(updatedPlayer.getUuid());
             String head_cosmetic = ServerRaceCache.Cache.getHeadCosmetic(updatedPlayer.getUuid());
+            String chest_cosmetic = ServerRaceCache.Cache.getChestCosmetic(updatedPlayer.getUuid());
+            String leg_cosmetic = ServerRaceCache.Cache.getLegCosmetic(updatedPlayer.getUuid());
+            String boots_cosmetic = ServerRaceCache.Cache.getBootsCosmetic(updatedPlayer.getUuid());
             if(!id.isEmpty()) {
                 for (ServerPlayerEntity playerEntity : server.getPlayerManager().getPlayerList()) {
-                    FadenNetwork.Server.sendRace(playerEntity, updatedPlayer.getUuid(), id, sub_id, head_cosmetic, remove);
+                    FadenNetwork.Server.sendRace(playerEntity, updatedPlayer.getUuid(), id, sub_id, new RaceData.RaceDataCosmetics(head_cosmetic, chest_cosmetic, leg_cosmetic, boots_cosmetic), remove);
                 }
-                FadenNetwork.Server.sendRace(updatedPlayer, updatedPlayer.getUuid(), id, sub_id, head_cosmetic, remove);
+                FadenNetwork.Server.sendRace(updatedPlayer, updatedPlayer.getUuid(), id, sub_id, new RaceData.RaceDataCosmetics(head_cosmetic, chest_cosmetic, leg_cosmetic, boots_cosmetic), remove);
             }
             FadenNetwork.Server.sendRaces(updatedPlayer);
         }
