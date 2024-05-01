@@ -33,11 +33,11 @@ public class ClothFeatureRenderer <T extends LivingEntity, M extends BipedEntity
     private void renderArmor(MatrixStack matrices, VertexConsumerProvider vertexConsumers, T entity, EquipmentSlot armorSlot, int light) {
         ItemStack itemStack = entity.getEquippedStack(armorSlot);
         Item item = itemStack.getItem();
-        PlayerEntityModel playerEntityModel = playerEntityRenderer.getPlayerModel();
         if (item instanceof ClothItem clothItem) {
+            PlayerEntityModel playerEntityModel = playerEntityRenderer.getPlayerModel();
             this.getContextModel().copyBipedStateTo(playerEntityModel);
             this.setVisible((A) playerEntityModel, armorSlot);
-            this.renderArmorParts(matrices, vertexConsumers, light, playerEntityModel, 1, 1, 1, clothItem.getTexture());
+            this.renderArmorParts(matrices, vertexConsumers, light, playerEntityModel, 1, 1, 1, playerEntityRenderer.slim() ? clothItem.getTexture() : clothItem.getTextureWide());
         }
     }
 

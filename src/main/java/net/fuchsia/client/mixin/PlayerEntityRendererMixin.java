@@ -34,6 +34,7 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
     private PlayerEntityRenderer renderer = ((PlayerEntityRenderer) ((Object) this));
     private PlayerEntityModel slimModel = null;
     private PlayerEntityModel wideModel = null;
+    private boolean slim = false;
     private ClothFeatureRenderer clothFeatureRenderer;
     protected PlayerEntityRendererMixin(EntityRendererFactory.Context ctx) {
         super(ctx);
@@ -79,6 +80,11 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
     }
 
     @Override
+    public boolean slim() {
+        return slim;
+    }
+
+    @Override
     public PlayerEntityModel<AbstractClientPlayerEntity> getPlayerModel() {
         RaceData data = ClientRaceCache.get(MinecraftClient.getInstance().player.getUuid());
         PlayerEntityModel<AbstractClientPlayerEntity> playerEntityModel = null;
@@ -86,19 +92,26 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
             switch (data.getRace().model()) {
                 case SLIM -> {
                     playerEntityModel = slimModel;
+                    slim = true;
+                    break;
                 }
 
                 case WIDE -> {
                     playerEntityModel = wideModel;
+                    slim = false;
+                    break;
                 }
 
                 case BOTH -> {
                     Identifier id = ClientRaceSkinCache.getPlayerSkins().getOrDefault(MinecraftClient.getInstance().player.getUuid(), new Identifier("empty"));
                     if (id.toString().toLowerCase().contains("_slim")) {
                         playerEntityModel = slimModel;
+                        slim = true;
                     } else if (id.toString().toLowerCase().contains("_wide")) {
                         playerEntityModel = wideModel;
+                        slim = false;
                     }
+                    break;
                 }
 
             }

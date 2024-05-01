@@ -6,5 +6,5 @@ import net.minecraft.client.render.entity.model.PlayerEntityModel;
 public interface IPlayerEntityRenderer {
 
     PlayerEntityModel<AbstractClientPlayerEntity> getPlayerModel();
-
+    boolean slim();
 }
