@@ -46,10 +46,10 @@ public class FadenCloths {
 
 
                     data = SkinProvider.readSkin(Files.newInputStream(Faden.CONTAINER.findPath("assets/faden/textures/cloth/" + cloth.getFile() + "_wide.png").get()));
-                    skinTexture = new SkinTexture(cloth.getTexture());
+                    skinTexture = new SkinTexture(cloth.getTextureWide());
                     skinTexture.setSkinData(data);
-                    MinecraftClient.getInstance().getTextureManager().registerTexture(cloth.getTexture(), skinTexture);
-                    MinecraftClient.getInstance().getTextureManager().bindTexture(cloth.getTexture());
+                    MinecraftClient.getInstance().getTextureManager().registerTexture(cloth.getTextureWide(), skinTexture);
+                    MinecraftClient.getInstance().getTextureManager().bindTexture(cloth.getTextureWide());
 
                 }
             } catch (IOException e) {
