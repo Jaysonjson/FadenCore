@@ -16,11 +16,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(InventoryScreen.class)
 public class PlayerInventoryMixin {
 
-    private static Identifier CLOTH_BUTTON = FadenIdentifier.create("gui/cloth_button.png");
+    private static Identifier CLOTH_BUTTON = FadenIdentifier.create("textures/gui/cloth_button.png");
+    private static Identifier CLOTH_BUTTON_SELECTED = FadenIdentifier.create("textures/gui/cloth_button_hovered.png");
+    boolean selected = false;
 
-    @Inject(at = @At("HEAD"), method = "render", cancellable = true)
+    @Inject(at = @At("TAIL"), method = "render", cancellable = true)
     private void render(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
-        context.drawGuiTexture(CLOTH_BUTTON, 0, 0, 16, 16);
+        selected = false;
+        int x = context.getScaledWindowWidth() / 2 - 12;
+        int y = context.getScaledWindowHeight() / 2 - 75;
+        if(mouseX >= x && mouseX < x + 16 && mouseY >= y && mouseY < y + 16) {
+            selected = true;
+        }
+        context.drawTexture(selected ? CLOTH_BUTTON_SELECTED : CLOTH_BUTTON, x, y, 0, 0, 16, 16,16, 16);
     }
 
 }
