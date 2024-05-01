@@ -31,7 +31,6 @@ public class FadenItems {
     public static CoinItem NETHERITE_COIN = registerItem("netherite_coin", new CoinItem(new Item.Settings(), 1000), "coins/netherite_coin");
     public static Item SILVER_INGOT = registerItem("silver_ingot", new Item(new Item.Settings()), "ingots/silver_ingot");
     public static Item TEST = registerItem("test_item", new TestItem(new Item.Settings()), "ingots/silver_ingot");
-    public static ClothItem TEST_CLOTH = registerItem("test_cloth", new ClothItem(new Item.Settings()), "ingots/silver_ingot");
 
     public static Item FADEN_MUSIC_DISC = registerItem("music_disc_faden", new MusicDiscItem(14, FadenSoundEvents.FADEN, new Item.Settings().maxCount(1).rarity(Rarity.RARE), 140), "discs/faden");
 

@@ -6,6 +6,7 @@ import net.fuchsia.common.cape.FadenCape;
 import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.client.handler.FadenItemModelHandler;
 import net.fuchsia.client.registry.FadenItemModelRegistry;
+import net.fuchsia.common.init.FadenCloths;
 import net.fuchsia.common.objects.tooltip.ItemValueTooltipComponent;
 import net.fuchsia.common.objects.tooltip.ItemValueTooltipData;
 import net.fuchsia.network.FadenNetwork;
@@ -26,6 +27,7 @@ public class FadenClient implements ClientModInitializer {
             for (FadenCape cape : FadenCapes.getCapes()) {
                 cape.load();
             }
+            FadenCloths.load();
         });
 
 

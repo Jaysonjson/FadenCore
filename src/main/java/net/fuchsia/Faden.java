@@ -4,8 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.fabricmc.fabric.api.command.v2.ArgumentTypeRegistry;
 import net.fuchsia.common.cape.FadenCapes;
-import net.fuchsia.common.init.FadenDataComponents;
-import net.fuchsia.common.init.FadenSoundEvents;
+import net.fuchsia.common.init.*;
 import net.fuchsia.common.objects.command.types.RaceArgumentType;
 import net.fuchsia.common.objects.command.types.RaceSubIdArgumentType;
 import net.fuchsia.common.quest.TestQuest;
@@ -34,8 +33,6 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fuchsia.common.objects.command.FadenCommands;
-import net.fuchsia.common.init.FadenItems;
-import net.fuchsia.common.init.FadenTabs;
 import net.fuchsia.common.objects.CoinMap;
 import net.fuchsia.common.data.ItemValues;
 import net.fuchsia.network.FadenNetwork;
@@ -90,6 +87,7 @@ public class Faden implements ModInitializer {
 		CommandRegistrationCallback.EVENT.register(new FadenCommands());
 		RaceSkinMap.addSkins();
 		FadenDataComponents.init();
+		FadenCloths.register();
 	}
 
 	public static void argumentTypes() {

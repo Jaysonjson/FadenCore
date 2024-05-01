@@ -1,13 +1,11 @@
 package net.fuchsia.client.mixin;
 
-import com.sun.jna.platform.win32.OaIdl;
+import net.fuchsia.client.IPlayerEntityRenderer;
 import net.fuchsia.client.render.feature.ChestFeatureRenderer;
 import net.fuchsia.client.render.feature.ClothFeatureRenderer;
 import net.fuchsia.client.render.feature.HeadFeatureRenderer;
-import net.fuchsia.common.race.RaceModelType;
 import net.fuchsia.common.race.data.ClientRaceCache;
 import net.fuchsia.common.race.data.RaceData;
-import net.fuchsia.config.FadenConfig;
 import net.fuchsia.common.race.skin.client.ClientRaceSkinCache;
 import net.fuchsia.config.FadenOptions;
 import net.minecraft.client.MinecraftClient;
@@ -18,17 +16,10 @@ import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
-import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer;
-import net.minecraft.client.render.entity.model.ArmorEntityModel;
-import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
-import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Arm;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
@@ -39,7 +30,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntityRenderer.class)
-public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixin<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
+public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixin<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> implements IPlayerEntityRenderer {
     private PlayerEntityRenderer renderer = ((PlayerEntityRenderer) ((Object) this));
     private PlayerEntityModel slimModel = null;
     private PlayerEntityModel wideModel = null;
@@ -54,7 +45,7 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
         renderer.addFeature(new HeadFeatureRenderer(renderer));
         this.slimModel = new PlayerEntityModel(ctx.getPart(EntityModelLayers.PLAYER_SLIM), true);
         this.wideModel = new PlayerEntityModel(ctx.getPart(EntityModelLayers.PLAYER), false);
-        clothFeatureRenderer = new ClothFeatureRenderer(this, slimModel, ctx.getModelManager());
+        clothFeatureRenderer = new ClothFeatureRenderer(this, this);
         renderer.addFeature(clothFeatureRenderer);
     }
 
@@ -71,73 +62,10 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
     @Inject(at = @At("HEAD"), method = "render(Lnet/minecraft/client/network/AbstractClientPlayerEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", cancellable = true)
     private void render2(AbstractClientPlayerEntity abstractClientPlayerEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
         if(FadenOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
-            RaceData data = ClientRaceCache.get(abstractClientPlayerEntity.getUuid());
-            if (data.getRace() != null) {
-                switch (data.getRace().model()) {
-                    case SLIM -> {
-                        this.model = slimModel;
-                        clothFeatureRenderer.setInnerModel(this.model);
-                    }
-
-                    case WIDE -> {
-                        this.model = wideModel;
-                        clothFeatureRenderer.setInnerModel(this.model);
-                    }
-
-                    case BOTH -> {
-                        Identifier id = ClientRaceSkinCache.getPlayerSkins().getOrDefault(abstractClientPlayerEntity.getUuid(), new Identifier("empty"));
-                        if (id.toString().toLowerCase().contains("_slim")) {
-                            this.model = slimModel;
-                            clothFeatureRenderer.setInnerModel(this.model);
-                        } else if (id.toString().toLowerCase().contains("_wide")) {
-                            this.model = wideModel;
-                            clothFeatureRenderer.setInnerModel(this.model);
-                        }
-                    }
-
-                }
-            }
+            this.model = getPlayerModel();
         }
     }
 
-
-
-    //DOES NOT WORK AS INTENDED; ONLY IN SINGLEPLAER
-    /*@Override
-    public void getModel(CallbackInfoReturnable<EntityModel> cir) {
-        if(FadenOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
-            RaceData data = ClientRaceCache.get(MinecraftClient.getInstance().player.getUuid());
-            if (data.getRace() != null) {
-                switch (data.getRace().model()) {
-                    case SLIM -> {
-                        this.model = slimModel;
-                        clothFeatureRenderer.setInnerModel(this.model);
-                        cir.setReturnValue(slimModel);
-                    }
-
-                    case WIDE -> {
-                        this.model = wideModel;
-                        clothFeatureRenderer.setInnerModel(this.model);
-                        cir.setReturnValue(wideModel);
-                    }
-
-                    case BOTH -> {
-                        Identifier id = ClientRaceSkinCache.getPlayerSkins().getOrDefault(MinecraftClient.getInstance().player.getUuid(), new Identifier("empty"));
-                        if (id.toString().toLowerCase().contains("_slim")) {
-                            this.model = slimModel;
-                            clothFeatureRenderer.setInnerModel(this.model);
-                            cir.setReturnValue(slimModel);
-                        } else if (id.toString().toLowerCase().contains("_wide")) {
-                            this.model = wideModel;
-                            clothFeatureRenderer.setInnerModel(this.model);
-                            cir.setReturnValue(wideModel);
-                        }
-                    }
-
-                }
-            }
-        }
-    }*/
 
     @ModifyVariable(method = "renderArm", at = @At("STORE"), ordinal = 0)
     private Identifier injected(Identifier x, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve) {
@@ -150,33 +78,39 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
         return x;
     }
 
-    @Inject(at = @At("HEAD"), method = "renderArm", cancellable = true)
-    private void renderArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve, CallbackInfo ci) {
+    @Override
+    public PlayerEntityModel<AbstractClientPlayerEntity> getPlayerModel() {
+        RaceData data = ClientRaceCache.get(MinecraftClient.getInstance().player.getUuid());
+        PlayerEntityModel<AbstractClientPlayerEntity> playerEntityModel = null;
+        if (data.getRace() != null) {
+            switch (data.getRace().model()) {
+                case SLIM -> {
+                    playerEntityModel = slimModel;
+                }
 
-        if(FadenOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
-            RaceData data = ClientRaceCache.get(MinecraftClient.getInstance().player.getUuid());
-            PlayerEntityModel<AbstractClientPlayerEntity> playerEntityModel = null;
-            if (data.getRace() != null) {
-                switch (data.getRace().model()) {
-                    case SLIM -> {
+                case WIDE -> {
+                    playerEntityModel = wideModel;
+                }
+
+                case BOTH -> {
+                    Identifier id = ClientRaceSkinCache.getPlayerSkins().getOrDefault(MinecraftClient.getInstance().player.getUuid(), new Identifier("empty"));
+                    if (id.toString().toLowerCase().contains("_slim")) {
                         playerEntityModel = slimModel;
-                    }
-
-                    case WIDE -> {
+                    } else if (id.toString().toLowerCase().contains("_wide")) {
                         playerEntityModel = wideModel;
                     }
-
-                    case BOTH -> {
-                        Identifier id = ClientRaceSkinCache.getPlayerSkins().getOrDefault(MinecraftClient.getInstance().player.getUuid(), new Identifier("empty"));
-                        if (id.toString().toLowerCase().contains("_slim")) {
-                            playerEntityModel = slimModel;
-                        } else if (id.toString().toLowerCase().contains("_wide")) {
-                            playerEntityModel = wideModel;
-                        }
-                    }
-
                 }
+
             }
+        }
+        return playerEntityModel;
+    }
+
+
+    @Inject(at = @At("HEAD"), method = "renderArm", cancellable = true)
+    private void renderArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve, CallbackInfo ci) {
+        if(FadenOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
+            PlayerEntityModel<AbstractClientPlayerEntity> playerEntityModel = getPlayerModel();
             if(playerEntityModel != null) {
                 playerEntityModel.handSwingProgress = 0.0F;
                 playerEntityModel.sneaking = false;
