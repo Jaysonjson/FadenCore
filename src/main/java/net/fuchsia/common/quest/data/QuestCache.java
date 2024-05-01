@@ -58,6 +58,17 @@ public class QuestCache {
         return false;
     }
 
+    public static Identifier currentStep(UUID uuid, IQuest quest) {
+        NbtCompound playerTag = get().getCompound(uuid.toString());
+        if(playerTag.contains(quest.id().toString())) {
+            NbtCompound questTag = playerTag.getCompound(quest.id().toString());
+            if(questTag.contains("step")) {
+                return new Identifier(questTag.getString("step"));
+            }
+        }
+        return null;
+    }
+
     public static void finishQuestLine(UUID uuid, IQuest quest, IQuestStep step) {
         new Thread(() -> {
             NbtCompound playerTag = get().getCompound(uuid.toString());

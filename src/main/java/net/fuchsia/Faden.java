@@ -2,11 +2,13 @@ package net.fuchsia;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import me.shedaniel.rei.plugin.client.categories.beacon.DefaultBeaconPaymentCategory;
 import net.fabricmc.fabric.api.command.v2.ArgumentTypeRegistry;
 import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.common.init.*;
 import net.fuchsia.common.objects.command.types.RaceArgumentType;
 import net.fuchsia.common.objects.command.types.RaceSubIdArgumentType;
+import net.fuchsia.common.quest.FadenQuests;
 import net.fuchsia.common.quest.TestQuest;
 import net.fuchsia.common.quest.data.QuestCache;
 import net.fuchsia.common.race.RaceCosmetics;
@@ -115,7 +117,7 @@ public class Faden implements ModInitializer {
 			ServerRaceCache.Cache.sendUpdate(serverPlayerEntity, server, false);
 
 			//TODO REMVOE: QUEST TESTING
-			new TestQuest().startQuest(serverPlayerEntity.getUuid());
+			FadenQuests.TEST.startQuest(serverPlayerEntity.getUuid());
 		});
 
 

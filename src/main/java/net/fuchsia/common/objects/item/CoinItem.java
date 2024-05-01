@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
 
+import net.fuchsia.common.quest.FadenQuests;
 import net.fuchsia.common.quest.TestQuest;
 import net.fuchsia.common.quest.data.QuestCache;
 import net.fuchsia.util.FadenIdentifier;
@@ -43,8 +44,7 @@ public class CoinItem extends Item {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if(!world.isClient) {
             //QUESTS SHOULD BE IN A STATIC CONTEXT LATER, JUST FOR TESTING
-            TestQuest test = new TestQuest();
-            test.checkAndRewardStep(user, FadenIdentifier.create("use_coin"));
+            FadenQuests.TEST.checkAndRewardStep(user, FadenIdentifier.create("use_coin"));
         }
         return super.use(world, user, hand);
     }

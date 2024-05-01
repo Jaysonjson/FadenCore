@@ -28,12 +28,15 @@ public abstract class FadenQuest implements IQuest {
 
     @Override
     public IQuestStep getCurrentStep(UUID player) {
+        Identifier id = QuestCache.currentStep(player, this);
+        if(id != null) {
+            for (IQuestStep step : getSteps()) {
+                if(step.id().toString().equalsIgnoreCase(id.toString())) {
+                    return step;
+                }
+            }
+        }
         return getSteps().get(0);
-    }
-
-    @Override
-    public void renderRewardList(DrawContext context) {
-
     }
 
     public void checkAndRewardStep(PlayerEntity player, Identifier stepId) {
@@ -49,6 +52,7 @@ public abstract class FadenQuest implements IQuest {
                 step.rewardAndFinish(player);
                 for (IQuestStep iQuestStep : getSteps()) {
                     if(step.nextStep() == null) {
+                        finishQuest(player);
                         QuestCache.finishQuestLine(player.getUuid(), this, step);
                     } else {
                         if (iQuestStep.id().toString().equalsIgnoreCase(step.nextStep().toString())) {

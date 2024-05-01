@@ -14,7 +14,7 @@
     "LivingEntityRendererMixin",
     "ModelLoaderMixin",
     "PlayerEntityRendererMixin",
-    "PlayerInventoryMixin",
+    "PlayerInventoryScreenMixin",
     "SoundManagerMixin",
     "TitlescreenMixin"
   ],

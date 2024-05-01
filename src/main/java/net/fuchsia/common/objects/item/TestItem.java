@@ -2,6 +2,7 @@ package net.fuchsia.common.objects.item;
 
 import com.mojang.authlib.GameProfile;
 import com.terraformersmc.modmenu.gui.ModsScreen;
+import net.fuchsia.common.quest.FadenQuests;
 import net.fuchsia.common.quest.TestQuest;
 import net.fuchsia.common.race.Race;
 import net.fuchsia.common.race.RaceUtil;
@@ -31,8 +32,7 @@ public class TestItem extends Item {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if(!world.isClient) {
             //QUESTS SHOULD BE IN A STATIC CONTEXT LATER, JUST FOR TESTING
-            TestQuest test = new TestQuest();
-            test.checkAndRewardStep(user, FadenIdentifier.create("use_test_item"));
+            FadenQuests.TEST.checkAndRewardStep(user, FadenIdentifier.create("use_test_item"));
         }
         return super.use(world, user, hand);
     }

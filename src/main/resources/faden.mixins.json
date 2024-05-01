@@ -5,7 +5,10 @@
   "mixins": [
     "EntityMixin",
     "ItemMixin",
-    "PlayerEntityMixin"
+    "PlayerEntityMixin",
+    "PlayerInventoryMixin",
+    "PlayerScreenHandlerMixin",
+    "SlotMixin"
   ],
   "injectors": {
     "defaultRequire": 1

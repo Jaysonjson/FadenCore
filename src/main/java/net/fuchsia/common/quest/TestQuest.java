@@ -16,6 +16,8 @@ public class TestQuest extends FadenQuest {
         return FadenIdentifier.create("test_quest");
     }
 
+
+
     @Override
     public void setupQuestSteps() {
         getSteps().add(new IQuestStep() {
@@ -51,5 +53,10 @@ public class TestQuest extends FadenQuest {
                 return null;
             }
         });
+    }
+
+    @Override
+    public void finishQuest(PlayerEntity player) {
+        player.sendMessage(Text.literal("Finished Test Quest"));
     }
 }

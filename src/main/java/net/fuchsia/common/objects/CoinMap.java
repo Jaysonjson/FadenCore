@@ -97,10 +97,7 @@ public class CoinMap {
 			ItemStack itemStack = item.getDefaultStack();
 			itemStack.setCount(itemStacks.get(item));
 			if(inventory instanceof PlayerInventory playerInventory) {
-				drop = playerInventory.getEmptySlot() == -1;
-				if(!drop) {
-					playerInventory.insertStack(itemStack);
-				}
+				playerInventory.offerOrDrop(itemStack);
 			} else {
 				for (int i = 0; i < inventory.size(); i++) {
 					if(i >= inventory.size()) {
@@ -111,10 +108,11 @@ public class CoinMap {
 						break;
 					}
 				}
+				if(drop && world != null & pos != null) {
+					world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), itemStack));
+				}
 			}
-			if(drop && world != null & pos != null) {
-				world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), itemStack));
-			}
+
 		}
 	}
 	

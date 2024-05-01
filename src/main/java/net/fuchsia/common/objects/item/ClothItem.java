@@ -1,12 +1,11 @@
 package net.fuchsia.common.objects.item;
 
+import net.fuchsia.ClothSlot;
 import net.fuchsia.util.FadenIdentifier;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.Equipment;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 
-public class ClothItem extends Item implements Equipment {
+public class ClothItem extends Item implements Cloth {
     private String file;
     private Identifier texture;
     private Identifier textureWide;
@@ -35,7 +34,7 @@ public class ClothItem extends Item implements Equipment {
     }
 
     @Override
-    public EquipmentSlot getSlotType() {
-        return EquipmentSlot.CHEST;
+    public ClothSlot getClothType() {
+        return ClothSlot.CHEST;
     }
 }

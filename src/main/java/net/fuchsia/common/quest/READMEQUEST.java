@@ -1,6 +1,0 @@
-package net.fuchsia.common.quest;
-
-public class READMEQUEST {
-
-    //NEEDS A REDONE; BUT GENERAL SYSTEM CAN STAY TEH SAME; JUST THE CACHE DATA MIGHT NEED A REDO!
-}

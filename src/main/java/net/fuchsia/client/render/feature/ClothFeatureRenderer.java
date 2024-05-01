@@ -1,7 +1,10 @@
 package net.fuchsia.client.render.feature;
 
+import net.fuchsia.ClothSlot;
+import net.fuchsia.IClothInventory;
 import net.fuchsia.client.IPlayerEntityRenderer;
 import net.fuchsia.common.objects.item.ClothItem;
+import net.fuchsia.mixin.PlayerInventoryMixin;
 import net.minecraft.client.render.*;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
@@ -10,6 +13,7 @@ import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import org.joml.Vector3f;
@@ -24,20 +28,23 @@ public class ClothFeatureRenderer <T extends LivingEntity, M extends BipedEntity
     }
 
     public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, T livingEntity, float f, float g, float h, float j, float k, float l) {
+        this.renderArmor(matrixStack, vertexConsumerProvider, livingEntity, EquipmentSlot.HEAD, i);
         this.renderArmor(matrixStack, vertexConsumerProvider, livingEntity, EquipmentSlot.CHEST, i);
         this.renderArmor(matrixStack, vertexConsumerProvider, livingEntity, EquipmentSlot.LEGS, i);
         this.renderArmor(matrixStack, vertexConsumerProvider, livingEntity, EquipmentSlot.FEET, i);
-        this.renderArmor(matrixStack, vertexConsumerProvider, livingEntity, EquipmentSlot.HEAD, i);
     }
 
     private void renderArmor(MatrixStack matrices, VertexConsumerProvider vertexConsumers, T entity, EquipmentSlot armorSlot, int light) {
-        ItemStack itemStack = entity.getEquippedStack(armorSlot);
-        Item item = itemStack.getItem();
-        if (item instanceof ClothItem clothItem) {
-            PlayerEntityModel playerEntityModel = playerEntityRenderer.getPlayerModel();
-            this.getContextModel().copyBipedStateTo(playerEntityModel);
-            this.setVisible((A) playerEntityModel, armorSlot);
-            this.renderArmorParts(matrices, vertexConsumers, light, playerEntityModel, 1, 1, 1, playerEntityRenderer.slim() ? clothItem.getTexture() : clothItem.getTextureWide());
+        if(entity instanceof PlayerEntity player) {
+            IClothInventory playerInventory = (IClothInventory) player.getInventory();
+            ItemStack itemStack = playerInventory.getClothOrArmor(armorSlot, ClothSlot.fromEquipment(armorSlot));
+            Item item = itemStack.getItem();
+            if (item instanceof ClothItem clothItem) {
+                PlayerEntityModel playerEntityModel = playerEntityRenderer.getPlayerModel();
+                this.getContextModel().copyBipedStateTo(playerEntityModel);
+                this.setVisible((A) playerEntityModel, armorSlot);
+                this.renderArmorParts(matrices, vertexConsumers, light, playerEntityModel, 1, 1, 1, playerEntityRenderer.slim() ? clothItem.getTexture() : clothItem.getTextureWide());
+            }
         }
     }
 
