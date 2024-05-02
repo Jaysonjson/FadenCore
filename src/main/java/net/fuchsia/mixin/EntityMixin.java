@@ -20,6 +20,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BundleItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.scoreboard.AbstractTeam;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.FabricUtil;
@@ -44,6 +45,8 @@ public abstract class EntityMixin {
     @Shadow public abstract void setSwimming(boolean swimming);
 
     @Shadow protected abstract void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition);
+
+    @Shadow public abstract boolean isTeamPlayer(AbstractTeam team);
 
     private Entity entity = ((Entity) ((Object) this));
 
@@ -77,7 +80,7 @@ public abstract class EntityMixin {
             IGearInventory playerInventory = (IGearInventory) player.getInventory();
             ItemStack necklace = playerInventory.getNecklace();
             if(necklace.getItem() instanceof Gear gear) {
-                if(gear.freeWaterMovement(necklace)) {
+                if(gear.freeWaterMovement(player, necklace, player.isSubmergedInWater())) {
                     setSwimming(false);
                     ci.cancel();
                 }
@@ -93,7 +96,7 @@ public abstract class EntityMixin {
                 IGearInventory playerInventory = (IGearInventory) player.getInventory();
                 ItemStack necklace = playerInventory.getNecklace();
                 if (necklace.getItem() instanceof Gear gear) {
-                    if(gear.freeWaterMovement(necklace)) {
+                    if(gear.freeWaterMovement(player, necklace, player.isSubmergedInWater())) {
                         cir.cancel();
                     }
                 }

@@ -46,6 +46,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Random;
 
 public class Faden implements ModInitializer {
 	public static final String MOD_ID = "faden";
@@ -54,6 +55,7 @@ public class Faden implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("Faden");
 	public static ModContainer CONTAINER;
 	public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+	public static final Random RANDOM = new Random();
 
 	@Override
 	public void onInitialize() {
