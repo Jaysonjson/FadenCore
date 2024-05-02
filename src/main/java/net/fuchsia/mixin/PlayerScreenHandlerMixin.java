@@ -75,7 +75,7 @@ public abstract class PlayerScreenHandlerMixin extends ScreenHandler{
 
         for(int i = 0; i < ExtraInventory.GEAR_END - ExtraInventory.GEAR_START; ++i) {
             final GearSlot equipmentSlot = GEAR_SLOT_ORDER[i];
-            addSlot(new Slot(inventory,ExtraInventory.GEAR_START + i, 8, 8 + i * 18) {
+            addSlot(new Slot(inventory,PlayerInventory.OFF_HAND_SLOT + 5 + i, 8, 8 + i * 18) {
                 public void setStack(ItemStack stack, ItemStack previousStack) {
                     super.setStack(stack, previousStack);
                 }

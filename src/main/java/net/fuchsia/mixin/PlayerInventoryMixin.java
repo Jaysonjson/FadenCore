@@ -57,7 +57,7 @@ public abstract class PlayerInventoryMixin implements IClothInventory {
         for(int i = 0; i < gear.size(); ++i) {
             if (!(gear.get(i)).isEmpty()) {
                 nbtCompound = new NbtCompound();
-                nbtCompound.putByte("Slot", (byte) (i + 250));
+                nbtCompound.putByte("Slot", (byte) (i + 230));
                 nbtList.add((gear.get(i)).encode(player.getRegistryManager(), nbtCompound));
             }
         }
@@ -77,8 +77,8 @@ public abstract class PlayerInventoryMixin implements IClothInventory {
                 this.clothes.set(j - 200, itemStack);
             }
 
-            if(j >= 250 && j < this.gear.size() + 250) {
-                this.gear.set(j - 250, itemStack);
+            if(j >= 230 && j < this.gear.size() + 230) {
+                this.gear.set(j - 230, itemStack);
             }
         }
     }

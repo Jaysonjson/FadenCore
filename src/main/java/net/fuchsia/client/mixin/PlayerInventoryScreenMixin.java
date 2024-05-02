@@ -4,6 +4,7 @@ import com.sun.jna.platform.win32.OaIdl;
 import net.fuchsia.ExtraInventory;
 import net.fuchsia.common.slot.ISlot;
 import net.fuchsia.util.FadenIdentifier;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
@@ -54,10 +55,12 @@ public abstract class PlayerInventoryScreenMixin extends AbstractInventoryScreen
         int y = context.getScaledWindowHeight() / 2 - 75;
         if(mouseX >= x && mouseX < x + 16 && mouseY >= y && mouseY < y + 16) {
             clothSelected = true;
+            context.drawTooltip(MinecraftClient.getInstance().textRenderer, Text.translatable("tooltip.faden.toggle_cloth"), mouseX, mouseY);
         }
 
         if(mouseX >= x && mouseX < x + 16 && mouseY >= (y + 16) && mouseY < (y + 32)) {
             gearSelected = true;
+            context.drawTooltip(MinecraftClient.getInstance().textRenderer, Text.translatable("tooltip.faden.toggle_gear"), mouseX, mouseY);
         }
         context.drawTexture(clothSelected ? CLOTH_BUTTON_SELECTED : CLOTH_BUTTON, x, y, 0, 0, 16, 16,16, 16);
         context.drawTexture(gearSelected ? GEAR_BUTTON_SELECTED : GEAR_BUTTON, x, y + 16, 0, 0, 16, 16,16, 16);

@@ -90,6 +90,7 @@ public class Faden implements ModInitializer {
 		RaceSkinMap.addSkins();
 		FadenDataComponents.init();
 		FadenCloths.register();
+		FadenGear.register();
 	}
 
 	public static void argumentTypes() {
