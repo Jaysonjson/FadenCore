@@ -29,6 +29,8 @@ public abstract class PlayerScreenHandlerMixin extends ScreenHandler{
 
     @Unique
     private static final Identifier[] EMPTY_CLOTH_SLOT_TEXTURES = new Identifier[]{FadenIdentifier.create("item/feet"), FadenIdentifier.create("item/leg"), FadenIdentifier.create("item/chest"), FadenIdentifier.create("item/head")};
+    @Unique
+    private static final Identifier[] EMPTY_GEAR_SLOT_TEXTURES = new Identifier[]{FadenIdentifier.create("item/empty_bracelet_slot"), FadenIdentifier.create("item/empty_bracelet_slot"), FadenIdentifier.create("item/empty_necklace_slot")};
 
 
     @Unique
@@ -44,7 +46,7 @@ public abstract class PlayerScreenHandlerMixin extends ScreenHandler{
     public void constructorHead(PlayerInventory inventory, boolean onServer, PlayerEntity owner, CallbackInfo ci) {
         for(int i = 0; i < 4; ++i) {
             final ClothSlot equipmentSlot = CLOTH_SLOT_ORDER[i];
-            addSlot(new Slot(inventory,ExtraInventory.CLOTH_START + i, 8, 8 + i * 18) {
+            addSlot(new Slot(inventory,PlayerInventory.OFF_HAND_SLOT + 1 + i, 8, 8 + i * 18) {
                 public void setStack(ItemStack stack, ItemStack previousStack) {
                     super.setStack(stack, previousStack);
                 }
@@ -95,7 +97,7 @@ public abstract class PlayerScreenHandlerMixin extends ScreenHandler{
                 }
 
                 public Pair<Identifier, Identifier> getBackgroundSprite() {
-                    return Pair.of(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE, EMPTY_CLOTH_SLOT_TEXTURES[equipmentSlot.getEntitySlotId()]);
+                    return Pair.of(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE, EMPTY_GEAR_SLOT_TEXTURES[equipmentSlot.getEntitySlotId()]);
                 }
             });
         }

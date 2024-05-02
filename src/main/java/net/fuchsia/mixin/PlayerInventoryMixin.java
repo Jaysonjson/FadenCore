@@ -68,6 +68,7 @@ public abstract class PlayerInventoryMixin implements IClothInventory {
     @Inject(method = "readNbt", at = @At("TAIL"))
     public void readNbt(NbtList nbtList, CallbackInfo ci) {
         this.clothes.clear();
+        this.gear.clear();
         for(int i = 0; i < nbtList.size(); ++i) {
             NbtCompound nbtCompound = nbtList.getCompound(i);
             int j = nbtCompound.getByte("Slot") & 255;
@@ -77,7 +78,7 @@ public abstract class PlayerInventoryMixin implements IClothInventory {
             }
 
             if(j >= 250 && j < this.gear.size() + 250) {
-                this.gear.set(j - 200, itemStack);
+                this.gear.set(j - 250, itemStack);
             }
         }
     }
@@ -85,7 +86,7 @@ public abstract class PlayerInventoryMixin implements IClothInventory {
     @Override
     public ItemStack getClothOrArmor(EquipmentSlot slot, ClothSlot clothSlot) {
         ItemStack stack = armor.get(slot.getEntitySlotId());
-        if(stack.getItem() instanceof Cloth cloth) {
+        if(stack.getItem() instanceof Cloth) {
            return stack;
         }  else {
             return clothes.get(clothSlot.getEntitySlotId());
