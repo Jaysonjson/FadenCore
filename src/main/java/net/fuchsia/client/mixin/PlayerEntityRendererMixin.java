@@ -1,12 +1,15 @@
 package net.fuchsia.client.mixin;
 
+import net.fuchsia.IClothInventory;
 import net.fuchsia.client.IPlayerEntityRenderer;
 import net.fuchsia.client.render.feature.ChestFeatureRenderer;
 import net.fuchsia.client.render.feature.ClothFeatureRenderer;
 import net.fuchsia.client.render.feature.HeadFeatureRenderer;
+import net.fuchsia.common.objects.item.ClothItem;
 import net.fuchsia.common.race.data.ClientRaceCache;
 import net.fuchsia.common.race.data.RaceData;
 import net.fuchsia.common.race.skin.client.ClientRaceSkinCache;
+import net.fuchsia.common.slot.ClothSlot;
 import net.fuchsia.config.FadenOptions;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
@@ -20,6 +23,9 @@ import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Arm;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
@@ -144,11 +150,32 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
                     playerEntityModel.rightArm.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntitySolid(identifier)), light, OverlayTexture.DEFAULT_UV);
                     playerEntityModel.rightSleeve.pitch = 0.0F;
                     playerEntityModel.rightSleeve.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(identifier)), light, OverlayTexture.DEFAULT_UV);
+
+                    //CLOTH RENDERING
+                    IClothInventory playerInventory = (IClothInventory) player.getInventory();
+                    ItemStack itemStack = playerInventory.getClothOrArmor(EquipmentSlot.CHEST, ClothSlot.CHEST);
+                    Item item = itemStack.getItem();
+                    if (item instanceof ClothItem clothItem) {
+                        playerEntityModel.rightArm.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityCutout(slim() ? clothItem.getTexture() : clothItem.getTextureWide())), light, OverlayTexture.DEFAULT_UV);
+                        playerEntityModel.rightSleeve.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityCutout(slim() ? clothItem.getTexture() : clothItem.getTextureWide())), light, OverlayTexture.DEFAULT_UV);
+                    }
+
                 } else {
                     playerEntityModel.leftArm.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntitySolid(identifier)), light, OverlayTexture.DEFAULT_UV);
                     playerEntityModel.leftSleeve.pitch = 0.0F;
                     playerEntityModel.leftArm.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(identifier)), light, OverlayTexture.DEFAULT_UV);
+
+                    //CLOTH RENDERING
+                    IClothInventory playerInventory = (IClothInventory) player.getInventory();
+                    ItemStack itemStack = playerInventory.getClothOrArmor(EquipmentSlot.CHEST, ClothSlot.CHEST);
+                    Item item = itemStack.getItem();
+                    if (item instanceof ClothItem clothItem) {
+                        playerEntityModel.leftArm.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityCutout(slim() ? clothItem.getTexture() : clothItem.getTextureWide())), light, OverlayTexture.DEFAULT_UV);
+                        playerEntityModel.leftSleeve.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityCutout(slim() ? clothItem.getTexture() : clothItem.getTextureWide())), light, OverlayTexture.DEFAULT_UV);
+                    }
+
                 }
+
 
                 ci.cancel();
             }
