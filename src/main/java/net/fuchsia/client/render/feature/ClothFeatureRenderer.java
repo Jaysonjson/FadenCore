@@ -54,6 +54,7 @@ public class ClothFeatureRenderer <T extends LivingEntity, M extends BipedEntity
             case HEAD:
                 bipedModel.head.visible = true;
                 bipedModel.hat.visible = true;
+                bipedModel.ear.visible = true;
                 break;
             case CHEST:
                 bipedModel.body.visible = true;
@@ -62,6 +63,7 @@ public class ClothFeatureRenderer <T extends LivingEntity, M extends BipedEntity
                 bipedModel.rightSleeve.visible = true;
                 bipedModel.leftSleeve.visible = true;
                 bipedModel.jacket.visible = true;
+                bipedModel.cloak.visible = true;
                 break;
             case LEGS:
                 bipedModel.body.visible = true;
@@ -71,8 +73,9 @@ public class ClothFeatureRenderer <T extends LivingEntity, M extends BipedEntity
             case FEET:
                 bipedModel.rightLeg.visible = true;
                 bipedModel.leftLeg.visible = true;
+                bipedModel.leftPants.visible = true;
+                bipedModel.rightPants.visible = true;
         }
-
     }
 
     private void renderArmorParts(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, PlayerEntityModel model, float red, float green, float blue, Identifier overlay) {
