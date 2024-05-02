@@ -68,23 +68,15 @@ public abstract class PlayerInventoryScreenMixin extends AbstractInventoryScreen
         if(clothSelected || gearSelected) {
             if(clothSelected) {
                 clothEnabled = !clothEnabled;
+                gearEnabled = false;
             } else {
                 gearEnabled = !gearEnabled;
+                clothEnabled = false;
             }
 
-            if(clothEnabled) {
-                toggleClothes(clothEnabled);
-                toggleGear(false);
-                toggleArmor(false);
-            } else if(gearSelected) {
-                toggleGear(gearEnabled);
-                toggleClothes(false);
-                toggleArmor(false);
-            }
-
-            if(!clothEnabled && !gearEnabled) {
-                toggleArmor(true);
-            }
+            toggleGear(gearEnabled);
+            toggleClothes(clothEnabled);
+            toggleArmor(!clothEnabled && !gearEnabled);
         }
     }
 
