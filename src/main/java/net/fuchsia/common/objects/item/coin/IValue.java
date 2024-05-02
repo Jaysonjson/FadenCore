@@ -1,4 +1,4 @@
-package net.fuchsia.common.objects.item;
+package net.fuchsia.common.objects.item.coin;
 
 import net.minecraft.item.ItemStack;
 

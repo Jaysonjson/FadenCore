@@ -1,5 +1,6 @@
-package net.fuchsia.common.objects.item;
+package net.fuchsia.common.objects.item.gear.bracelet;
 
+import net.fuchsia.common.objects.item.gear.Gear;
 import net.fuchsia.common.slot.GearSlot;
 import net.minecraft.item.Item;
 

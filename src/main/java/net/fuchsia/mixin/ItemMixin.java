@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import net.fuchsia.common.objects.item.IValue;
+import net.fuchsia.common.objects.item.coin.IValue;
 import net.fuchsia.common.objects.tooltip.ItemValueTooltipComponent;
 import net.fuchsia.common.objects.tooltip.ItemValueTooltipData;
 import net.fuchsia.common.data.ItemValues;

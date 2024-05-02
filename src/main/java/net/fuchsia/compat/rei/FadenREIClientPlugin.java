@@ -5,6 +5,7 @@ import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
 import me.shedaniel.rei.api.client.registry.screen.ScreenRegistry;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
+import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import me.shedaniel.rei.plugin.common.displays.beacon.DefaultBeaconPaymentDisplay;
@@ -15,6 +16,7 @@ import net.fuchsia.common.objects.CoinMap;
 import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.tag.ItemTags;
@@ -31,8 +33,12 @@ public class FadenREIClientPlugin implements REIClientPlugin {
     @Override
     public void registerCategories(CategoryRegistry registry) {
         registry.add(new REIBuyCategory());
-        registry.addWorkstations(BUY_DISPLAY, EntryStacks.of(FadenItems.COPPER_COIN));
-
+        Collection<ItemConvertible> coins = new ArrayList<>();
+        for (Item value : CoinMap.COINS.values()) {
+            coins.add(value);
+        }
+        //registry.addWorkstations(BUY_DISPLAY, EntryIngredients.ofItems(CoinMap.COINS.values()));
+        registry.addWorkstations(BUY_DISPLAY, EntryIngredients.ofItems(coins));
     }
 
     @Override

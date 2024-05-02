@@ -1,25 +1,19 @@
-package net.fuchsia.common.objects.item;
+package net.fuchsia.common.objects.item.coin;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Optional;
 
 import net.fuchsia.common.quest.FadenQuests;
-import net.fuchsia.common.quest.TestQuest;
-import net.fuchsia.common.quest.data.QuestCache;
 import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
-import org.jetbrains.annotations.Nullable;
 
 import net.fuchsia.common.init.FadenItems;
 import net.fuchsia.common.objects.tooltip.ItemValueTooltipData;
 import net.minecraft.client.item.TooltipData;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.Text;
-import net.minecraft.util.Colors;
 import net.minecraft.world.World;
 
 public class CoinItem extends Item {

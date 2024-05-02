@@ -5,7 +5,7 @@ import net.fuchsia.client.IPlayerEntityRenderer;
 import net.fuchsia.client.render.feature.ChestFeatureRenderer;
 import net.fuchsia.client.render.feature.ClothFeatureRenderer;
 import net.fuchsia.client.render.feature.HeadFeatureRenderer;
-import net.fuchsia.common.objects.item.ClothItem;
+import net.fuchsia.common.objects.item.cloth.ClothItem;
 import net.fuchsia.common.race.data.ClientRaceCache;
 import net.fuchsia.common.race.data.RaceData;
 import net.fuchsia.common.race.skin.client.ClientRaceSkinCache;

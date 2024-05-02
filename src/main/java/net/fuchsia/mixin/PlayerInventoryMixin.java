@@ -2,9 +2,10 @@ package net.fuchsia.mixin;
 
 import com.google.common.collect.ImmutableList;
 import net.fuchsia.ExtraInventory;
+import net.fuchsia.IGearInventory;
 import net.fuchsia.common.slot.ClothSlot;
 import net.fuchsia.IClothInventory;
-import net.fuchsia.common.objects.item.Cloth;
+import net.fuchsia.common.objects.item.cloth.Cloth;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -21,10 +22,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 @Mixin(PlayerInventory.class)
-public abstract class PlayerInventoryMixin implements IClothInventory {
+public abstract class PlayerInventoryMixin implements IClothInventory, IGearInventory {
 
     @Shadow @Final public PlayerEntity player;
     @Mutable
@@ -96,5 +100,25 @@ public abstract class PlayerInventoryMixin implements IClothInventory {
     @Override
     public DefaultedList<ItemStack> getClothes() {
         return clothes;
+    }
+
+    @Override
+    public Collection<ItemStack> getBracelets() {
+        return Arrays.asList(gear.get(0), gear.get(1));
+    }
+
+    @Override
+    public ItemStack getBelt() {
+        return gear.get(2);
+    }
+
+    @Override
+    public ItemStack getGearStack(int slot) {
+        return gear.get(slot);
+    }
+
+    @Override
+    public ItemStack getNecklace() {
+        return gear.get(3);
     }
 }

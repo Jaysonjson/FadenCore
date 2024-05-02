@@ -1,7 +1,7 @@
 package net.fuchsia.common.init;
 
 import net.fuchsia.Faden;
-import net.fuchsia.common.objects.item.ClothItem;
+import net.fuchsia.common.objects.item.cloth.ClothItem;
 import net.fuchsia.common.race.skin.client.SkinTexture;
 import net.fuchsia.common.race.skin.provider.SkinProvider;
 import net.fuchsia.datagen.DataItemModel;

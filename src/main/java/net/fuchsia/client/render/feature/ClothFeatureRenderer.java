@@ -3,7 +3,7 @@ package net.fuchsia.client.render.feature;
 import net.fuchsia.common.slot.ClothSlot;
 import net.fuchsia.IClothInventory;
 import net.fuchsia.client.IPlayerEntityRenderer;
-import net.fuchsia.common.objects.item.ClothItem;
+import net.fuchsia.common.objects.item.cloth.ClothItem;
 import net.minecraft.client.render.*;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;

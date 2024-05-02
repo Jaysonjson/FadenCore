@@ -1,4 +1,4 @@
-package net.fuchsia.common.objects.item;
+package net.fuchsia.common.objects.item.cloth;
 
 import net.fuchsia.common.slot.ClothSlot;
 

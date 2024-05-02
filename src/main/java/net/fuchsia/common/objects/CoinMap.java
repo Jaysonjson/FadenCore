@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import net.fuchsia.common.init.FadenItems;
-import net.fuchsia.common.objects.item.CoinItem;
+import net.fuchsia.common.objects.item.coin.CoinItem;
 import net.fuchsia.datagen.FadenDataItem;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerInventory;
