@@ -2,6 +2,7 @@ package net.fuchsia.client.mixin;
 
 import com.mojang.datafixers.util.Pair;
 import net.fuchsia.ClothSlot;
+import net.fuchsia.ExtraInventory;
 import net.fuchsia.IClothInventory;
 import net.fuchsia.ISlot;
 import net.fuchsia.common.objects.item.Cloth;
@@ -40,7 +41,7 @@ public abstract class PlayerInventoryScreenMixin extends AbstractInventoryScreen
 
     @Inject(method = "<init>*", at = @At("TAIL"))
     public void constructorHead(PlayerEntity player, CallbackInfo ci) {
-        for (int i = 46; i < handler.slots.size(); i++) {
+        for (int i = ExtraInventory.CLOTH_START; i < ExtraInventory.CLOTH_END; i++) {
             ISlot slot = (ISlot) handler.slots.get(i);
             slot.setEnabled(false);
         }
@@ -73,7 +74,7 @@ public abstract class PlayerInventoryScreenMixin extends AbstractInventoryScreen
                 slot.setEnabled(!clothEnabled);
             }
 
-            for (int i = 46; i < handler.slots.size(); i++) {
+            for (int i = ExtraInventory.CLOTH_START; i < ExtraInventory.CLOTH_END; i++) {
                 ISlot slot = (ISlot) handler.slots.get(i);
                 slot.setEnabled(clothEnabled);
             }

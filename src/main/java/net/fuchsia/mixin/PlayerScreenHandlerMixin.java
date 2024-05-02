@@ -3,6 +3,7 @@ package net.fuchsia.mixin;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import net.fuchsia.ClothSlot;
+import net.fuchsia.ExtraInventory;
 import net.fuchsia.IClothInventory;
 import net.fuchsia.common.objects.item.Cloth;
 import net.fuchsia.util.FadenIdentifier;
@@ -24,6 +25,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerScreenHandler.class)
 public abstract class PlayerScreenHandlerMixin extends ScreenHandler{
@@ -69,6 +71,27 @@ public abstract class PlayerScreenHandlerMixin extends ScreenHandler{
             });
         }
     }
+
+
+    @Inject(method = "quickMove", at = @At("HEAD"), cancellable = true)
+    public void quickMove(PlayerEntity player, int slot, CallbackInfoReturnable<ItemStack> cir) {
+        ItemStack itemStack = ItemStack.EMPTY;
+        Slot slot2 = this.slots.get(slot);
+        if (slot2.hasStack()) {
+            ItemStack itemStack2 = slot2.getStack();
+            itemStack = itemStack2.copy();
+            if(itemStack.getItem() instanceof Cloth cloth) {
+                ClothSlot clothSlot = cloth.getClothType();
+                if(!(this.slots.get(ExtraInventory.CLOTH_END - 1 - clothSlot.getEntitySlotId())).hasStack()) {
+                    int i = ExtraInventory.CLOTH_END - 1 - clothSlot.getEntitySlotId();
+                    if (!this.insertItem(itemStack2, i, i + 1, false)) {
+                        cir.setReturnValue(ItemStack.EMPTY);
+                    }
+                }
+            }
+        }
+    }
+
 
 
 }

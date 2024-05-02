@@ -42,13 +42,13 @@ public class ClothFeatureRenderer <T extends LivingEntity, M extends BipedEntity
             if (item instanceof ClothItem clothItem) {
                 PlayerEntityModel playerEntityModel = playerEntityRenderer.getPlayerModel();
                 this.getContextModel().copyBipedStateTo(playerEntityModel);
-                this.setVisible((A) playerEntityModel, armorSlot);
+                this.setVisible(playerEntityModel, armorSlot);
                 this.renderArmorParts(matrices, vertexConsumers, light, playerEntityModel, 1, 1, 1, playerEntityRenderer.slim() ? clothItem.getTexture() : clothItem.getTextureWide());
             }
         }
     }
 
-    protected void setVisible(A bipedModel, EquipmentSlot slot) {
+    protected void setVisible(PlayerEntityModel bipedModel, EquipmentSlot slot) {
         bipedModel.setVisible(false);
         switch (slot) {
             case HEAD:
@@ -59,6 +59,9 @@ public class ClothFeatureRenderer <T extends LivingEntity, M extends BipedEntity
                 bipedModel.body.visible = true;
                 bipedModel.rightArm.visible = true;
                 bipedModel.leftArm.visible = true;
+                bipedModel.rightSleeve.visible = true;
+                bipedModel.leftSleeve.visible = true;
+                bipedModel.jacket.visible = true;
                 break;
             case LEGS:
                 bipedModel.body.visible = true;
@@ -79,6 +82,8 @@ public class ClothFeatureRenderer <T extends LivingEntity, M extends BipedEntity
         matrices.translate(0f, -0.01f, 0.0f);
         model.leftArm.translate(new Vector3f(-0.25f, 0f, 0f));
         model.rightArm.translate(new Vector3f(0.25f, 0f, 0f));
+        model.leftSleeve.translate(new Vector3f(-0.25f, 0f, 0f));
+        model.rightSleeve.translate(new Vector3f(0.25f, 0f, 0f));
         model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, red, green, blue, 1.0F);
         matrices.pop();
     }
