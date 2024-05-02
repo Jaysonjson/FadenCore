@@ -20,6 +20,6 @@
 	"config.faden.enable_custom_capes": "Enable Custom Capes",
 	"config.faden.title": "Faden Configuration",
 	"tooltip.faden.toggle_cloth": "Toggle Cloth",
-	"tooltip.faden.toggle_gear": "Toggle Gear,",
+	"tooltip.faden.toggle_gear": "Toggle Gear",
 	"tooltip.faden.free_water_movement": "Allows Free Water Movement"
 }

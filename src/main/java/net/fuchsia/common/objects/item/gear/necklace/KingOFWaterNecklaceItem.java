@@ -2,6 +2,7 @@ package net.fuchsia.common.objects.item.gear.necklace;
 
 import net.fuchsia.Faden;
 import net.minecraft.client.item.TooltipType;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
@@ -9,6 +10,8 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.text.Text;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -28,9 +31,20 @@ public class KingOFWaterNecklaceItem extends NecklaceItem {
         return true;
     }
 
+    @Override
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        user.setStackInHand(hand, randomize(user.getStackInHand(hand)));
+        return super.use(world, user, hand);
+    }
 
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         tooltip.add(Text.translatable("tooltip.faden.free_water_movement"));
+    }
+
+    @Override
+    public ItemStack randomize(ItemStack itemStack) {
+        itemStack.set(DataComponentTypes.MAX_DAMAGE, Faden.RANDOM.nextInt(100, 1000));
+        return itemStack;
     }
 }

@@ -4,6 +4,8 @@ import net.fuchsia.common.slot.GearSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
+import java.util.Collection;
+
 public interface Gear {
 
     GearSlot getGearType();
@@ -11,4 +13,6 @@ public interface Gear {
         return false;
     }
 
+    ItemStack randomize(ItemStack itemStack);
+    ItemStack upgrade(Collection<ItemStack> inputs, ItemStack itemStack);
 }
