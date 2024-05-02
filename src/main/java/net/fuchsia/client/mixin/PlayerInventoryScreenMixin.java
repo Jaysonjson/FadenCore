@@ -51,7 +51,7 @@ public abstract class PlayerInventoryScreenMixin extends AbstractInventoryScreen
     private void render(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         clothSelected = false;
         gearSelected = false;
-        int x = context.getScaledWindowWidth() / 2 - 12;
+        int x = context.getScaledWindowWidth() / 2 - 11;
         int y = context.getScaledWindowHeight() / 2 - 75;
         if(mouseX >= x && mouseX < x + 16 && mouseY >= y && mouseY < y + 16) {
             clothSelected = true;

@@ -30,13 +30,13 @@ public abstract class PlayerScreenHandlerMixin extends ScreenHandler{
     @Unique
     private static final Identifier[] EMPTY_CLOTH_SLOT_TEXTURES = new Identifier[]{FadenIdentifier.create("item/feet"), FadenIdentifier.create("item/leg"), FadenIdentifier.create("item/chest"), FadenIdentifier.create("item/head")};
     @Unique
-    private static final Identifier[] EMPTY_GEAR_SLOT_TEXTURES = new Identifier[]{FadenIdentifier.create("item/empty_bracelet_slot"), FadenIdentifier.create("item/empty_bracelet_slot"), FadenIdentifier.create("item/empty_necklace_slot")};
+    private static final Identifier[] EMPTY_GEAR_SLOT_TEXTURES = new Identifier[]{FadenIdentifier.create("item/empty_bracelet_slot"), FadenIdentifier.create("item/empty_bracelet_slot"), FadenIdentifier.create("item/empty_bracelet_slot"), FadenIdentifier.create("item/empty_necklace_slot")};
 
 
     @Unique
     ClothSlot[] CLOTH_SLOT_ORDER = new ClothSlot[]{ClothSlot.HEAD, ClothSlot.CHEST, ClothSlot.LEGS, ClothSlot.FEET};
     @Unique
-    GearSlot[] GEAR_SLOT_ORDER = new GearSlot[]{GearSlot.BRACELET, GearSlot.BRACELET, GearSlot.NECKLACE};
+    GearSlot[] GEAR_SLOT_ORDER = new GearSlot[]{GearSlot.BRACELET, GearSlot.BRACELET, GearSlot.BELT, GearSlot.NECKLACE};
 
     protected PlayerScreenHandlerMixin(@Nullable ScreenHandlerType<?> type, int syncId) {
         super(type, syncId);

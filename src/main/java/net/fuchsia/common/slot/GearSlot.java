@@ -6,7 +6,8 @@ import net.minecraft.util.StringIdentifiable;
 public enum GearSlot implements StringIdentifiable {
 
     BRACELET(0, 1,"bracelet"),
-    NECKLACE(2, 0, "necklace");
+    BELT(2, 0,"belt"),
+    NECKLACE(3, 0, "necklace");
 
     public static final StringIdentifiable.EnumCodec<GearSlot> CODEC = StringIdentifiable.createCodec(GearSlot::values);
     private final int entityId;
