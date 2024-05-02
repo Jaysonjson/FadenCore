@@ -73,7 +73,7 @@ public abstract class PlayerInventoryScreenMixin extends AbstractInventoryScreen
             }
 
             if(clothEnabled) {
-                toggleClothes(true);
+                toggleClothes(clothEnabled);
                 toggleGear(false);
                 toggleArmor(false);
             } else if(gearSelected) {
