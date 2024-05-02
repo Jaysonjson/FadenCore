@@ -3,6 +3,7 @@ package net.fuchsia.mixin;
 
 import java.util.Optional;
 
+import net.fuchsia.FadenData;
 import net.fuchsia.common.init.FadenDataComponents;
 import net.minecraft.component.DataComponentTypes;
 import org.spongepowered.asm.mixin.Mixin;
@@ -49,7 +50,7 @@ public class ItemMixin implements IValue {
 
     @Override
     public int getBuyValue(ItemStack stack) {
-        return getValue(stack) * 9;
+        return getValue(stack) * FadenData.BUY_MULTIPLIER;
     }
 
 }
