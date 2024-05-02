@@ -11,7 +11,7 @@ public class ClothItem extends Item implements Cloth {
     private Identifier textureWide;
     private boolean slim = false;
     public ClothItem(Settings settings, String file) {
-        super(settings);
+        super(settings.maxCount(1));
         this.file = file;
         this.texture = FadenIdentifier.create("cloth/" + file);
         this.textureWide = FadenIdentifier.create("cloth/" + file + "_wide");

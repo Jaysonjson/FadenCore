@@ -6,7 +6,7 @@ import net.minecraft.item.Item;
 public class BraceletItem extends Item implements Gear {
 
     public BraceletItem(Settings settings) {
-        super(settings);
+        super(settings.maxCount(1));
     }
 
     @Override
