@@ -1,5 +1,6 @@
 package net.fuchsia;
 
+import net.fuchsia.common.slot.ClothSlot;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;

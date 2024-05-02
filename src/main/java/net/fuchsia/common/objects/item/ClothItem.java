@@ -1,6 +1,6 @@
 package net.fuchsia.common.objects.item;
 
-import net.fuchsia.ClothSlot;
+import net.fuchsia.common.slot.ClothSlot;
 import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;

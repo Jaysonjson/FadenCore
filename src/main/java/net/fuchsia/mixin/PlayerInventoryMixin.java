@@ -1,16 +1,10 @@
 package net.fuchsia.mixin;
 
 import com.google.common.collect.ImmutableList;
-import net.fabricmc.fabric.api.transfer.v1.item.PlayerInventoryStorage;
-import net.fuchsia.ClothSlot;
+import net.fuchsia.ExtraInventory;
+import net.fuchsia.common.slot.ClothSlot;
 import net.fuchsia.IClothInventory;
-import net.fuchsia.client.render.feature.ChestFeatureRenderer;
-import net.fuchsia.client.render.feature.ClothFeatureRenderer;
-import net.fuchsia.client.render.feature.HeadFeatureRenderer;
 import net.fuchsia.common.objects.item.Cloth;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.model.EntityModelLayers;
-import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -18,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.util.collection.DefaultedList;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
@@ -41,12 +34,14 @@ public abstract class PlayerInventoryMixin implements IClothInventory {
     @Shadow @Final public DefaultedList<ItemStack> offHand;
 
     public DefaultedList<ItemStack> clothes;
+    public DefaultedList<ItemStack> gear;
 
 
     @Inject(method = "<init>*", at = @At("TAIL"))
     public void constructorHead(PlayerEntity player, CallbackInfo ci) {
-        clothes = DefaultedList.ofSize(4, ItemStack.EMPTY);
-        combinedInventory = ImmutableList.of(main, armor, offHand, clothes);
+        clothes = DefaultedList.ofSize(ExtraInventory.CLOTH_END - ExtraInventory.CLOTH_START, ItemStack.EMPTY);
+        gear = DefaultedList.ofSize(ExtraInventory.GEAR_END - ExtraInventory.GEAR_START, ItemStack.EMPTY);
+        combinedInventory = ImmutableList.of(main, armor, offHand, clothes, gear);
     }
 
     @Inject(method = "writeNbt", at = @At("TAIL"), cancellable = true)
@@ -57,6 +52,13 @@ public abstract class PlayerInventoryMixin implements IClothInventory {
                 nbtCompound = new NbtCompound();
                 nbtCompound.putByte("Slot", (byte) (i + 200));
                 nbtList.add((clothes.get(i)).encode(player.getRegistryManager(), nbtCompound));
+            }
+        }
+        for(int i = 0; i < gear.size(); ++i) {
+            if (!(gear.get(i)).isEmpty()) {
+                nbtCompound = new NbtCompound();
+                nbtCompound.putByte("Slot", (byte) (i + 250));
+                nbtList.add((gear.get(i)).encode(player.getRegistryManager(), nbtCompound));
             }
         }
         cir.setReturnValue(nbtList);
@@ -72,6 +74,10 @@ public abstract class PlayerInventoryMixin implements IClothInventory {
             ItemStack itemStack = ItemStack.fromNbt(this.player.getRegistryManager(), nbtCompound).orElse(ItemStack.EMPTY);
             if(j >= 200 && j < this.clothes.size() + 200) {
                 this.clothes.set(j - 200, itemStack);
+            }
+
+            if(j >= 250 && j < this.gear.size() + 250) {
+                this.gear.set(j - 200, itemStack);
             }
         }
     }

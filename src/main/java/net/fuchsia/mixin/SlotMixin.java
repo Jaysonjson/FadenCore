@@ -1,6 +1,6 @@
 package net.fuchsia.mixin;
 
-import net.fuchsia.ISlot;
+import net.fuchsia.common.slot.ISlot;
 import net.minecraft.screen.slot.Slot;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;

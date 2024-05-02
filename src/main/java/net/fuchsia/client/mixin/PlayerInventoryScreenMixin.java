@@ -1,26 +1,18 @@
 package net.fuchsia.client.mixin;
 
-import com.mojang.datafixers.util.Pair;
-import net.fuchsia.ClothSlot;
+import com.sun.jna.platform.win32.OaIdl;
 import net.fuchsia.ExtraInventory;
-import net.fuchsia.IClothInventory;
-import net.fuchsia.ISlot;
-import net.fuchsia.common.objects.item.Cloth;
+import net.fuchsia.common.slot.ISlot;
 import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
-import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.gui.screen.recipebook.RecipeBookProvider;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.screen.PlayerScreenHandler;
-import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.collection.DefaultedList;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -32,8 +24,14 @@ public abstract class PlayerInventoryScreenMixin extends AbstractInventoryScreen
 
     private static Identifier CLOTH_BUTTON = FadenIdentifier.create("textures/gui/cloth_button.png");
     private static Identifier CLOTH_BUTTON_SELECTED = FadenIdentifier.create("textures/gui/cloth_button_hovered.png");
-    boolean selected = false;
+
+    private static Identifier GEAR_BUTTON = FadenIdentifier.create("textures/gui/gear_button.png");
+    private static Identifier GEAR_BUTTON_SELECTED = FadenIdentifier.create("textures/gui/gear_button_hovered.png");
+
+    boolean clothSelected = false;
+    boolean gearSelected = false;
     boolean clothEnabled = false;
+    boolean gearEnabled = false;
 
     public PlayerInventoryScreenMixin(PlayerScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
         super(screenHandler, playerInventory, text);
@@ -41,43 +39,73 @@ public abstract class PlayerInventoryScreenMixin extends AbstractInventoryScreen
 
     @Inject(method = "<init>*", at = @At("TAIL"))
     public void constructorHead(PlayerEntity player, CallbackInfo ci) {
-        for (int i = ExtraInventory.CLOTH_START; i < ExtraInventory.CLOTH_END; i++) {
-            ISlot slot = (ISlot) handler.slots.get(i);
-            slot.setEnabled(false);
-        }
-
-        for (int i = 5; i < 9; i++) {
-            ISlot slot = (ISlot) handler.slots.get(i);
-            slot.setEnabled(true);
-        }
+        toggleClothes(false);
+        toggleGear(false);
+        toggleArmor(true);
 
     }
 
 
     @Inject(at = @At("TAIL"), method = "render")
     private void render(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
-        selected = false;
+        clothSelected = false;
+        gearSelected = false;
         int x = context.getScaledWindowWidth() / 2 - 12;
         int y = context.getScaledWindowHeight() / 2 - 75;
         if(mouseX >= x && mouseX < x + 16 && mouseY >= y && mouseY < y + 16) {
-            selected = true;
+            clothSelected = true;
         }
-        context.drawTexture(selected ? CLOTH_BUTTON_SELECTED : CLOTH_BUTTON, x, y, 0, 0, 16, 16,16, 16);
+
+        if(mouseX >= x && mouseX < x + 16 && mouseY >= (y + 16) && mouseY < (y + 32)) {
+            gearSelected = true;
+        }
+        context.drawTexture(clothSelected ? CLOTH_BUTTON_SELECTED : CLOTH_BUTTON, x, y, 0, 0, 16, 16,16, 16);
+        context.drawTexture(gearSelected ? GEAR_BUTTON_SELECTED : GEAR_BUTTON, x, y + 16, 0, 0, 16, 16,16, 16);
     }
 
     @Inject(at = @At("TAIL"), method = "mouseClicked")
-    private void render(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
-        if(selected) {
-           clothEnabled = !clothEnabled;
-            for (int i = 5; i < 9; i++) {
-                ISlot slot = (ISlot) handler.slots.get(i);
-                slot.setEnabled(!clothEnabled);
+    private void mouseClicked(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
+        if(clothSelected || gearSelected) {
+            if(clothSelected) {
+                clothEnabled = !clothEnabled;
+            } else {
+                gearEnabled = !gearEnabled;
             }
 
-            for (int i = ExtraInventory.CLOTH_START; i < ExtraInventory.CLOTH_END; i++) {
-                ISlot slot = (ISlot) handler.slots.get(i);
-                slot.setEnabled(clothEnabled);
+            if(clothEnabled) {
+                toggleClothes(true);
+                toggleGear(false);
+                toggleArmor(false);
+            } else if(gearSelected) {
+                toggleGear(gearEnabled);
+                toggleClothes(false);
+                toggleArmor(false);
             }
+
+            if(!clothEnabled && !gearEnabled) {
+                toggleArmor(true);
+            }
+        }
+    }
+
+    public void toggleArmor(boolean bool) {
+        for (int i = 5; i < 9; i++) {
+            ISlot slot = (ISlot) handler.slots.get(i);
+            slot.setEnabled(bool);
+        }
+    }
+
+    public void toggleClothes(boolean bool) {
+        for (int i = ExtraInventory.CLOTH_START; i < ExtraInventory.CLOTH_END; i++) {
+            ISlot slot = (ISlot) handler.slots.get(i);
+            slot.setEnabled(bool);
+        }
+    }
+
+    public void toggleGear(boolean bool) {
+        for (int i = ExtraInventory.GEAR_START - 1; i < ExtraInventory.GEAR_END - 1; i++) {
+            ISlot slot = (ISlot) handler.slots.get(i);
+            slot.setEnabled(bool);
         }
     }
 }

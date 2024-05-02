@@ -1,4 +1,4 @@
-package net.fuchsia;
+package net.fuchsia.common.slot;
 
 public interface ISlot {
 
