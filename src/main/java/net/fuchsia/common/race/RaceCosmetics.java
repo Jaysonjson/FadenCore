@@ -9,8 +9,13 @@ import net.minecraft.client.util.ModelIdentifier;
 public class RaceCosmetics {
 
     public static RaceCosmeticPalette HARENGON = new RaceCosmeticPalette();
+    public static RaceCosmeticPalette ELF = new RaceCosmeticPalette();
 
     public static void add() {
+        /*
+        * HARENGON
+        * */
+        //EAR
         HARENGON.addCosmetic("brown", new RaceCosmetic(FadenIdentifier.modelId("player_cosmetic/harengon/ears/harengon_ears_brown"), RaceCosmeticType.HEAD, "ear_0"));
         HARENGON.addCosmetic("brown", new RaceCosmetic(FadenIdentifier.modelId("player_cosmetic/harengon/ears/floppy/harengon_ears_floopy_brown"), RaceCosmeticType.HEAD, "ear_1"));
 
@@ -32,6 +37,7 @@ public class RaceCosmetics {
         HARENGON.addCosmetic("white_splotched", new RaceCosmetic(FadenIdentifier.modelId("player_cosmetic/harengon/ears/harengon_ears_white_splotched"), RaceCosmeticType.HEAD, "ear_0"));
         HARENGON.addCosmetic("white_splotched", new RaceCosmetic(FadenIdentifier.modelId("player_cosmetic/harengon/ears/floppy/harengon_ears_floopy_white_splotched"), RaceCosmeticType.HEAD, "ear_1"));
 
+        //TAIL
         HARENGON.addCosmetic("brown", new RaceCosmetic(FadenIdentifier.modelId("player_cosmetic/harengon/tail/harengon_tail_brown"), RaceCosmeticType.CHEST, "tail_0"));
         HARENGON.addCosmetic("black", new RaceCosmetic(FadenIdentifier.modelId("player_cosmetic/harengon/tail/harengon_tail_black"), RaceCosmeticType.CHEST, "tail_0"));
         HARENGON.addCosmetic("gold", new RaceCosmetic(FadenIdentifier.modelId("player_cosmetic/harengon/tail/harengon_tail_gold"), RaceCosmeticType.CHEST, "tail_0"));
@@ -39,6 +45,11 @@ public class RaceCosmetics {
         HARENGON.addCosmetic("toast", new RaceCosmetic(FadenIdentifier.modelId("player_cosmetic/harengon/tail/harengon_tail_toast"), RaceCosmeticType.CHEST, "tail_0"));
         HARENGON.addCosmetic("white", new RaceCosmetic(FadenIdentifier.modelId("player_cosmetic/harengon/tail/harengon_tail_white"), RaceCosmeticType.CHEST, "tail_0"));
         HARENGON.addCosmetic("white_splotched", new RaceCosmetic(FadenIdentifier.modelId("player_cosmetic/harengon/tail/harengon_tail_white_splotched"), RaceCosmeticType.CHEST, "tail_0"));
+
+        /*
+        * ELF
+        * */
+        ELF.addCosmetic("pale", new RaceCosmetic(FadenIdentifier.modelId("player_cosmetic/elf/ear/ear_0"), RaceCosmeticType.HEAD, "ear_0"));
 
     }
 

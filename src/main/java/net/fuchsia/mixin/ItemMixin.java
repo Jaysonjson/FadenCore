@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import net.fuchsia.FadenData;
 import net.fuchsia.common.init.FadenDataComponents;
+import net.fuchsia.common.objects.item.ItemTier;
 import net.minecraft.component.DataComponentTypes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -40,6 +41,7 @@ public class ItemMixin implements IValue {
 	public int getValue(ItemStack stack) {
 		int initialValue = ItemValues.VALUES.getOrDefault(stack.getItem(), 0);
         //sstack.set(FadenDataComponents.EXTRA_VALUE, 35343);
+        initialValue = (int) ((float)initialValue * ItemTier.valueOf(stack.getOrDefault(FadenDataComponents.ITEM_TIER, ItemTier.COMMON.name())).getSellValueMultiplier());
         initialValue += stack.getOrDefault(FadenDataComponents.EXTRA_VALUE, 0);
         if(stack.contains(DataComponentTypes.DAMAGE)) {
             initialValue = (int) ((float) stack.getOrDefault(DataComponentTypes.DAMAGE, 0) / (float) stack.getOrDefault(DataComponentTypes.MAX_DAMAGE, 1) * (float) initialValue);

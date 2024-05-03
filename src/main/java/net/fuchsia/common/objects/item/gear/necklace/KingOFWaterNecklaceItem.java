@@ -1,6 +1,7 @@
 package net.fuchsia.common.objects.item.gear.necklace;
 
 import net.fuchsia.Faden;
+import net.fuchsia.common.init.FadenDataComponents;
 import net.fuchsia.common.objects.item.ItemTier;
 import net.minecraft.client.item.TooltipType;
 import net.minecraft.component.DataComponentTypes;
@@ -41,11 +42,13 @@ public class KingOFWaterNecklaceItem extends NecklaceItem {
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         tooltip.add(Text.translatable("tooltip.faden.free_water_movement"));
+        tooltip.add(Text.literal(stack.getOrDefault(FadenDataComponents.ITEM_TIER, ItemTier.COMMON.name())));
     }
 
     @Override
     public ItemStack randomize(ItemStack itemStack, PlayerEntity player, ItemTier itemTier) {
-        itemStack.set(DataComponentTypes.MAX_DAMAGE, Faden.RANDOM.nextInt(50 + (int)(50.0f * itemTier.getDurabilityMultiplier()), (int)(500.0ff * itemTier.getDurabilityMultiplier())));
+        itemStack.set(DataComponentTypes.MAX_DAMAGE, Faden.RANDOM.nextInt(50 + (int)(50.0f * itemTier.getDurabilityMultiplier()), (int)(500.0f * itemTier.getDurabilityMultiplier())));
+        itemStack.set(FadenDataComponents.ITEM_TIER, itemTier.name());
         return itemStack;
     }
 }
