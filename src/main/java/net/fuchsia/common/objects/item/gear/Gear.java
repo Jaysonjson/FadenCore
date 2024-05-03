@@ -1,5 +1,6 @@
 package net.fuchsia.common.objects.item.gear;
 
+import net.fuchsia.common.objects.item.ItemTier;
 import net.fuchsia.common.slot.GearSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -13,6 +14,6 @@ public interface Gear {
         return false;
     }
 
-    ItemStack randomize(ItemStack itemStack);
+    ItemStack randomize(ItemStack itemStack, PlayerEntity player, ItemTier itemTier);
     ItemStack upgrade(Collection<ItemStack> inputs, ItemStack itemStack);
 }

@@ -1,7 +1,9 @@
 package net.fuchsia.common.objects.item.gear.bracelet;
 
+import net.fuchsia.common.objects.item.ItemTier;
 import net.fuchsia.common.objects.item.gear.Gear;
 import net.fuchsia.common.slot.GearSlot;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -19,7 +21,7 @@ public class BraceletItem extends Item implements Gear {
     }
 
     @Override
-    public ItemStack randomize(ItemStack itemStack) {
+    public ItemStack randomize(ItemStack itemStack, PlayerEntity player, ItemTier itemTier) {
         return null;
     }
 
