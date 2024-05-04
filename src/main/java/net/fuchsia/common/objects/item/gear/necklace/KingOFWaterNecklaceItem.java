@@ -61,20 +61,28 @@ public class KingOFWaterNecklaceItem extends NecklaceItem implements ItemToolTip
 
     @Override
     public void toolTipDrawText(FadenTooltipComponent component, TextRenderer textRenderer, int x, int y, Matrix4f matrix, VertexConsumerProvider.Immediate vertexConsumers) {
-        textRenderer.draw(Text.translatable("tooltip.faden.free_water_movement"), x + 10, (y + component.getHeight() - 8), 0xAFFFFFFF, true, matrix, vertexConsumers, TextRenderer.TextLayerType.NORMAL, 0, 15728880);
+        textRenderer.draw(Text.translatable("tooltip.faden.free_water_movement"), x + 10, (y + component.extraHeight), 0xAFFFFFFF, true, matrix, vertexConsumers, TextRenderer.TextLayerType.NORMAL, 0, 15728880);
         //tooltip.add(Text.literal(stack.getOrDefault(FadenDataComponents.ITEM_TIER, ItemTier.COMMON.name())));
     }
 
     @Override
-    public int toolTipHeight(int height) {
-        return height + 10;
+    public int toolTipHeight(FadenTooltipComponent component, int height) {
+        if(component.extraHeight == 8) {
+            return 16;
+        }
+        return 8;
+    }
+
+    @Override
+    public int toolTipWidth(TextRenderer renderer, int width) {
+        return renderer.getWidth(Text.translatable("tooltip.faden.free_water_movement"));
     }
 
     @Override
     public void toolTipDrawItem(FadenTooltipComponent component, TextRenderer textRenderer, int x, int y, DrawContext context) {
         context.getMatrices().push();
         context.getMatrices().scale(0.5f, 0.5f,0.5f);
-        context.drawItem(Items.WATER_BUCKET.asItem().getDefaultStack(), x * 2, (y + component.getHeight() - 8) * 2);
+        context.drawItem(Items.WATER_BUCKET.asItem().getDefaultStack(), x * 2, (y + component.extraHeight) * 2);
         context.getMatrices().pop();
     }
 }

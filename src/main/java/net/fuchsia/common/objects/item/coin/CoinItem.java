@@ -61,8 +61,8 @@ public class CoinItem extends Item implements ItemToolTipRenderer {
     }
 
     @Override
-    public int toolTipHeight(int height) {
-        return height + 10;
+    public int toolTipHeight(FadenTooltipComponent component,int height) {
+        return 10;
     }
 
     @Override

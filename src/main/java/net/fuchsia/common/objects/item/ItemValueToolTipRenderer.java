@@ -16,11 +16,11 @@ public interface ItemValueToolTipRenderer {
     LinkedHashMap<Item, Integer> getValues(ItemStack itemStack);
 
     default int toolTipWidth(int width, FadenTooltipComponent component, TextRenderer textRenderer) {
-        return width + 16 + 4 + textRenderer.getWidth(String.valueOf(getValues(component.data.itemStack).getOrDefault(FadenItems.COPPER_COIN, 64)));
+        return 16 + 4 + textRenderer.getWidth(String.valueOf(getValues(component.data.itemStack).getOrDefault(FadenItems.COPPER_COIN, 64)));
     }
 
     default int toolTipHeight(int height, FadenTooltipComponent component) {
-        return height + (8 * getValues(component.data.itemStack).size());
+        return (8 * getValues(component.data.itemStack).size());
     }
 
     default void toolTipDrawText(FadenTooltipComponent component, TextRenderer textRenderer, int x, int y, Matrix4f matrix, VertexConsumerProvider.Immediate vertexConsumers) {
