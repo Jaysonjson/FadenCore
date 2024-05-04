@@ -1,4 +1,4 @@
-package net.fuchsia;
+package net.fuchsia.mixin_interfaces;
 
 import net.fuchsia.common.slot.ClothSlot;
 import net.minecraft.entity.EquipmentSlot;

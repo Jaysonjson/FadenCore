@@ -1,4 +1,4 @@
-package net.fuchsia;
+package net.fuchsia.mixin_interfaces;
 
 public class ExtraInventory {
 

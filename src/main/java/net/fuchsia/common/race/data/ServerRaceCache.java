@@ -44,6 +44,7 @@ public class ServerRaceCache {
         public static void add(UUID uuid, String id, String sub_id, RaceData.RaceDataCosmetics cosmetics) {
             new Thread(() -> {
                 if(CACHE.contains(uuid.toString())) CACHE.remove(uuid.toString());
+                NbtCompound slot = new NbtCompound();
                 NbtCompound tag = new NbtCompound();
                 tag.putString("id", id);
                 tag.putString("sub_id", sub_id);
@@ -51,7 +52,8 @@ public class ServerRaceCache {
                 tag.putString("chest_cosmetic", cosmetics.getChestCosmeticId());
                 tag.putString("leg_cosmetic", cosmetics.getLegCosmeticId());
                 tag.putString("boots_cosmetic", cosmetics.getBootsCosmeticId());
-                CACHE.put(uuid.toString(), tag);
+                slot.put("slot_0", tag);
+                CACHE.put(uuid.toString(), slot);
                 new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/").mkdirs();
                 try {
                     NbtIo.writeCompressed(CACHE,  CACHE_PATH);
@@ -73,7 +75,9 @@ public class ServerRaceCache {
         public static String getId(UUID uuid) {
             if(get().contains(uuid.toString())) {
                 NbtCompound compound = get().getCompound(uuid.toString());
-                return compound.getString("id");
+                if(compound.contains("slot_0")) {
+                    return compound.getCompound("slot_0").getString("id");
+                }
             }
             return "";
         }
@@ -81,7 +85,9 @@ public class ServerRaceCache {
         public static String getSubId(UUID uuid) {
             if(get().contains(uuid.toString())) {
                 NbtCompound compound = get().getCompound(uuid.toString());
-                return compound.getString("sub_id");
+                if(compound.contains("slot_0")) {
+                    return compound.getCompound("slot_0").getString("sub_id");
+                }
             }
             return "";
         }
@@ -89,7 +95,9 @@ public class ServerRaceCache {
         public static String getHeadCosmetic(UUID uuid) {
             if(get().contains(uuid.toString())) {
                 NbtCompound compound = get().getCompound(uuid.toString());
-                return compound.getString("head_cosmetic");
+                if(compound.contains("slot_0")) {
+                    return compound.getCompound("slot_0").getString("head_cosmetic");
+                }
             }
             return "";
         }
@@ -97,7 +105,9 @@ public class ServerRaceCache {
         public static String getChestCosmetic(UUID uuid) {
             if(get().contains(uuid.toString())) {
                 NbtCompound compound = get().getCompound(uuid.toString());
-                return compound.getString("chest_cosmetic");
+                if(compound.contains("slot_0")) {
+                    return compound.getCompound("slot_0").getString("chest_cosmetic");
+                }
             }
             return "";
         }
@@ -105,7 +115,9 @@ public class ServerRaceCache {
         public static String getLegCosmetic(UUID uuid) {
             if(get().contains(uuid.toString())) {
                 NbtCompound compound = get().getCompound(uuid.toString());
-                return compound.getString("leg_cosmetic");
+                if(compound.contains("slot_0")) {
+                    return compound.getCompound("slot_0").getString("leg_cosmetic");
+                }
             }
             return "";
         }
@@ -113,7 +125,9 @@ public class ServerRaceCache {
         public static String getBootsCosmetic(UUID uuid) {
             if(get().contains(uuid.toString())) {
                 NbtCompound compound = get().getCompound(uuid.toString());
-                return compound.getString("boots_cosmetic");
+                if(compound.contains("slot_0")) {
+                    return compound.getCompound("slot_0").getString("boots_cosmetic");
+                }
             }
             return "";
         }

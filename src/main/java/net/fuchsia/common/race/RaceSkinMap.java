@@ -115,9 +115,11 @@ public class RaceSkinMap {
 		public static void add(UUID uuid, String id) {
 			new Thread(() -> {
 				if(CACHE.contains(id)) CACHE.remove(id);
+				NbtCompound slot = new NbtCompound();
 				NbtCompound tag = new NbtCompound();
 				tag.putString("id", id);
-				CACHE.put(uuid.toString(), tag);
+				slot.put("slot_0", tag);
+				CACHE.put(uuid.toString(), slot);
 				new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/").mkdirs();
 				try {
 					NbtIo.writeCompressed(CACHE,  CACHE_PATH);
@@ -139,7 +141,9 @@ public class RaceSkinMap {
 		public static String getId(UUID uuid) {
 			if(get().contains(uuid.toString())) {
 				NbtCompound compound = get().getCompound(uuid.toString());
-				return compound.getString("id");
+				if(compound.contains("slot_0")) {
+					return compound.getCompound("slot_0").getString("id");
+				}
 			}
 			return "";
 		}

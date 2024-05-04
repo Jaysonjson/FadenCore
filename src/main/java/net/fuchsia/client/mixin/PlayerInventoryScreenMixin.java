@@ -1,7 +1,6 @@
 package net.fuchsia.client.mixin;
 
-import com.sun.jna.platform.win32.OaIdl;
-import net.fuchsia.ExtraInventory;
+import net.fuchsia.mixin_interfaces.ExtraInventory;
 import net.fuchsia.common.slot.ISlot;
 import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.client.MinecraftClient;

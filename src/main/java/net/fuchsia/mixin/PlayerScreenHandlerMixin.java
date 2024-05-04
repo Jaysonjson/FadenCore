@@ -3,7 +3,7 @@ package net.fuchsia.mixin;
 import com.mojang.datafixers.util.Pair;
 import net.fuchsia.common.objects.item.gear.Gear;
 import net.fuchsia.common.slot.ClothSlot;
-import net.fuchsia.ExtraInventory;
+import net.fuchsia.mixin_interfaces.ExtraInventory;
 import net.fuchsia.common.objects.item.cloth.Cloth;
 import net.fuchsia.common.slot.GearSlot;
 import net.fuchsia.util.FadenIdentifier;

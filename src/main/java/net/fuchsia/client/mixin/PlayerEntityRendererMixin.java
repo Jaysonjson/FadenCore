@@ -1,6 +1,6 @@
 package net.fuchsia.client.mixin;
 
-import net.fuchsia.IClothInventory;
+import net.fuchsia.mixin_interfaces.IClothInventory;
 import net.fuchsia.client.IPlayerEntityRenderer;
 import net.fuchsia.client.render.feature.ChestFeatureRenderer;
 import net.fuchsia.client.render.feature.ClothFeatureRenderer;
@@ -93,7 +93,7 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
     @Override
     public PlayerEntityModel<AbstractClientPlayerEntity> getPlayerModel() {
         RaceData data = ClientRaceCache.get(MinecraftClient.getInstance().player.getUuid());
-        PlayerEntityModel<AbstractClientPlayerEntity> playerEntityModel = null;
+        PlayerEntityModel<AbstractClientPlayerEntity> playerEntityModel = getModel();
         if (data.getRace() != null) {
             switch (data.getRace().model()) {
                 case SLIM -> {

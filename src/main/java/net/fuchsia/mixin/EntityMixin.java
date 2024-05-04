@@ -2,28 +2,20 @@ package net.fuchsia.mixin;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fuchsia.IGearInventory;
+import net.fuchsia.mixin_interfaces.IGearInventory;
 import net.fuchsia.common.objects.item.gear.Gear;
-import net.fuchsia.common.objects.tooltip.ItemValueTooltipComponent;
-import net.fuchsia.common.objects.tooltip.ItemValueTooltipData;
 import net.fuchsia.common.race.data.ClientRaceCache;
 import net.fuchsia.common.race.data.RaceData;
 import net.fuchsia.common.race.data.ServerRaceCache;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.item.TooltipData;
-import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BundleItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.scoreboard.AbstractTeam;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import org.spongepowered.asm.mixin.FabricUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -31,7 +23,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Mixin(Entity.class)
