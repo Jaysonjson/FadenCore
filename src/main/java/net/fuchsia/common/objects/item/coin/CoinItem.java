@@ -3,20 +3,26 @@ package net.fuchsia.common.objects.item.coin;
 import java.util.LinkedHashMap;
 import java.util.Optional;
 
+import net.fuchsia.common.objects.item.ItemToolTipRenderer;
+import net.fuchsia.common.objects.tooltip.FadenTooltipComponent;
 import net.fuchsia.common.quest.FadenQuests;
 import net.fuchsia.util.FadenIdentifier;
+import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 
 import net.fuchsia.common.init.FadenItems;
-import net.fuchsia.common.objects.tooltip.ItemValueTooltipData;
+import net.fuchsia.common.objects.tooltip.FadenTooltipData;
 import net.minecraft.client.item.TooltipData;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import org.joml.Matrix4f;
 
-public class CoinItem extends Item {
+public class CoinItem extends Item implements ItemToolTipRenderer {
     private final int value;
     public CoinItem(Settings settings, int value) {
         super(settings);
@@ -29,9 +35,7 @@ public class CoinItem extends Item {
 
     @Override
     public Optional<TooltipData> getTooltipData(ItemStack stack) {
-        LinkedHashMap<Item, Integer> itemStacks = new LinkedHashMap<>();
-        itemStacks.put(FadenItems.COPPER_COIN, value * stack.getCount());
-        return Optional.of(new ItemValueTooltipData(itemStacks));
+        return Optional.of(new FadenTooltipData(stack));
     }
 
     @Override
@@ -43,13 +47,26 @@ public class CoinItem extends Item {
         return super.use(world, user, hand);
     }
 
+    @Override
+    public void toolTipDrawText(FadenTooltipComponent component, TextRenderer textRenderer, int x, int y, Matrix4f matrix, VertexConsumerProvider.Immediate vertexConsumers) {
+        textRenderer.draw(String.valueOf(value * component.data.itemStack.getCount()), x + 10, y, 0xAFFFFFFF, true, matrix, vertexConsumers, TextRenderer.TextLayerType.NORMAL, 0, 15728880);
+    }
 
-    /*@Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.literal(Text.translatable("lore.faden.coin_value").withColor(Colors.GRAY).getString().replaceAll("%v", String.valueOf(stack.getCount() * value))));
-        if(context.isAdvanced()) {
-            tooltip.add(Text.translatable("tooltip.faden.coin_value").withColor(Colors.GRAY));
-        }
-        super.appendTooltip(stack, world, tooltip, context);
-    }*/
+    @Override
+    public void toolTipDrawItem(FadenTooltipComponent component, TextRenderer textRenderer, int x, int y, DrawContext context) {
+        context.getMatrices().push();
+        context.getMatrices().scale(0.5f, 0.5f,0.5f);
+        context.drawItem(FadenItems.COPPER_COIN.getDefaultStack(), x * 2, y * 2);
+        context.getMatrices().pop();
+    }
+
+    @Override
+    public int toolTipHeight(int height) {
+        return height + 10;
+    }
+
+    @Override
+    public int toolTipWidth(TextRenderer renderer, int width) {
+        return width + 16 + renderer.getWidth(String.valueOf(value));
+    }
 }

@@ -2,6 +2,8 @@ package net.fuchsia.common.data;
 
 import com.google.gson.reflect.TypeToken;
 import net.fuchsia.Faden;
+import net.fuchsia.common.init.FadenGear;
+import net.fuchsia.common.init.FadenItems;
 import net.fuchsia.util.FadenOnlineUtil;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;

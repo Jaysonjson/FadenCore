@@ -7,8 +7,8 @@ import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.client.handler.FadenItemModelHandler;
 import net.fuchsia.client.registry.FadenItemModelRegistry;
 import net.fuchsia.common.init.FadenCloths;
-import net.fuchsia.common.objects.tooltip.ItemValueTooltipComponent;
-import net.fuchsia.common.objects.tooltip.ItemValueTooltipData;
+import net.fuchsia.common.objects.tooltip.FadenTooltipComponent;
+import net.fuchsia.common.objects.tooltip.FadenTooltipData;
 import net.fuchsia.network.FadenNetwork;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
@@ -35,8 +35,8 @@ public class FadenClient implements ClientModInitializer {
         });
 
         TooltipComponentCallback.EVENT.register((component) -> {
-            if(component instanceof ItemValueTooltipData data) {
-                return new ItemValueTooltipComponent(data);
+            if(component instanceof FadenTooltipData data) {
+                return new FadenTooltipComponent(data);
             }
             return null;
         });
