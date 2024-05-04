@@ -3,7 +3,7 @@ package net.fuchsia.mixin;
 
 import java.util.Optional;
 
-import net.fuchsia.FadenData;
+import net.fuchsia.server.FadenData;
 import net.fuchsia.common.init.FadenDataComponents;
 import net.fuchsia.common.objects.item.ItemTier;
 import net.minecraft.component.DataComponentTypes;

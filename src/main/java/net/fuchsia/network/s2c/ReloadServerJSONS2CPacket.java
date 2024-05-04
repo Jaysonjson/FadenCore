@@ -12,6 +12,7 @@ import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.packet.CustomPayload;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -39,7 +40,7 @@ public record ReloadServerJSONS2CPacket(String type, String json) implements Cus
     public void receive(ClientPlayNetworking.Context context) {
         switch (type) {
             case "cape": {
-                FadenCapes.setPlayerCapes(Faden.GSON.fromJson(json, new TypeToken<HashMap<UUID, String>>(){}.getType()));
+                FadenCapes.setPlayerCapes(Faden.GSON.fromJson(json, new TypeToken<HashMap<UUID, ArrayList<String>>>(){}.getType()));
                 break;
             }
 

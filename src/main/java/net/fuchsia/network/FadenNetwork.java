@@ -15,6 +15,8 @@ import net.fuchsia.common.race.data.ServerRaceCache;
 import net.fuchsia.network.s2c.*;
 import net.fuchsia.common.race.skin.provider.SkinProvider;
 import net.fuchsia.common.race.skin.server.ServerSkinCache;
+import net.fuchsia.server.PlayerData;
+import net.fuchsia.server.ServerPlayerDatas;
 import net.fuchsia.util.FadenIdentifier;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -32,6 +34,8 @@ public class FadenNetwork {
         PayloadTypeRegistry.playS2C().register(SendAllRaceSkinsS2CPacket.ID, SendAllRaceSkinsS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(ReloadServerJSONS2CPacket.ID, ReloadServerJSONS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(SendAllRacesS2CPacket.ID, SendAllRacesS2CPacket.CODEC);
+        PayloadTypeRegistry.playS2C().register(SendPlayerDatasS2CPacket.ID, SendPlayerDatasS2CPacket.CODEC);
+        PayloadTypeRegistry.playS2C().register(SendSinglePlayerDataS2CPacket.ID, SendSinglePlayerDataS2CPacket.CODEC);
 
         ClientPlayNetworking.registerGlobalReceiver(SendRaceUpdateS2CPacket.ID, SendRaceUpdateS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(RemoveSkinS2CPacket.ID, RemoveSkinS2CPacket::receive);
@@ -39,6 +43,8 @@ public class FadenNetwork {
         ClientPlayNetworking.registerGlobalReceiver(SendAllRaceSkinsS2CPacket.ID, SendAllRaceSkinsS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(ReloadServerJSONS2CPacket.ID, ReloadServerJSONS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(SendAllRacesS2CPacket.ID, SendAllRacesS2CPacket::receive);
+        ClientPlayNetworking.registerGlobalReceiver(SendPlayerDatasS2CPacket.ID, SendPlayerDatasS2CPacket::receive);
+        ClientPlayNetworking.registerGlobalReceiver(SendSinglePlayerDataS2CPacket.ID, SendSinglePlayerDataS2CPacket::receive);
     }
 
     public static void registerC2S() {
@@ -90,6 +96,14 @@ public class FadenNetwork {
 
         public static void reloadItemValues(ServerPlayerEntity player) {
             ServerPlayNetworking.send(player, new ReloadServerJSONS2CPacket("item_values", Faden.GSON.toJson(ItemValues.VALUES)));
+        }
+
+        public static void sendPlayerDatas(ServerPlayerEntity player) {
+            ServerPlayNetworking.send(player, new SendPlayerDatasS2CPacket(ServerPlayerDatas.getPlayerDatas()));
+        }
+
+        public static void syncPlayerData(ServerPlayerEntity player, UUID playerUuid, PlayerData playerData) {
+            ServerPlayNetworking.send(player, new SendSinglePlayerDataS2CPacket(playerUuid, playerData));
         }
     }
 

@@ -3,10 +3,12 @@ package net.fuchsia.common.race.data;
 import net.fuchsia.common.race.IRace;
 import net.fuchsia.common.race.Race;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class RaceData implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 0L;
 
     private transient IRace race;

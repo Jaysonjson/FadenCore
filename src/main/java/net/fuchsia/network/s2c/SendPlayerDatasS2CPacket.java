@@ -2,16 +2,17 @@ package net.fuchsia.network.s2c;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fuchsia.common.race.Race;
-import net.fuchsia.common.race.data.ClientRaceCache;
-import net.fuchsia.common.race.data.RaceData;
 import net.fuchsia.common.race.data.ServerRaceCache;
-import net.fuchsia.common.race.skin.server.ServerSkinCache;
+import net.fuchsia.common.race.skin.client.ClientRaceSkinCache;
+import net.fuchsia.server.PlayerData;
+import net.fuchsia.server.ServerPlayerDatas;
+import net.fuchsia.server.client.ClientPlayerDatas;
 import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.packet.CustomPayload;
+import net.minecraft.util.Identifier;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -22,35 +23,32 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.UUID;
 
-public record SendAllRacesS2CPacket(ArrayList<RacePacket> packets) implements CustomPayload {
+public record SendPlayerDatasS2CPacket(HashMap<UUID, PlayerData> map) implements CustomPayload {
 
-    public static final CustomPayload.Id<SendAllRacesS2CPacket> ID = new CustomPayload.Id<>(FadenIdentifier.create("send_all_races"));
-    public static final PacketCodec<RegistryByteBuf, SendAllRacesS2CPacket> CODEC = new PacketCodec<>() {
+    public static final CustomPayload.Id<SendPlayerDatasS2CPacket> ID = new CustomPayload.Id<>(FadenIdentifier.create("send_player_datas"));
+    public static final PacketCodec<RegistryByteBuf, SendPlayerDatasS2CPacket> CODEC = new PacketCodec<>() {
         @Override
-        public SendAllRacesS2CPacket decode(RegistryByteBuf buf) {
-            ArrayList<RacePacket> map = new ArrayList<>();
+        public SendPlayerDatasS2CPacket decode(RegistryByteBuf buf) {
+            HashMap<UUID, PlayerData> map = null;
             try {
                 ByteArrayInputStream byteOut = new ByteArrayInputStream(Base64.getDecoder().decode(buf.readString()));
                 ObjectInputStream out = new ObjectInputStream(byteOut);
-                map = (ArrayList<RacePacket>) out.readObject();
+                map = (HashMap<UUID, PlayerData>) out.readObject();
                 byteOut.close();
                 out.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return new SendAllRacesS2CPacket(map);
+            return new SendPlayerDatasS2CPacket(map);
         }
 
         @Override
-        public void encode(RegistryByteBuf buf, SendAllRacesS2CPacket value) {
+        public void encode(RegistryByteBuf buf, SendPlayerDatasS2CPacket value) {
             try {
+                PacketByteBuf byteBufs = PacketByteBufs.create();
                 ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
                 ObjectOutputStream out = new ObjectOutputStream(byteOut);
-                ArrayList<RacePacket> packets1 = new ArrayList<>();
-                for (UUID uuid : ServerRaceCache.getCache().keySet()) {
-                    packets1.add(new RacePacket(uuid, ServerRaceCache.getCache().get(uuid)));
-                }
-                out.writeObject(packets1);
+                out.writeObject(ServerPlayerDatas.getPlayerDatas());
                 byte[] data = byteOut.toByteArray();
                 byteOut.close();
                 out.close();
@@ -62,13 +60,11 @@ public record SendAllRacesS2CPacket(ArrayList<RacePacket> packets) implements Cu
     };
 
     @Override
-    public CustomPayload.Id<? extends CustomPayload> getId() {
+    public Id<? extends CustomPayload> getId() {
         return ID;
     }
 
     public void receive(ClientPlayNetworking.Context context) {
-        for (RacePacket packet : packets) {
-            ClientRaceCache.getCache().put(packet.uuid(), packet.data());
-        }
+        ClientPlayerDatas.setPlayerDatas(map);
     }
 }

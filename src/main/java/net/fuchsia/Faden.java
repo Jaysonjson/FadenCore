@@ -16,6 +16,8 @@ import net.fuchsia.common.race.data.ServerRaceCache;
 import net.fuchsia.config.FadenConfig;
 import net.fuchsia.config.FadenConfigScreen;
 import net.fuchsia.config.FadenOptions;
+import net.fuchsia.server.PlayerData;
+import net.fuchsia.server.ServerPlayerDatas;
 import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.GameMenuScreen;
@@ -105,20 +107,31 @@ public class Faden implements ModInitializer {
 			RaceSkinMap.Cache.load();
 			ServerRaceCache.Cache.load();
 			QuestCache.load();
+			ServerPlayerDatas.load();
+			ServerPlayerDatas.SERVER = server;
 		});
 
 		ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
 			RaceSkinMap.Cache.save();
 			ServerRaceCache.Cache.save();
 			QuestCache.save();
+			ServerPlayerDatas.save();
 		});
 
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
 			ServerPlayerEntity serverPlayerEntity = handler.getPlayer();
+			if(!ServerPlayerDatas.getPlayerDatas().containsKey(serverPlayerEntity.getUuid())) {
+				ServerPlayerDatas.getPlayerDatas().put(serverPlayerEntity.getUuid(), new PlayerData());
+			}
+
 			FadenNetwork.Server.sendAllRaces(serverPlayerEntity);
 			RaceSkinMap.Cache.sendUpdate(serverPlayerEntity, server);
 			ServerRaceCache.Cache.sendUpdate(serverPlayerEntity, server, false);
-
+			FadenNetwork.Server.sendPlayerDatas(serverPlayerEntity);
+			for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
+				FadenNetwork.Server.syncPlayerData(player, serverPlayerEntity.getUuid(), ServerPlayerDatas.getPlayerDatas().getOrDefault(serverPlayerEntity.getUuid(), new PlayerData()));
+			}
+			FadenNetwork.Server.syncPlayerData(serverPlayerEntity, serverPlayerEntity.getUuid(), ServerPlayerDatas.getPlayerDatas().getOrDefault(serverPlayerEntity.getUuid(), new PlayerData()));
 			//TODO REMVOE: QUEST TESTING
 			FadenQuests.TEST.startQuest(serverPlayerEntity.getUuid());
 		});

@@ -1,4 +1,4 @@
-package net.fuchsia;
+package net.fuchsia.server;
 
 public class FadenData {
 

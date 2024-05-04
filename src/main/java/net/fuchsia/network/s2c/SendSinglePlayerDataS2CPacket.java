@@ -2,11 +2,10 @@ package net.fuchsia.network.s2c;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fuchsia.common.race.Race;
-import net.fuchsia.common.race.data.ClientRaceCache;
-import net.fuchsia.common.race.data.RaceData;
-import net.fuchsia.common.race.data.ServerRaceCache;
-import net.fuchsia.common.race.skin.server.ServerSkinCache;
+import net.fuchsia.Faden;
+import net.fuchsia.server.PlayerData;
+import net.fuchsia.server.ServerPlayerDatas;
+import net.fuchsia.server.client.ClientPlayerDatas;
 import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.RegistryByteBuf;
@@ -17,58 +16,52 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.UUID;
 
-public record SendAllRacesS2CPacket(ArrayList<RacePacket> packets) implements CustomPayload {
+public record SendSinglePlayerDataS2CPacket(UUID playerUuid, PlayerData playerData) implements CustomPayload {
 
-    public static final CustomPayload.Id<SendAllRacesS2CPacket> ID = new CustomPayload.Id<>(FadenIdentifier.create("send_all_races"));
-    public static final PacketCodec<RegistryByteBuf, SendAllRacesS2CPacket> CODEC = new PacketCodec<>() {
+    public static final CustomPayload.Id<SendSinglePlayerDataS2CPacket> ID = new CustomPayload.Id<>(FadenIdentifier.create("send_player_data"));
+    public static final PacketCodec<RegistryByteBuf, SendSinglePlayerDataS2CPacket> CODEC = new PacketCodec<>() {
         @Override
-        public SendAllRacesS2CPacket decode(RegistryByteBuf buf) {
-            ArrayList<RacePacket> map = new ArrayList<>();
+        public SendSinglePlayerDataS2CPacket decode(RegistryByteBuf buf) {
+            PlayerData data = null;
             try {
                 ByteArrayInputStream byteOut = new ByteArrayInputStream(Base64.getDecoder().decode(buf.readString()));
                 ObjectInputStream out = new ObjectInputStream(byteOut);
-                map = (ArrayList<RacePacket>) out.readObject();
+                data = (PlayerData) out.readObject();
                 byteOut.close();
                 out.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return new SendAllRacesS2CPacket(map);
+            return new SendSinglePlayerDataS2CPacket(buf.readUuid(), data);
         }
 
         @Override
-        public void encode(RegistryByteBuf buf, SendAllRacesS2CPacket value) {
+        public void encode(RegistryByteBuf buf, SendSinglePlayerDataS2CPacket value) {
             try {
                 ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
                 ObjectOutputStream out = new ObjectOutputStream(byteOut);
-                ArrayList<RacePacket> packets1 = new ArrayList<>();
-                for (UUID uuid : ServerRaceCache.getCache().keySet()) {
-                    packets1.add(new RacePacket(uuid, ServerRaceCache.getCache().get(uuid)));
-                }
-                out.writeObject(packets1);
+                out.writeObject(value.playerData);
                 byte[] data = byteOut.toByteArray();
                 byteOut.close();
                 out.close();
                 buf.writeString(new String(Base64.getEncoder().encode(data)));
             } catch (Exception e) {
-                e.printStackTrace();
+                Faden.LOGGER.warn(e.getMessage());
             }
+            buf.writeUuid(value.playerUuid);
         }
     };
 
     @Override
-    public CustomPayload.Id<? extends CustomPayload> getId() {
+    public Id<? extends CustomPayload> getId() {
         return ID;
     }
 
     public void receive(ClientPlayNetworking.Context context) {
-        for (RacePacket packet : packets) {
-            ClientRaceCache.getCache().put(packet.uuid(), packet.data());
-        }
+        ClientPlayerDatas.getPlayerDatas().put(playerUuid, playerData);
     }
 }

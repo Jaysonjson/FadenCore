@@ -24,7 +24,7 @@ import java.util.UUID;
 public record SendRaceUpdateS2CPacket(UUID uuid, RaceData data, boolean remove) implements CustomPayload {
 
     public static final CustomPayload.Id<SendRaceUpdateS2CPacket> ID = new CustomPayload.Id<>(FadenIdentifier.create("send_race"));
-    public static final PacketCodec<RegistryByteBuf, SendRaceUpdateS2CPacket> CODEC =new PacketCodec<RegistryByteBuf, SendRaceUpdateS2CPacket>() {
+    public static final PacketCodec<RegistryByteBuf, SendRaceUpdateS2CPacket> CODEC = new PacketCodec<>() {
         @Override
         public SendRaceUpdateS2CPacket decode(RegistryByteBuf buf) {
             UUID uuid1 = buf.readUuid();
@@ -46,7 +46,6 @@ public record SendRaceUpdateS2CPacket(UUID uuid, RaceData data, boolean remove) 
         public void encode(RegistryByteBuf buf, SendRaceUpdateS2CPacket value) {
             try {
                 buf.writeUuid(value.uuid);
-                PacketByteBuf byteBufs = PacketByteBufs.create();
                 ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
                 ObjectOutputStream out = new ObjectOutputStream(byteOut);
                 out.writeObject(value.data);
