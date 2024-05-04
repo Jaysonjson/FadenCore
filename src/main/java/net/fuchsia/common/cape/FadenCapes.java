@@ -56,7 +56,13 @@ public class FadenCapes {
 
     public static void init() {
         if(FadenOptions.getConfig().CUSTOM_CAPES) {
-            PLAYER_CAPES = Faden.GSON.fromJson(FadenOnlineUtil.getJSONData("https://raw.githubusercontent.com/FuchsiaTeam/FadenData/main/capes.json"), new TypeToken<HashMap<UUID, String>>() {}.getType());
+            //JUST SO THE GAME DOESNT CRASH
+            try {
+                PLAYER_CAPES = Faden.GSON.fromJson(FadenOnlineUtil.getJSONData("https://raw.githubusercontent.com/FuchsiaTeam/FadenData/main/capes.json"), new TypeToken<HashMap<UUID, ArrayList<String>>>() {
+                }.getType());
+            } catch (Exception e) {
+
+            }
         }
     }
 }
