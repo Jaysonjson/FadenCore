@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 
 import net.fuchsia.common.data.ItemValues;
 import net.fuchsia.common.init.FadenDataComponents;
+import net.fuchsia.common.objects.item.ItemTier;
 import net.fuchsia.common.objects.item.ItemToolTipRenderer;
 import net.fuchsia.common.objects.item.ItemValueToolTipRenderer;
 import net.minecraft.item.Items;
@@ -36,7 +37,9 @@ public class FadenTooltipComponent implements TooltipComponent {
         if(data.itemStack.contains(FadenDataComponents.ITEM_TIER)) {
             context.getMatrices().push();
             context.getMatrices().scale(0.5f, 0.5f,0.5f);
-            context.drawItem(Items.DIAMOND.getDefaultStack(), x * 2, y * 2);
+            ItemTier itemTier = ItemTier.valueOf(data.itemStack.get(FadenDataComponents.ITEM_TIER));
+            context.drawTexture(itemTier.getIcon(), x * 2, y * 2, 0, 0, 16, 16,16, 16);
+            //context.drawItem(Items.DIAMOND.getDefaultStack(), x * 2, y * 2);
             context.getMatrices().pop();
             extraHeight = 5;
             tooltipHeight = 11;
@@ -54,7 +57,8 @@ public class FadenTooltipComponent implements TooltipComponent {
         extraHeight = 0;
         tooltipHeight = 2;
         if(data.itemStack.contains(FadenDataComponents.ITEM_TIER)) {
-            textRenderer.draw(data.itemStack.get(FadenDataComponents.ITEM_TIER), x + 10, y, 0xAFFFFFFF, true, matrix, vertexConsumers, TextRenderer.TextLayerType.NORMAL, 0, 15728880);
+            ItemTier itemTier = ItemTier.valueOf(data.itemStack.get(FadenDataComponents.ITEM_TIER));
+            textRenderer.draw(itemTier.name(), x + 10, y, itemTier.getColor(), true, matrix, vertexConsumers, TextRenderer.TextLayerType.NORMAL, 0, 15728880);
             extraHeight = 5;
             tooltipHeight = 11;
         }

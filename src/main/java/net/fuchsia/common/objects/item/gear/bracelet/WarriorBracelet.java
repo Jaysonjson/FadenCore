@@ -17,6 +17,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
+import net.minecraft.world.World;
 import org.joml.Matrix4f;
 
 import java.util.Optional;
@@ -33,6 +36,11 @@ public class WarriorBracelet extends BraceletItem implements ItemToolTipRenderer
         return Optional.of(new FadenTooltipData(stack));
     }
 
+    @Override
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        user.setStackInHand(hand, randomize(user.getStackInHand(hand), user, ItemTier.MYTHIC));
+        return super.use(world, user, hand);
+    }
 
     @Override
     public ItemStack randomize(ItemStack itemStack, PlayerEntity player, ItemTier itemTier) {
