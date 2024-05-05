@@ -78,7 +78,7 @@ public class KingOFWaterNecklaceItem extends NecklaceItem implements ItemToolTip
 
     @Override
     public int toolTipWidth(TextRenderer renderer, int width) {
-        return renderer.getWidth(Text.translatable("tooltip.faden.free_water_movement"));
+        return renderer.getWidth(Text.translatable("tooltip.faden.free_water_movement")) - 16;
     }
 
     @Override

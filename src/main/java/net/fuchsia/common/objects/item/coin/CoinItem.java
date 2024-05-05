@@ -70,6 +70,6 @@ public class CoinItem extends Item implements ItemToolTipRenderer {
 
     @Override
     public int toolTipWidth(TextRenderer renderer, int width) {
-        return width + 16 + renderer.getWidth(String.valueOf(value));
+        return renderer.getWidth(String.valueOf(value));
     }
 }
