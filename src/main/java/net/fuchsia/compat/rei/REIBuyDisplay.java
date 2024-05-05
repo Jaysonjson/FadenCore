@@ -37,6 +37,6 @@ public class REIBuyDisplay extends BasicDisplay {
 
     @Override
     public CategoryIdentifier<?> getCategoryIdentifier() {
-        return FadenREIClientPlugin.BUY_DISPLAY;
+        return FadenREIServerPlugin.BUY_DISPLAY;
     }
 }

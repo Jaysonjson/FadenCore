@@ -21,10 +21,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
-@Environment(EnvType.CLIENT)
 public class FadenREIClientPlugin implements REIClientPlugin {
-
-    public static final CategoryIdentifier<REIBuyDisplay> BUY_DISPLAY = CategoryIdentifier.of(FadenIdentifier.create("buy_display"));
 
     @Override
     public void registerCategories(CategoryRegistry registry) {
@@ -34,7 +31,7 @@ public class FadenREIClientPlugin implements REIClientPlugin {
             coins.add(value);
         }
         //registry.addWorkstations(BUY_DISPLAY, EntryIngredients.ofItems(CoinMap.COINS.values()));
-        registry.addWorkstations(BUY_DISPLAY, EntryIngredients.ofItems(coins));
+        registry.addWorkstations(FadenREIServerPlugin.BUY_DISPLAY, EntryIngredients.ofItems(coins));
     }
 
     @Override

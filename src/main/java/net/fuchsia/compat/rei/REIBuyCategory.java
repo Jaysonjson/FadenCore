@@ -33,7 +33,7 @@ public class REIBuyCategory implements DisplayCategory<REIBuyDisplay> {
 
     @Override
     public CategoryIdentifier<? extends REIBuyDisplay> getCategoryIdentifier() {
-        return FadenREIClientPlugin.BUY_DISPLAY;
+        return FadenREIServerPlugin.BUY_DISPLAY;
     }
 
     @Override

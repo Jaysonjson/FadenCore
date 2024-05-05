@@ -31,7 +31,7 @@
 		"rei_client": [
 			"net.fuchsia.compat.rei.FadenREIClientPlugin"
 		],
-		"rei_server": [
+		"rei_common": [
 			"net.fuchsia.compat.rei.FadenREIServerPlugin"
 		]
 	},

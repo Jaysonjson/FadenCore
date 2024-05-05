@@ -45,7 +45,7 @@ public class WarriorBracelet extends BraceletItem implements ItemToolTipRenderer
     @Environment(EnvType.CLIENT)
     @Override
     public void toolTipDrawText(FadenTooltipComponent component, TextRenderer textRenderer, int x, int y, Matrix4f matrix, VertexConsumerProvider.Immediate vertexConsumers) {
-        textRenderer.draw(Text.translatable("tooltip.faden.damage_increase_value").toString().replaceAll("%d", String.valueOf(component.data.itemStack.getOrDefault(FadenDataComponents.DAMAGE_INCREASE_VALUE, 0f))), x + 10, (y + component.heightAfterCoinAndTier()), 0xAFFFFFFF, true, matrix, vertexConsumers, TextRenderer.TextLayerType.NORMAL, 0, 15728880);
+        textRenderer.draw(Text.translatable("tooltip.faden.damage_increase_value").getString().replaceAll("%s", String.valueOf(component.data.itemStack.getOrDefault(FadenDataComponents.DAMAGE_INCREASE_VALUE, 0f))), x + 10, (y + component.heightAfterCoinAndTier()), 0xAFFFFFFF, true, matrix, vertexConsumers, TextRenderer.TextLayerType.NORMAL, 0, 15728880);
     }
 
     @Override
