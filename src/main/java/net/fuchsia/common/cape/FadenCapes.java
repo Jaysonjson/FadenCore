@@ -2,15 +2,12 @@ package net.fuchsia.common.cape;
 
 import com.google.gson.reflect.TypeToken;
 import net.fuchsia.Faden;
-import net.fuchsia.config.FadenConfig;
 import net.fuchsia.config.FadenOptions;
 import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.client.ClientPlayerDatas;
 import net.fuchsia.util.FadenOnlineUtil;
-import net.minecraft.client.MinecraftClient;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.UUID;
 

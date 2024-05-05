@@ -21,5 +21,7 @@
 	"config.faden.title": "Faden Configuration",
 	"tooltip.faden.toggle_cloth": "Toggle Cloth",
 	"tooltip.faden.toggle_gear": "Toggle Gear",
-	"tooltip.faden.free_water_movement": "Allows Free Water Movement"
+	"tooltip.faden.free_water_movement": "Allows Free Water Movement",
+	"tooltip.faden.damage_increase_value": "Increases Damage by %d Damage Points",
+	"tooltip.faden.damage_increase_percentage": "Increases Damage by %d%"
 }

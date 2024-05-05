@@ -1,5 +1,7 @@
 package net.fuchsia.common.cape;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fuchsia.Faden;
 import net.fuchsia.common.race.skin.client.SkinTexture;
 import net.fuchsia.common.race.skin.provider.SkinProvider;
@@ -29,6 +31,7 @@ public class FadenCape {
         return id;
     }
 
+    @Environment(EnvType.CLIENT)
     public void load() {
         if(!loaded) {
             try {

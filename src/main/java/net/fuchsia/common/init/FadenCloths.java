@@ -1,5 +1,7 @@
 package net.fuchsia.common.init;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fuchsia.Faden;
 import net.fuchsia.common.objects.item.cloth.ClothItem;
 import net.fuchsia.common.race.skin.client.SkinTexture;
@@ -34,6 +36,7 @@ public class FadenCloths {
     }
 
     private static boolean loaded = false;
+    @Environment(EnvType.CLIENT)
     public static void load() {
         if(!loaded) {
             try {

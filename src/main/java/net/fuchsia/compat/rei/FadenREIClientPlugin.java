@@ -6,6 +6,8 @@ import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
 import me.shedaniel.rei.api.client.registry.screen.ScreenRegistry;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fuchsia.server.FadenData;
 import net.fuchsia.common.data.ItemValues;
 import net.fuchsia.common.objects.CoinMap;
@@ -19,6 +21,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
+@Environment(EnvType.CLIENT)
 public class FadenREIClientPlugin implements REIClientPlugin {
 
     public static final CategoryIdentifier<REIBuyDisplay> BUY_DISPLAY = CategoryIdentifier.of(FadenIdentifier.create("buy_display"));

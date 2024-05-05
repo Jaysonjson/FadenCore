@@ -3,6 +3,8 @@ package net.fuchsia.common.objects.item.coin;
 import java.util.LinkedHashMap;
 import java.util.Optional;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fuchsia.common.objects.item.ItemToolTipRenderer;
 import net.fuchsia.common.objects.tooltip.FadenTooltipComponent;
 import net.fuchsia.common.quest.FadenQuests;
@@ -47,6 +49,7 @@ public class CoinItem extends Item implements ItemToolTipRenderer {
         return super.use(world, user, hand);
     }
 
+    @Environment(EnvType.CLIENT)
     @Override
     public void toolTipDrawText(FadenTooltipComponent component, TextRenderer textRenderer, int x, int y, Matrix4f matrix, VertexConsumerProvider.Immediate vertexConsumers) {
         textRenderer.draw(String.valueOf(value * component.data.itemStack.getCount()), x + 10, y, 0xAFFFFFFF, true, matrix, vertexConsumers, TextRenderer.TextLayerType.NORMAL, 0, 15728880);

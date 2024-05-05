@@ -1,6 +1,7 @@
 package net.fuchsia.common.init;
 
 import net.fuchsia.common.objects.item.gear.bracelet.BraceletItem;
+import net.fuchsia.common.objects.item.gear.bracelet.WarriorBracelet;
 import net.fuchsia.common.objects.item.gear.necklace.KingOFWaterNecklaceItem;
 import net.fuchsia.common.objects.item.gear.necklace.NecklaceItem;
 import net.fuchsia.datagen.DataItemModel;
@@ -18,7 +19,7 @@ public class FadenGear {
     public static List<BraceletItem> BRACELETS = new ArrayList<>();
     public static List<NecklaceItem> NECKLACES = new ArrayList<>();
 
-    public static BraceletItem TEST_BRACELET = registerBracelet("test_bracelet", new BraceletItem(new Item.Settings()), "ingots/silver_ingot");
+    public static BraceletItem WARRIORS_BRACELET = registerBracelet("warriors_bracelet", new WarriorBracelet(new Item.Settings()), "ingots/silver_ingot");
     public static KingOFWaterNecklaceItem KING_OF_WATER_NECKLACE = registerNecklace("king_of_water_necklace", new KingOFWaterNecklaceItem(new Item.Settings()), "ingots/silver_ingot");
 
     private static <T extends BraceletItem> T registerBracelet(String name, T item, String texture, DataItemModel itemModel) {

@@ -1,20 +1,24 @@
 package net.fuchsia.common.race.cosmetic;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.client.util.ModelIdentifier;
 
 public class RaceCosmetic {
-
+    @Environment(EnvType.CLIENT)
     private ModelIdentifier model;
+    private String modelId = "";
     private RaceCosmeticType type;
     private String id = "default";
 
-    public RaceCosmetic(ModelIdentifier model, RaceCosmeticType type) {
-        this.model = model;
+    public RaceCosmetic(String modelId, RaceCosmeticType type) {
+        this.modelId = modelId;
         this.type = type;
     }
 
-    public RaceCosmetic(ModelIdentifier model, RaceCosmeticType type, String id) {
-        this.model = model;
+    public RaceCosmetic(String modelId, RaceCosmeticType type, String id) {
+        this.modelId = modelId;
         this.type = type;
         this.id = id;
     }
@@ -23,8 +27,9 @@ public class RaceCosmetic {
         return id;
     }
 
+    @Environment(EnvType.CLIENT)
     public ModelIdentifier getModel() {
-        return model;
+        return FadenIdentifier.modelId(modelId);
     }
 
     public RaceCosmeticType getType() {

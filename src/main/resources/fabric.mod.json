@@ -30,6 +30,9 @@
 		],
 		"rei_client": [
 			"net.fuchsia.compat.rei.FadenREIClientPlugin"
+		],
+		"rei_server": [
+			"net.fuchsia.compat.rei.FadenREIServerPlugin"
 		]
 	},
 	"mixins": [

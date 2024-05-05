@@ -1,5 +1,7 @@
 package net.fuchsia.common.objects.item;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fuchsia.common.init.FadenItems;
 import net.fuchsia.common.objects.tooltip.FadenTooltipComponent;
 import net.minecraft.client.font.TextRenderer;
@@ -23,6 +25,7 @@ public interface ItemValueToolTipRenderer {
         return (8 * getValues(component.data.itemStack).size());
     }
 
+    @Environment(EnvType.CLIENT)
     default void toolTipDrawCoinText(FadenTooltipComponent component, TextRenderer textRenderer, int x, int y, Matrix4f matrix, VertexConsumerProvider.Immediate vertexConsumers) {
         int height = 0;
         for (Item item : getValues(component.data.itemStack).keySet()) {

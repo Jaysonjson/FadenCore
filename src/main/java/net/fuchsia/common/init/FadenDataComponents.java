@@ -12,6 +12,8 @@ import java.util.function.UnaryOperator;
 public class FadenDataComponents {
 
     public static final DataComponentType<Integer> EXTRA_VALUE = register("extra_value", (builder) -> builder.codec(Codecs.POSITIVE_INT).packetCodec(PacketCodecs.VAR_INT));
+    public static final DataComponentType<Float> DAMAGE_INCREASE_VALUE = register("extra_damage", (builder) -> builder.codec(Codecs.POSITIVE_FLOAT).packetCodec(PacketCodecs.FLOAT));
+    public static final DataComponentType<Float> DAMAGE_INCREASE_PERCENTAGE = register("extra_damage_percentage", (builder) -> builder.codec(Codecs.POSITIVE_FLOAT).packetCodec(PacketCodecs.FLOAT));
     public static final DataComponentType<String> ITEM_TIER = register("item_tier", (builder) -> builder.codec(Codecs.ESCAPED_STRING).packetCodec(PacketCodecs.STRING));
 
     private static <T> DataComponentType<T> register(String id, UnaryOperator<DataComponentType.Builder<T>> builderOperator) {
