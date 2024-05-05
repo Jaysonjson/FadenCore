@@ -41,7 +41,7 @@ public enum Race implements IRace {
 		this.subIds = subIds;
 		this.size = size;
 		this.modelType = slim;
-		dimensions = EntityDimensions.changing(0.6F * size.x, 1.8F * size.y).withEyeHeight(1.62F * size.y).withAttachments(EntityAttachments.builder().add(EntityAttachmentType.VEHICLE, PlayerEntity.VEHICLE_ATTACHMENT_POS));
+		dimensions = EntityDimensions.changing(0.6F * size.x, 2.0F * size.y).withEyeHeight(1.62F).withAttachments(EntityAttachments.builder().add(EntityAttachmentType.VEHICLE, PlayerEntity.VEHICLE_ATTACHMENT_POS));
 		poseDimensions = ImmutableMap.builder().put(EntityPose.STANDING, dimensions).put(EntityPose.SLEEPING, PlayerEntity.SLEEPING_DIMENSIONS).put(EntityPose.FALL_FLYING, EntityDimensions.changing(0.6F, 0.6F).withEyeHeight(0.4F)).put(EntityPose.SWIMMING, EntityDimensions.changing(0.6F, 0.6F).withEyeHeight(0.4F)).put(EntityPose.SPIN_ATTACK, EntityDimensions.changing(0.6F, 0.6F).withEyeHeight(0.4F)).put(EntityPose.CROUCHING, EntityDimensions.changing(0.6F, 1.5F).withEyeHeight(1.27F).withAttachments(EntityAttachments.builder().add(EntityAttachmentType.VEHICLE, PlayerEntity.VEHICLE_ATTACHMENT_POS))).put(EntityPose.DYING, EntityDimensions.fixed(0.2F, 0.2F).withEyeHeight(1.62F)).build();
 	}
 
