@@ -1,5 +1,6 @@
 package net.fuchsia.common.objects.item.gear.necklace;
 
+import net.fuchsia.common.objects.item.FadenItem;
 import net.fuchsia.common.objects.item.ItemTier;
 import net.fuchsia.common.objects.item.gear.Gear;
 import net.fuchsia.common.slot.GearSlot;
@@ -9,7 +10,7 @@ import net.minecraft.item.ItemStack;
 
 import java.util.Collection;
 
-public class NecklaceItem extends Item implements Gear {
+public class NecklaceItem extends FadenItem implements Gear {
     public NecklaceItem(Settings settings) {
         super(settings.maxCount(1));
     }

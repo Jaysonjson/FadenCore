@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 
 
 /*
- * TODO: REWRITE TO GENERIC TOOLTIPCOMPONENT TO USE ItemToolTipRenderer INTERFACE
+ * TODO: FIX HEIGHT CALULCATIONS
  * */
 public class FadenTooltipData implements TooltipData {
     public ItemStack itemStack;

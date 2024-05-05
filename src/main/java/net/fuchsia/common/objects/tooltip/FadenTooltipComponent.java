@@ -18,7 +18,7 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.item.Item;
 
 /*
-* TODO: REWRITE TO GENERIC TOOLTIPCOMPONENT TO USE ItemToolTipRenderer INTERFACE
+* TODO: FIX HEIGHT CALULCATIONS
 * */
 public class FadenTooltipComponent implements TooltipComponent {
 
@@ -31,15 +31,18 @@ public class FadenTooltipComponent implements TooltipComponent {
 
     @Override
     public void drawItems(TextRenderer textRenderer, int x, int y, DrawContext context) {
+        extraHeight = 0;
+        tooltipHeight = 2;
         if(data.itemStack.contains(FadenDataComponents.ITEM_TIER)) {
             context.getMatrices().push();
             context.getMatrices().scale(0.5f, 0.5f,0.5f);
             context.drawItem(Items.DIAMOND.getDefaultStack(), x * 2, y * 2);
             context.getMatrices().pop();
-            extraHeight = 4;
+            extraHeight = 5;
+            tooltipHeight = 11;
         }
         if(data.itemStack.getItem() instanceof ItemValueToolTipRenderer itemToolTipRenderer) {
-            itemToolTipRenderer.toolTipDrawItem(this, textRenderer, x, y + extraHeight, context);
+            itemToolTipRenderer.toolTipDrawCoinItems(this, textRenderer, x, y + extraHeight, context);
         }
         if(data.itemStack.getItem() instanceof ItemToolTipRenderer itemToolTipRenderer) {
             itemToolTipRenderer.toolTipDrawItem(this, textRenderer, x, y + extraHeight, context);
@@ -48,12 +51,15 @@ public class FadenTooltipComponent implements TooltipComponent {
 
     @Override
     public void drawText(TextRenderer textRenderer, int x, int y, Matrix4f matrix, VertexConsumerProvider.Immediate vertexConsumers) {
+        extraHeight = 0;
+        tooltipHeight = 2;
         if(data.itemStack.contains(FadenDataComponents.ITEM_TIER)) {
             textRenderer.draw(data.itemStack.get(FadenDataComponents.ITEM_TIER), x + 10, y, 0xAFFFFFFF, true, matrix, vertexConsumers, TextRenderer.TextLayerType.NORMAL, 0, 15728880);
-            extraHeight = 4;
+            extraHeight = 5;
+            tooltipHeight = 11;
         }
         if(data.itemStack.getItem() instanceof ItemValueToolTipRenderer itemToolTipRenderer) {
-            itemToolTipRenderer.toolTipDrawText(this, textRenderer, x, y + extraHeight, matrix, vertexConsumers);
+            itemToolTipRenderer.toolTipDrawCoinText(this, textRenderer, x, y + extraHeight, matrix, vertexConsumers);
         }
         if(data.itemStack.getItem() instanceof ItemToolTipRenderer itemToolTipRenderer) {
             itemToolTipRenderer.toolTipDrawText(this, textRenderer, x, y + extraHeight, matrix, vertexConsumers);
@@ -86,6 +92,10 @@ public class FadenTooltipComponent implements TooltipComponent {
             height += itemToolTipRenderer.toolTipHeight(this, height);
         }
         return height;
+    }
+
+    public int heightAfterCoinAndTier() {
+        return tooltipHeight;
     }
 
     @Override

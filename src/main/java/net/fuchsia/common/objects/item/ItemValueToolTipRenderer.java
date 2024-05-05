@@ -23,22 +23,24 @@ public interface ItemValueToolTipRenderer {
         return (8 * getValues(component.data.itemStack).size());
     }
 
-    default void toolTipDrawText(FadenTooltipComponent component, TextRenderer textRenderer, int x, int y, Matrix4f matrix, VertexConsumerProvider.Immediate vertexConsumers) {
+    default void toolTipDrawCoinText(FadenTooltipComponent component, TextRenderer textRenderer, int x, int y, Matrix4f matrix, VertexConsumerProvider.Immediate vertexConsumers) {
         int height = 0;
         for (Item item : getValues(component.data.itemStack).keySet()) {
-            textRenderer.draw(String.valueOf(getValues(component.data.itemStack).get(item)), x + 10, y + height, 0xAFFFFFFF, true, matrix, vertexConsumers, TextRenderer.TextLayerType.NORMAL, 0, 15728880);
+            textRenderer.draw(String.valueOf(getValues(component.data.itemStack).get(item)), x + 10, y + component.extraHeight + height, 0xAFFFFFFF, true, matrix, vertexConsumers, TextRenderer.TextLayerType.NORMAL, 0, 15728880);
             height += 8;
         }
+        component.extraHeight = height;
     }
 
-    default void toolTipDrawItem(FadenTooltipComponent component, TextRenderer textRenderer, int x, int y, DrawContext context) {
+    default void toolTipDrawCoinItems(FadenTooltipComponent component, TextRenderer textRenderer, int x, int y, DrawContext context) {
         context.getMatrices().push();
         context.getMatrices().scale(0.5f, 0.5f,0.5f);
         int height = 0;
         for (Item item : getValues(component.data.itemStack).keySet()) {
-            context.drawItem(item.getDefaultStack(), x * 2, (y + height) * 2);
+            context.drawItem(item.getDefaultStack(), x * 2, (y + component.extraHeight + height) * 2);
             height += 8;
         }
+        component.extraHeight = height;
         context.getMatrices().pop();
     }
 

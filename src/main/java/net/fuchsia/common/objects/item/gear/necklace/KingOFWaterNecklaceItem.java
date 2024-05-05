@@ -2,8 +2,10 @@ package net.fuchsia.common.objects.item.gear.necklace;
 
 import net.fuchsia.Faden;
 import net.fuchsia.common.init.FadenDataComponents;
+import net.fuchsia.common.objects.item.FadenItem;
 import net.fuchsia.common.objects.item.ItemTier;
 import net.fuchsia.common.objects.item.ItemToolTipRenderer;
+import net.fuchsia.common.objects.item.ItemValueToolTipRenderer;
 import net.fuchsia.common.objects.tooltip.FadenTooltipComponent;
 import net.fuchsia.common.objects.tooltip.FadenTooltipData;
 import net.minecraft.client.font.TextRenderer;
@@ -13,6 +15,7 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.tag.FluidTags;
@@ -22,9 +25,11 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.joml.Matrix4f;
 
+import java.util.LinkedHashMap;
 import java.util.Optional;
 
 public class KingOFWaterNecklaceItem extends NecklaceItem implements ItemToolTipRenderer {
+
     public KingOFWaterNecklaceItem(Settings settings) {
         super(settings.maxDamage(500));
     }
@@ -58,19 +63,14 @@ public class KingOFWaterNecklaceItem extends NecklaceItem implements ItemToolTip
         return itemStack;
     }
 
-
     @Override
     public void toolTipDrawText(FadenTooltipComponent component, TextRenderer textRenderer, int x, int y, Matrix4f matrix, VertexConsumerProvider.Immediate vertexConsumers) {
-        textRenderer.draw(Text.translatable("tooltip.faden.free_water_movement"), x + 10, (y + component.extraHeight), 0xAFFFFFFF, true, matrix, vertexConsumers, TextRenderer.TextLayerType.NORMAL, 0, 15728880);
-        //tooltip.add(Text.literal(stack.getOrDefault(FadenDataComponents.ITEM_TIER, ItemTier.COMMON.name())));
+        textRenderer.draw(Text.translatable("tooltip.faden.free_water_movement"), x + 10, (y + component.heightAfterCoinAndTier()), 0xAFFFFFFF, true, matrix, vertexConsumers, TextRenderer.TextLayerType.NORMAL, 0, 15728880);
     }
 
     @Override
     public int toolTipHeight(FadenTooltipComponent component, int height) {
-        if(component.extraHeight == 8) {
-            return 16;
-        }
-        return 8;
+        return component.data.itemStack.contains(FadenDataComponents.ITEM_TIER) ? 20 : 14;
     }
 
     @Override
@@ -82,7 +82,7 @@ public class KingOFWaterNecklaceItem extends NecklaceItem implements ItemToolTip
     public void toolTipDrawItem(FadenTooltipComponent component, TextRenderer textRenderer, int x, int y, DrawContext context) {
         context.getMatrices().push();
         context.getMatrices().scale(0.5f, 0.5f,0.5f);
-        context.drawItem(Items.WATER_BUCKET.asItem().getDefaultStack(), x * 2, (y + component.extraHeight) * 2);
+        context.drawItem(Items.WATER_BUCKET.asItem().getDefaultStack(), x * 2, (y + component.heightAfterCoinAndTier()) * 2);
         context.getMatrices().pop();
     }
 }
