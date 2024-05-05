@@ -1,9 +1,16 @@
 package net.fuchsia.common.race;
 
+import com.google.common.collect.ImmutableMap;
 import net.fuchsia.common.race.cosmetic.RaceCosmeticPalette;
+import net.minecraft.entity.EntityAttachmentType;
+import net.minecraft.entity.EntityAttachments;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityPose;
+import net.minecraft.entity.player.PlayerEntity;
 import org.joml.Vector3f;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public enum Race implements IRace {
 	
@@ -18,10 +25,14 @@ public enum Race implements IRace {
 	private String[] subIds;
 	private Vector3f size = new Vector3f(1, 1, 1);
 	private RaceModelType modelType = RaceModelType.BOTH;
+	private EntityDimensions dimensions;
+	private ImmutableMap<Object, Object> poseDimensions;
 	Race(RaceCosmeticPalette palette, String[] subIds) {
 		skinMap = new HashMap<>();
 		this.palette = palette;
 		this.subIds = subIds;
+		dimensions = EntityDimensions.changing(0.6F, 1.8F).withEyeHeight(1.62F).withAttachments(EntityAttachments.builder().add(EntityAttachmentType.VEHICLE, PlayerEntity.VEHICLE_ATTACHMENT_POS));
+		poseDimensions = null;
 	}
 
 	Race(RaceCosmeticPalette palette, String[] subIds, Vector3f size, RaceModelType slim) {
@@ -30,6 +41,8 @@ public enum Race implements IRace {
 		this.subIds = subIds;
 		this.size = size;
 		this.modelType = slim;
+		dimensions = EntityDimensions.changing(0.6F * size.x, 1.8F * size.y).withEyeHeight(1.62F * size.y).withAttachments(EntityAttachments.builder().add(EntityAttachmentType.VEHICLE, PlayerEntity.VEHICLE_ATTACHMENT_POS));
+		poseDimensions = ImmutableMap.builder().put(EntityPose.STANDING, dimensions).put(EntityPose.SLEEPING, PlayerEntity.SLEEPING_DIMENSIONS).put(EntityPose.FALL_FLYING, EntityDimensions.changing(0.6F, 0.6F).withEyeHeight(0.4F)).put(EntityPose.SWIMMING, EntityDimensions.changing(0.6F, 0.6F).withEyeHeight(0.4F)).put(EntityPose.SPIN_ATTACK, EntityDimensions.changing(0.6F, 0.6F).withEyeHeight(0.4F)).put(EntityPose.CROUCHING, EntityDimensions.changing(0.6F, 1.5F).withEyeHeight(1.27F).withAttachments(EntityAttachments.builder().add(EntityAttachmentType.VEHICLE, PlayerEntity.VEHICLE_ATTACHMENT_POS))).put(EntityPose.DYING, EntityDimensions.fixed(0.2F, 0.2F).withEyeHeight(1.62F)).build();
 	}
 
 	Race() {
@@ -66,5 +79,15 @@ public enum Race implements IRace {
 	@Override
 	public RaceModelType model() {
 		return modelType;
+	}
+
+	@Override
+	public EntityDimensions dimensions() {
+		return dimensions;
+	}
+
+	@Override
+	public ImmutableMap<Object, Object> poseDimensions() {
+		return poseDimensions;
 	}
 }
