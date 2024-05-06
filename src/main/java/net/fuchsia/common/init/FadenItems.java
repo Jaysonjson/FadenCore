@@ -1,5 +1,6 @@
 package net.fuchsia.common.init;
 
+import net.fuchsia.common.objects.item.TooltipTestItem;
 import net.fuchsia.common.objects.item.coin.CoinItem;
 import net.fuchsia.common.objects.item.TestItem;
 import net.fuchsia.datagen.DataItemModel;
@@ -28,6 +29,7 @@ public class FadenItems {
     public static CoinItem STAR_COIN = registerItem("star_coin", new CoinItem(new Item.Settings(), 64000), "coins/star_coin");
     public static Item SILVER_INGOT = registerItem("silver_ingot", new Item(new Item.Settings()), "ingots/silver_ingot");
     public static Item TEST = registerItem("test_item", new TestItem(new Item.Settings()), "ingots/silver_ingot");
+    public static Item TOOL_TIP_TEST = registerItem("tooltip_test_item", new TooltipTestItem(new Item.Settings()), "ingots/silver_ingot");
 
     public static Item FADEN_MUSIC_DISC = registerItem("music_disc_faden", new MusicDiscItem(14, FadenSoundEvents.FADEN, new Item.Settings().maxCount(1).rarity(Rarity.RARE), 140), "discs/faden");
 

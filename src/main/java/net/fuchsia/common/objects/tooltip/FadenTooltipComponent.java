@@ -1,10 +1,14 @@
 package net.fuchsia.common.objects.tooltip;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 
 import net.fuchsia.common.data.ItemValues;
 import net.fuchsia.common.init.FadenDataComponents;
 import net.fuchsia.common.objects.item.ItemTier;
+import net.fuchsia.common.objects.item.ItemToolTipEntryRenderer;
 import net.fuchsia.common.objects.item.ItemToolTipRenderer;
 import net.fuchsia.common.objects.item.ItemValueToolTipRenderer;
 import net.minecraft.item.Items;
@@ -34,19 +38,14 @@ public class FadenTooltipComponent implements TooltipComponent {
     public void drawItems(TextRenderer textRenderer, int x, int y, DrawContext context) {
         extraHeight = 0;
         tooltipHeight = 2;
-        if(data.itemStack.contains(FadenDataComponents.ITEM_TIER)) {
-            context.getMatrices().push();
-            context.getMatrices().scale(0.5f, 0.5f,0.5f);
-            ItemTier itemTier = ItemTier.valueOf(data.itemStack.get(FadenDataComponents.ITEM_TIER));
-            context.drawTexture(itemTier.getIcon(), x * 2, y * 2, 0, 0, 16, 16,16, 16);
-            //context.drawItem(Items.DIAMOND.getDefaultStack(), x * 2, y * 2);
-            context.getMatrices().pop();
-            extraHeight = 5;
-            tooltipHeight = 11;
-        }
         if(data.itemStack.getItem() instanceof ItemValueToolTipRenderer itemToolTipRenderer) {
             itemToolTipRenderer.toolTipDrawCoinItems(this, textRenderer, x, y + extraHeight, context);
         }
+
+        if(data.itemStack.getItem() instanceof ItemToolTipEntryRenderer entryRenderer) {
+            entryRenderer.toolTipDrawItem(this, textRenderer, x, y + extraHeight, context);
+        }
+
         if(data.itemStack.getItem() instanceof ItemToolTipRenderer itemToolTipRenderer) {
             itemToolTipRenderer.toolTipDrawItem(this, textRenderer, x, y + extraHeight, context);
         }
@@ -56,15 +55,14 @@ public class FadenTooltipComponent implements TooltipComponent {
     public void drawText(TextRenderer textRenderer, int x, int y, Matrix4f matrix, VertexConsumerProvider.Immediate vertexConsumers) {
         extraHeight = 0;
         tooltipHeight = 2;
-        if(data.itemStack.contains(FadenDataComponents.ITEM_TIER)) {
-            ItemTier itemTier = ItemTier.valueOf(data.itemStack.get(FadenDataComponents.ITEM_TIER));
-            textRenderer.draw(itemTier.name(), x + 10, y, itemTier.getColor(), true, matrix, vertexConsumers, TextRenderer.TextLayerType.NORMAL, 0, 15728880);
-            extraHeight = 5;
-            tooltipHeight = 11;
-        }
         if(data.itemStack.getItem() instanceof ItemValueToolTipRenderer itemToolTipRenderer) {
             itemToolTipRenderer.toolTipDrawCoinText(this, textRenderer, x, y + extraHeight, matrix, vertexConsumers);
         }
+
+        if(data.itemStack.getItem() instanceof ItemToolTipEntryRenderer entryRenderer) {
+            entryRenderer.toolTipDrawText(this, textRenderer, x, y + extraHeight, matrix, vertexConsumers);
+        }
+
         if(data.itemStack.getItem() instanceof ItemToolTipRenderer itemToolTipRenderer) {
             itemToolTipRenderer.toolTipDrawText(this, textRenderer, x, y + extraHeight, matrix, vertexConsumers);
         }
@@ -95,6 +93,12 @@ public class FadenTooltipComponent implements TooltipComponent {
         if(data.itemStack.getItem() instanceof ItemToolTipRenderer itemToolTipRenderer) {
             height += itemToolTipRenderer.toolTipHeight(this, height);
         }
+
+        if(data.itemStack.getItem() instanceof ItemToolTipEntryRenderer entryRenderer) {
+            height += entryRenderer.getToolTipEntries(this).size() * 11;
+            height += heightAfterCoinAndTier();
+        }
+
         return height;
     }
 
@@ -112,6 +116,17 @@ public class FadenTooltipComponent implements TooltipComponent {
         if(data.itemStack.getItem() instanceof ItemToolTipRenderer itemToolTipRenderer) {
             width += itemToolTipRenderer.toolTipWidth(textRenderer, width);
         }
+
+        if(data.itemStack.getItem() instanceof ItemToolTipEntryRenderer entryRenderer) {
+            Collection<Integer> textSizes = new ArrayList<>();
+            for (ToolTipEntry toolTipEntry : entryRenderer.getToolTipEntries(this)) {
+                textSizes.add(textRenderer.getWidth(toolTipEntry.getText(this)));
+            }
+            if(!textSizes.isEmpty()) {
+                width += Collections.max(textSizes) - 4;
+            }
+        }
+
         return width;
     }
 }
