@@ -23,5 +23,8 @@
 	"tooltip.faden.toggle_gear": "Toggle Gear",
 	"tooltip.faden.free_water_movement": "Allows Free Water Movement",
 	"tooltip.faden.damage_increase_value": "Increases DMG by %s DP",
-	"tooltip.faden.damage_increase_percentage": "Increases DMG by %s%"
+	"tooltip.faden.damage_increase_percentage": "Increases DMG by %s%",
+	"tooltip.faden.bracelet": "Bracelet",
+	"tooltip.faden.necklace": "Necklace",
+	"tooltip.faden.belt": "Belt"
 }

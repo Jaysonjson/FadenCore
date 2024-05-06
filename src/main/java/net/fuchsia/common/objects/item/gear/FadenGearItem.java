@@ -7,6 +7,8 @@ import net.fuchsia.common.objects.item.ItemToolTipEntryRenderer;
 import net.fuchsia.common.objects.tooltip.FadenTooltipComponent;
 import net.fuchsia.common.objects.tooltip.FadenTooltipData;
 import net.fuchsia.common.objects.tooltip.ToolTipEntry;
+import net.fuchsia.common.slot.GearSlot;
+import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.client.item.TooltipData;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.Item;
@@ -50,6 +52,18 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
                 }
             });
         }
+
+        entries.add(new ToolTipEntry() {
+            @Override
+            public Text getText(FadenTooltipComponent component) {
+                return getGearType() == GearSlot.BRACELET ? Text.translatable("tooltip.faden.bracelet") : getGearType() == GearSlot.BELT ? Text.translatable("tooltip.faden.belt") : Text.translatable("tooltip.faden.necklace");
+            }
+
+            @Override
+            public @Nullable Identifier getTexture(FadenTooltipComponent component) {
+                return getGearType() == GearSlot.BRACELET ? FadenIdentifier.create("textures/item/empty_bracelet_slot.png") : getGearType() == GearSlot.BELT ? FadenIdentifier.create("textures/item/empty_belt_slot.png") : FadenIdentifier.create("textures/item/empty_necklace_slot.png");
+            }
+        });
 
         //ADD COINS
         entries.addAll(super.getToolTipEntries(component));
