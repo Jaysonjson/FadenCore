@@ -71,7 +71,7 @@ public class FadenTooltipComponent implements TooltipComponent {
         }
 
         if(data.itemStack.getItem() instanceof ItemToolTipEntryRenderer entryRenderer) {
-            height += entryRenderer.getToolTipEntries(this).size() * 11;
+            height += entryRenderer.getToolTipEntries(this).size() * 10;
         }
 
         return height;

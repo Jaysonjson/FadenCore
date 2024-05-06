@@ -81,11 +81,6 @@ public abstract class ItemMixin implements IValue, ItemWithValues, ItemToolTipEn
                 }
 
                 @Override
-                public @Nullable Identifier getTexture(FadenTooltipComponent component) {
-                    return null;
-                }
-
-                @Override
                 public Text getText(FadenTooltipComponent component) {
                     return Text.literal(String.valueOf(getValues(component.data.itemStack).get(item)));
                 }

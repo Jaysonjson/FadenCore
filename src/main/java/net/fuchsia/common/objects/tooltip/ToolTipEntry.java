@@ -15,9 +15,13 @@ import org.joml.Matrix4f;
 public interface ToolTipEntry {
 
     @Nullable
-    Item getItem(FadenTooltipComponent component);
+    default Item getItem(FadenTooltipComponent component) {
+        return null;
+    }
     @Nullable
-    Identifier getTexture(FadenTooltipComponent component);
+    default Identifier getTexture(FadenTooltipComponent component) {
+        return null;
+    }
     default int getTextureScale() {
         return 16;
     }

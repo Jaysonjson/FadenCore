@@ -8,6 +8,7 @@ import net.fuchsia.common.objects.tooltip.FadenTooltipComponent;
 import net.fuchsia.common.objects.tooltip.FadenTooltipData;
 import net.fuchsia.common.objects.tooltip.ToolTipEntry;
 import net.minecraft.client.item.TooltipData;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -33,11 +34,6 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
         if(itemStack.contains(FadenDataComponents.ITEM_TIER)) {
             ItemTier itemTier = ItemTier.valueOf(itemStack.get(FadenDataComponents.ITEM_TIER));
             entries.add(new ToolTipEntry() {
-                @Override
-                public @Nullable Item getItem(FadenTooltipComponent component) {
-                    return null;
-                }
-
                 @Override
                 public @Nullable Identifier getTexture(FadenTooltipComponent component) {
                     return itemTier.getIcon();
@@ -66,11 +62,6 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
                 }
 
                 @Override
-                public @Nullable Identifier getTexture(FadenTooltipComponent component) {
-                    return null;
-                }
-
-                @Override
                 public Text getText(FadenTooltipComponent component) {
                     return Text.translatable("tooltip.faden.free_water_movement");
                 }
@@ -85,13 +76,44 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
                 }
 
                 @Override
-                public @Nullable Identifier getTexture(FadenTooltipComponent component) {
-                    return null;
+                public Text getText(FadenTooltipComponent component) {
+                    return Text.literal(Text.translatable("tooltip.faden.damage_increase_value").getString().replaceAll("%s", String.valueOf(component.data.itemStack.getOrDefault(FadenDataComponents.DAMAGE_INCREASE_VALUE, 0f))));
+                }
+            });
+        }
+
+        if(itemStack.contains(FadenDataComponents.DAMAGE_INCREASE_PERCENTAGE)) {
+            entries.add(new ToolTipEntry() {
+                @Override
+                public @Nullable Item getItem(FadenTooltipComponent component) {
+                    return Items.IRON_SWORD;
                 }
 
                 @Override
                 public Text getText(FadenTooltipComponent component) {
-                    return Text.literal(Text.translatable("tooltip.faden.damage_increase_value").getString().replaceAll("%s", String.valueOf(component.data.itemStack.getOrDefault(FadenDataComponents.DAMAGE_INCREASE_VALUE, 0f))));
+                    return Text.literal(Text.translatable("tooltip.faden.damage_increase_percentage").getString().replaceAll("%s", String.valueOf(component.data.itemStack.getOrDefault(FadenDataComponents.DAMAGE_INCREASE_VALUE, 0f))));
+                }
+            });
+        }
+
+        if(itemStack.contains(DataComponentTypes.MAX_DAMAGE)) {
+            int maxDmg = itemStack.get(DataComponentTypes.MAX_DAMAGE);
+            int dmg = maxDmg - itemStack.getOrDefault(DataComponentTypes.DAMAGE, 0);
+            float perc = (float) dmg / (float) maxDmg * 100.0f;
+            entries.add(new ToolTipEntry() {
+                @Override
+                public @Nullable Item getItem(FadenTooltipComponent component) {
+                    if(perc <= 33) {
+                        return Items.CHIPPED_ANVIL;
+                    } else if(perc <= 66) {
+                        return Items.DAMAGED_ANVIL;
+                    }
+                    return Items.ANVIL;
+                }
+
+                @Override
+                public Text getText(FadenTooltipComponent component) {
+                    return Text.literal(dmg + "/" + maxDmg);
                 }
             });
         }
