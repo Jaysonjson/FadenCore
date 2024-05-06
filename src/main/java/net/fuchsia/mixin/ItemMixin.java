@@ -1,14 +1,18 @@
 package net.fuchsia.mixin;
 
 
-import java.util.LinkedHashMap;
-import java.util.Optional;
+import java.util.*;
 
-import net.fuchsia.common.objects.item.ItemValueToolTipRenderer;
+import net.fuchsia.common.objects.ItemWithValues;
+import net.fuchsia.common.objects.item.ItemToolTipEntryRenderer;
+import net.fuchsia.common.objects.tooltip.ToolTipEntry;
 import net.fuchsia.server.FadenData;
 import net.fuchsia.common.init.FadenDataComponents;
 import net.fuchsia.common.objects.item.ItemTier;
 import net.minecraft.component.DataComponentTypes;
+import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -25,7 +29,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 @Mixin(Item.class)
-public class ItemMixin implements IValue, ItemValueToolTipRenderer {
+public abstract class ItemMixin implements IValue, ItemWithValues, ItemToolTipEntryRenderer {
 
     @Unique
     public LinkedHashMap<Item, Integer> valueMap = null;
@@ -64,5 +68,29 @@ public class ItemMixin implements IValue, ItemValueToolTipRenderer {
             valueMap = FadenTooltipComponent.generateMap(value);
         }
         return valueMap;
+    }
+
+    @Override
+    public Collection<ToolTipEntry> getToolTipEntries(FadenTooltipComponent component) {
+        ArrayList<ToolTipEntry> entries = new ArrayList<>();
+        for (Item item : getValues(component.data.itemStack).keySet()) {
+            entries.add(new ToolTipEntry() {
+                @Override
+                public @Nullable Item getItem(FadenTooltipComponent component) {
+                    return item;
+                }
+
+                @Override
+                public @Nullable Identifier getTexture(FadenTooltipComponent component) {
+                    return null;
+                }
+
+                @Override
+                public Text getText(FadenTooltipComponent component) {
+                    return Text.literal(String.valueOf(getValues(component.data.itemStack).get(item)));
+                }
+            });
+        }
+        return entries;
     }
 }

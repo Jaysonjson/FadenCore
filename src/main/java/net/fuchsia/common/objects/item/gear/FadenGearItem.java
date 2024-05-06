@@ -7,9 +7,7 @@ import net.fuchsia.common.objects.item.ItemToolTipEntryRenderer;
 import net.fuchsia.common.objects.tooltip.FadenTooltipComponent;
 import net.fuchsia.common.objects.tooltip.FadenTooltipData;
 import net.fuchsia.common.objects.tooltip.ToolTipEntry;
-import net.fuchsia.common.slot.GearSlot;
 import net.minecraft.client.item.TooltipData;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -19,7 +17,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolTipEntryRenderer {
@@ -57,6 +54,9 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
                 }
             });
         }
+
+        //ADD COINS
+        entries.addAll(super.getToolTipEntries(component));
 
         if(freeWaterMovement(null, null, false)) {
             entries.add(new ToolTipEntry() {

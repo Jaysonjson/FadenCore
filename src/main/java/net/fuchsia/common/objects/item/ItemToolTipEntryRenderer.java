@@ -17,7 +17,7 @@ public interface ItemToolTipEntryRenderer {
 
     @Environment(EnvType.CLIENT)
     default void toolTipDrawText(FadenTooltipComponent component, TextRenderer textRenderer, int x, int y, Matrix4f matrix, VertexConsumerProvider.Immediate vertexConsumers) {
-        int yHeight = component.heightAfterCoinAndTier();
+        int yHeight = 0;
         for (ToolTipEntry toolTipEntry : getToolTipEntries(component)) {
             toolTipEntry.renderText(component, textRenderer, x, y + yHeight, matrix, vertexConsumers);
             yHeight += 9;
@@ -26,7 +26,7 @@ public interface ItemToolTipEntryRenderer {
 
     @Environment(EnvType.CLIENT)
     default void toolTipDrawItem(FadenTooltipComponent component, TextRenderer textRenderer, int x, int y, DrawContext context) {
-        int yHeight = component.heightAfterCoinAndTier();
+        int yHeight = 0;
         for (ToolTipEntry toolTipEntry : getToolTipEntries(component)) {
             toolTipEntry.renderItem(this, component, textRenderer, x, y + yHeight, context);
             yHeight += 9;
