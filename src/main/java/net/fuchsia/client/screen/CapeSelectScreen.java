@@ -32,7 +32,7 @@ public class CapeSelectScreen extends Screen {
 
     @Override
     protected void init() {
-        capes = new CapeListWidget(this.client, 250, this.height - 100, 50, 15);
+        capes = new CapeListWidget(this.client, 250, this.height - 100, 50, 13);
         capes.setX(15);
         this.addDrawableChild(ButtonWidget.builder(Text.translatable("button.faden.select_cape"), button -> {
                     FadenNetwork.Client.requestCapeUpdate(client.player.getUuid(), PRE_SELECTED_CAPE.getId());
