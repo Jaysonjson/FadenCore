@@ -2,6 +2,7 @@ package net.fuchsia.common.objects.item;
 
 import com.mojang.authlib.GameProfile;
 import com.terraformersmc.modmenu.gui.ModsScreen;
+import net.fuchsia.client.screen.CapeSelectScreen;
 import net.fuchsia.common.quest.FadenQuests;
 import net.fuchsia.common.quest.TestQuest;
 import net.fuchsia.common.race.Race;
@@ -33,6 +34,8 @@ public class TestItem extends Item {
         if(!world.isClient) {
             //QUESTS SHOULD BE IN A STATIC CONTEXT LATER, JUST FOR TESTING
             FadenQuests.TEST.checkAndRewardStep(user, FadenIdentifier.create("use_test_item"));
+        } else {
+            MinecraftClient.getInstance().setScreen(new CapeSelectScreen());
         }
         return super.use(world, user, hand);
     }

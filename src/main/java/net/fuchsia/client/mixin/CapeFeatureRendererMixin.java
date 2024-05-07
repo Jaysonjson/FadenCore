@@ -1,5 +1,6 @@
 package net.fuchsia.client.mixin;
 
+import net.fuchsia.client.screen.CapeSelectScreen;
 import net.fuchsia.common.cape.FadenCape;
 import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.config.FadenOptions;
@@ -22,6 +23,11 @@ public class CapeFeatureRendererMixin {
 
     @ModifyVariable(method = "render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/client/network/AbstractClientPlayerEntity;FFFFFF)V", at = @At("STORE"), ordinal = 0)
     private VertexConsumer injected(VertexConsumer x, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, AbstractClientPlayerEntity abstractClientPlayerEntity, float f, float g, float h, float j, float k, float l) {
+
+        if(CapeSelectScreen.PRE_SELECTED_CAPE != null) {
+            return vertexConsumerProvider.getBuffer(RenderLayer.getEntitySolid(CapeSelectScreen.PRE_SELECTED_CAPE.getTexture()));
+        }
+
         if(FadenOptions.getConfig().CUSTOM_CAPES) {
             FadenCape cape = FadenCapes.getCapeForPlayer(abstractClientPlayerEntity.getUuid());
             if (cape != null) {
@@ -34,6 +40,10 @@ public class CapeFeatureRendererMixin {
 
     @ModifyVariable(method = "render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/client/network/AbstractClientPlayerEntity;FFFFFF)V", at = @At("STORE"), ordinal = 0)
     private SkinTextures injected(SkinTextures x, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, AbstractClientPlayerEntity abstractClientPlayerEntity, float f, float g, float h, float j, float k, float l) {
+        if(CapeSelectScreen.PRE_SELECTED_CAPE != null) {
+            return new SkinTextures(CapeSelectScreen.PRE_SELECTED_CAPE.getTexture(), null, CapeSelectScreen.PRE_SELECTED_CAPE.getTexture(), null, null, false);
+        }
+
         if(FadenOptions.getConfig().CUSTOM_CAPES) {
             FadenCape cape = FadenCapes.getCapeForPlayer(abstractClientPlayerEntity.getUuid());
             if (cape != null) {

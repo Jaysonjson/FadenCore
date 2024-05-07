@@ -48,6 +48,15 @@ public class FadenCapes {
         return ClientPlayerDatas.getPlayerDatas().getOrDefault(uuid, new PlayerData()).getSelectedCape();
     }
 
+    public static FadenCape getCapeById(String name) {
+        for (FadenCape cape : getCapes()) {
+            if(cape.getId().equalsIgnoreCase(name)) {
+                return cape;
+            }
+        }
+        return null;
+    }
+
     public static boolean playerHasCape(UUID uuid) {
         return PLAYER_CAPES.containsKey(uuid);
     }

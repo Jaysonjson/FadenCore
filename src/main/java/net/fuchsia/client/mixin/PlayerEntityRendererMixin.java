@@ -38,8 +38,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(PlayerEntityRenderer.class)
 public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixin<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> implements IPlayerEntityRenderer {
     private PlayerEntityRenderer renderer = ((PlayerEntityRenderer) ((Object) this));
-    private PlayerEntityModel slimModel = null;
-    private PlayerEntityModel wideModel = null;
+    //RECENTLY MADE STATIC, IF BROKE: REMOVE STATIC TO FIX!
+    private static PlayerEntityModel slimModel = null;
+    private static PlayerEntityModel wideModel = null;
+
     private boolean slim = false;
     private ClothFeatureRenderer clothFeatureRenderer;
     protected PlayerEntityRendererMixin(EntityRendererFactory.Context ctx) {
@@ -50,8 +52,12 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
     public void constructorHead(EntityRendererFactory.Context ctx, boolean slim, CallbackInfo ci) {
         renderer.addFeature(new ChestFeatureRenderer(renderer));
         renderer.addFeature(new HeadFeatureRenderer(renderer));
-        this.slimModel = new PlayerEntityModel(ctx.getPart(EntityModelLayers.PLAYER_SLIM), true);
-        this.wideModel = new PlayerEntityModel(ctx.getPart(EntityModelLayers.PLAYER), false);
+        if(slimModel == null) {
+            slimModel = new PlayerEntityModel(ctx.getPart(EntityModelLayers.PLAYER_SLIM), true);
+        }
+        if(wideModel == null) {
+            wideModel = new PlayerEntityModel(ctx.getPart(EntityModelLayers.PLAYER), false);
+        }
         clothFeatureRenderer = new ClothFeatureRenderer(this, this);
         renderer.addFeature(clothFeatureRenderer);
     }
