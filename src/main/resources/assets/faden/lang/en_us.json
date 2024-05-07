@@ -28,5 +28,13 @@
 	"tooltip.faden.necklace": "Necklace",
 	"tooltip.faden.belt": "Belt",
 	"button.faden.remove_cape": "Remove Cape",
-	"button.faden.select_cape": "Select Cape"
+	"button.faden.select_cape": "Select Cape",
+	"cape.faden.fuchsia": "Fuchsia",
+	"cape.faden.developer": "Developer",
+	"cape.faden.data": "Data",
+	"cape.faden.pixel_artist": "Pixel Artist",
+	"cape.faden.music_artist": "Music Artist",
+	"cape.faden.staff": "Staff",
+	"cape.faden.donator": "Donator",
+	"cape.faden.translator": "Translator"
 }

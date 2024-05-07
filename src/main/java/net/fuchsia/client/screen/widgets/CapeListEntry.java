@@ -20,7 +20,7 @@ public class CapeListEntry extends AlwaysSelectedEntryListWidget.Entry<CapeListE
 
     @Override
     public void render(DrawContext context, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean hovered, float tickDelta) {
-        context.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, Text.literal(cape.getId()), x, y, 0xFFFFFFFF);
+        context.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, cape.getName(), x, y, 0xFFFFFFFF);
     }
 
 

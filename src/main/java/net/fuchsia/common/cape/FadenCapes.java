@@ -6,6 +6,7 @@ import net.fuchsia.config.FadenOptions;
 import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.client.ClientPlayerDatas;
 import net.fuchsia.util.FadenOnlineUtil;
+import net.minecraft.text.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +32,7 @@ public class FadenCapes {
     }
 
     private static FadenCape register(String id) {
-        FadenCape cape = new FadenCape(id);
+        FadenCape cape = new FadenCape(id, Text.translatable("cape.faden." + id));
         CAPES.add(cape);
         return cape;
     }
