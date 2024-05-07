@@ -1,23 +1,17 @@
 package net.fuchsia.client.screen;
 
-import com.terraformersmc.modmenu.config.ModMenuConfig;
-import com.terraformersmc.modmenu.gui.ModsScreen;
-import com.terraformersmc.modmenu.gui.widget.ModListWidget;
-import net.fuchsia.client.mixin.PlayerEntityRendererMixin;
+import net.fuchsia.client.PlayerModelCache;
 import net.fuchsia.client.screen.widgets.CapeListWidget;
 import net.fuchsia.common.cape.FadenCape;
-import net.fuchsia.common.objects.item.coin.IValue;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
-import net.minecraft.client.gui.screen.pack.PackListWidget;
-import net.minecraft.client.render.entity.PlayerEntityRenderer;
-import net.minecraft.client.render.entity.feature.CapeFeatureRenderer;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.client.render.OverlayTexture;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.RotationAxis;
-import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import org.joml.Random;
 import org.joml.Vector3f;
@@ -63,6 +57,24 @@ public class CapeSelectScreen extends Screen {
             InventoryScreen.drawEntity(context, context.getScaledWindowWidth() / 2, context.getScaledWindowHeight() / 2, 75, new Vector3f(1.8f, 0.75f,0), d, null, MinecraftClient.getInstance().player);
             if(rot >= 360) {
                 rot = 0;
+            }
+
+            if(PlayerModelCache.wideModel != null) {
+                context.getMatrices().push();
+                context.getMatrices().scale(55, 55, 55);
+                context.getMatrices().multiply(RotationAxis.POSITIVE_Y.rotationDegrees(45));
+                context.getMatrices().translate(-5, 1.25f, 12.5);
+                PlayerModelCache.wideModel.renderCape(context.getMatrices(), context.getVertexConsumers().getBuffer(RenderLayer.getEntitySolid(cape.getTexture())), 15728880, OverlayTexture.DEFAULT_UV);
+                context.getMatrices().pop();
+            }
+
+            if(PlayerModelCache.elytraEntityModel != null) {
+                context.getMatrices().push();
+                context.getMatrices().scale(55, 55, 55);
+                context.getMatrices().multiply(RotationAxis.POSITIVE_Y.rotationDegrees(45));
+                context.getMatrices().translate(-5, 2, 12.5);
+                PlayerModelCache.elytraEntityModel.render(context.getMatrices(), ItemRenderer.getArmorGlintConsumer(context.getVertexConsumers(), RenderLayer.getArmorCutoutNoCull(cape.getTexture()), false, false), 15728880, OverlayTexture.DEFAULT_UV, 1f, 1f, 1f, 1f);
+                context.getMatrices().pop();
             }
         }
     }

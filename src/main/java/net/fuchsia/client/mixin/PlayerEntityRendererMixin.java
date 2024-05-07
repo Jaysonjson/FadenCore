@@ -1,5 +1,6 @@
 package net.fuchsia.client.mixin;
 
+import net.fuchsia.client.PlayerModelCache;
 import net.fuchsia.mixin_interfaces.IClothInventory;
 import net.fuchsia.client.IPlayerEntityRenderer;
 import net.fuchsia.client.render.feature.ChestFeatureRenderer;
@@ -39,8 +40,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixin<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> implements IPlayerEntityRenderer {
     private PlayerEntityRenderer renderer = ((PlayerEntityRenderer) ((Object) this));
     //RECENTLY MADE STATIC, IF BROKE: REMOVE STATIC TO FIX!
-    private static PlayerEntityModel slimModel = null;
-    private static PlayerEntityModel wideModel = null;
 
     private boolean slim = false;
     private ClothFeatureRenderer clothFeatureRenderer;
@@ -52,11 +51,11 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
     public void constructorHead(EntityRendererFactory.Context ctx, boolean slim, CallbackInfo ci) {
         renderer.addFeature(new ChestFeatureRenderer(renderer));
         renderer.addFeature(new HeadFeatureRenderer(renderer));
-        if(slimModel == null) {
-            slimModel = new PlayerEntityModel(ctx.getPart(EntityModelLayers.PLAYER_SLIM), true);
+        if(PlayerModelCache.slimModel == null) {
+            PlayerModelCache.slimModel = new PlayerEntityModel(ctx.getPart(EntityModelLayers.PLAYER_SLIM), true);
         }
-        if(wideModel == null) {
-            wideModel = new PlayerEntityModel(ctx.getPart(EntityModelLayers.PLAYER), false);
+        if(PlayerModelCache.wideModel == null) {
+            PlayerModelCache.wideModel = new PlayerEntityModel(ctx.getPart(EntityModelLayers.PLAYER), false);
         }
         clothFeatureRenderer = new ClothFeatureRenderer(this, this);
         renderer.addFeature(clothFeatureRenderer);
@@ -103,13 +102,13 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
         if (data.getRace() != null) {
             switch (data.getRace().model()) {
                 case SLIM -> {
-                    playerEntityModel = slimModel;
+                    playerEntityModel = PlayerModelCache.slimModel;
                     slim = true;
                     break;
                 }
 
                 case WIDE -> {
-                    playerEntityModel = wideModel;
+                    playerEntityModel = PlayerModelCache.wideModel;
                     slim = false;
                     break;
                 }
@@ -117,10 +116,10 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
                 case BOTH -> {
                     Identifier id = ClientRaceSkinCache.getPlayerSkins().getOrDefault(MinecraftClient.getInstance().player.getUuid(), new Identifier("empty"));
                     if (id.toString().toLowerCase().contains("_slim")) {
-                        playerEntityModel = slimModel;
+                        playerEntityModel = PlayerModelCache.slimModel;
                         slim = true;
                     } else if (id.toString().toLowerCase().contains("_wide")) {
-                        playerEntityModel = wideModel;
+                        playerEntityModel = PlayerModelCache.wideModel;
                         slim = false;
                     }
                     break;
