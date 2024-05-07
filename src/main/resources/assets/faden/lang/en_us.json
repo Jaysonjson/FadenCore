@@ -26,5 +26,7 @@
 	"tooltip.faden.damage_increase_percentage": "Increases DMG by %s%",
 	"tooltip.faden.bracelet": "Bracelet",
 	"tooltip.faden.necklace": "Necklace",
-	"tooltip.faden.belt": "Belt"
+	"tooltip.faden.belt": "Belt",
+	"button.faden.remove_cape": "Remove Cape",
+	"button.faden.select_cape": "Select Cape"
 }

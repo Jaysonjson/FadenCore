@@ -12,6 +12,7 @@ import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.common.data.ItemValues;
 import net.fuchsia.common.race.data.RaceData;
 import net.fuchsia.common.race.data.ServerRaceCache;
+import net.fuchsia.network.c2s.RequestCapeChangeC2SPacket;
 import net.fuchsia.network.s2c.*;
 import net.fuchsia.common.race.skin.provider.SkinProvider;
 import net.fuchsia.common.race.skin.server.ServerSkinCache;
@@ -48,12 +49,20 @@ public class FadenNetwork {
     }
 
     public static void registerC2S() {
+        PayloadTypeRegistry.playC2S().register(RequestCapeChangeC2SPacket.ID, RequestCapeChangeC2SPacket.CODEC);
+        ServerPlayNetworking.registerGlobalReceiver(RequestCapeChangeC2SPacket.ID, RequestCapeChangeC2SPacket::receive);
+
     }
 
     /*
      * Client to Server
      * */
     public static class Client {
+
+        public static void requestCapeUpdate(UUID uuid, String id) {
+            ClientPlayNetworking.send(new RequestCapeChangeC2SPacket(uuid, id));
+        }
+
     }
 
     /*

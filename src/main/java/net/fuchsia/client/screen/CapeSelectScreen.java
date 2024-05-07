@@ -1,19 +1,23 @@
 package net.fuchsia.client.screen;
 
+import com.terraformersmc.modmenu.config.ModMenuConfig;
+import com.terraformersmc.modmenu.config.ModMenuConfigManager;
+import com.terraformersmc.modmenu.gui.ModsScreen;
 import net.fuchsia.client.PlayerModelCache;
 import net.fuchsia.client.screen.widgets.CapeListWidget;
 import net.fuchsia.common.cape.FadenCape;
+import net.fuchsia.network.FadenNetwork;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
+import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.RotationAxis;
 import org.joml.Quaternionf;
-import org.joml.Random;
 import org.joml.Vector3f;
 
 public class CapeSelectScreen extends Screen {
@@ -30,6 +34,22 @@ public class CapeSelectScreen extends Screen {
     protected void init() {
         capes = new CapeListWidget(this.client, 250, this.height - 100, 50, 15);
         capes.setX(15);
+        this.addDrawableChild(ButtonWidget.builder(Text.translatable("button.faden.select_cape"), button -> {
+                    FadenNetwork.Client.requestCapeUpdate(client.player.getUuid(), PRE_SELECTED_CAPE.getId());
+                    close();
+                })
+                .position(176, client.getWindow().getScaledHeight() - 45)
+                .size(90, 20)
+                .build());
+
+        this.addDrawableChild(ButtonWidget.builder(Text.translatable("button.faden.remove_cape"), button -> {
+                    FadenNetwork.Client.requestCapeUpdate(client.player.getUuid(), "");
+                    close();
+                })
+                .position(14, client.getWindow().getScaledHeight() - 45)
+                .size(90, 20)
+                .build());
+
         this.addSelectableChild(this.capes);
     }
 
