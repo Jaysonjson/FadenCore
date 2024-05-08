@@ -82,7 +82,7 @@ public class Faden implements ModInitializer {
 	}
 
 	public static void init() {
-		FadenCapes.init();
+		FadenCapes.register();
 		RaceCosmetics.add();
 		FadenSoundEvents.register();
 		FadenItems.register();
@@ -92,9 +92,10 @@ public class Faden implements ModInitializer {
 		ItemValues.add();
 		CommandRegistrationCallback.EVENT.register(new FadenCommands());
 		RaceSkinMap.addSkins();
-		FadenDataComponents.init();
+		FadenDataComponents.register();
 		FadenCloths.register();
 		FadenGear.register();
+		FadenBlocks.register();
 	}
 
 	public static void argumentTypes() {

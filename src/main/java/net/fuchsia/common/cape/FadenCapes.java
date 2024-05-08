@@ -64,7 +64,7 @@ public class FadenCapes {
         return PLAYER_CAPES.containsKey(uuid);
     }
 
-    public static void init() {
+    public static void register() {
         if(FadenOptions.getConfig().CUSTOM_CAPES) {
             //JUST SO THE GAME DOESNT CRASH
             try {

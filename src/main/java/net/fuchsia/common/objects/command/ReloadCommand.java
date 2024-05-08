@@ -31,7 +31,7 @@ public class ReloadCommand {
     }
 
     public static int reloadCapes(CommandContext<ServerCommandSource> source) throws CommandSyntaxException {
-        FadenCapes.init();
+        FadenCapes.register();
         for (ServerPlayerEntity serverPlayerEntity : source.getSource().getServer().getPlayerManager().getPlayerList()) {
             FadenNetwork.Server.reloadCapes(serverPlayerEntity);
         }

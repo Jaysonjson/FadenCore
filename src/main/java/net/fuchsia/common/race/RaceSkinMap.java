@@ -55,7 +55,7 @@ public class RaceSkinMap {
 
 
 	public static String getSkinPath(IRace race, String modid) {
-		return "assets/" + modid + "/textures/skins/" + race.getId().toLowerCase() + "/";
+		return "assets/" + modid + "/textures/skin/" + race.getId().toLowerCase() + "/";
 	}
 
 	@Nullable

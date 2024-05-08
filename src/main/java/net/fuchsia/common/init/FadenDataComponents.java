@@ -20,7 +20,7 @@ public class FadenDataComponents {
         return (DataComponentType) Registry.register(Registries.DATA_COMPONENT_TYPE, FadenIdentifier.create(id), ((DataComponentType.Builder)builderOperator.apply(DataComponentType.builder())).build());
     }
 
-    public static void init() {
+    public static void register() {
 
     }
 

@@ -70,7 +70,7 @@ public class ClientSkinCache {
     }
 
     public static Path getSkinFolder() {
-        return new File(FabricLoader.getInstance().getGameDir().toString() + "/dalekmod/skins/").toPath();
+        return new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/skin/").toPath();
     }
 
 
@@ -160,7 +160,7 @@ public class ClientSkinCache {
     }
 
     public static String getSkinPath(ClientPlayerEntity player, String modid) {
-        return player.getSkinTextures().model() == SkinTextures.Model.WIDE ? "assets/" + modid + "/textures/regeneration/skins/minecraft/wide/" : "assets/" + modid + "/textures/regeneration/skins/minecraft/slim/";
+        return player.getSkinTextures().model() == SkinTextures.Model.WIDE ? "assets/" + modid + "/textures/skin/minecraft/wide/" : "assets/" + modid + "/textures/regeneration/skins/minecraft/slim/";
     }
 }
 

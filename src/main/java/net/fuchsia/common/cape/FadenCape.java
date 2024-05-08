@@ -42,7 +42,7 @@ public class FadenCape {
     public void load() {
         if(!loaded) {
             try {
-                byte[] data = SkinProvider.readSkin(Files.newInputStream(Faden.CONTAINER.findPath("assets/faden/textures/capes/" + id + ".png").get()));
+                byte[] data = SkinProvider.readSkin(Files.newInputStream(Faden.CONTAINER.findPath("assets/faden/textures/cape/" + id + ".png").get()));
                 SkinTexture skinTexture = new SkinTexture(texture);
                 skinTexture.setSkinData(data);
                 MinecraftClient.getInstance().getTextureManager().registerTexture(texture, skinTexture);
