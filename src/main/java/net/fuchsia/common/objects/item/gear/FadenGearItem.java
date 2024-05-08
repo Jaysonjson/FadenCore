@@ -1,5 +1,6 @@
 package net.fuchsia.common.objects.item.gear;
 
+import net.fuchsia.Faden;
 import net.fuchsia.common.init.FadenDataComponents;
 import net.fuchsia.common.objects.item.FadenItem;
 import net.fuchsia.common.objects.item.ItemTier;
@@ -11,6 +12,9 @@ import net.fuchsia.common.slot.GearSlot;
 import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.client.item.TooltipData;
 import net.minecraft.component.DataComponentTypes;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -138,5 +142,20 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
     @Override
     public Optional<TooltipData> getTooltipData(ItemStack stack) {
         return Optional.of(new FadenTooltipData(stack));
+    }
+
+    public float onLivingDamaged(PlayerEntity player, LivingEntity livingEntity, ItemStack itemStack, float damageAmount) {
+        boolean damageItem = false;
+        if(itemStack.contains(FadenDataComponents.DAMAGE_INCREASE_VALUE)) {
+            damageAmount += itemStack.get(FadenDataComponents.DAMAGE_INCREASE_VALUE);
+            damageItem = true;
+        } else if(itemStack.contains(FadenDataComponents.DAMAGE_INCREASE_PERCENTAGE)) {
+            damageAmount = damageAmount + (damageAmount / 100.0f * itemStack.get(FadenDataComponents.DAMAGE_INCREASE_PERCENTAGE));
+            damageItem = true;
+        }
+        if(damageItem) {
+            itemStack.damage(1, player, EquipmentSlot.CHEST);
+        }
+        return damageAmount;
     }
 }

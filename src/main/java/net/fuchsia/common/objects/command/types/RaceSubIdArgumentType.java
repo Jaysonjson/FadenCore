@@ -38,6 +38,7 @@ public class RaceSubIdArgumentType implements ArgumentType<String> {
                 }
             }
         }
+        builder.suggest("RANDOM");
         return builder.buildFuture();
     }
 }

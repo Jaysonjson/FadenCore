@@ -17,7 +17,7 @@ import net.minecraft.text.Text;
 public class FadenTabs {
 
     public static final ItemGroup FADEN = Registry.register(Registries.ITEM_GROUP, FadenIdentifier.create("misc_tab"),
-            FabricItemGroup.builder().displayName(Text.translatable("itemgroup.faden.misc")).icon(() -> new ItemStack(FadenItems.AMETHYST_COIN)).entries((displayContext, entries) -> {
+            FabricItemGroup.builder().displayName(Text.translatable("itemgroup.faden.misc")).icon(() -> new ItemStack(FadenItems.COPPER_COIN)).entries((displayContext, entries) -> {
                 for (FadenDataItem item : FadenItems.ITEMS) {
                     if(item.item() instanceof Cloth || item.item() instanceof Gear) {
                         continue;
@@ -34,7 +34,7 @@ public class FadenTabs {
             }).build());
 
     public static final ItemGroup FADEN_GEAR = Registry.register(Registries.ITEM_GROUP, FadenIdentifier.create("gear_tab"),
-            FabricItemGroup.builder().displayName(Text.translatable("itemgroup.faden.gear")).icon(() -> new ItemStack(FadenItems.AMETHYST_COIN)).entries((displayContext, entries) -> {
+            FabricItemGroup.builder().displayName(Text.translatable("itemgroup.faden.gear")).icon(() -> new ItemStack(FadenGear.WARRIORS_BRACELET)).entries((displayContext, entries) -> {
                 for (BraceletItem bracelet : FadenGear.BRACELETS) {
                     entries.add(bracelet);
                 }

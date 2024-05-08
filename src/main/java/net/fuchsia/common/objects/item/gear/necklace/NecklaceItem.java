@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 
 import java.util.Collection;
 
-public class NecklaceItem extends FadenGearItem {
+public abstract class NecklaceItem extends FadenGearItem {
     public NecklaceItem(Settings settings) {
         super(settings.maxCount(1));
     }
@@ -22,12 +22,7 @@ public class NecklaceItem extends FadenGearItem {
     }
 
     @Override
-    public ItemStack randomize(ItemStack itemStack, PlayerEntity player, ItemTier itemTier) {
-        return itemStack;
-    }
-
-    @Override
     public ItemStack upgrade(Collection<ItemStack> inputs, ItemStack itemStack) {
-        return itemStack;
+        return null;
     }
 }

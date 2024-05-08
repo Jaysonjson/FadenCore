@@ -12,6 +12,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
+import java.util.Collection;
+
 public class KingOFWaterNecklaceItem extends NecklaceItem {
 
     public KingOFWaterNecklaceItem(Settings settings) {
