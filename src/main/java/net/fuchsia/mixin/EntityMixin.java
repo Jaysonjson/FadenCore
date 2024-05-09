@@ -2,6 +2,8 @@ package net.fuchsia.mixin;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fuchsia.Faden;
+import net.fuchsia.common.init.FadenDataComponents;
 import net.fuchsia.mixin_interfaces.IGearInventory;
 import net.fuchsia.common.objects.item.gear.Gear;
 import net.fuchsia.common.race.data.ClientRaceCache;
@@ -9,10 +11,12 @@ import net.fuchsia.common.race.data.RaceData;
 import net.fuchsia.common.race.data.ServerRaceCache;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.scoreboard.AbstractTeam;
 import net.minecraft.util.math.BlockPos;
@@ -38,6 +42,8 @@ public abstract class EntityMixin {
     @Shadow protected abstract void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition);
 
     @Shadow public abstract boolean isTeamPlayer(AbstractTeam team);
+
+    @Shadow public abstract int getAir();
 
     private Entity entity = ((Entity) ((Object) this));
 
@@ -69,9 +75,13 @@ public abstract class EntityMixin {
     private void submergedInWater(CallbackInfo ci) {
         if(entity instanceof PlayerEntity player) {
             IGearInventory playerInventory = (IGearInventory) player.getInventory();
-            ItemStack necklace = playerInventory.getNecklace();
-            if(necklace.getItem() instanceof Gear gear) {
-                if(gear.freeWaterMovement(player, necklace, player.isSubmergedInWater())) {
+            for (ItemStack gear : playerInventory.getGears()) {
+                if(gear.getOrDefault(FadenDataComponents.FREE_WATER_MOVEMENT, false)) {
+                    if (!player.getWorld().isClient && player.isSubmergedIn(FluidTags.WATER)) {
+                        if (Faden.RANDOM.nextInt(175) == 1) {
+                            gear.damage(1, player, EquipmentSlot.CHEST);
+                        }
+                    }
                     setSwimming(false);
                     ci.cancel();
                 }
@@ -85,9 +95,13 @@ public abstract class EntityMixin {
         if(Fluids.WATER.isIn(tag) || Fluids.FLOWING_WATER.isIn(tag)) {
             if (entity instanceof PlayerEntity player) {
                 IGearInventory playerInventory = (IGearInventory) player.getInventory();
-                ItemStack necklace = playerInventory.getNecklace();
-                if (necklace.getItem() instanceof Gear gear) {
-                    if(gear.freeWaterMovement(player, necklace, player.isSubmergedInWater())) {
+                for (ItemStack gear : playerInventory.getGears()) {
+                    if(gear.getOrDefault(FadenDataComponents.FREE_WATER_MOVEMENT, false)) {
+                        if (!player.getWorld().isClient && player.isSubmergedIn(FluidTags.WATER)) {
+                            if (Faden.RANDOM.nextInt(175) == 1) {
+                                gear.damage(1, player, EquipmentSlot.CHEST);
+                            }
+                        }
                         cir.cancel();
                     }
                 }

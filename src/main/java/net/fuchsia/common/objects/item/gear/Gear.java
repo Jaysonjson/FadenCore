@@ -11,10 +11,6 @@ import java.util.Collection;
 public interface Gear {
 
     GearSlot getGearType();
-    default boolean freeWaterMovement(@Nullable PlayerEntity player, @Nullable ItemStack itemStack, boolean inWater) {
-        return false;
-    }
-
     ItemStack randomize(ItemStack itemStack, PlayerEntity player, ItemTier itemTier);
     ItemStack upgrade(Collection<ItemStack> inputs, ItemStack itemStack);
 }

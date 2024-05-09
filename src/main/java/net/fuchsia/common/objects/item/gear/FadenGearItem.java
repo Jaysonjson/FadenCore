@@ -72,7 +72,7 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
         //ADD COINS
         entries.addAll(super.getToolTipEntries(component));
 
-        if(freeWaterMovement(null, null, false)) {
+        if(itemStack.getOrDefault(FadenDataComponents.FREE_WATER_MOVEMENT, false)) {
             entries.add(new ToolTipEntry() {
                 @Override
                 public @Nullable Item getItem(FadenTooltipComponent component) {

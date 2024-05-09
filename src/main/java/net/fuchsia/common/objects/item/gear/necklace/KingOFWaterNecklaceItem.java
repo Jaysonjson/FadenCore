@@ -17,19 +17,7 @@ import java.util.Collection;
 public class KingOFWaterNecklaceItem extends NecklaceItem {
 
     public KingOFWaterNecklaceItem(Settings settings) {
-        super(settings.maxDamage(500));
-    }
-
-    @Override
-    public boolean freeWaterMovement(PlayerEntity player, ItemStack itemStack, boolean inWater) {
-        if(player != null && itemStack != null) {
-            if (!player.getWorld().isClient && player.isSubmergedIn(FluidTags.WATER)) {
-                if (Faden.RANDOM.nextInt(175) == 1) {
-                    itemStack.damage(1, player, EquipmentSlot.CHEST);
-                }
-            }
-        }
-        return true;
+        super(settings);
     }
 
     @Override
@@ -42,6 +30,7 @@ public class KingOFWaterNecklaceItem extends NecklaceItem {
     public ItemStack randomize(ItemStack itemStack, PlayerEntity player, ItemTier itemTier) {
         itemStack.set(DataComponentTypes.MAX_DAMAGE, Faden.RANDOM.nextInt(50 + (int)(50.0f * itemTier.getDurabilityMultiplier()), (int)(500.0f * itemTier.getDurabilityMultiplier())));
         itemStack.set(FadenDataComponents.ITEM_TIER, itemTier.name());
+        itemStack.set(FadenDataComponents.FREE_WATER_MOVEMENT, true);
         return itemStack;
     }
 }
