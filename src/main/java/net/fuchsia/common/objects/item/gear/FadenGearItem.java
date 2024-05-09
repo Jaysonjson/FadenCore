@@ -20,6 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -64,7 +65,7 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
             }
 
             @Override
-            public @Nullable Identifier getTexture(FadenTooltipComponent component) {
+            public @NotNull Identifier getTexture(FadenTooltipComponent component) {
                 return getGearType() == GearSlot.BRACELET ? FadenIdentifier.create("textures/item/empty_bracelet_slot.png") : getGearType() == GearSlot.BELT ? FadenIdentifier.create("textures/item/empty_belt_slot.png") : FadenIdentifier.create("textures/item/empty_necklace_slot.png");
             }
         });
