@@ -1,54 +1,52 @@
 package net.fuchsia;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import me.shedaniel.rei.plugin.client.categories.beacon.DefaultBeaconPaymentCategory;
-import net.fabricmc.fabric.api.command.v2.ArgumentTypeRegistry;
-import net.fuchsia.common.cape.FadenCapes;
-import net.fuchsia.common.init.*;
-import net.fuchsia.common.objects.command.types.RaceArgumentType;
-import net.fuchsia.common.objects.command.types.RaceSubIdArgumentType;
-import net.fuchsia.common.quest.FadenQuests;
-import net.fuchsia.common.quest.TestQuest;
-import net.fuchsia.common.quest.data.QuestCache;
-import net.fuchsia.common.race.RaceCosmetics;
-import net.fuchsia.common.race.data.ServerRaceCache;
-import net.fuchsia.config.FadenConfig;
-import net.fuchsia.config.FadenConfigScreen;
-import net.fuchsia.config.FadenOptions;
-import net.fuchsia.server.PlayerData;
-import net.fuchsia.server.ServerPlayerDatas;
-import net.fuchsia.util.FadenIdentifier;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.GameMenuScreen;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.TitleScreen;
-import net.minecraft.client.render.WorldRenderer;
-import net.minecraft.client.render.entity.model.ArmorEntityModel;
-import net.minecraft.command.argument.serialize.ConstantArgumentSerializer;
-import net.minecraft.server.command.LocateCommand;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Random;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v2.ArgumentTypeRegistry;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
-import net.fuchsia.common.objects.command.FadenCommands;
-import net.fuchsia.common.objects.CoinMap;
+import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.common.data.ItemValues;
-import net.fuchsia.network.FadenNetwork;
+import net.fuchsia.common.init.FadenBlocks;
+import net.fuchsia.common.init.FadenCloths;
+import net.fuchsia.common.init.FadenDataComponents;
+import net.fuchsia.common.init.FadenGear;
+import net.fuchsia.common.init.FadenItems;
+import net.fuchsia.common.init.FadenSoundEvents;
+import net.fuchsia.common.init.FadenTabs;
+import net.fuchsia.common.objects.CoinMap;
+import net.fuchsia.common.objects.command.FadenCommands;
+import net.fuchsia.common.objects.command.types.RaceArgumentType;
+import net.fuchsia.common.objects.command.types.RaceSubIdArgumentType;
+import net.fuchsia.common.quest.FadenQuests;
+import net.fuchsia.common.quest.data.QuestCache;
+import net.fuchsia.common.race.RaceCosmetics;
 import net.fuchsia.common.race.RaceSkinMap;
+import net.fuchsia.common.race.data.ServerRaceCache;
 import net.fuchsia.common.race.skin.server.ServerSkinCache;
+import net.fuchsia.config.FadenConfig;
+import net.fuchsia.config.FadenConfigScreen;
+import net.fuchsia.config.FadenOptions;
+import net.fuchsia.network.FadenNetwork;
+import net.fuchsia.server.PlayerData;
+import net.fuchsia.server.ServerPlayerDatas;
+import net.fuchsia.util.FadenIdentifier;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.command.argument.serialize.ConstantArgumentSerializer;
 import net.minecraft.server.network.ServerPlayerEntity;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Random;
 
 public class Faden implements ModInitializer {
 	public static final String MOD_ID = "faden";

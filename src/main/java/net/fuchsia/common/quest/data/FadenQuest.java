@@ -1,13 +1,11 @@
 package net.fuchsia.common.quest.data;
 
-import net.fuchsia.common.quest.TestQuest;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.Identifier;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Identifier;
 
 public abstract class FadenQuest implements IQuest {
 

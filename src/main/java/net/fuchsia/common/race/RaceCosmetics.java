@@ -1,12 +1,8 @@
 package net.fuchsia.common.race;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fuchsia.common.race.cosmetic.RaceCosmetic;
 import net.fuchsia.common.race.cosmetic.RaceCosmeticPalette;
 import net.fuchsia.common.race.cosmetic.RaceCosmeticType;
-import net.fuchsia.util.FadenIdentifier;
-import net.minecraft.client.util.ModelIdentifier;
 
 public class RaceCosmetics {
 

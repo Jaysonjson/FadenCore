@@ -1,27 +1,21 @@
 package net.fuchsia.network.s2c;
 
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fuchsia.common.race.data.ServerRaceCache;
-import net.fuchsia.common.race.skin.client.ClientRaceSkinCache;
-import net.fuchsia.server.PlayerData;
-import net.fuchsia.server.ServerPlayerDatas;
-import net.fuchsia.server.client.ClientPlayerDatas;
-import net.fuchsia.util.FadenIdentifier;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.network.RegistryByteBuf;
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.packet.CustomPayload;
-import net.minecraft.util.Identifier;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.UUID;
+
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fuchsia.server.PlayerData;
+import net.fuchsia.server.ServerPlayerDatas;
+import net.fuchsia.server.client.ClientPlayerDatas;
+import net.fuchsia.util.FadenIdentifier;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.packet.CustomPayload;
 
 public record SendPlayerDatasS2CPacket(HashMap<UUID, PlayerData> map) implements CustomPayload {
 
@@ -45,7 +39,6 @@ public record SendPlayerDatasS2CPacket(HashMap<UUID, PlayerData> map) implements
         @Override
         public void encode(RegistryByteBuf buf, SendPlayerDatasS2CPacket value) {
             try {
-                PacketByteBuf byteBufs = PacketByteBufs.create();
                 ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
                 ObjectOutputStream out = new ObjectOutputStream(byteOut);
                 out.writeObject(ServerPlayerDatas.getPlayerDatas());

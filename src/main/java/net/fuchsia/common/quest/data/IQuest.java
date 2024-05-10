@@ -1,11 +1,10 @@
 package net.fuchsia.common.quest.data;
 
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.Identifier;
-
 import java.util.List;
 import java.util.UUID;
+
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Identifier;
 
 public interface IQuest {
 

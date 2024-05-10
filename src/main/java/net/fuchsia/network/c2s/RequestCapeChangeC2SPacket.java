@@ -1,7 +1,9 @@
 package net.fuchsia.network.c2s;
 
+import java.util.ArrayList;
+import java.util.UUID;
+
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.fuchsia.common.cape.FadenCape;
 import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.network.FadenNetwork;
 import net.fuchsia.server.PlayerData;
@@ -11,9 +13,6 @@ import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.server.network.ServerPlayerEntity;
-
-import java.util.ArrayList;
-import java.util.UUID;
 
 public record RequestCapeChangeC2SPacket(UUID uuid, String capeId) implements CustomPayload {
 

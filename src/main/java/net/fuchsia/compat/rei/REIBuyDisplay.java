@@ -1,15 +1,14 @@
 package net.fuchsia.compat.rei;
 
+import java.util.Collections;
+import java.util.List;
+
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import me.shedaniel.rei.plugin.common.displays.beacon.DefaultBeaconDisplay;
 import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.ItemStack;
-
-import java.util.Collections;
-import java.util.List;
 
 public class REIBuyDisplay extends BasicDisplay {
 

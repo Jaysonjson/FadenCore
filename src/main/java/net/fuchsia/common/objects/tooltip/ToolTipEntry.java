@@ -1,16 +1,15 @@
 package net.fuchsia.common.objects.tooltip;
 
-import net.fuchsia.common.init.FadenDataComponents;
+import org.jetbrains.annotations.Nullable;
+import org.joml.Matrix4f;
+
 import net.fuchsia.common.objects.item.ItemToolTipEntryRenderer;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.Nullable;
-import org.joml.Matrix4f;
 
 public interface ToolTipEntry {
 

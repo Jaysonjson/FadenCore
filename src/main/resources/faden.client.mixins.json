@@ -3,11 +3,9 @@
   "package": "net.fuchsia.client.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
-    "CameraMixin",
     "CapeFeatureRendererMixin",
     "CraftingTableScreenMixin",
     "ElytraFeatureRendererMixin",
-    "GameRendererMixin",
     "InGameHudMixin",
     "ItemRendererAccessor",
     "ItemRendererMixin",

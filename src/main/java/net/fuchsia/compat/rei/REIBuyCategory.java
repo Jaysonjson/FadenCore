@@ -1,6 +1,10 @@
 package net.fuchsia.compat.rei;
 
+import java.util.List;
+import java.util.Objects;
+
 import com.google.common.collect.Lists;
+
 import me.shedaniel.clothconfig2.ClothConfigInitializer;
 import me.shedaniel.clothconfig2.api.scroll.ScrollingContainer;
 import me.shedaniel.math.Point;
@@ -8,26 +12,22 @@ import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.REIRuntime;
 import me.shedaniel.rei.api.client.gui.DisplayRenderer;
 import me.shedaniel.rei.api.client.gui.Renderer;
-import me.shedaniel.rei.api.client.gui.widgets.*;
+import me.shedaniel.rei.api.client.gui.widgets.CloseableScissors;
+import me.shedaniel.rei.api.client.gui.widgets.Slot;
+import me.shedaniel.rei.api.client.gui.widgets.Widget;
+import me.shedaniel.rei.api.client.gui.widgets.WidgetWithBounds;
+import me.shedaniel.rei.api.client.gui.widgets.Widgets;
 import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.CollectionUtils;
 import me.shedaniel.rei.api.common.util.EntryStacks;
-import me.shedaniel.rei.plugin.client.categories.beacon.DefaultBeaconPaymentCategory;
-import me.shedaniel.rei.plugin.common.BuiltinPlugin;
-import me.shedaniel.rei.plugin.common.displays.beacon.DefaultBeaconPaymentDisplay;
 import net.fuchsia.common.init.FadenItems;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.Element;
-import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.MathHelper;
-
-import java.util.List;
-import java.util.Objects;
 
 public class REIBuyCategory implements DisplayCategory<REIBuyDisplay> {
 

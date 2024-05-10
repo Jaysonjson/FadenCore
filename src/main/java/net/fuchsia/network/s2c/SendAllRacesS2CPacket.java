@@ -1,26 +1,20 @@
 package net.fuchsia.network.s2c;
 
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fuchsia.common.race.Race;
-import net.fuchsia.common.race.data.ClientRaceCache;
-import net.fuchsia.common.race.data.RaceData;
-import net.fuchsia.common.race.data.ServerRaceCache;
-import net.fuchsia.common.race.skin.server.ServerSkinCache;
-import net.fuchsia.util.FadenIdentifier;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.network.RegistryByteBuf;
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.packet.CustomPayload;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.util.HashMap;
 import java.util.UUID;
+
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fuchsia.common.race.data.ClientRaceCache;
+import net.fuchsia.common.race.data.ServerRaceCache;
+import net.fuchsia.util.FadenIdentifier;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.packet.CustomPayload;
 
 public record SendAllRacesS2CPacket(ArrayList<RacePacket> packets) implements CustomPayload {
 

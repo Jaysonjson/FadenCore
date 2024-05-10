@@ -1,16 +1,17 @@
 package net.fuchsia.common.race;
 
+import java.util.HashMap;
+
+import org.joml.Vector3f;
+
 import com.google.common.collect.ImmutableMap;
+
 import net.fuchsia.common.race.cosmetic.RaceCosmeticPalette;
 import net.minecraft.entity.EntityAttachmentType;
 import net.minecraft.entity.EntityAttachments;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.player.PlayerEntity;
-import org.joml.Vector3f;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public enum Race implements IRace {
 	

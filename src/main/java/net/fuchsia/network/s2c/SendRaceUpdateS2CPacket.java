@@ -1,25 +1,19 @@
 package net.fuchsia.network.s2c;
 
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fuchsia.common.race.IRace;
-import net.fuchsia.common.race.Race;
-import net.fuchsia.common.race.data.ClientRaceCache;
-import net.fuchsia.common.race.data.RaceData;
-import net.fuchsia.common.race.skin.server.ServerSkinCache;
-import net.fuchsia.util.FadenIdentifier;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.network.RegistryByteBuf;
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.packet.CustomPayload;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Base64;
-import java.util.HashMap;
 import java.util.UUID;
+
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fuchsia.common.race.data.ClientRaceCache;
+import net.fuchsia.common.race.data.RaceData;
+import net.fuchsia.util.FadenIdentifier;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.packet.CustomPayload;
 
 public record SendRaceUpdateS2CPacket(UUID uuid, RaceData data, boolean remove) implements CustomPayload {
 
@@ -67,7 +61,6 @@ public record SendRaceUpdateS2CPacket(UUID uuid, RaceData data, boolean remove) 
 
     public void receive(ClientPlayNetworking.Context context) {
         if(!remove) {
-            IRace race1 = data.getRace();
             ClientRaceCache.getCache().put(uuid, data);
         } else {
             ClientRaceCache.getCache().remove(uuid);

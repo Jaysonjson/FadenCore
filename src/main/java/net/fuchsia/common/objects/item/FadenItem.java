@@ -1,18 +1,16 @@
 package net.fuchsia.common.objects.item;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.jetbrains.annotations.Nullable;
+
 import net.fuchsia.common.objects.ItemWithValues;
-import net.fuchsia.common.objects.item.coin.IValue;
 import net.fuchsia.common.objects.tooltip.FadenTooltipComponent;
 import net.fuchsia.common.objects.tooltip.ToolTipEntry;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashMap;
 
 public class FadenItem extends Item implements ItemToolTipEntryRenderer {
 

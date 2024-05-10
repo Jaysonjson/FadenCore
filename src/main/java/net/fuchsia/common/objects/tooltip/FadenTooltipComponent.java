@@ -16,9 +16,6 @@ import net.minecraft.client.gui.tooltip.TooltipComponent;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.item.Item;
 
-/*
-* TODO: FIX HEIGHT CALULCATIONS
-* */
 public class FadenTooltipComponent implements TooltipComponent {
 
     public FadenTooltipData data;

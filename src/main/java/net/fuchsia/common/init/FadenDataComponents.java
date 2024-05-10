@@ -18,7 +18,7 @@ public class FadenDataComponents {
     public static final DataComponentType<Boolean> FREE_WATER_MOVEMENT = register("free_water_movement", (builder) -> builder.codec(FadenCodecs.BOOL).packetCodec(PacketCodecs.BOOL));
 
     private static <T> DataComponentType<T> register(String id, UnaryOperator<DataComponentType.Builder<T>> builderOperator) {
-        return (DataComponentType) Registry.register(Registries.DATA_COMPONENT_TYPE, FadenIdentifier.create(id), ((DataComponentType.Builder)builderOperator.apply(DataComponentType.builder())).build());
+        return (DataComponentType<T>) Registry.register(Registries.DATA_COMPONENT_TYPE, FadenIdentifier.create(id), ((DataComponentType.Builder)builderOperator.apply(DataComponentType.builder())).build());
     }
 
     public static void register() {

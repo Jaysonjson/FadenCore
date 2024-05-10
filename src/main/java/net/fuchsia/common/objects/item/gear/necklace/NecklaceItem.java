@@ -1,15 +1,10 @@
 package net.fuchsia.common.objects.item.gear.necklace;
 
-import net.fuchsia.common.objects.item.FadenItem;
-import net.fuchsia.common.objects.item.ItemTier;
-import net.fuchsia.common.objects.item.gear.FadenGearItem;
-import net.fuchsia.common.objects.item.gear.Gear;
-import net.fuchsia.common.slot.GearSlot;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-
 import java.util.Collection;
+
+import net.fuchsia.common.objects.item.gear.FadenGearItem;
+import net.fuchsia.common.slot.GearSlot;
+import net.minecraft.item.ItemStack;
 
 public abstract class NecklaceItem extends FadenGearItem {
     public NecklaceItem(Settings settings) {

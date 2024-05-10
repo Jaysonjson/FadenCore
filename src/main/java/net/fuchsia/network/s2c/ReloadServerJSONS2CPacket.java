@@ -1,20 +1,19 @@
 package net.fuchsia.network.s2c;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.UUID;
+
 import com.google.gson.reflect.TypeToken;
+
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fuchsia.Faden;
 import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.common.data.ItemValues;
-import net.fuchsia.common.race.skin.client.ClientRaceSkinCache;
 import net.fuchsia.util.FadenIdentifier;
-import net.fuchsia.util.FadenOnlineUtil;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.packet.CustomPayload;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.UUID;
 
 public record ReloadServerJSONS2CPacket(String type, String json) implements CustomPayload {
 

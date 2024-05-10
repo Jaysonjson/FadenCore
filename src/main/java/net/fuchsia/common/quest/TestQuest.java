@@ -1,13 +1,13 @@
 package net.fuchsia.common.quest;
 
+import org.jetbrains.annotations.Nullable;
+
 import net.fuchsia.common.quest.data.FadenQuest;
 import net.fuchsia.common.quest.data.IQuestStep;
 import net.fuchsia.util.FadenIdentifier;
-import net.minecraft.client.gui.DrawContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.Nullable;
 
 public class TestQuest extends FadenQuest {
 

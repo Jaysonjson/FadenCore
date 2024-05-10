@@ -1,25 +1,21 @@
 package net.fuchsia.compat.rei;
 
-import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
-import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
-import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
-import me.shedaniel.rei.api.client.registry.screen.ScreenRegistry;
-import me.shedaniel.rei.api.common.category.CategoryIdentifier;
-import me.shedaniel.rei.api.common.util.EntryIngredients;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fuchsia.server.FadenData;
-import net.fuchsia.common.data.ItemValues;
-import net.fuchsia.common.objects.CoinMap;
-import net.fuchsia.util.FadenIdentifier;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.ItemStack;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
+
+import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
+import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
+import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
+import me.shedaniel.rei.api.client.registry.screen.ScreenRegistry;
+import me.shedaniel.rei.api.common.util.EntryIngredients;
+import net.fuchsia.common.data.ItemValues;
+import net.fuchsia.common.objects.CoinMap;
+import net.fuchsia.server.FadenData;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.ItemStack;
 
 public class FadenREIClientPlugin implements REIClientPlugin {
 

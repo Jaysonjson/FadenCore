@@ -1,20 +1,5 @@
 package net.fuchsia.client.mixin;
 
-import net.fuchsia.client.PlayerModelCache;
-import net.fuchsia.client.render.feature.ChestFeatureRenderer;
-import net.fuchsia.client.render.feature.ClothFeatureRenderer;
-import net.fuchsia.client.render.feature.HeadFeatureRenderer;
-import net.fuchsia.common.cape.FadenCape;
-import net.fuchsia.common.cape.FadenCapes;
-import net.minecraft.client.network.AbstractClientPlayerEntity;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.feature.ElytraFeatureRenderer;
-import net.minecraft.client.render.entity.feature.FeatureRendererContext;
-import net.minecraft.client.render.entity.model.*;
-import net.minecraft.client.util.SkinTextures;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -22,6 +7,19 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import net.fuchsia.client.PlayerModelCache;
+import net.fuchsia.common.cape.FadenCape;
+import net.fuchsia.common.cape.FadenCapes;
+import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.entity.feature.ElytraFeatureRenderer;
+import net.minecraft.client.render.entity.feature.FeatureRendererContext;
+import net.minecraft.client.render.entity.model.ElytraEntityModel;
+import net.minecraft.client.render.entity.model.EntityModel;
+import net.minecraft.client.render.entity.model.EntityModelLoader;
+import net.minecraft.client.util.SkinTextures;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.LivingEntity;
 
 @Mixin(ElytraFeatureRenderer.class)
 public class ElytraFeatureRendererMixin<T extends LivingEntity, M extends EntityModel<T>> {

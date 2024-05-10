@@ -4,15 +4,11 @@ import net.fuchsia.Faden;
 import net.fuchsia.common.init.FadenDataComponents;
 import net.fuchsia.common.objects.item.ItemTier;
 import net.minecraft.component.DataComponentTypes;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
-
-import java.util.Collection;
 
 public class KingOFWaterNecklaceItem extends NecklaceItem {
 

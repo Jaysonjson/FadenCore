@@ -1,14 +1,13 @@
 package net.fuchsia.common.race;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import net.fuchsia.common.race.cosmetic.RaceCosmetic;
-import net.fuchsia.common.race.cosmetic.RaceCosmeticType;
 import net.fuchsia.common.race.data.RaceData;
 import net.fuchsia.common.race.data.ServerRaceCache;
 import net.fuchsia.network.FadenNetwork;
 import net.minecraft.server.network.ServerPlayerEntity;
-
-import java.util.ArrayList;
-import java.util.Random;
 
 public class RaceUtil {
 
@@ -18,7 +17,6 @@ public class RaceUtil {
     }
 
     public static void setPlayerRace(ServerPlayerEntity player, IRace race, String sub_id) {
-        String head_cosmetic = "";
         ArrayList<RaceCosmetic> headCosmetics = new ArrayList<>();
         ArrayList<RaceCosmetic> chestCosmetics = new ArrayList<>();
         ArrayList<RaceCosmetic> legCosmetics = new ArrayList<>();

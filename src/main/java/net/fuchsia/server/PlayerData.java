@@ -1,13 +1,13 @@
 package net.fuchsia.server;
 
 
-import net.fuchsia.common.cape.FadenCape;
-import net.fuchsia.common.cape.FadenCapes;
-import net.minecraft.entity.player.PlayerEntity;
-import org.jetbrains.annotations.Nullable;
-
 import java.io.Serial;
 import java.io.Serializable;
+
+import org.jetbrains.annotations.Nullable;
+
+import net.fuchsia.common.cape.FadenCape;
+import net.fuchsia.common.cape.FadenCapes;
 
 public class PlayerData implements Serializable {
 

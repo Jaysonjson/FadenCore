@@ -1,6 +1,12 @@
 package net.fuchsia.common.objects.item.gear;
 
-import net.fuchsia.Faden;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Optional;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import net.fuchsia.common.init.FadenDataComponents;
 import net.fuchsia.common.objects.item.FadenItem;
 import net.fuchsia.common.objects.item.ItemTier;
@@ -20,12 +26,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Optional;
 
 public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolTipEntryRenderer {
     public FadenGearItem(Settings settings) {

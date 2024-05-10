@@ -1,8 +1,5 @@
 package net.fuchsia.common.race.data;
 
-import net.fuchsia.common.race.IRace;
-import net.fuchsia.common.race.Race;
-
 import java.util.HashMap;
 import java.util.UUID;
 

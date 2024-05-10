@@ -1,19 +1,18 @@
 package net.fuchsia.common.race.data;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.UUID;
+
 import net.fabricmc.loader.api.FabricLoader;
 import net.fuchsia.Faden;
-import net.fuchsia.common.race.RaceSkinMap;
 import net.fuchsia.network.FadenNetwork;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.NbtSizeTracker;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
-
-import java.io.File;
-import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.UUID;
 
 public class ServerRaceCache {
 

@@ -1,30 +1,31 @@
 package net.fuchsia.network;
 
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.UUID;
 
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fuchsia.Faden;
 import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.common.data.ItemValues;
 import net.fuchsia.common.race.data.RaceData;
 import net.fuchsia.common.race.data.ServerRaceCache;
-import net.fuchsia.network.c2s.RequestCapeChangeC2SPacket;
-import net.fuchsia.network.s2c.*;
 import net.fuchsia.common.race.skin.provider.SkinProvider;
 import net.fuchsia.common.race.skin.server.ServerSkinCache;
+import net.fuchsia.network.c2s.RequestCapeChangeC2SPacket;
+import net.fuchsia.network.s2c.RacePacket;
+import net.fuchsia.network.s2c.ReloadServerJSONS2CPacket;
+import net.fuchsia.network.s2c.RemoveSkinS2CPacket;
+import net.fuchsia.network.s2c.SendAllRaceSkinsS2CPacket;
+import net.fuchsia.network.s2c.SendAllRacesS2CPacket;
+import net.fuchsia.network.s2c.SendPlayerDatasS2CPacket;
+import net.fuchsia.network.s2c.SendRaceUpdateS2CPacket;
+import net.fuchsia.network.s2c.SendSinglePlayerDataS2CPacket;
+import net.fuchsia.network.s2c.SendSkinS2CPacket;
 import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.ServerPlayerDatas;
-import net.fuchsia.util.FadenIdentifier;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.Identifier;
 
 public class FadenNetwork {
 

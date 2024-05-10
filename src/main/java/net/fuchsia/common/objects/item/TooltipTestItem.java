@@ -1,16 +1,16 @@
 package net.fuchsia.common.objects.item;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.jetbrains.annotations.Nullable;
+
 import net.fuchsia.common.objects.tooltip.FadenTooltipComponent;
 import net.fuchsia.common.objects.tooltip.ToolTipEntry;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 public class TooltipTestItem extends Item implements ItemToolTipEntryRenderer {
     public TooltipTestItem(Settings settings) {

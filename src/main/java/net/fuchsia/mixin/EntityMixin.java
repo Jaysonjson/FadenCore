@@ -1,14 +1,22 @@
 package net.fuchsia.mixin;
 
+import java.util.UUID;
+
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fuchsia.Faden;
 import net.fuchsia.common.init.FadenDataComponents;
-import net.fuchsia.mixin_interfaces.IGearInventory;
-import net.fuchsia.common.objects.item.gear.Gear;
 import net.fuchsia.common.race.data.ClientRaceCache;
 import net.fuchsia.common.race.data.RaceData;
 import net.fuchsia.common.race.data.ServerRaceCache;
+import net.fuchsia.mixin_interfaces.IGearInventory;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
@@ -20,14 +28,6 @@ import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.scoreboard.AbstractTeam;
 import net.minecraft.util.math.BlockPos;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.util.UUID;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin {

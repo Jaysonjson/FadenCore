@@ -1,19 +1,13 @@
 package net.fuchsia.client.overlay;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fuchsia.config.FadenOptions;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.render.DiffuseLighting;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
-import net.minecraft.entity.LivingEntity;
-import org.jetbrains.annotations.Nullable;
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
 
 public class StatsOverlay implements HudRenderCallback {
 

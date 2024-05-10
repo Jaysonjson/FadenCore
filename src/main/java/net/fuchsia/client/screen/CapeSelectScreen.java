@@ -1,8 +1,8 @@
 package net.fuchsia.client.screen;
 
-import com.terraformersmc.modmenu.config.ModMenuConfig;
-import com.terraformersmc.modmenu.config.ModMenuConfigManager;
-import com.terraformersmc.modmenu.gui.ModsScreen;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
+
 import net.fuchsia.client.PlayerModelCache;
 import net.fuchsia.client.screen.widgets.CapeListWidget;
 import net.fuchsia.common.cape.FadenCape;
@@ -17,8 +17,6 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.RotationAxis;
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
 
 public class CapeSelectScreen extends Screen {
 

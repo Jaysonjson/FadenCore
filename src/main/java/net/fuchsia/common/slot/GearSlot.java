@@ -1,6 +1,5 @@
 package net.fuchsia.common.slot;
 
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.util.StringIdentifiable;
 
 public enum GearSlot implements StringIdentifiable {

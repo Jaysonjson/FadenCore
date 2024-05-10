@@ -1,17 +1,14 @@
 package net.fuchsia.common.data;
 
+import java.util.HashMap;
+
 import com.google.gson.reflect.TypeToken;
+
 import net.fuchsia.Faden;
-import net.fuchsia.common.init.FadenGear;
-import net.fuchsia.common.init.FadenItems;
 import net.fuchsia.util.FadenOnlineUtil;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
-
-import java.util.HashMap;
-import java.util.UUID;
 
 public class ItemValues {
 

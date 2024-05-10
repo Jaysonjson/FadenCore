@@ -1,23 +1,18 @@
 package net.fuchsia.common.objects.command;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.fuchsia.common.objects.CoinMap;
+
 import net.fuchsia.common.objects.command.types.RaceArgumentType;
 import net.fuchsia.common.objects.command.types.RaceSubIdArgumentType;
-import net.fuchsia.common.race.IRace;
 import net.fuchsia.common.race.Race;
-import net.fuchsia.common.race.RaceSkinUtil;
 import net.fuchsia.common.race.RaceUtil;
 import net.fuchsia.common.race.data.ClientRaceCache;
 import net.fuchsia.common.race.data.RaceData;
-import net.fuchsia.common.race.data.ServerRaceCache;
 import net.minecraft.command.argument.EntityArgumentType;
-import net.minecraft.command.argument.EnumArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;

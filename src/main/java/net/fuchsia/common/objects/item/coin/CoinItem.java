@@ -1,28 +1,27 @@
 package net.fuchsia.common.objects.item.coin;
 
-import java.util.LinkedHashMap;
 import java.util.Optional;
+
+import org.joml.Matrix4f;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fuchsia.common.init.FadenItems;
 import net.fuchsia.common.objects.item.ItemToolTipRenderer;
 import net.fuchsia.common.objects.tooltip.FadenTooltipComponent;
+import net.fuchsia.common.objects.tooltip.FadenTooltipData;
 import net.fuchsia.common.quest.FadenQuests;
 import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.item.TooltipData;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
-
-import net.fuchsia.common.init.FadenItems;
-import net.fuchsia.common.objects.tooltip.FadenTooltipData;
-import net.minecraft.client.item.TooltipData;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
-import org.joml.Matrix4f;
 
 public class CoinItem extends Item implements ItemToolTipRenderer {
     private final int value;

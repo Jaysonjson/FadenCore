@@ -3,7 +3,6 @@ package net.fuchsia.common.objects.item.cloth;
 import net.fuchsia.common.objects.item.FadenItem;
 import net.fuchsia.common.slot.ClothSlot;
 import net.fuchsia.util.FadenIdentifier;
-import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 
 public class ClothItem extends FadenItem implements Cloth {

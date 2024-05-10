@@ -1,15 +1,5 @@
 package net.fuchsia.common.quest.data;
 
-import net.fabricmc.loader.api.FabricLoader;
-import net.fuchsia.Faden;
-import net.fuchsia.config.FadenConfig;
-import net.fuchsia.config.FadenOptions;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtIo;
-import net.minecraft.nbt.NbtSizeTracker;
-import net.minecraft.util.Identifier;
-import org.apache.commons.io.FileUtils;
-
 import java.io.File;
 import java.io.FileReader;
 import java.nio.charset.StandardCharsets;
@@ -17,6 +7,15 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.UUID;
+
+import org.apache.commons.io.FileUtils;
+
+import net.fabricmc.loader.api.FabricLoader;
+import net.fuchsia.Faden;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtIo;
+import net.minecraft.nbt.NbtSizeTracker;
+import net.minecraft.util.Identifier;
 
 public class QuestCache {
 

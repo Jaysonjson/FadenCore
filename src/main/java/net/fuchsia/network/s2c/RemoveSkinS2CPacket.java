@@ -1,17 +1,13 @@
 package net.fuchsia.network.s2c;
 
+import java.util.UUID;
+
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fuchsia.common.race.IRace;
-import net.fuchsia.common.race.Race;
-import net.fuchsia.common.race.data.ClientRaceCache;
-import net.fuchsia.common.race.data.RaceData;
 import net.fuchsia.common.race.skin.client.ClientRaceSkinCache;
 import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.packet.CustomPayload;
-
-import java.util.UUID;
 
 public record RemoveSkinS2CPacket(UUID uuid) implements CustomPayload {
 
