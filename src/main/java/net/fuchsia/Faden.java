@@ -85,7 +85,11 @@ public class Faden implements ModInitializer {
 	}
 
 	public static void init() {
-		CHECKSUMS = Faden.GSON.fromJson(FadenOnlineUtil.getJSONData("https://github.com/FuchsiaTeam/FadenData/blob/main/checksums.json"), CheckSums.class);
+		try {
+			CHECKSUMS = Faden.GSON.fromJson(FadenOnlineUtil.getJSONData("https://raw.githubusercontent.com/FuchsiaTeam/FadenData/main/checksums.json"), CheckSums.class);
+		} catch (Exception e) {
+
+		}
 		FadenCapes.register();
 		RaceCosmetics.add();
 		FadenSoundEvents.register();
