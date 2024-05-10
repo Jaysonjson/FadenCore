@@ -39,6 +39,12 @@ public class FadenCapes {
         return cape;
     }
 
+    public static FadenCape registerOnlineCape(String id) {
+        FadenCape cape = new FadenCape(id, Text.literal(id));
+        CAPES.add(cape);
+        return cape;
+    }
+
     public static ArrayList<FadenCape> getCapes() {
         return CAPES;
     }

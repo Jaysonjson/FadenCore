@@ -5,6 +5,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
 
+import net.fuchsia.common.CheckSums;
+import net.fuchsia.common.cape.online.OnlineCapeCache;
+import net.fuchsia.common.cape.online.OnlineCapes;
+import net.fuchsia.util.FadenOnlineUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,6 +60,7 @@ public class Faden implements ModInitializer {
 	public static ModContainer CONTAINER;
 	public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 	public static final Random RANDOM = new Random();
+	public static CheckSums CHECKSUMS = new CheckSums();
 
 	@Override
 	public void onInitialize() {
@@ -80,6 +85,7 @@ public class Faden implements ModInitializer {
 	}
 
 	public static void init() {
+		CHECKSUMS = Faden.GSON.fromJson(FadenOnlineUtil.getJSONData("https://github.com/FuchsiaTeam/FadenData/blob/main/checksums.json"), CheckSums.class);
 		FadenCapes.register();
 		RaceCosmetics.add();
 		FadenSoundEvents.register();
@@ -94,6 +100,7 @@ public class Faden implements ModInitializer {
 		FadenCloths.register();
 		FadenGear.register();
 		FadenBlocks.register();
+		OnlineCapes.retrieve();
 	}
 
 	public static void argumentTypes() {

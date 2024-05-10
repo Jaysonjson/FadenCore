@@ -19,6 +19,7 @@ public class FadenCape {
     private String id;
     private Text name;
     private boolean loaded = false;
+    private byte[] textureData = null;
 
     public FadenCape(String id, Text name) {
         this.texture = FadenIdentifier.create("cape/" + id);
@@ -38,15 +39,22 @@ public class FadenCape {
         return id;
     }
 
+    public void setTextureData(byte[] textureData) {
+        this.textureData = textureData;
+    }
+
     @Environment(EnvType.CLIENT)
     public void load() {
         if(!loaded) {
             try {
-                byte[] data = SkinProvider.readSkin(Files.newInputStream(Faden.CONTAINER.findPath("assets/faden/textures/cape/" + id + ".png").get()));
+                if(textureData == null) {
+                    textureData = SkinProvider.readSkin(Files.newInputStream(Faden.CONTAINER.findPath("assets/faden/textures/cape/" + id + ".png").get()));
+                }
                 SkinTexture skinTexture = new SkinTexture(texture);
-                skinTexture.setSkinData(data);
+                skinTexture.setSkinData(textureData);
                 MinecraftClient.getInstance().getTextureManager().registerTexture(texture, skinTexture);
                 MinecraftClient.getInstance().getTextureManager().bindTexture(texture);
+                textureData = null;
             } catch (IOException e) {
                 e.printStackTrace();
             }
