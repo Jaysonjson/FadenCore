@@ -1,13 +1,19 @@
 package net.fuchsia.common.cape;
 
 import com.google.gson.reflect.TypeToken;
+import net.fabricmc.loader.api.FabricLoader;
 import net.fuchsia.Faden;
+import net.fuchsia.common.cape.online.OnlineCape;
+import net.fuchsia.common.cape.online.OnlineCapeCache;
 import net.fuchsia.config.FadenOptions;
 import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.client.ClientPlayerDatas;
+import net.fuchsia.util.FadenCheckSum;
 import net.fuchsia.util.FadenOnlineUtil;
 import net.minecraft.text.Text;
 
+import java.io.*;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
@@ -16,6 +22,7 @@ public class FadenCapes {
 
     private static ArrayList<FadenCape> CAPES = new ArrayList<>();
     private static HashMap<UUID, ArrayList<String>> PLAYER_CAPES = new HashMap<>();
+    private static final Path CACHE_PATH = new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/client/capes.json").toPath();
 
     public static final FadenCape FUCHSIA = register("fuchsia");
     public static final FadenCape DEVELOPER = register("developer");
@@ -72,12 +79,31 @@ public class FadenCapes {
 
     public static void register() {
         if(FadenOptions.getConfig().CUSTOM_CAPES) {
-            //JUST SO THE GAME DOESNT CRASH
             try {
-                PLAYER_CAPES = Faden.GSON.fromJson(FadenOnlineUtil.getJSONData("https://raw.githubusercontent.com/FuchsiaTeam/FadenData/main/capes.json"), new TypeToken<HashMap<UUID, ArrayList<String>>>() {
-                }.getType());
-            } catch (Exception e) {
+                File cache = CACHE_PATH.toFile();
+                String json = "{}";
+                if(!cache.exists()) {
+                    //USE GITHUB JSON INSTEAD OF GSON, SO THE CHECKSUM MATCHES
+                    json = FadenOnlineUtil.getJSONData("https://raw.githubusercontent.com/FuchsiaTeam/FadenData/main/capes.json");
+                    PLAYER_CAPES = Faden.GSON.fromJson(json, new TypeToken<HashMap<UUID, ArrayList<String>>>(){}.getType());
+                    FileWriter writer = new FileWriter(cache);
+                    writer.write(json);
+                    writer.close();
+                } else {
+                    InputStream inputStream = new FileInputStream(cache);
+                    PLAYER_CAPES = Faden.GSON.fromJson(new FileReader(cache), new TypeToken<HashMap<UUID, ArrayList<String>>>(){}.getType());
+                    if(!FadenCheckSum.checkSum(inputStream).equals(Faden.CHECKSUMS.capes)) {
+                        Faden.LOGGER.warn("Mismatched Checksum for " + cache + " - retrieving data again");
+                        json = FadenOnlineUtil.getJSONData("https://raw.githubusercontent.com/FuchsiaTeam/FadenData/main/capes.json");
+                        PLAYER_CAPES = Faden.GSON.fromJson(json, new TypeToken<HashMap<UUID, ArrayList<String>>>(){}.getType());
+                    }
+                    FileWriter writer = new FileWriter(cache);
+                    writer.write(json);
+                    writer.close();
+                }
 
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }

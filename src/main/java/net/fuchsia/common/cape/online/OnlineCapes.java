@@ -24,7 +24,6 @@ public class OnlineCapes {
 		if(FadenOptions.getConfig().CUSTOM_CAPES) {
 			try {
 				File cache = CACHE_PATH.toFile();
-				cache.mkdirs();
 				if(!cache.exists()) {
 					ONLINE_CAPES = Faden.GSON.fromJson(FadenOnlineUtil.getJSONData("https://raw.githubusercontent.com/FuchsiaTeam/FadenData/main/online_capes.json"), OnlineCapeCache.class);
 					FileWriter writer = new FileWriter(cache);
@@ -33,7 +32,7 @@ public class OnlineCapes {
 				} else {
 					InputStream inputStream = new FileInputStream(cache);
 					ONLINE_CAPES = Faden.GSON.fromJson(new FileReader(cache), OnlineCapeCache.class);
-					if(!FadenCheckSum.checkSum(inputStream).equals(Faden.CHECKSUMS.ONLINE_CAPES)) {
+					if(!FadenCheckSum.checkSum(inputStream).equals(Faden.CHECKSUMS.online_capes)) {
 						Faden.LOGGER.warn("Mismatched Checksum for " + cache + " - retrieving data again");
 						ONLINE_CAPES = Faden.GSON.fromJson(FadenOnlineUtil.getJSONData("https://raw.githubusercontent.com/FuchsiaTeam/FadenData/main/online_capes.json"), OnlineCapeCache.class);
 					}

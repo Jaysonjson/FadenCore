@@ -44,7 +44,7 @@ public record ReloadServerJSONS2CPacket(String type, String json) implements Cus
             }
 
             case "item_values": {
-                ItemValues.reload(Faden.GSON.fromJson(json, new TypeToken<HashMap<String, Integer>>(){}.getType()));
+                ItemValues.reload(Faden.GSON.fromJson(json, new TypeToken<HashMap<String, Integer>>(){}.getType()), json);
                 break;
             }
         }

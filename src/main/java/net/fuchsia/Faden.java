@@ -64,6 +64,7 @@ public class Faden implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/client/");
 		CONTAINER = FabricLoader.getInstance().getModContainer(MOD_ID).get();
 		init();
         loadConfig();
