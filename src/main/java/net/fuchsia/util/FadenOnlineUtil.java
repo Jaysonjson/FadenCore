@@ -28,7 +28,7 @@ public class FadenOnlineUtil {
         return "{}";
     }
 
-    public static <T> T getJSONDataOrCache(String requestURL, File file, String checksum) {
+    public static <T> T getDataOrCache(String requestURL, File file, String checksum) {
         try {
             T t = null;
             String json = "{}";
@@ -58,5 +58,33 @@ public class FadenOnlineUtil {
         }
         return null;
     }
+
+    public static String getJSONDataOrCache(String requestURL, File file, String checksum) {
+        try {
+            String json = "{}";
+            if(!file.exists()) {
+                //USE GITHUB JSON INSTEAD OF GSON, SO THE CHECKSUM MATCHES
+                json = FadenOnlineUtil.getJSONData(requestURL);
+                FileWriter writer = new FileWriter(file);
+                writer.write(json);
+                writer.close();
+            } else {
+                InputStream inputStream = new FileInputStream(file);
+                if(!FadenCheckSum.checkSum(inputStream).equals(checksum)) {
+                    Faden.LOGGER.warn("Mismatched Checksum for " + file + " - retrieving data again");
+                    json = FadenOnlineUtil.getJSONData(requestURL);
+                }
+                inputStream.close();
+                FileWriter writer = new FileWriter(file);
+                writer.write(json);
+                writer.close();
+            }
+            return json;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "{}";
+    }
+
 
 }

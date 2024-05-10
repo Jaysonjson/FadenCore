@@ -25,26 +25,8 @@ public class ItemValues {
 
     public static void add() {
         HashMap<String, Integer> map = new HashMap<>();
-        String json = "{}";
-        try {
-            File cache = CACHE_PATH.toFile();
-            if(!cache.exists()) {
-                //USE GITHUB JSON INSTEAD OF GSON, SO THE CHECKSUM MATCHES
-                json = FadenOnlineUtil.getJSONData("https://raw.githubusercontent.com/FuchsiaTeam/FadenData/main/item_values.json");
-                map = Faden.GSON.fromJson(json, new TypeToken<HashMap<String, Integer>>(){}.getType());
-            } else {
-                InputStream inputStream = new FileInputStream(cache);
-                map = Faden.GSON.fromJson(new FileReader(cache), new TypeToken<HashMap<String, Integer>>(){}.getType());
-                if(!FadenCheckSum.checkSum(inputStream).equals(Faden.CHECKSUMS.item_values)) {
-                    Faden.LOGGER.warn("Mismatched Checksum for " + cache + " - retrieving data again");
-                    json = FadenOnlineUtil.getJSONData("https://raw.githubusercontent.com/FuchsiaTeam/FadenData/main/item_values.json");
-                    map = Faden.GSON.fromJson(json, new TypeToken<HashMap<String, Integer>>(){}.getType());
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        String json = FadenOnlineUtil.getJSONDataOrCache("https://raw.githubusercontent.com/FuchsiaTeam/FadenData/main/item_values.json", CACHE_PATH.toFile(), Faden.CHECKSUMS.item_values);
+        map = Faden.GSON.fromJson(json, new TypeToken<HashMap<String, Integer>>(){}.getType());
         reload(map, json);
     }
 

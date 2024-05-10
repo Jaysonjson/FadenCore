@@ -15,8 +15,6 @@ public class CapeListWidget extends AlwaysSelectedEntryListWidget<CapeListEntry>
         PlayerData data = ClientPlayerDatas.getPlayerData(minecraftClient.player.getUuid());
         int f = 0;
         if(data != null) {
-            System.out.println(FadenCapes.getPlayerCapes());
-            System.out.println(minecraftClient.player.getUuid());
             if(FadenCapes.getPlayerCapes().containsKey(minecraftClient.player.getUuid())) {
                 for (String s : FadenCapes.getPlayerCapes().get(minecraftClient.player.getUuid())) {
                     FadenCape cape = FadenCapes.getCapeById(s);
