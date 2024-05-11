@@ -1,6 +1,7 @@
 package net.fuchsia.common.objects.item.gear.bracelet;
 
 import net.fuchsia.Faden;
+import net.fuchsia.common.data.ItemValues;
 import net.fuchsia.common.init.FadenDataComponents;
 import net.fuchsia.common.objects.item.ItemTier;
 import net.minecraft.component.DataComponentTypes;

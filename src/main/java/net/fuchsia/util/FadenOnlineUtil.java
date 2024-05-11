@@ -73,11 +73,11 @@ public class FadenOnlineUtil {
                 if(!FadenCheckSum.checkSum(inputStream).equals(checksum)) {
                     Faden.LOGGER.warn("Mismatched Checksum for " + file + " - retrieving data again");
                     json = FadenOnlineUtil.getJSONData(requestURL);
+                    FileWriter writer = new FileWriter(file);
+                    writer.write(json);
+                    writer.close();
                 }
                 inputStream.close();
-                FileWriter writer = new FileWriter(file);
-                writer.write(json);
-                writer.close();
             }
             return json;
         } catch (Exception e) {
