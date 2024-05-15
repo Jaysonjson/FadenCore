@@ -41,7 +41,7 @@ public record SendAllRaceSkinsS2CPacket(HashMap<UUID, String> map) implements Cu
             try {
                 ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
                 ObjectOutputStream out = new ObjectOutputStream(byteOut);
-                out.writeObject(ServerSkinCache.PLAYER_SKINS);
+                out.writeObject(ServerSkinCache.getPlayerSkins());
                 byte[] data = byteOut.toByteArray();
                 byteOut.close();
                 out.close();
@@ -59,7 +59,7 @@ public record SendAllRaceSkinsS2CPacket(HashMap<UUID, String> map) implements Cu
 
     public void receive(ClientPlayNetworking.Context context) {
         for (UUID uuid : map.keySet()) {
-            ClientRaceSkinCache.getPlayerSkins().put(uuid, SkinProvider.getSkinIdentifier(map.get(uuid)));
+            ClientRaceSkinCache.setSkin(uuid, SkinProvider.getSkinIdentifier(map.get(uuid)));
         }
     }
 }

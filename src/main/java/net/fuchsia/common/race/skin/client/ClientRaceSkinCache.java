@@ -13,6 +13,13 @@ public class ClientRaceSkinCache {
     private static HashMap<UUID, Identifier> PLAYER_SKINS = new HashMap<>();
     private static HashMap<String, Identifier> SKINS = new HashMap<>();
     private static boolean added = false;
+
+
+    /*
+     * I keep it with the added bool for now, and just put it into client world load,
+     * TODO Remove added boolean and hook this into the TextureLoader instead
+     *  ~Jayson
+     * */
     public static void add() {
         if(!added && FadenOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
             HashMap<String, byte[]> maps = RaceSkinMap.getAllMaps();
@@ -31,5 +38,21 @@ public class ClientRaceSkinCache {
 
     public static HashMap<UUID, Identifier> getPlayerSkins() {
         return PLAYER_SKINS;
+    }
+
+    public static Identifier getSkin(UUID playerUuid) {
+        return getPlayerSkins().getOrDefault(playerUuid, new Identifier("missing"));
+    }
+
+    public static boolean hasSkin(UUID playerUuid) {
+        return getPlayerSkins().containsKey(playerUuid);
+    }
+
+    public static void removeSkin(UUID playerUuid) {
+        getPlayerSkins().remove(playerUuid);
+    }
+
+    public static void setSkin(UUID playerUuid, Identifier skinId) {
+        getPlayerSkins().put(playerUuid, skinId);
     }
 }

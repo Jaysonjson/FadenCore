@@ -64,7 +64,7 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
     @Inject(at = @At("HEAD"), method = "getTexture(Lnet/minecraft/client/network/AbstractClientPlayerEntity;)Lnet/minecraft/util/Identifier;", cancellable = true)
     private void getTextureAbstractPlayer(AbstractClientPlayerEntity abstractClientPlayerEntity, CallbackInfoReturnable<Identifier> cir) {
         if(FadenOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
-        	if(ClientRaceSkinCache.getPlayerSkins().containsKey(abstractClientPlayerEntity.getUuid())) {
+        	if(ClientRaceSkinCache.hasSkin(abstractClientPlayerEntity.getUuid())) {
         		cir.setReturnValue(ClientRaceSkinCache.getPlayerSkins().get(abstractClientPlayerEntity.getUuid()));
         	}
         }
@@ -83,8 +83,8 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
     private Identifier injected(Identifier x, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve) {
         if(FadenOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
             ClientPlayerEntity clientPlayer = MinecraftClient.getInstance().player;
-            if (ClientRaceSkinCache.getPlayerSkins().containsKey(clientPlayer.getUuid())) {
-                return ClientRaceSkinCache.getPlayerSkins().get(clientPlayer.getUuid());
+            if (ClientRaceSkinCache.hasSkin(clientPlayer.getUuid())) {
+                return ClientRaceSkinCache.getSkin(clientPlayer.getUuid());
             }
         }
         return x;
@@ -147,8 +147,8 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
                     playerEntityModel.leftArm.pitch = 0.0F;
                 }
                 Identifier identifier = player.getSkinTextures().texture();
-                if (ClientRaceSkinCache.getPlayerSkins().containsKey(MinecraftClient.getInstance().player.getUuid())) {
-                    identifier = ClientRaceSkinCache.getPlayerSkins().get(MinecraftClient.getInstance().player.getUuid());
+                if (ClientRaceSkinCache.hasSkin(MinecraftClient.getInstance().player.getUuid())) {
+                    identifier = ClientRaceSkinCache.getSkin(MinecraftClient.getInstance().player.getUuid());
                 }
 
                 if(playerArm == Arm.RIGHT) {

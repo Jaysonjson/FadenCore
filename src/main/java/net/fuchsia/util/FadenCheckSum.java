@@ -22,11 +22,11 @@ public class FadenCheckSum {
 	public static String checkSum(InputStream inputStream) {
 		try {
 			byte[] digest = create(inputStream);
-			String checksum = "";
-			for (int i = 0; i < digest.length; i++) {
-				checksum += Integer.toString((digest[i] & 0xff) + 0x100, 16).substring(1);
-			}
-			return checksum;
+			StringBuilder checksum = new StringBuilder();
+            for (byte b : digest) {
+                checksum.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
+            }
+			return checksum.toString();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

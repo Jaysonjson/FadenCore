@@ -12,6 +12,9 @@ import java.io.InputStream;
 
 public class SkinProvider {
 
+    /*
+    * This will cause issues when trying to load it from the jar
+    * */
     public static byte[] readSkin(File file) throws IOException {
         BufferedImage bufferedImage = ImageIO.read(file);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

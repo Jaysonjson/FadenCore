@@ -30,6 +30,6 @@ public record RemoveSkinS2CPacket(UUID uuid) implements CustomPayload {
     }
 
     public void receive(ClientPlayNetworking.Context context) {
-        ClientRaceSkinCache.getPlayerSkins().remove(uuid);
+        ClientRaceSkinCache.removeSkin(uuid);
     }
 }

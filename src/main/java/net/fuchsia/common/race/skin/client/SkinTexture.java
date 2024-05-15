@@ -58,7 +58,8 @@ public class SkinTexture extends ResourceTexture {
         try {
             nativeImage = NativeImage.read(bytes);
 
-        } catch (Exception var4) {
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
         return nativeImage;
     }
