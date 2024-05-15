@@ -16,6 +16,8 @@ public class FadenDataComponents {
     public static final DataComponentType<Float> DAMAGE_INCREASE_PERCENTAGE = register("extra_damage_percentage", (builder) -> builder.codec(Codecs.POSITIVE_FLOAT).packetCodec(PacketCodecs.FLOAT));
     public static final DataComponentType<String> ITEM_TIER = register("item_tier", (builder) -> builder.codec(Codecs.ESCAPED_STRING).packetCodec(PacketCodecs.STRING));
     public static final DataComponentType<Boolean> FREE_WATER_MOVEMENT = register("free_water_movement", (builder) -> builder.codec(FadenCodecs.BOOL).packetCodec(PacketCodecs.BOOL));
+    public static final DataComponentType<Float> JUMP_INCREASE_VALUE = register("jump_increase", (builder) -> builder.codec(Codecs.POSITIVE_FLOAT).packetCodec(PacketCodecs.FLOAT));
+    public static final DataComponentType<Float> JUMP_INCREASE_PERCENTAGE = register("jump_increase_percentage", (builder) -> builder.codec(Codecs.POSITIVE_FLOAT).packetCodec(PacketCodecs.FLOAT));
 
     private static <T> DataComponentType<T> register(String id, UnaryOperator<DataComponentType.Builder<T>> builderOperator) {
         return (DataComponentType<T>) Registry.register(Registries.DATA_COMPONENT_TYPE, FadenIdentifier.create(id), ((DataComponentType.Builder)builderOperator.apply(DataComponentType.builder())).build());

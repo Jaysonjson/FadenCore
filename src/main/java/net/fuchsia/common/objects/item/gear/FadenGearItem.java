@@ -115,6 +115,34 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
             });
         }
 
+        if(itemStack.contains(FadenDataComponents.JUMP_INCREASE_VALUE)) {
+            entries.add(new ToolTipEntry() {
+                @Override
+                public @Nullable Item getItem(FadenTooltipComponent component) {
+                    return Items.RABBIT_FOOT;
+                }
+
+                @Override
+                public Text getText(FadenTooltipComponent component) {
+                    return Text.literal(Text.translatable("tooltip.faden.jump_increase_value").getString().replaceAll("%s", String.valueOf(component.data.itemStack.getOrDefault(FadenDataComponents.DAMAGE_INCREASE_VALUE, 0f))));
+                }
+            });
+        }
+
+        if(itemStack.contains(FadenDataComponents.JUMP_INCREASE_PERCENTAGE)) {
+            entries.add(new ToolTipEntry() {
+                @Override
+                public @Nullable Item getItem(FadenTooltipComponent component) {
+                    return Items.RABBIT_FOOT;
+                }
+
+                @Override
+                public Text getText(FadenTooltipComponent component) {
+                    return Text.literal(Text.translatable("tooltip.faden.jump_increase_percentage").getString().replaceAll("%s", String.valueOf(component.data.itemStack.getOrDefault(FadenDataComponents.DAMAGE_INCREASE_VALUE, 0f))));
+                }
+            });
+        }
+
         if(itemStack.contains(DataComponentTypes.MAX_DAMAGE)) {
             int maxDmg = itemStack.get(DataComponentTypes.MAX_DAMAGE);
             int dmg = maxDmg - itemStack.getOrDefault(DataComponentTypes.DAMAGE, 0);
@@ -146,17 +174,34 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
     }
 
     public float onLivingDamaged(PlayerEntity player, LivingEntity livingEntity, ItemStack itemStack, float damageAmount) {
+        float dmg = 0f;
         boolean damageItem = false;
         if(itemStack.contains(FadenDataComponents.DAMAGE_INCREASE_VALUE)) {
-            damageAmount += itemStack.get(FadenDataComponents.DAMAGE_INCREASE_VALUE);
+            dmg += itemStack.get(FadenDataComponents.DAMAGE_INCREASE_VALUE);
             damageItem = true;
         } else if(itemStack.contains(FadenDataComponents.DAMAGE_INCREASE_PERCENTAGE)) {
-            damageAmount = damageAmount + (damageAmount / 100.0f * itemStack.get(FadenDataComponents.DAMAGE_INCREASE_PERCENTAGE));
+            dmg = damageAmount + (damageAmount / 100.0f * itemStack.get(FadenDataComponents.DAMAGE_INCREASE_PERCENTAGE));
             damageItem = true;
         }
         if(damageItem) {
             itemStack.damage(1, player, EquipmentSlot.CHEST);
         }
-        return damageAmount;
+        return dmg;
+    }
+
+    public float jumpVelocity(PlayerEntity player, ItemStack itemStack, float velocityAmount) {
+        float strength = 0f;
+        boolean damageItem = false;
+        if(itemStack.contains(FadenDataComponents.JUMP_INCREASE_VALUE)) {
+            strength += itemStack.get(FadenDataComponents.JUMP_INCREASE_VALUE);
+            damageItem = true;
+        } else if(itemStack.contains(FadenDataComponents.JUMP_INCREASE_PERCENTAGE)) {
+            strength = velocityAmount + (velocityAmount / 100.0f * itemStack.get(FadenDataComponents.JUMP_INCREASE_PERCENTAGE));
+            damageItem = true;
+        }
+        if(damageItem) {
+            itemStack.damage(1, player, EquipmentSlot.CHEST);
+        }
+        return strength;
     }
 }

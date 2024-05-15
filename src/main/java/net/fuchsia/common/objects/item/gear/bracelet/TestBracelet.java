@@ -28,6 +28,8 @@ public class TestBracelet extends BraceletItem {
         itemStack.set(FadenDataComponents.ITEM_TIER, itemTier.name());
         itemStack.set(FadenDataComponents.DAMAGE_INCREASE_VALUE, Faden.RANDOM.nextFloat() * (itemTier.getSellValueMultiplier() * 3f));
         itemStack.set(FadenDataComponents.DAMAGE_INCREASE_PERCENTAGE, Faden.RANDOM.nextFloat() * (itemTier.getSellValueMultiplier() * 3f));
+        itemStack.set(FadenDataComponents.JUMP_INCREASE_PERCENTAGE, Faden.RANDOM.nextFloat() * (itemTier.getSellValueMultiplier() * 3f));
+        itemStack.set(FadenDataComponents.JUMP_INCREASE_VALUE, Faden.RANDOM.nextFloat() * (itemTier.getSellValueMultiplier() * 3f));
         itemStack.set(FadenDataComponents.FREE_WATER_MOVEMENT, true);
         return itemStack;
     }
