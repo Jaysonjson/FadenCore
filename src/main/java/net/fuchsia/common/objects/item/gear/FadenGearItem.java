@@ -124,7 +124,7 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
 
                 @Override
                 public Text getText(FadenTooltipComponent component) {
-                    return Text.literal(Text.translatable("tooltip.faden.jump_increase_value").getString().replaceAll("%s", String.valueOf(component.data.itemStack.getOrDefault(FadenDataComponents.DAMAGE_INCREASE_VALUE, 0f))));
+                    return Text.literal(Text.translatable("tooltip.faden.jump_increase_value").getString().replaceAll("%s", String.valueOf(component.data.itemStack.getOrDefault(FadenDataComponents.JUMP_INCREASE_VALUE, 0f) * 100f)));
                 }
             });
         }
@@ -138,7 +138,7 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
 
                 @Override
                 public Text getText(FadenTooltipComponent component) {
-                    return Text.literal(Text.translatable("tooltip.faden.jump_increase_percentage").getString().replaceAll("%s", String.valueOf(component.data.itemStack.getOrDefault(FadenDataComponents.DAMAGE_INCREASE_VALUE, 0f))));
+                    return Text.literal(Text.translatable("tooltip.faden.jump_increase_percentage").getString().replaceAll("%s", String.valueOf(component.data.itemStack.getOrDefault(FadenDataComponents.JUMP_INCREASE_PERCENTAGE, 0f))));
                 }
             });
         }
@@ -189,6 +189,9 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
         return dmg;
     }
 
+    /*
+    * this only gets called on client, need to fix
+    * */
     public float jumpVelocity(PlayerEntity player, ItemStack itemStack, float velocityAmount) {
         float strength = 0f;
         boolean damageItem = false;
