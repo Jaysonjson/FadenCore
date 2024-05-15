@@ -3,6 +3,7 @@ package net.fuchsia.common.init;
 import net.fuchsia.common.objects.item.gear.bracelet.BraceletItem;
 import net.fuchsia.common.objects.item.gear.bracelet.TestBracelet;
 import net.fuchsia.common.objects.item.gear.bracelet.WarriorBracelet;
+import net.fuchsia.common.objects.item.gear.necklace.FrogPendant;
 import net.fuchsia.common.objects.item.gear.necklace.KingOFWaterNecklaceItem;
 import net.fuchsia.common.objects.item.gear.necklace.NecklaceItem;
 import net.fuchsia.datagen.DataItemModel;
@@ -23,6 +24,7 @@ public class FadenGear {
     public static BraceletItem WARRIORS_BRACELET = registerBracelet("warriors_bracelet", new WarriorBracelet(new Item.Settings()), "ingots/silver_ingot");
     public static NecklaceItem KING_OF_WATER_NECKLACE = registerNecklace("king_of_water_necklace", new KingOFWaterNecklaceItem(new Item.Settings()), "ingots/silver_ingot");
     public static BraceletItem TEST_BRACELET = registerBracelet("test_bracelet", new TestBracelet(new Item.Settings()), "ingots/silver_ingot");
+    public static NecklaceItem FROG_PENDANT = registerNecklace("frog_pendant", new FrogPendant(new Item.Settings()), "ingots/silver_ingot");
 
     private static <T extends BraceletItem> T registerBracelet(String name, T item, String texture, DataItemModel itemModel) {
         T i = Registry.register(Registries.ITEM, FadenIdentifier.create(name), item);
