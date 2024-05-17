@@ -96,7 +96,7 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
 
                 @Override
                 public Text getText(FadenTooltipComponent component) {
-                    return Text.literal(Text.translatable("tooltip.faden.damage_increase_value").getString().replaceAll("%s", String.valueOf(component.data.itemStack.getOrDefault(FadenDataComponents.DAMAGE_INCREASE_VALUE, 0f))));
+                    return Text.literal(Text.translatable("tooltip.faden.damage_increase_value").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenDataComponents.DAMAGE_INCREASE_VALUE, 0f))));
                 }
             });
         }
@@ -110,7 +110,7 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
 
                 @Override
                 public Text getText(FadenTooltipComponent component) {
-                    return Text.literal(Text.translatable("tooltip.faden.damage_increase_percentage").getString().replaceAll("%s", String.valueOf(component.data.itemStack.getOrDefault(FadenDataComponents.DAMAGE_INCREASE_VALUE, 0f))));
+                    return Text.literal(Text.translatable("tooltip.faden.damage_increase_percentage").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenDataComponents.DAMAGE_INCREASE_VALUE, 0f))));
                 }
             });
         }
@@ -124,7 +124,7 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
 
                 @Override
                 public Text getText(FadenTooltipComponent component) {
-                    return Text.literal(Text.translatable("tooltip.faden.fall_damage_decrease_percentage").getString().replaceAll("%s", String.valueOf(component.data.itemStack.getOrDefault(FadenDataComponents.FALL_DAMAGE_DECREASE_PERCENTAGE, 0f))));
+                    return Text.literal(Text.translatable("tooltip.faden.fall_damage_decrease_percentage").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenDataComponents.FALL_DAMAGE_DECREASE_PERCENTAGE, 0f))));
                 }
             });
         }
@@ -138,7 +138,7 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
 
                 @Override
                 public Text getText(FadenTooltipComponent component) {
-                    return Text.literal(Text.translatable("tooltip.faden.jump_increase_value").getString().replaceAll("%s", String.valueOf(component.data.itemStack.getOrDefault(FadenDataComponents.JUMP_INCREASE_VALUE, 0f) * 100f)));
+                    return Text.literal(Text.translatable("tooltip.faden.jump_increase_value").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenDataComponents.JUMP_INCREASE_VALUE, 0f) * 100f)));
                 }
             });
         }
@@ -152,7 +152,7 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
 
                 @Override
                 public Text getText(FadenTooltipComponent component) {
-                    return Text.literal(Text.translatable("tooltip.faden.jump_increase_percentage").getString().replaceAll("%s", String.valueOf(component.data.itemStack.getOrDefault(FadenDataComponents.JUMP_INCREASE_PERCENTAGE, 0f))));
+                    return Text.literal(Text.translatable("tooltip.faden.jump_increase_percentage").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenDataComponents.JUMP_INCREASE_PERCENTAGE, 0f))));
                 }
             });
         }
