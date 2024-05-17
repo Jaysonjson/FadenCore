@@ -25,10 +25,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class LivingEntityMixin {
     private LivingEntity entity = ((LivingEntity) ((Object) this));
 
-    @Shadow public abstract Vec3d applyMovementInput(Vec3d movementInput, float slipperiness);
-
-    @Shadow protected abstract void initDataTracker(DataTracker.Builder builder);
-
     @Shadow public abstract void remove(Entity.RemovalReason reason);
 
     @ModifyVariable(method = "damage", at = @At(value = "HEAD"), argsOnly = true)
@@ -45,6 +41,22 @@ public abstract class LivingEntityMixin {
         }
         return amount;
     }
+
+    @ModifyVariable(method = "handleFallDamage", at = @At(value = "STORE"))
+    public int fallDamage(int i, float fallDistance, float damageMultiplier, DamageSource damageSource) {
+        if(entity instanceof PlayerEntity player) {
+            IGearInventory gearInventory = (IGearInventory) player.getInventory();
+            int dmg = i;
+            for (ItemStack gear : gearInventory.getGears()) {
+                if(gear.getItem() instanceof FadenGearItem gearItem) {
+                    dmg = gearItem.onLivingFallDamage(player, entity, gear, dmg);
+                }
+            }
+            return dmg;
+        }
+        return i;
+    }
+
 
 
     @Inject(at = @At("HEAD"), method = "getJumpVelocity()F", cancellable = true)

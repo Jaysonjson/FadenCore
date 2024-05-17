@@ -115,6 +115,20 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
             });
         }
 
+        if(itemStack.contains(FadenDataComponents.FALL_DAMAGE_DECREASE_PERCENTAGE)) {
+            entries.add(new ToolTipEntry() {
+                @Override
+                public @Nullable Item getItem(FadenTooltipComponent component) {
+                    return Items.DIAMOND_BOOTS;
+                }
+
+                @Override
+                public Text getText(FadenTooltipComponent component) {
+                    return Text.literal(Text.translatable("tooltip.faden.fall_damage_decrease_percentage").getString().replaceAll("%s", String.valueOf(component.data.itemStack.getOrDefault(FadenDataComponents.FALL_DAMAGE_DECREASE_PERCENTAGE, 0f))));
+                }
+            });
+        }
+
         if(itemStack.contains(FadenDataComponents.JUMP_INCREASE_VALUE)) {
             entries.add(new ToolTipEntry() {
                 @Override
@@ -181,6 +195,19 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
             damageItem = true;
         } else if(itemStack.contains(FadenDataComponents.DAMAGE_INCREASE_PERCENTAGE)) {
             dmg = damageAmount + (damageAmount / 100.0f * itemStack.get(FadenDataComponents.DAMAGE_INCREASE_PERCENTAGE));
+            damageItem = true;
+        }
+        if(damageItem) {
+            itemStack.damage(1, player, EquipmentSlot.CHEST);
+        }
+        return dmg;
+    }
+
+    public int onLivingFallDamage(PlayerEntity player, LivingEntity livingEntity, ItemStack itemStack, int damageAmount) {
+        int dmg = damageAmount;
+        boolean damageItem = false;
+        if(itemStack.contains(FadenDataComponents.FALL_DAMAGE_DECREASE_PERCENTAGE)) {
+            dmg = (int) (damageAmount - (damageAmount / 100.0f * itemStack.get(FadenDataComponents.FALL_DAMAGE_DECREASE_PERCENTAGE)));
             damageItem = true;
         }
         if(damageItem) {

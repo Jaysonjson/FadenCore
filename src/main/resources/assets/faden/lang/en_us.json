@@ -28,6 +28,7 @@
 	"tooltip.faden.damage_increase_percentage": "Increases DMG by %s%",
 	"tooltip.faden.jump_increase_value": "Increases JMP by %s",
 	"tooltip.faden.jump_increase_percentage": "Increases JMP by %s%",
+	"tooltip.faden.fall_damage_decrease_percentage": "Negates Fall Damage by %s%",
 	"tooltip.faden.bracelet": "Bracelet",
 	"tooltip.faden.necklace": "Necklace",
 	"tooltip.faden.belt": "Belt",
