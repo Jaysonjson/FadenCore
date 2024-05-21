@@ -1,5 +1,7 @@
 package net.fuchsia.common.objects.block;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fuchsia.client.screen.CapeSelectScreen;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -15,6 +17,7 @@ public class CapeStandBlock extends Block {
         super(settings);
     }
 
+    @Environment(EnvType.CLIENT)
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if(world.isClient) {

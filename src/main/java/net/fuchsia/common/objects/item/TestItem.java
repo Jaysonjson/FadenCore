@@ -1,9 +1,7 @@
 package net.fuchsia.common.objects.item;
 
-import net.fuchsia.client.screen.CapeSelectScreen;
 import net.fuchsia.common.quest.FadenQuests;
 import net.fuchsia.util.FadenIdentifier;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -22,7 +20,7 @@ public class TestItem extends Item {
             //QUESTS SHOULD BE IN A STATIC CONTEXT LATER, JUST FOR TESTING
             FadenQuests.TEST.checkAndRewardStep(user, FadenIdentifier.create("use_test_item"));
         } else {
-            MinecraftClient.getInstance().setScreen(new CapeSelectScreen());
+            //MinecraftClient.getInstance().setScreen(new CapeSelectScreen());
         }
         return super.use(world, user, hand);
     }

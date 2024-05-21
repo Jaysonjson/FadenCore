@@ -18,17 +18,23 @@ public class FadenCape {
     private Identifier texture;
     private String id;
     private Text name;
+    private Text description;
     private boolean loaded = false;
     private byte[] textureData = null;
 
-    public FadenCape(String id, Text name) {
+    public FadenCape(String id, Text name, Text description) {
         this.texture = FadenIdentifier.create("cape/" + id);
         this.id = id;
         this.name = name;
+        this.description = description;
     }
 
     public Text getName() {
         return name;
+    }
+
+    public Text getDescription() {
+        return description;
     }
 
     public Identifier getTexture() {

@@ -37,19 +37,20 @@ public class FadenCapes {
     public static final FadenCape BUILDER = register("builder");
     public static final FadenCape DT10 = register("dt10");
     public static final FadenCape SAKURA = register("sakura");
+    public static final FadenCape TEST = register("test");
 
     public static void setPlayerCapes(HashMap<UUID, ArrayList<String>> playerCapes) {
         PLAYER_CAPES = playerCapes;
     }
 
     private static FadenCape register(String id) {
-        FadenCape cape = new FadenCape(id, Text.translatable("cape.faden." + id));
+        FadenCape cape = new FadenCape(id, Text.translatable("cape.faden." + id), Text.translatable("cape.faden." + id + ".description"));
         CAPES.add(cape);
         return cape;
     }
 
     public static FadenCape registerOnlineCape(String id) {
-        FadenCape cape = new FadenCape(id, Text.literal(id));
+        FadenCape cape = new FadenCape(id, Text.literal(id), Text.literal(id));
         CAPES.add(cape);
         return cape;
     }

@@ -31,6 +31,25 @@ public class FadenItems {
     public static Item TEST = registerItem("test_item", new TestItem(new Item.Settings()), "ingots/silver_ingot");
     public static Item TOOL_TIP_TEST = registerItem("tooltip_test_item", new TooltipTestItem(new Item.Settings()), "ingots/silver_ingot");
 
+    public static Item SCROLL = registerItem("scroll", new Item(new Item.Settings()), "scroll/scroll");
+
+    public static Item BLACK_CLOTH = registerItem("black_cloth", new Item(new Item.Settings()), "crafting/cloth/black");
+    public static Item BLUE_CLOTH = registerItem("blue_cloth", new Item(new Item.Settings()), "crafting/cloth/blue");
+    public static Item BROWN_CLOTH = registerItem("brown_cloth", new Item(new Item.Settings()), "crafting/cloth/brown");
+    public static Item CYAN_CLOTH = registerItem("cyan_cloth", new Item(new Item.Settings()), "crafting/cloth/cyan");
+    public static Item GRAY_CLOTH = registerItem("gray_cloth", new Item(new Item.Settings()), "crafting/cloth/gray");
+    public static Item GREEN_CLOTH = registerItem("green_cloth", new Item(new Item.Settings()), "crafting/cloth/green");
+    public static Item LIGHT_BLUE_CLOTH = registerItem("light_blue_cloth", new Item(new Item.Settings()), "crafting/cloth/light_blue");
+    public static Item LIGHT_GRAY_CLOTH = registerItem("light_gray_cloth", new Item(new Item.Settings()), "crafting/cloth/light_gray");
+    public static Item LIME_CLOTH = registerItem("lime_cloth", new Item(new Item.Settings()), "crafting/cloth/lime");
+    public static Item MAGENTA_CLOTH = registerItem("magenta_cloth", new Item(new Item.Settings()), "crafting/cloth/magenta");
+    public static Item ORANGE_CLOTH = registerItem("orange_cloth", new Item(new Item.Settings()), "crafting/cloth/orange");
+    public static Item PINK_CLOTH = registerItem("pink_cloth", new Item(new Item.Settings()), "crafting/cloth/pink");
+    public static Item PURPLE_CLOTH = registerItem("purple_cloth", new Item(new Item.Settings()), "crafting/cloth/purple");
+    public static Item RED_CLOTH = registerItem("red_cloth", new Item(new Item.Settings()), "crafting/cloth/red");
+    public static Item WHITE_CLOTH = registerItem("white_cloth", new Item(new Item.Settings()), "crafting/cloth/white");
+    public static Item YELLOW_CLOTH = registerItem("yellow_cloth", new Item(new Item.Settings()), "crafting/cloth/yellow");
+
     public static Item FADEN_MUSIC_DISC = registerItem("music_disc_faden", new MusicDiscItem(14, FadenSoundEvents.FADEN, new Item.Settings().maxCount(1).rarity(Rarity.RARE), 140), "discs/faden");
 
     private static <T extends Item> T registerItem(String name, T item, String texture, DataItemModel itemModel) {

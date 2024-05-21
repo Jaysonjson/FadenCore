@@ -36,7 +36,7 @@
 	"button.faden.remove_cape": "Remove Cape",
 	"button.faden.select_cape": "Select Cape",
 
-	"cape.faden.fuchsia": "Fuchsia",
+	"cape.faden.fuchsia": "§dFuchsia",
 	"cape.faden.developer": "Developer",
 	"cape.faden.data": "Data",
 	"cape.faden.pixel_artist": "Pixel Artist",
@@ -46,5 +46,7 @@
 	"cape.faden.translator": "Translator",
 	"cape.faden.builder": "Builder",
 	"cape.faden.dt10": "Cape of DT10",
-	"cape.faden.sakura": "Sakura"
+	"cape.faden.sakura": "Sakura",
+
+	"cape.faden.fuchsia.description": "Lorem ipsum dolor sit amet. Qui autem quis ut labore dolor est molestias laudantium. Non explicabo consequuntur eum neque omnis non autem voluptate eos perspiciatis eveniet vel omnis odio.\n\nAut perspiciatis quaerat aut laudantium omnis eum cupiditate asperiores. Ut laudantium laborum a aliquid eveniet et omnis laboriosam et similique ipsam qui dolores totam est consequatur quam. Id corrupti voluptatibus aut provident assumenda non atque repudiandae est nulla officiis sit galisum facere sed possimus assumenda.\n\nEos reprehenderit debitis non sint numquam et nisi distinctio ut maxime dolore. Non aperiam veritatis qui Quis iusto et pariatur voluptatem."
 }

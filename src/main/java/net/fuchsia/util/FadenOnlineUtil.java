@@ -68,9 +68,11 @@ public class FadenOnlineUtil {
                 FileWriter writer = new FileWriter(file);
                 writer.write(json);
                 writer.close();
-            } else {
+            }
+
+            if(!file.exists() || json.equalsIgnoreCase("{}")){
                 InputStream inputStream = new FileInputStream(file);
-                if(!FadenCheckSum.checkSum(inputStream).equals(checksum)) {
+                if(!FadenCheckSum.checkSum(inputStream).equals(checksum) || json.equalsIgnoreCase("{}")) {
                     Faden.LOGGER.warn("Mismatched Checksum for " + file + " - retrieving data again");
                     json = FadenOnlineUtil.getJSONData(requestURL);
                     FileWriter writer = new FileWriter(file);
@@ -79,6 +81,7 @@ public class FadenOnlineUtil {
                 }
                 inputStream.close();
             }
+
             return json;
         } catch (Exception e) {
             e.printStackTrace();
