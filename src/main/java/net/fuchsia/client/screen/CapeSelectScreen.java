@@ -38,8 +38,10 @@ public class CapeSelectScreen extends Screen {
         capes = new CapeListWidget(this.client, 250, this.height - 100, 50, 40, this);
         capes.setX(15);
         this.addDrawableChild(selectCapeWidget = ButtonWidget.builder(Text.translatable("button.faden.select_cape"), button -> {
-                    FadenNetwork.Client.requestCapeUpdate(client.player.getUuid(), PRE_SELECTED_CAPE.getId());
-                    close();
+                    if(PRE_SELECTED_CAPE != null) {
+                        FadenNetwork.Client.requestCapeUpdate(client.player.getUuid(), PRE_SELECTED_CAPE.getId());
+                        close();
+                    }
                 })
                 .position(176, client.getWindow().getScaledHeight() - 45)
                 .size(90, 20)
