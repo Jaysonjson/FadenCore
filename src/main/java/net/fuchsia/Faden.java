@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.Random;
 
 import net.fuchsia.common.CheckSums;
-import net.fuchsia.common.cape.online.OnlineCapeCache;
 import net.fuchsia.common.cape.online.OnlineCapes;
 import net.fuchsia.util.FadenOnlineUtil;
 import org.slf4j.Logger;
@@ -88,7 +87,7 @@ public class Faden implements ModInitializer {
 	public static void init() {
 		try {
 			CHECKSUMS = Faden.GSON.fromJson(FadenOnlineUtil.getJSONData("https://raw.githubusercontent.com/FuchsiaTeam/FadenData/main/checksums.json"), CheckSums.class);
-		} catch (Exception e) {
+		} catch (Exception ignored) {
 
 		}
 		FadenCapes.register();

@@ -1,0 +1,344 @@
+[20:48:01] [main/INFO] (FabricLoader/GameProvider) Loading Minecraft 1.20.6 with Fabric Loader 0.15.10
+[20:48:02] [main/INFO] (FabricLoader) Loading 59 mods:
+	- cloth-basic-math 0.6.1
+	- cloth-config 14.0.126
+	- fabric-api 0.98.0+1.20.6
+	- fabric-api-base 0.4.40+80f8cf51b0
+	- fabric-api-lookup-api-v1 1.6.59+e9d2a72bb0
+	- fabric-biome-api-v1 13.0.25+be5d88beb0
+	- fabric-block-api-v1 1.0.20+6dfe4c9bb0
+	- fabric-block-view-api-v2 1.0.8+80f8cf51b0
+	- fabric-blockrenderlayer-v1 1.1.50+80f8cf51b0
+	- fabric-client-tags-api-v1 1.1.12+7f945d5bb0
+	- fabric-command-api-v1 1.2.45+f71b366fb0
+	- fabric-command-api-v2 2.2.24+80f8cf51b0
+	- fabric-commands-v0 0.2.62+df3654b3b0
+	- fabric-content-registries-v0 8.0.5+b82b2392b0
+	- fabric-convention-tags-v1 2.0.4+7f945d5bb0
+	- fabric-convention-tags-v2 2.1.0+70fd1b46b0
+	- fabric-crash-report-info-v1 0.2.27+80f8cf51b0
+	- fabric-data-attachment-api-v1 1.1.16+2a2c66b6b0
+	- fabric-data-generation-api-v1 19.1.0+ad474493b0
+	- fabric-dimensions-v1 2.1.68+94793913b0
+	- fabric-entity-events-v1 1.6.8+e9d2a72bb0
+	- fabric-events-interaction-v0 0.7.6+c5fc38b3b0
+	- fabric-game-rule-api-v1 1.0.50+80f8cf51b0
+	- fabric-gametest-api-v1 1.3.17+1172e897b0
+	- fabric-item-api-v1 8.2.0+5bcea88ab0
+	- fabric-item-group-api-v1 4.0.39+aae0949ab0
+	- fabric-key-binding-api-v1 1.0.45+80f8cf51b0
+	- fabric-keybindings-v0 0.2.43+df3654b3b0
+	- fabric-lifecycle-events-v1 2.3.4+c5fc38b3b0
+	- fabric-loot-api-v2 3.0.5+97f703dab0
+	- fabric-message-api-v1 6.0.10+109a837cb0
+	- fabric-model-loading-api-v1 1.0.12+80f8cf51b0
+	- fabric-models-v0 0.4.11+9386d8a7b0
+	- fabric-networking-api-v1 4.0.8+0dca0349b0
+	- fabric-object-builder-api-v1 15.1.4+c5fc38b3b0
+	- fabric-particles-v1 4.0.0+c5fc38b3b0
+	- fabric-recipe-api-v1 5.0.3+c5fc38b3b0
+	- fabric-registry-sync-v0 5.0.16+ad474493b0
+	- fabric-renderer-api-v1 3.2.12+97f703dab0
+	- fabric-renderer-indigo 1.5.12+80f8cf51b0
+	- fabric-renderer-registries-v1 3.2.61+df3654b3b0
+	- fabric-rendering-data-attachment-v1 0.3.46+73761d2eb0
+	- fabric-rendering-fluids-v1 3.1.3+2c869dedb0
+	- fabric-rendering-v0 1.1.64+df3654b3b0
+	- fabric-rendering-v1 4.2.4+b21c00cbb0
+	- fabric-resource-conditions-api-v1 4.1.0+83154f1bb0
+	- fabric-resource-loader-v0 1.1.0+c0e5481fb0
+	- fabric-screen-api-v1 2.0.21+7b70ea8ab0
+	- fabric-screen-handler-api-v1 1.3.73+8c7b71c2b0
+	- fabric-sound-api-v1 1.0.21+c5fc38b3b0
+	- fabric-transfer-api-v1 5.1.6+c5fc38b3b0
+	- fabric-transitive-access-wideners-v1 6.0.10+74e2f560b0
+	- fabricloader 0.15.10
+	- faden 1.0.0
+	- geckolib 4.5.1
+	- java 21
+	- minecraft 1.20.6
+	- mixinextras 0.3.5
+	- modmenu 10.0.0-beta.1
+[20:48:02] [main/INFO] (FabricLoader/Mixin) SpongePowered MIXIN Subsystem Version=0.8.5 Source=file:/C:/Users/1zaia/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.13.3+mixin.0.8.5/9527e6b0d2449408958fd1302594dc65ec5ade9c/sponge-mixin-0.13.3+mixin.0.8.5.jar Service=Knot/Fabric Env=CLIENT
+[20:48:02] [main/INFO] (FabricLoader/Mixin) Loaded Fabric development mappings for mixin remapper!
+[20:48:02] [main/INFO] (FabricLoader/Mixin) Compatibility level set to JAVA_17
+[20:48:02] [main/INFO] (FabricLoader/Mixin) Compatibility level set to JAVA_21
+[20:48:05] [main/INFO] (FabricLoader/MixinExtras|Service) Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.3.5).
+[20:48:14] [Datafixer Bootstrap/INFO] (Minecraft) 222 Datafixer optimizations took 486 milliseconds
+[20:48:19] [Render thread/INFO] (Minecraft) Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[20:48:19] [Render thread/INFO] (Minecraft) Setting user: Loqor
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: java.io.FileNotFoundException: D:\Users\1zaia\OneDrive\Documents\GitHub\FadenServer\faden\cache\client\capes.json (The system cannot find the path specified)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at java.base/java.io.FileOutputStream.open0(Native Method)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:289)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:230)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:179)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at java.base/java.io.FileWriter.<init>(FileWriter.java:98)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fuchsia.util.FadenOnlineUtil.getJSONDataOrCache(FadenOnlineUtil.java:68)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fuchsia.common.cape.FadenCapes.register(FadenCapes.java:86)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fuchsia.Faden.init(Faden.java:93)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fuchsia.Faden.onInitialize(Faden.java:68)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fabricmc.loader.impl.FabricLoaderImpl.invokeEntrypoints(FabricLoaderImpl.java:384)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fabricmc.loader.impl.game.minecraft.Hooks.startClient(Hooks.java:52)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.minecraft.client.MinecraftClient.<init>(MinecraftClient.java:484)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.minecraft.client.main.Main.main(Main.java:223)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fabricmc.loader.impl.game.minecraft.MinecraftGameProvider.launch(MinecraftGameProvider.java:470)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fabricmc.loader.impl.launch.knot.Knot.launch(Knot.java:74)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fabricmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:23)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fabricmc.devlaunchinjector.Main.main(Main.java:86)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: java.io.FileNotFoundException: D:\Users\1zaia\OneDrive\Documents\GitHub\FadenServer\faden\cache\client\item_values.json (The system cannot find the path specified)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at java.base/java.io.FileOutputStream.open0(Native Method)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:289)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:230)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:179)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at java.base/java.io.FileWriter.<init>(FileWriter.java:98)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fuchsia.util.FadenOnlineUtil.getJSONDataOrCache(FadenOnlineUtil.java:68)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fuchsia.common.data.ItemValues.add(ItemValues.java:28)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fuchsia.Faden.init(Faden.java:100)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fuchsia.Faden.onInitialize(Faden.java:68)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fabricmc.loader.impl.FabricLoaderImpl.invokeEntrypoints(FabricLoaderImpl.java:384)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fabricmc.loader.impl.game.minecraft.Hooks.startClient(Hooks.java:52)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.minecraft.client.MinecraftClient.<init>(MinecraftClient.java:484)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.minecraft.client.main.Main.main(Main.java:223)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fabricmc.loader.impl.game.minecraft.MinecraftGameProvider.launch(MinecraftGameProvider.java:470)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fabricmc.loader.impl.launch.knot.Knot.launch(Knot.java:74)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fabricmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:23)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fabricmc.devlaunchinjector.Main.main(Main.java:86)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: java.io.FileNotFoundException: D:\Users\1zaia\OneDrive\Documents\GitHub\FadenServer\faden\cache\client\item_values.json (The system cannot find the path specified)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at java.base/java.io.FileOutputStream.open0(Native Method)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:289)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:230)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:179)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at java.base/java.io.FileWriter.<init>(FileWriter.java:98)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fuchsia.common.data.ItemValues.reload(ItemValues.java:43)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fuchsia.common.data.ItemValues.add(ItemValues.java:30)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fuchsia.Faden.init(Faden.java:100)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fuchsia.Faden.onInitialize(Faden.java:68)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fabricmc.loader.impl.FabricLoaderImpl.invokeEntrypoints(FabricLoaderImpl.java:384)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fabricmc.loader.impl.game.minecraft.Hooks.startClient(Hooks.java:52)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.minecraft.client.MinecraftClient.<init>(MinecraftClient.java:484)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.minecraft.client.main.Main.main(Main.java:223)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fabricmc.loader.impl.game.minecraft.MinecraftGameProvider.launch(MinecraftGameProvider.java:470)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fabricmc.loader.impl.launch.knot.Knot.launch(Knot.java:74)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fabricmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:23)
+[20:48:20] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fabricmc.devlaunchinjector.Main.main(Main.java:86)
+[20:48:21] [Render thread/INFO] (Minecraft) [STDERR]: java.io.FileNotFoundException: D:\Users\1zaia\OneDrive\Documents\GitHub\FadenServer\faden\cache\client\online_capes.json (The system cannot find the path specified)
+[20:48:21] [Render thread/INFO] (Minecraft) [STDERR]: 	at java.base/java.io.FileOutputStream.open0(Native Method)
+[20:48:21] [Render thread/INFO] (Minecraft) [STDERR]: 	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:289)
+[20:48:21] [Render thread/INFO] (Minecraft) [STDERR]: 	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:230)
+[20:48:21] [Render thread/INFO] (Minecraft) [STDERR]: 	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:179)
+[20:48:21] [Render thread/INFO] (Minecraft) [STDERR]: 	at java.base/java.io.FileWriter.<init>(FileWriter.java:98)
+[20:48:21] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fuchsia.util.FadenOnlineUtil.getJSONDataOrCache(FadenOnlineUtil.java:68)
+[20:48:21] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fuchsia.common.cape.online.OnlineCapes.retrieve(OnlineCapes.java:19)
+[20:48:21] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fuchsia.Faden.init(Faden.java:107)
+[20:48:21] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fuchsia.Faden.onInitialize(Faden.java:68)
+[20:48:21] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fabricmc.loader.impl.FabricLoaderImpl.invokeEntrypoints(FabricLoaderImpl.java:384)
+[20:48:21] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fabricmc.loader.impl.game.minecraft.Hooks.startClient(Hooks.java:52)
+[20:48:21] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.minecraft.client.MinecraftClient.<init>(MinecraftClient.java:484)
+[20:48:21] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.minecraft.client.main.Main.main(Main.java:223)
+[20:48:21] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fabricmc.loader.impl.game.minecraft.MinecraftGameProvider.launch(MinecraftGameProvider.java:470)
+[20:48:21] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fabricmc.loader.impl.launch.knot.Knot.launch(Knot.java:74)
+[20:48:21] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fabricmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:23)
+[20:48:21] [Render thread/INFO] (Minecraft) [STDERR]: 	at net.fabricmc.devlaunchinjector.Main.main(Main.java:86)
+[20:48:21] [Render thread/INFO] (Indigo) [Indigo] Registering Indigo renderer!
+[20:48:21] [Render thread/INFO] (Mod Menu/Update Checker) Checking mod updates...
+[20:48:21] [Update Checker/Fabric Loader/INFO] (Mod Menu/Update Checker) Update available for 'fabricloader@0.15.10'
+[20:48:22] [Render thread/INFO] (Minecraft) Backend library: LWJGL version 3.3.3-snapshot
+[20:48:25] [Render thread/INFO] (Minecraft) Reloading ResourceManager: vanilla, fabric, cloth-config, fabric-api, fabric-api-base, fabric-api-lookup-api-v1, fabric-biome-api-v1, fabric-block-api-v1, fabric-block-view-api-v2, fabric-blockrenderlayer-v1, fabric-client-tags-api-v1, fabric-command-api-v1, fabric-command-api-v2, fabric-commands-v0, fabric-content-registries-v0, fabric-convention-tags-v1, fabric-convention-tags-v2, fabric-crash-report-info-v1, fabric-data-attachment-api-v1, fabric-data-generation-api-v1, fabric-dimensions-v1, fabric-entity-events-v1, fabric-events-interaction-v0, fabric-game-rule-api-v1, fabric-gametest-api-v1, fabric-item-api-v1, fabric-item-group-api-v1, fabric-key-binding-api-v1, fabric-keybindings-v0, fabric-lifecycle-events-v1, fabric-loot-api-v2, fabric-message-api-v1, fabric-model-loading-api-v1, fabric-models-v0, fabric-networking-api-v1, fabric-object-builder-api-v1, fabric-particles-v1, fabric-recipe-api-v1, fabric-registry-sync-v0, fabric-renderer-api-v1, fabric-renderer-indigo, fabric-renderer-registries-v1, fabric-rendering-data-attachment-v1, fabric-rendering-fluids-v1, fabric-rendering-v0, fabric-rendering-v1, fabric-resource-conditions-api-v1, fabric-resource-loader-v0, fabric-screen-api-v1, fabric-screen-handler-api-v1, fabric-sound-api-v1, fabric-transfer-api-v1, fabric-transitive-access-wideners-v1, fabricloader, faden, modmenu
+[20:48:25] [Worker-Main-1/INFO] (Minecraft) Found unifont_all_no_pua-15.1.04.hex, loading
+[20:48:25] [Worker-Main-10/INFO] (Minecraft) Found unifont_jp_patch-15.1.04.hex, loading
+[20:48:26] [Worker-Main-4/WARN] (Minecraft) Exception loading blockstate definition: 'faden:blockstates/cape_stand.json' missing model for variant: 'faden:cape_stand#'
+[20:48:26] [Worker-Main-4/WARN] (Minecraft) Unable to load model: 'faden:test_cloth#inventory' referenced from: faden:test_cloth#inventory: java.io.FileNotFoundException: faden:models/item/test_cloth.json
+[20:48:26] [Worker-Main-4/WARN] (Minecraft) Unable to load model: 'faden:cape_stand#inventory' referenced from: faden:cape_stand#inventory: java.io.FileNotFoundException: faden:models/item/cape_stand.json
+[20:48:27] [Worker-Main-4/WARN] (Minecraft) Missing textures in model faden:player_cosmetic/harengon/tail/harengon_tail_salt#inventory:
+    minecraft:textures/atlas/blocks.png:faden:item/player_cosmetic/harengon/salt/tail
+[20:48:27] [Worker-Main-4/WARN] (Minecraft) Missing textures in model faden:player_cosmetic/harengon/tail/harengon_tail_white_splotched#inventory:
+    minecraft:textures/atlas/blocks.png:faden:item/player_cosmetic/harengon/white_splotched/tail
+[20:48:27] [Worker-Main-4/WARN] (Minecraft) Missing textures in model faden:player_cosmetic/harengon/tail/harengon_tail_toast#inventory:
+    minecraft:textures/atlas/blocks.png:faden:item/player_cosmetic/harengon/toast/tail
+[20:48:27] [Worker-Main-4/WARN] (Minecraft) Missing textures in model faden:star_coin#inventory:
+    minecraft:textures/atlas/blocks.png:faden:item/coins/star_coin
+[20:48:27] [Render thread/WARN] (Minecraft) Missing sound for event: minecraft:item.goat_horn.play
+[20:48:27] [Render thread/WARN] (Minecraft) Missing sound for event: minecraft:entity.goat.screaming.horn_break
+[20:48:27] [Render thread/INFO] (Minecraft) OpenAL initialized on device OpenAL Soft on Speaker/Headphone (Realtek High Definition Audio)
+[20:48:27] [Render thread/INFO] (Minecraft) Sound engine started
+[20:48:27] [Render thread/INFO] (Minecraft) Created: 1024x512x4 minecraft:textures/atlas/blocks.png-atlas
+[20:48:27] [Render thread/INFO] (Minecraft) Created: 256x256x4 minecraft:textures/atlas/signs.png-atlas
+[20:48:27] [Render thread/INFO] (Minecraft) Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
+[20:48:27] [Render thread/INFO] (Minecraft) Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
+[20:48:27] [Render thread/INFO] (Minecraft) Created: 1024x1024x4 minecraft:textures/atlas/armor_trims.png-atlas
+[20:48:27] [Render thread/INFO] (Minecraft) Created: 128x64x4 minecraft:textures/atlas/decorated_pot.png-atlas
+[20:48:27] [Render thread/INFO] (Minecraft) Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
+[20:48:27] [Render thread/INFO] (Minecraft) Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
+[20:48:27] [Render thread/INFO] (Minecraft) Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
+[20:48:28] [Render thread/INFO] (Minecraft) Created: 512x256x0 minecraft:textures/atlas/particles.png-atlas
+[20:48:28] [Render thread/INFO] (Minecraft) Created: 256x256x0 minecraft:textures/atlas/paintings.png-atlas
+[20:48:28] [Render thread/INFO] (Minecraft) Created: 256x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[20:48:28] [Render thread/INFO] (Minecraft) Created: 64x64x0 minecraft:textures/atlas/map_decorations.png-atlas
+[20:48:28] [Render thread/INFO] (Minecraft) Created: 1024x512x0 minecraft:textures/atlas/gui.png-atlas
+[20:48:28] [Render thread/WARN] (Minecraft) Shader rendertype_entity_translucent_emissive could not find sampler named Sampler2 in the specified shader program.
+[20:48:59] [Render thread/INFO] (Minecraft) Reloading ResourceManager: vanilla, fabric, cloth-config, fabric-api, fabric-api-base, fabric-api-lookup-api-v1, fabric-biome-api-v1, fabric-block-api-v1, fabric-block-view-api-v2, fabric-blockrenderlayer-v1, fabric-client-tags-api-v1, fabric-command-api-v1, fabric-command-api-v2, fabric-commands-v0, fabric-content-registries-v0, fabric-convention-tags-v1, fabric-convention-tags-v2, fabric-crash-report-info-v1, fabric-data-attachment-api-v1, fabric-data-generation-api-v1, fabric-dimensions-v1, fabric-entity-events-v1, fabric-events-interaction-v0, fabric-game-rule-api-v1, fabric-gametest-api-v1, fabric-item-api-v1, fabric-item-group-api-v1, fabric-key-binding-api-v1, fabric-keybindings-v0, fabric-lifecycle-events-v1, fabric-loot-api-v2, fabric-message-api-v1, fabric-model-loading-api-v1, fabric-models-v0, fabric-networking-api-v1, fabric-object-builder-api-v1, fabric-particles-v1, fabric-recipe-api-v1, fabric-registry-sync-v0, fabric-renderer-api-v1, fabric-renderer-indigo, fabric-renderer-registries-v1, fabric-rendering-data-attachment-v1, fabric-rendering-fluids-v1, fabric-rendering-v0, fabric-rendering-v1, fabric-resource-conditions-api-v1, fabric-resource-loader-v0, fabric-screen-api-v1, fabric-screen-handler-api-v1, fabric-sound-api-v1, fabric-transfer-api-v1, fabric-transitive-access-wideners-v1, fabricloader, faden, modmenu, high_contrast, modmenu_high_contrast
+[20:48:59] [Worker-Main-5/INFO] (Minecraft) Found unifont_all_no_pua-15.1.04.hex, loading
+[20:48:59] [Worker-Main-3/INFO] (Minecraft) Found unifont_jp_patch-15.1.04.hex, loading
+[20:49:00] [Worker-Main-3/WARN] (Minecraft) Exception loading blockstate definition: 'faden:blockstates/cape_stand.json' missing model for variant: 'faden:cape_stand#'
+[20:49:00] [Worker-Main-3/WARN] (Minecraft) Unable to load model: 'faden:test_cloth#inventory' referenced from: faden:test_cloth#inventory: java.io.FileNotFoundException: faden:models/item/test_cloth.json
+[20:49:00] [Worker-Main-3/WARN] (Minecraft) Unable to load model: 'faden:cape_stand#inventory' referenced from: faden:cape_stand#inventory: java.io.FileNotFoundException: faden:models/item/cape_stand.json
+[20:49:00] [Worker-Main-3/WARN] (Minecraft) Missing textures in model faden:player_cosmetic/harengon/tail/harengon_tail_salt#inventory:
+    minecraft:textures/atlas/blocks.png:faden:item/player_cosmetic/harengon/salt/tail
+[20:49:00] [Worker-Main-3/WARN] (Minecraft) Missing textures in model faden:player_cosmetic/harengon/tail/harengon_tail_white_splotched#inventory:
+    minecraft:textures/atlas/blocks.png:faden:item/player_cosmetic/harengon/white_splotched/tail
+[20:49:00] [Worker-Main-3/WARN] (Minecraft) Missing textures in model faden:player_cosmetic/harengon/tail/harengon_tail_toast#inventory:
+    minecraft:textures/atlas/blocks.png:faden:item/player_cosmetic/harengon/toast/tail
+[20:49:00] [Worker-Main-3/WARN] (Minecraft) Missing textures in model faden:star_coin#inventory:
+    minecraft:textures/atlas/blocks.png:faden:item/coins/star_coin
+[20:49:00] [Render thread/WARN] (Minecraft) Missing sound for event: minecraft:item.goat_horn.play
+[20:49:00] [Render thread/WARN] (Minecraft) Missing sound for event: minecraft:entity.goat.screaming.horn_break
+[20:49:00] [Render thread/INFO] (Minecraft) OpenAL initialized on device OpenAL Soft on Speaker/Headphone (Realtek High Definition Audio)
+[20:49:00] [Render thread/INFO] (Minecraft) Sound engine started
+[20:49:01] [Render thread/INFO] (Minecraft) Created: 1024x512x4 minecraft:textures/atlas/blocks.png-atlas
+[20:49:01] [Render thread/INFO] (Minecraft) Created: 256x256x4 minecraft:textures/atlas/signs.png-atlas
+[20:49:01] [Render thread/INFO] (Minecraft) Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
+[20:49:01] [Render thread/INFO] (Minecraft) Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
+[20:49:01] [Render thread/INFO] (Minecraft) Created: 1024x1024x4 minecraft:textures/atlas/armor_trims.png-atlas
+[20:49:01] [Render thread/INFO] (Minecraft) Created: 128x64x4 minecraft:textures/atlas/decorated_pot.png-atlas
+[20:49:01] [Render thread/INFO] (Minecraft) Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
+[20:49:01] [Render thread/INFO] (Minecraft) Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
+[20:49:01] [Render thread/INFO] (Minecraft) Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
+[20:49:01] [Render thread/INFO] (Minecraft) Created: 512x256x0 minecraft:textures/atlas/particles.png-atlas
+[20:49:01] [Render thread/INFO] (Minecraft) Created: 256x256x0 minecraft:textures/atlas/paintings.png-atlas
+[20:49:01] [Render thread/INFO] (Minecraft) Created: 256x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[20:49:01] [Render thread/INFO] (Minecraft) Created: 64x64x0 minecraft:textures/atlas/map_decorations.png-atlas
+[20:49:01] [Render thread/INFO] (Minecraft) Created: 1024x512x0 minecraft:textures/atlas/gui.png-atlas
+[20:49:01] [Render thread/WARN] (Minecraft) Shader rendertype_entity_translucent_emissive could not find sampler named Sampler2 in the specified shader program.
+[20:49:17] [Render thread/INFO] (Minecraft) Loaded 1175 recipes
+[20:49:17] [Render thread/INFO] (Minecraft) Loaded 1276 advancements
+[20:49:20] [Render thread/INFO] (BiomeModificationImpl) Applied 0 biome modifications to 0 of 64 new biomes in 3.151 ms
+[20:49:20] [Server thread/INFO] (Minecraft) [STDERR]: java.io.FileNotFoundException: D:\Users\1zaia\OneDrive\Documents\GitHub\FadenServer\faden\cache\1.20.6\player_data.json (The system cannot find the file specified)
+[20:49:20] [Server thread/INFO] (Minecraft) [STDERR]: 	at java.base/java.io.FileInputStream.open0(Native Method)
+[20:49:20] [Server thread/INFO] (Minecraft) [STDERR]: 	at java.base/java.io.FileInputStream.open(FileInputStream.java:213)
+[20:49:20] [Server thread/INFO] (Minecraft) [STDERR]: 	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:152)
+[20:49:20] [Server thread/INFO] (Minecraft) [STDERR]: 	at java.base/java.io.FileReader.<init>(FileReader.java:75)
+[20:49:20] [Server thread/INFO] (Minecraft) [STDERR]: 	at net.fuchsia.server.ServerPlayerDatas.load(ServerPlayerDatas.java:26)
+[20:49:20] [Server thread/INFO] (Minecraft) [STDERR]: 	at net.fuchsia.Faden.lambda$serverEvents$0(Faden.java:120)
+[20:49:20] [Server thread/INFO] (Minecraft) [STDERR]: 	at net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents.lambda$static$0(ServerLifecycleEvents.java:38)
+[20:49:20] [Server thread/INFO] (Minecraft) [STDERR]: 	at net.minecraft.server.MinecraftServer.handler$znl001$fabric-lifecycle-events-v1$beforeSetupServer(MinecraftServer.java:4573)
+[20:49:20] [Server thread/INFO] (Minecraft) [STDERR]: 	at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:658)
+[20:49:20] [Server thread/INFO] (Minecraft) [STDERR]: 	at net.minecraft.server.MinecraftServer.method_29739(MinecraftServer.java:275)
+[20:49:20] [Server thread/INFO] (Minecraft) [STDERR]: 	at java.base/java.lang.Thread.run(Thread.java:1583)
+[20:49:20] [Server thread/INFO] (Minecraft) Starting integrated minecraft server version 1.20.6
+[20:49:20] [Server thread/INFO] (Minecraft) Generating keypair
+[20:49:24] [Server thread/INFO] (Minecraft) Preparing start region for dimension minecraft:overworld
+[20:49:24] [Render thread/INFO] (Minecraft) Preparing spawn area: 2%
+[20:49:25] [Render thread/INFO] (Minecraft) Preparing spawn area: 2%
+[20:49:25] [Render thread/INFO] (Minecraft) Preparing spawn area: 6%
+[20:49:26] [Render thread/INFO] (Minecraft) Preparing spawn area: 18%
+[20:49:26] [Render thread/INFO] (Minecraft) Preparing spawn area: 38%
+[20:49:27] [Render thread/INFO] (Minecraft) Preparing spawn area: 59%
+[20:49:27] [Render thread/INFO] (Minecraft) Preparing spawn area: 77%
+[20:49:27] [Render thread/INFO] (Minecraft) Time elapsed: 3310 ms
+[20:49:27] [Server thread/INFO] (Minecraft) Changing view distance to 9, from 10
+[20:49:27] [Server thread/INFO] (Minecraft) Changing simulation distance to 5, from 0
+[20:49:29] [Server thread/INFO] (Minecraft) Loqor[local:E:89c728bd] logged in with entity id 32 at (-2.5, 68.0, -6.5)
+[20:49:29] [Server thread/INFO] (Minecraft) Loqor joined the game
+[20:49:30] [Render thread/INFO] (Minecraft) [STDOUT]: CALLING LOAD FUNCTION: false
+[20:49:30] [Render thread/INFO] (Minecraft) [STDOUT]: STARTING CLOTH
+[20:49:30] [Render thread/INFO] (Minecraft) [STDOUT]: LOADING CLOTH
+[20:49:30] [Render thread/INFO] (Minecraft) [STDOUT]: BINDING faden:cloth/test_cloth
+[20:49:30] [Render thread/ERROR] (Faden) Error trying to load textures for: CAPES
+java.util.NoSuchElementException: No value present
+	at java.base/java.util.Optional.get(Optional.java:143) ~[?:?]
+	at net.fuchsia.common.cape.FadenCape.load(FadenCape.java:57) ~[main/:?]
+	at net.fuchsia.client.FadenClient.lambda$onInitializeClient$0(FadenClient.java:31) ~[main/:?]
+	at net.fuchsia.client.FadenClient.tryToLoadTextures(FadenClient.java:54) ~[main/:?]
+	at net.fuchsia.client.FadenClient.lambda$onInitializeClient$1(FadenClient.java:29) ~[main/:?]
+	at net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents.lambda$static$2(ClientPlayConnectionEvents.java:50) ~[fabric-networking-api-v1-4.0.8+0dca0349b0.jar:?]
+	at net.fabricmc.fabric.impl.networking.client.ClientPlayNetworkAddon.onServerReady(ClientPlayNetworkAddon.java:60) ~[fabric-networking-api-v1-4.0.8+0dca0349b0.jar:?]
+	at net.minecraft.client.network.ClientPlayNetworkHandler.handler$zji000$fabric-networking-api-v1$handleServerPlayReady(ClientPlayNetworkHandler.java:3028) ~[minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.client.network.ClientPlayNetworkHandler.onGameJoin(ClientPlayNetworkHandler.java:474) ~[minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.network.packet.s2c.play.GameJoinS2CPacket.apply(GameJoinS2CPacket.java:69) ~[minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.network.packet.s2c.play.GameJoinS2CPacket.apply(GameJoinS2CPacket.java:17) ~[minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.network.NetworkThreadUtils.method_11072(NetworkThreadUtils.java:25) ~[minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.util.thread.ThreadExecutor.executeTask(ThreadExecutor.java:162) [minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.util.thread.ReentrantThreadExecutor.executeTask(ReentrantThreadExecutor.java:23) [minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.util.thread.ThreadExecutor.runTask(ThreadExecutor.java:136) [minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.util.thread.ThreadExecutor.runTasks(ThreadExecutor.java:121) [minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.client.MinecraftClient.render(MinecraftClient.java:1275) [minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.client.MinecraftClient.run(MinecraftClient.java:888) [minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.client.main.Main.main(Main.java:265) [minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.fabricmc.loader.impl.game.minecraft.MinecraftGameProvider.launch(MinecraftGameProvider.java:470) [fabric-loader-0.15.10.jar:?]
+	at net.fabricmc.loader.impl.launch.knot.Knot.launch(Knot.java:74) [fabric-loader-0.15.10.jar:?]
+	at net.fabricmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:23) [fabric-loader-0.15.10.jar:?]
+	at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+[20:49:30] [Render thread/INFO] (Minecraft) Loaded 2 advancements
+[20:49:31] [Server thread/INFO] (Minecraft) Saving and pausing game...
+[20:49:31] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
+[20:49:31] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
+[20:49:31] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
+[20:49:38] [Server thread/INFO] (Minecraft) [Loqor: Gave 1 [block.faden.cape_stand] to Loqor]
+[20:49:38] [Render thread/INFO] (Minecraft) [System] [CHAT] Gave 1 [block.faden.cape_stand] to Loqor
+[20:49:40] [Server thread/INFO] (Minecraft) Saving and pausing game...
+[20:49:40] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
+[20:49:40] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
+[20:49:40] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
+[20:49:55] [Server thread/INFO] (Minecraft) Saving and pausing game...
+[20:49:55] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
+[20:49:55] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
+[20:49:55] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
+[20:50:34] [Render thread/WARN] (Minecraft) Failed to load texture: faden:cape/test
+java.io.FileNotFoundException: faden:cape/test
+	at net.minecraft.resource.ResourceFactory.method_43043(ResourceFactory.java:23) ~[minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403) ~[?:?]
+	at net.minecraft.resource.ResourceFactory.getResourceOrThrow(ResourceFactory.java:23) ~[minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at software.bernie.geckolib.cache.texture.AnimatableTexture.load(AnimatableTexture.java:39) ~[geckolib-fabric-1.20.6-4.5.1.jar:?]
+	at net.minecraft.client.texture.TextureManager.loadTexture(TextureManager.java:96) ~[minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.client.texture.TextureManager.registerTexture(TextureManager.java:68) ~[minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.client.texture.TextureManager.getTexture(TextureManager.java:118) ~[minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.client.render.RenderPhase$Texture.method_23563(RenderPhase.java:244) ~[minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.client.render.RenderPhase.startDrawing(RenderPhase.java:37) ~[minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at com.google.common.collect.ImmutableList.forEach(ImmutableList.java:422) ~[guava-32.1.2-jre.jar:?]
+	at net.minecraft.client.render.RenderLayer$MultiPhase.method_23595(RenderLayer.java:1117) ~[minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.client.render.RenderPhase.startDrawing(RenderPhase.java:37) ~[minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.client.render.RenderLayer.draw(RenderLayer.java:902) ~[minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.client.render.VertexConsumerProvider$Immediate.draw(VertexConsumerProvider.java:97) ~[minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.client.render.VertexConsumerProvider$Immediate.method_24213(VertexConsumerProvider.java:76) ~[minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at java.base/java.util.Optional.ifPresent(Optional.java:178) ~[?:?]
+	at net.minecraft.client.render.VertexConsumerProvider$Immediate.draw(VertexConsumerProvider.java:73) ~[minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.client.gui.DrawContext.draw(DrawContext.java:130) ~[minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.client.gui.screen.ingame.InventoryScreen.drawEntity(InventoryScreen.java:157) ~[minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.fuchsia.client.screen.CapeSelectScreen.render(CapeSelectScreen.java:103) ~[main/:?]
+	at net.minecraft.client.gui.screen.Screen.renderWithTooltip(Screen.java:120) ~[minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.client.render.GameRenderer.mixinextras$bridge$renderWithTooltip$180(GameRenderer.java) ~[minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.client.render.GameRenderer.wrapOperation$zfa000$fabric-screen-api-v1$onRenderScreen(GameRenderer.java:1601) [minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.client.render.GameRenderer.render(GameRenderer.java:922) [minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.client.MinecraftClient.render(MinecraftClient.java:1320) [minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.client.MinecraftClient.run(MinecraftClient.java:888) [minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.minecraft.client.main.Main.main(Main.java:265) [minecraft-merged-38d7b66e20-1.20.6-net.fabricmc.yarn.1_20_6.1.20.6+build.1-v2.jar:?]
+	at net.fabricmc.loader.impl.game.minecraft.MinecraftGameProvider.launch(MinecraftGameProvider.java:470) [fabric-loader-0.15.10.jar:?]
+	at net.fabricmc.loader.impl.launch.knot.Knot.launch(Knot.java:74) [fabric-loader-0.15.10.jar:?]
+	at net.fabricmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:23) [fabric-loader-0.15.10.jar:?]
+	at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+[20:50:48] [Server thread/INFO] (Minecraft) Saving and pausing game...
+[20:50:48] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
+[20:50:48] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
+[20:50:48] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
+[20:50:58] [Server thread/INFO] (Minecraft) Saving and pausing game...
+[20:50:58] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
+[20:50:58] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
+[20:50:58] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
+[20:51:53] [Server thread/INFO] (Minecraft) Saving and pausing game...
+[20:51:54] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
+[20:51:54] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
+[20:51:54] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
+[20:51:54] [Server thread/INFO] (Minecraft) Loqor lost connection: Disconnected
+[20:51:54] [Server thread/INFO] (Minecraft) Loqor left the game
+[20:51:54] [Server thread/INFO] (Minecraft) Stopping singleplayer server as player logged out
+[20:51:54] [Server thread/INFO] (Minecraft) Stopping server
+[20:51:54] [Server thread/INFO] (Minecraft) Saving players
+[20:51:54] [Server thread/INFO] (Minecraft) Saving worlds
+[20:51:55] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
+[20:51:57] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
+[20:51:57] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
+[20:51:57] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (New World): All chunks are saved
+[20:51:57] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[20:51:57] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[20:51:57] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage: All dimensions are saved
+[20:52:00] [Render thread/INFO] (Minecraft) Stopping!
