@@ -31,6 +31,15 @@ bin/
 # fabric
 
 run/
+config/
+data/
+downloads/
+faden/
+saves/
+command_history.txt
+options.txt
+realms_persistence.json
+usercache.json
 
 # java
 
