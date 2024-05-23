@@ -3,11 +3,14 @@ package net.fuchsia;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 import net.fuchsia.common.CheckSums;
+import net.fuchsia.common.cape.FadenCape;
 import net.fuchsia.common.cape.online.OnlineCapes;
 import net.fuchsia.util.FadenOnlineUtil;
+import net.minecraft.client.MinecraftClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -105,6 +108,8 @@ public class Faden implements ModInitializer {
 		FadenGear.register();
 		FadenBlocks.register();
 		OnlineCapes.retrieve();
+
+
 	}
 
 	public static void argumentTypes() {
@@ -144,6 +149,14 @@ public class Faden implements ModInitializer {
 			FadenNetwork.Server.syncPlayerData(serverPlayerEntity, serverPlayerEntity.getUuid(), ServerPlayerDatas.getPlayerDatas().getOrDefault(serverPlayerEntity.getUuid(), new PlayerData()));
 			//TODO REMVOE: QUEST TESTING
 			FadenQuests.TEST.startQuest(serverPlayerEntity.getUuid());
+
+			//TODO REMOVE TOMORROW
+			ArrayList<String> capes = new ArrayList<>();
+			for (FadenCape cape : FadenCapes.getCapes()) {
+				capes.add(cape.getId());
+			}
+			FadenCapes.getPlayerCapes().put(serverPlayerEntity.getUuid(), capes);
+
 		});
 
 
