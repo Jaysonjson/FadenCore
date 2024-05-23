@@ -1,6 +1,7 @@
 package net.fuchsia.client;
 
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.fuchsia.Faden;
 import net.fuchsia.client.overlay.StatsOverlay;
 import net.fuchsia.common.cape.FadenCape;
 import net.fuchsia.common.cape.FadenCapes;
@@ -23,11 +24,13 @@ public class FadenClient implements ClientModInitializer {
     public void onInitializeClient() {
         FadenNetwork.registerS2C();
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
-            ClientRaceSkinCache.add();
-            for (FadenCape cape : FadenCapes.getCapes()) {
-                cape.load();
-            }
-            FadenCloths.load();
+            tryToLoadTextures(FadenCloths::load, "CLOTH");
+            tryToLoadTextures(ClientRaceSkinCache::add, "RACE SKINS");
+            tryToLoadTextures(() -> {
+                for (FadenCape cape : FadenCapes.getCapes()) {
+                    cape.load();
+                }
+            }, "CAPES");
         });
 
 
@@ -42,6 +45,16 @@ public class FadenClient implements ClientModInitializer {
         });
 
         HudRenderCallback.EVENT.register(new StatsOverlay());
+
+        registerModels();
+    }
+
+    private static void tryToLoadTextures(Runnable action, String textureType) {
+        try {
+            action.run();
+        } catch (Exception e) {
+            Faden.LOGGER.error("Error trying to load textures for: " + textureType, e);
+        }
     }
 
     public void registerModels() {
