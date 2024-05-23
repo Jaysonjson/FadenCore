@@ -2,6 +2,7 @@ package net.fuchsia.client.screen;
 
 import net.fuchsia.common.cape.FadenCapes;
 import net.minecraft.client.gui.widget.CheckboxWidget;
+import net.minecraft.client.gui.widget.TextFieldWidget;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
@@ -29,6 +30,7 @@ public class CapeSelectScreen extends Screen {
     public static FadenCape PRE_SELECTED_CAPE = null;
     public ButtonWidget selectCapeWidget = null;
     public CheckboxWidget lockedWidget = null;
+    public TextFieldWidget searchBox;
     public CapeSelectScreen() {
         super(Text.literal(""));
     }
@@ -55,10 +57,12 @@ public class CapeSelectScreen extends Screen {
                 .size(90, 20)
                 .build());
 
-        this.addDrawableChild(lockedWidget = CheckboxWidget.builder(Text.literal("Show locked"), textRenderer)
+        this.addDrawableChild(lockedWidget = CheckboxWidget.builder(Text.translatable("screen.faden.show_locked"), textRenderer)
                         .pos(14, 27)
                         .checked(false)
                 .build());
+
+        this.addDrawableChild(searchBox = new TextFieldWidget(MinecraftClient.getInstance().textRenderer, lockedWidget.getX() + textRenderer.getWidth(Text.translatable("screen.faden.show_locked")) + 25, lockedWidget.getY(), 95, 18, Text.of("")));
 
         this.addSelectableChild(this.capes);
     }
@@ -77,9 +81,15 @@ public class CapeSelectScreen extends Screen {
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         if(mouseX >= lockedWidget.getX() && mouseX <= lockedWidget.getX() + lockedWidget.getWidth() && mouseY >= lockedWidget.getY() && mouseY <= lockedWidget.getY() + lockedWidget.getHeight()) {
-            capes.reload(!lockedWidget.isChecked());
+            capes.reload(!lockedWidget.isChecked(), searchBox.getText());
         }
         return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean keyReleased(int keyCode, int scanCode, int modifiers) {
+        capes.reload(!lockedWidget.isChecked(), searchBox.getText());
+        return super.keyReleased(keyCode, scanCode, modifiers);
     }
 
     @Override
