@@ -22,8 +22,16 @@ public class CapeListWidget extends AlwaysSelectedEntryListWidget<CapeListEntry>
         PlayerData data = ClientPlayerDatas.getPlayerData(MinecraftClient.getInstance().player.getUuid());
         int f = 0;
         if(data != null) {
-            if(FadenCapes.getPlayerCapes().containsKey(MinecraftClient.getInstance().player.getUuid())) {
-                if(!showAll) {
+            if(showAll) {
+                for (FadenCape cape : FadenCapes.getCapes()) {
+                    addEntry(new CapeListEntry(cape));
+                    if (data.getSelectedCapeId().equalsIgnoreCase(cape.getId())) {
+                        setSelected(getEntry(f));
+                    }
+                    ++f;
+                }
+            } else {
+                if (FadenCapes.getPlayerCapes().containsKey(MinecraftClient.getInstance().player.getUuid())) {
                     for (String s : FadenCapes.getPlayerCapes().get(MinecraftClient.getInstance().player.getUuid())) {
                         FadenCape cape = FadenCapes.getCapeById(s);
                         if (cape != null) {
@@ -33,14 +41,6 @@ public class CapeListWidget extends AlwaysSelectedEntryListWidget<CapeListEntry>
                             }
                             ++f;
                         }
-                    }
-                } else {
-                    for (FadenCape cape : FadenCapes.getCapes()) {
-                        addEntry(new CapeListEntry(cape));
-                        if (data.getSelectedCapeId().equalsIgnoreCase(cape.getId())) {
-                            setSelected(getEntry(f));
-                        }
-                        ++f;
                     }
                 }
             }
