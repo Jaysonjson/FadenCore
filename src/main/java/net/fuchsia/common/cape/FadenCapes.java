@@ -1,24 +1,16 @@
 package net.fuchsia.common.cape;
 
-import com.google.gson.reflect.TypeToken;
-import net.fabricmc.loader.api.FabricLoader;
-import net.fuchsia.Faden;
-import net.fuchsia.common.cape.online.OnlineCape;
-import net.fuchsia.common.cape.online.OnlineCapeCache;
-import net.fuchsia.config.FadenOptions;
-import net.fuchsia.server.PlayerData;
-import net.fuchsia.server.client.ClientPlayerDatas;
-import net.fuchsia.util.FadenCheckSum;
-import net.fuchsia.util.FadenOnlineUtil;
-import net.minecraft.text.Text;
-import org.apache.http.entity.FileEntity;
-
-import java.io.*;
+import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
+
+import net.fabricmc.loader.api.FabricLoader;
+import net.fuchsia.config.FadenOptions;
+import net.fuchsia.server.PlayerData;
+import net.fuchsia.server.client.ClientPlayerDatas;
+import net.minecraft.text.Text;
 
 public class FadenCapes {
 

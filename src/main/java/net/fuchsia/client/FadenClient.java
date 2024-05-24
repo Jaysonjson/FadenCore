@@ -1,24 +1,20 @@
 package net.fuchsia.client;
 
+import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 import net.fuchsia.Faden;
+import net.fuchsia.client.handler.FadenItemModelHandler;
 import net.fuchsia.client.overlay.StatsOverlay;
+import net.fuchsia.client.registry.FadenItemModelRegistry;
 import net.fuchsia.common.cape.FadenCape;
 import net.fuchsia.common.cape.FadenCapes;
-import net.fuchsia.client.handler.FadenItemModelHandler;
-import net.fuchsia.client.registry.FadenItemModelRegistry;
 import net.fuchsia.common.init.FadenCloths;
 import net.fuchsia.common.objects.tooltip.FadenTooltipComponent;
 import net.fuchsia.common.objects.tooltip.FadenTooltipData;
-import net.fuchsia.network.FadenNetwork;
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
-import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 import net.fuchsia.common.race.skin.client.ClientRaceSkinCache;
-import net.minecraft.client.MinecraftClient;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+import net.fuchsia.network.FadenNetwork;
 
 public class FadenClient implements ClientModInitializer {
 

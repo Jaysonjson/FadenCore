@@ -1,7 +1,7 @@
 package net.fuchsia.client.screen.widgets;
 
-import com.terraformersmc.modmenu.gui.widget.ModListWidget;
-import com.terraformersmc.modmenu.gui.widget.entries.ModListEntry;
+import org.jetbrains.annotations.Nullable;
+
 import net.fuchsia.client.screen.CapeSelectScreen;
 import net.fuchsia.common.cape.FadenCape;
 import net.fuchsia.common.cape.FadenCapes;
@@ -9,7 +9,6 @@ import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.client.ClientPlayerDatas;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.widget.AlwaysSelectedEntryListWidget;
-import org.jetbrains.annotations.Nullable;
 
 public class CapeListWidget extends AlwaysSelectedEntryListWidget<CapeListEntry> implements AutoCloseable{
     public CapeListWidget(MinecraftClient minecraftClient, int i, int j, int k, int l, CapeSelectScreen screen) {

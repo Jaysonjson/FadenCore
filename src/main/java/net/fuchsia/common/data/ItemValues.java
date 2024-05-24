@@ -1,6 +1,7 @@
 package net.fuchsia.common.data;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
 import java.nio.file.Path;
 import java.util.HashMap;
 
@@ -8,10 +9,6 @@ import com.google.gson.reflect.TypeToken;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.fuchsia.Faden;
-import net.fuchsia.common.cape.FadenCapes;
-import net.fuchsia.common.cape.online.OnlineCape;
-import net.fuchsia.common.cape.online.OnlineCapeCache;
-import net.fuchsia.util.FadenCheckSum;
 import net.fuchsia.util.FadenOnlineUtil;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;

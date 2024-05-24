@@ -1,19 +1,18 @@
 package net.fuchsia.util;
 
-import com.google.gson.reflect.TypeToken;
-import net.fuchsia.Faden;
-import net.fuchsia.common.cape.FadenCapes;
-import net.fuchsia.common.cape.online.OnlineCape;
-import net.fuchsia.common.cape.online.OnlineCapeCache;
-import net.fuchsia.config.FadenOptions;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
-import java.util.UUID;
+
+import com.google.gson.reflect.TypeToken;
+
+import net.fuchsia.Faden;
 
 public class FadenOnlineUtil {
 

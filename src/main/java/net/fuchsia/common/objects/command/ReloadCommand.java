@@ -5,7 +5,6 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
-import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.common.data.ItemValues;
 import net.fuchsia.network.FadenNetwork;
 import net.minecraft.server.command.CommandManager;

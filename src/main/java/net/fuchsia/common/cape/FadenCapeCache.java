@@ -1,10 +1,5 @@
 package net.fuchsia.common.cape;
 
-import com.google.gson.reflect.TypeToken;
-import net.fabricmc.loader.api.FabricLoader;
-import net.fuchsia.Faden;
-import net.fuchsia.util.FadenOnlineUtil;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.nio.file.Files;
@@ -12,6 +7,11 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
+
+import com.google.gson.reflect.TypeToken;
+
+import net.fabricmc.loader.api.FabricLoader;
+import net.fuchsia.Faden;
 
 public class FadenCapeCache {
 

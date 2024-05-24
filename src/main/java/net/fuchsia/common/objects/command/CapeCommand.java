@@ -1,13 +1,14 @@
 package net.fuchsia.common.objects.command;
 
+import java.util.ArrayList;
+
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+
 import net.fuchsia.common.cape.FadenCapes;
-import net.fuchsia.common.objects.CoinMap;
 import net.fuchsia.common.objects.command.types.CapeArgumentType;
 import net.fuchsia.network.FadenNetwork;
 import net.minecraft.command.argument.EntityArgumentType;
@@ -16,8 +17,6 @@ import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
-
-import java.util.ArrayList;
 
 public class CapeCommand {
 
