@@ -12,5 +12,6 @@ public class FadenCommands implements CommandRegistrationCallback {
         CurrencyCommand.register(dispatcher);
         RaceCommand.register(dispatcher);
         ReloadCommand.register(dispatcher);
+        CapeCommand.register(dispatcher);
     }
 }

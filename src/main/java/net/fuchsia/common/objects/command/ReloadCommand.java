@@ -18,8 +18,8 @@ public class ReloadCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         LiteralArgumentBuilder<ServerCommandSource> literalCommandNode = CommandManager.literal("faden")
                 .then(CommandManager.literal("reload").requires((source) -> source.hasPermissionLevel(2))
-                        .then(CommandManager.literal("cape")
-                                                .executes(context -> reloadCapes(context)))
+                        //.then(CommandManager.literal("cape")
+                                                //.executes(context -> reloadCapes(context)))
 
                         .then(CommandManager.literal("item_values")
                                                 .executes(context -> reloadItemValues(context))));
@@ -28,7 +28,6 @@ public class ReloadCommand {
     }
 
     public static int reloadCapes(CommandContext<ServerCommandSource> source) throws CommandSyntaxException {
-        FadenCapes.register();
         for (ServerPlayerEntity serverPlayerEntity : source.getSource().getServer().getPlayerManager().getPlayerList()) {
             FadenNetwork.Server.reloadCapes(serverPlayerEntity);
         }

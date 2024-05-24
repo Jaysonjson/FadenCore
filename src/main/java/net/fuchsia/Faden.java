@@ -8,6 +8,7 @@ import java.util.Random;
 
 import net.fuchsia.common.CheckSums;
 import net.fuchsia.common.cape.FadenCape;
+import net.fuchsia.common.cape.FadenCapeCache;
 import net.fuchsia.common.cape.online.OnlineCapes;
 import net.fuchsia.util.FadenOnlineUtil;
 import net.minecraft.client.MinecraftClient;
@@ -35,6 +36,7 @@ import net.fuchsia.common.init.FadenSoundEvents;
 import net.fuchsia.common.init.FadenTabs;
 import net.fuchsia.common.objects.CoinMap;
 import net.fuchsia.common.objects.command.FadenCommands;
+import net.fuchsia.common.objects.command.types.CapeArgumentType;
 import net.fuchsia.common.objects.command.types.RaceArgumentType;
 import net.fuchsia.common.objects.command.types.RaceSubIdArgumentType;
 import net.fuchsia.common.quest.FadenQuests;
@@ -93,7 +95,6 @@ public class Faden implements ModInitializer {
 		} catch (Exception ignored) {
 
 		}
-		FadenCapes.register();
 		RaceCosmetics.add();
 		FadenSoundEvents.register();
 		FadenItems.register();
@@ -113,6 +114,7 @@ public class Faden implements ModInitializer {
 	}
 
 	public static void argumentTypes() {
+		ArgumentTypeRegistry.registerArgumentType(FadenIdentifier.create("cape_argument"), CapeArgumentType.class, ConstantArgumentSerializer.of(CapeArgumentType::empty));
 		ArgumentTypeRegistry.registerArgumentType(FadenIdentifier.create("race_sub_id_argument"), RaceSubIdArgumentType.class, ConstantArgumentSerializer.of(RaceSubIdArgumentType::empty));
 		ArgumentTypeRegistry.registerArgumentType(FadenIdentifier.create("race_argument"), RaceArgumentType.class, ConstantArgumentSerializer.of(RaceArgumentType::empty));
 	}
@@ -124,6 +126,7 @@ public class Faden implements ModInitializer {
 			QuestCache.load();
 			ServerPlayerDatas.load();
 			ServerPlayerDatas.SERVER = server;
+			FadenCapeCache.load();
 		});
 
 		ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
@@ -131,6 +134,7 @@ public class Faden implements ModInitializer {
 			ServerRaceCache.Cache.save();
 			QuestCache.save();
 			ServerPlayerDatas.save();
+			FadenCapeCache.save();
 		});
 
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
@@ -143,20 +147,13 @@ public class Faden implements ModInitializer {
 			RaceSkinMap.Cache.sendUpdate(serverPlayerEntity, server);
 			ServerRaceCache.Cache.sendUpdate(serverPlayerEntity, server, false);
 			FadenNetwork.Server.sendPlayerDatas(serverPlayerEntity);
+			FadenNetwork.Server.sendPlayerCapes(serverPlayerEntity);
 			for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
 				FadenNetwork.Server.syncPlayerData(player, serverPlayerEntity.getUuid(), ServerPlayerDatas.getPlayerDatas().getOrDefault(serverPlayerEntity.getUuid(), new PlayerData()));
 			}
 			FadenNetwork.Server.syncPlayerData(serverPlayerEntity, serverPlayerEntity.getUuid(), ServerPlayerDatas.getPlayerDatas().getOrDefault(serverPlayerEntity.getUuid(), new PlayerData()));
 			//TODO REMVOE: QUEST TESTING
 			FadenQuests.TEST.startQuest(serverPlayerEntity.getUuid());
-
-			//TODO REMOVE TOMORROW
-			ArrayList<String> capes = new ArrayList<>();
-			for (FadenCape cape : FadenCapes.getCapes()) {
-				capes.add(cape.getId());
-			}
-			FadenCapes.getPlayerCapes().put(serverPlayerEntity.getUuid(), capes);
-
 		});
 
 

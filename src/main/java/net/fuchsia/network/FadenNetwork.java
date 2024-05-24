@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fuchsia.Faden;
+import net.fuchsia.common.cape.FadenCapeCache;
 import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.common.data.ItemValues;
 import net.fuchsia.common.race.data.RaceData;
@@ -14,15 +15,7 @@ import net.fuchsia.common.race.data.ServerRaceCache;
 import net.fuchsia.common.race.skin.provider.SkinProvider;
 import net.fuchsia.common.race.skin.server.ServerSkinCache;
 import net.fuchsia.network.c2s.RequestCapeChangeC2SPacket;
-import net.fuchsia.network.s2c.RacePacket;
-import net.fuchsia.network.s2c.ReloadServerJSONS2CPacket;
-import net.fuchsia.network.s2c.RemoveSkinS2CPacket;
-import net.fuchsia.network.s2c.SendAllRaceSkinsS2CPacket;
-import net.fuchsia.network.s2c.SendAllRacesS2CPacket;
-import net.fuchsia.network.s2c.SendPlayerDatasS2CPacket;
-import net.fuchsia.network.s2c.SendRaceUpdateS2CPacket;
-import net.fuchsia.network.s2c.SendSinglePlayerDataS2CPacket;
-import net.fuchsia.network.s2c.SendSkinS2CPacket;
+import net.fuchsia.network.s2c.*;
 import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.ServerPlayerDatas;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -38,6 +31,8 @@ public class FadenNetwork {
         PayloadTypeRegistry.playS2C().register(SendAllRacesS2CPacket.ID, SendAllRacesS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(SendPlayerDatasS2CPacket.ID, SendPlayerDatasS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(SendSinglePlayerDataS2CPacket.ID, SendSinglePlayerDataS2CPacket.CODEC);
+        PayloadTypeRegistry.playS2C().register(SendCapesS2CPacket.ID, SendCapesS2CPacket.CODEC);
+        PayloadTypeRegistry.playS2C().register(SendCapeUpdateS2CPacket.ID, SendCapeUpdateS2CPacket.CODEC);
 
         ClientPlayNetworking.registerGlobalReceiver(SendRaceUpdateS2CPacket.ID, SendRaceUpdateS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(RemoveSkinS2CPacket.ID, RemoveSkinS2CPacket::receive);
@@ -47,6 +42,8 @@ public class FadenNetwork {
         ClientPlayNetworking.registerGlobalReceiver(SendAllRacesS2CPacket.ID, SendAllRacesS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(SendPlayerDatasS2CPacket.ID, SendPlayerDatasS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(SendSinglePlayerDataS2CPacket.ID, SendSinglePlayerDataS2CPacket::receive);
+        ClientPlayNetworking.registerGlobalReceiver(SendCapesS2CPacket.ID, SendCapesS2CPacket::receive);
+        ClientPlayNetworking.registerGlobalReceiver(SendCapeUpdateS2CPacket.ID, SendCapeUpdateS2CPacket::receive);
     }
 
     public static void registerC2S() {
@@ -114,6 +111,14 @@ public class FadenNetwork {
 
         public static void syncPlayerData(ServerPlayerEntity player, UUID playerUuid, PlayerData playerData) {
             ServerPlayNetworking.send(player, new SendSinglePlayerDataS2CPacket(playerUuid, playerData));
+        }
+
+        public static void sendPlayerCapes(ServerPlayerEntity player) {
+            ServerPlayNetworking.send(player, new SendCapesS2CPacket(FadenCapes.getPlayerCapes()));
+        }
+
+        public static void sendCapeUpdate(ServerPlayerEntity player, UUID uuid, String cape, boolean remove) {
+            ServerPlayNetworking.send(player, new SendCapeUpdateS2CPacket(uuid, cape, remove));
         }
     }
 

@@ -18,6 +18,7 @@ import net.fuchsia.common.race.skin.client.ClientRaceSkinCache;
 import net.minecraft.client.MinecraftClient;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class FadenClient implements ClientModInitializer {
 
@@ -34,16 +35,6 @@ public class FadenClient implements ClientModInitializer {
                     cape.load();
                 }
             }, "CAPES");
-
-            //TODO REMOVE TOMORROW
-
-            ArrayList<String> capes = new ArrayList<>();
-            for (FadenCape cape : FadenCapes.getCapes()) {
-                capes.add(cape.getId());
-            }
-            FadenCapes.getPlayerCapes().put(MinecraftClient.getInstance().player.getUuid(), capes);
-
-
         });
 
 

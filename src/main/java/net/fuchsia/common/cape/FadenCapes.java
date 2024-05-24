@@ -61,6 +61,7 @@ public class FadenCapes {
     }
 
     public static HashMap<UUID, ArrayList<String>> getPlayerCapes() {
+        if(PLAYER_CAPES == null) PLAYER_CAPES = new HashMap<>();
         return PLAYER_CAPES;
     }
 
@@ -78,12 +79,13 @@ public class FadenCapes {
     }
 
     public static boolean playerHasCape(UUID uuid) {
-        return PLAYER_CAPES.containsKey(uuid);
+        return getPlayerCapes().containsKey(uuid);
     }
 
+    @Deprecated
     public static void register() {
         if(FadenOptions.getConfig().CUSTOM_CAPES) {
-            PLAYER_CAPES = Faden.GSON.fromJson(FadenOnlineUtil.getJSONDataOrCache("https://raw.githubusercontent.com/FuchsiaTeam/FadenData/main/capes.json", CACHE_PATH.toFile(), Faden.CHECKSUMS.capes), new TypeToken<HashMap<UUID, ArrayList<String>>>(){}.getType());
+            //PLAYER_CAPES = Faden.GSON.fromJson(FadenOnlineUtil.getJSONDataOrCache("https://raw.githubusercontent.com/FuchsiaTeam/FadenData/main/capes.json", CACHE_PATH.toFile(), Faden.CHECKSUMS.capes), new TypeToken<HashMap<UUID, ArrayList<String>>>(){}.getType());
         }
     }
 }
