@@ -1,6 +1,7 @@
 plugins {
 	id 'fabric-loom' version '1.6-SNAPSHOT'
 	id 'maven-publish'
+	id 'java'
 }
 
 version = project.mod_version
@@ -15,6 +16,50 @@ loom {
 }
 
 repositories {
+
+	maven {
+		name = 'GeckoLib'
+		url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+	}
+
+	maven {
+		name = "Jared's maven"
+		url = "https://maven.blamejared.com/"
+	}
+	maven {
+		name = "ModMaven"
+		url = "https://modmaven.dev"
+	}
+
+	maven {
+		name = 'ModMenu'
+		url 'https://maven.terraformersmc.com/releases/'
+	}
+
+	maven { url "https://maven.shedaniel.me" }
+
+	repositories {
+		maven {
+			name = 'GeckoLib'
+			url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+			content {
+				includeGroup("software.bernie.geckolib")
+			}
+		}
+	}
+
+	exclusiveContent {
+		forRepository {
+			maven {
+				name = "Modrinth"
+				url = "https://api.modrinth.com/maven"
+			}
+		}
+		filter {
+			includeGroup "maven.modrinth"
+		}
+	}
+	maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 }
 
 fabricApi {
@@ -27,7 +72,34 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
+	modApi "com.terraformersmc:modmenu:10.0.0-beta.1"
+
+	//RE-ADD ONCE 1.20.5 VERSIONS RE OUT!
+	modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${rei_version}"
+	//modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rei_version}"
+	modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${rei_version}"
+	modCompileOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rei_version}"
+
+	modImplementation "software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}"
+
+	modApi("me.shedaniel.cloth:cloth-config-fabric:${config_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
+
+	//annotationProcessor 'systems.manifold:manifold-preprocessor:2024.1.12'
+	//testAnnotationProcessor 'systems.manifold:manifold-preprocessor:2024.1.12'
 }
+
+/*if (JavaVersion.current() != JavaVersion.VERSION_1_8 &&
+		sourceSets.main.allJava.files.any {it.name == "module-info.java"}) {
+	tasks.withType(JavaCompile) {
+		options.compilerArgs += ['-Xplugin:Manifold', '--module-path', it.classpath.asPath]
+	}
+} else {
+	tasks.withType(JavaCompile) {
+		options.compilerArgs += ['-Xplugin:Manifold']
+	}
+}*/
 
 processResources {
 	inputs.property "version", project.version
@@ -38,7 +110,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 17
+	it.options.release = 21
 }
 
 java {

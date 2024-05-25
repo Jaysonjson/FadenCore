@@ -1,2 +1,15 @@
 accessWidener v1 named
 accessible field net/minecraft/data/client/ItemModelGenerator writer Ljava/util/function/BiConsumer;
+accessible method net/minecraft/client/render/entity/LivingEntityRenderer addFeature (Lnet/minecraft/client/render/entity/feature/FeatureRenderer;)Z
+accessible field net/minecraft/client/render/GameRenderer blurPostProcessor Lnet/minecraft/client/gl/PostEffectProcessor;
+accessible method net/minecraft/client/gui/hud/InGameHud renderArmor (Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/entity/player/PlayerEntity;IIII)V
+accessible field net/minecraft/client/gui/hud/InGameHud AIR_TEXTURE Lnet/minecraft/util/Identifier;
+accessible field net/minecraft/client/gui/hud/InGameHud AIR_BURSTING_TEXTURE Lnet/minecraft/util/Identifier;
+accessible field net/minecraft/screen/PlayerScreenHandler EMPTY_ARMOR_SLOT_TEXTURES [Lnet/minecraft/util/Identifier;
+accessible field net/minecraft/client/gui/screen/ingame/HandledScreen handler Lnet/minecraft/screen/ScreenHandler;
+accessible field net/minecraft/client/render/entity/model/PlayerEntityModel ear Lnet/minecraft/client/model/ModelPart;
+accessible field net/minecraft/client/render/entity/model/PlayerEntityModel cloak Lnet/minecraft/client/model/ModelPart;
+accessible field net/minecraft/entity/player/PlayerEntity POSE_DIMENSIONS Ljava/util/Map;
+accessible field net/minecraft/entity/LivingEntity SLEEPING_DIMENSIONS Lnet/minecraft/entity/EntityDimensions;
+accessible field net/minecraft/client/gl/PostEffectProcessor targetsByName Ljava/util/Map;
+accessible field net/minecraft/client/gl/PostEffectProcessor defaultSizedTargets Ljava/util/List;

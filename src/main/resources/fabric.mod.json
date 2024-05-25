@@ -2,31 +2,42 @@
 	"schemaVersion": 1,
 	"id": "faden",
 	"version": "${version}",
-	"name": "Faden Server",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "Faden Core",
+	"description": "Faden Core",
 	"authors": [
-		"Me!"
+		"Fuchsia, Jayson.json, Ginger, Frogrilla, Derpy_7, animecheeze, Angel Dust"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://discord.gg/8kUVUTHapX",
+		"sources": "https://github.com/FuchsiaTeam/FadenServer",
+		"issues": "https://github.com/FuchsiaTeam/FadenServer/issues"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/faden/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-          "json.jayson.Faden"
+          "net.fuchsia.Faden"
 		],
 		"fabric-datagen": [
-			"json.jayson.datagen.FadenDataGen"
+			"net.fuchsia.datagen.FadenDataGen"
 		],
 		"client": [
-			"json.jayson.client.FadenClient"
+			"net.fuchsia.client.FadenClient"
+		],
+		"modmenu": [
+			"net.fuchsia.compat.FadenModMenu"
+		],
+		"rei_client": [
+			"net.fuchsia.compat.rei.FadenREIClientPlugin"
+		],
+		"rei_common": [
+			"net.fuchsia.compat.rei.FadenREIServerPlugin"
 		]
 	},
 	"mixins": [
-		"faden.mixins.json"
+		"faden.mixins.json",
+		"faden.client.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.15.7",

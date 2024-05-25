@@ -1,0 +1,42 @@
+{
+	"credit": "Made by TheGingerDoctor",
+	"texture_size": [32, 32],
+	"textures": {
+		"2": "faden:item/player_cosmetic/elf/pale/ears",
+		"particle": "faden:item/player_cosmetic/elf/pale/ears"
+	},
+	"elements": [
+		{
+			"from": [11.99, -15.01, 7.99],
+			"to": [17.01, -10.99, 8.01],
+			"rotation": {"angle": -45, "axis": "y", "origin": [12, -14, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 2.5, 2], "texture": "#2"},
+				"east": {"uv": [0, 0, 0, 2], "texture": "#2"},
+				"south": {"uv": [2.5, 0, 5, 2], "texture": "#2"},
+				"west": {"uv": [2.5, 0, 2.5, 2], "texture": "#2"},
+				"up": {"uv": [2.5, 0, 0, 0], "texture": "#2"},
+				"down": {"uv": [5, 0, 2.5, 0], "texture": "#2"}
+			}
+		},
+		{
+			"from": [-1.01, -15.01, 7.99],
+			"to": [4.01, -10.99, 8.01],
+			"rotation": {"angle": 45, "axis": "y", "origin": [4, -14, 8]},
+			"faces": {
+				"north": {"uv": [5, 0, 7.5, 2], "texture": "#2"},
+				"east": {"uv": [5, 0, 5, 2], "texture": "#2"},
+				"south": {"uv": [7.5, 0, 10, 2], "texture": "#2"},
+				"west": {"uv": [7.5, 0, 7.5, 2], "texture": "#2"},
+				"up": {"uv": [7.5, 0, 5, 0], "texture": "#2"},
+				"down": {"uv": [10, 0, 7.5, 0], "texture": "#2"}
+			}
+		}
+	],
+	"display": {
+		"head": {
+			"translation": [0, 6.5, 0],
+			"scale": [1.6, 1.6, 1.6]
+		}
+	}
+}

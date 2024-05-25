@@ -7,6 +7,46 @@
 	"item.faden.silver_ingot": "Silver Ingot",
 	"item.faden.ender_coin": "Ender Coin",
 	"item.faden.netherite_coin": "Netherite Coin",
+	"item.faden.king_of_water_necklace": "King Of Water Necklace",
+	"item.faden.music_disc_faden": "Faden Music Disc",
+	"item.faden.music_disc_faden.desc": "Lucas Burnett - Faden",
+
 	"itemgroup.faden.misc": "Faden Misc",
-	"lore.faden.coin_value": "(Actual Coin Value)"
+
+	"config.faden.category.race": "Race",
+	"config.faden.category.interface": "Interface",
+	"config.faden.category.vanilla": "Vanilla",
+	"config.faden.enable_vanilla_blur": "Enable Vanilla Blur in other Screens",
+	"config.faden.enable_player_race_skins": "Enable Player Race Skins",
+	"config.faden.enable_custom_capes": "Enable Custom Capes",
+	"config.faden.title": "Faden Configuration",
+
+	"tooltip.faden.toggle_cloth": "Toggle Cloth",
+	"tooltip.faden.toggle_gear": "Toggle Gear",
+	"tooltip.faden.free_water_movement": "Allows Free Water Movement",
+	"tooltip.faden.damage_increase_value": "Increases DMG by %s DP",
+	"tooltip.faden.damage_increase_percentage": "Increases DMG by %s%",
+	"tooltip.faden.jump_increase_value": "Increases JMP by %s",
+	"tooltip.faden.jump_increase_percentage": "Increases JMP by %s%",
+	"tooltip.faden.fall_damage_decrease_percentage": "Negates Fall Damage by %s%",
+	"tooltip.faden.bracelet": "Bracelet",
+	"tooltip.faden.necklace": "Necklace",
+	"tooltip.faden.belt": "Belt",
+
+	"button.faden.remove_cape": "Remove Cape",
+	"button.faden.select_cape": "Select Cape",
+
+	"cape.faden.fuchsia": "§dFuchsia",
+	"cape.faden.developer": "Developer",
+	"cape.faden.data": "Data",
+	"cape.faden.pixel_artist": "Pixel Artist",
+	"cape.faden.music_artist": "Music Artist",
+	"cape.faden.staff": "Staff",
+	"cape.faden.donator": "Donator",
+	"cape.faden.translator": "Translator",
+	"cape.faden.builder": "Builder",
+	"cape.faden.dt10": "Cape of DT10",
+	"cape.faden.sakura": "Sakura",
+
+	"cape.faden.fuchsia.description": "Lorem ipsum dolor sit amet. Qui autem quis ut labore dolor est molestias laudantium. Non explicabo consequuntur eum neque omnis non autem voluptate eos perspiciatis eveniet vel omnis odio.\n\nAut perspiciatis quaerat aut laudantium omnis eum cupiditate asperiores. Ut laudantium laborum a aliquid eveniet et omnis laboriosam et similique ipsam qui dolores totam est consequatur quam. Id corrupti voluptatibus aut provident assumenda non atque repudiandae est nulla officiis sit galisum facere sed possimus assumenda.\n\nEos reprehenderit debitis non sint numquam et nisi distinctio ut maxime dolore. Non aperiam veritatis qui Quis iusto et pariatur voluptatem."
 }
