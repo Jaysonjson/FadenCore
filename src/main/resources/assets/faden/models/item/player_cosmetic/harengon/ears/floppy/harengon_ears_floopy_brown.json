@@ -7,9 +7,9 @@
 	"elements": [
 		{
 			"name": "earLeft",
-			"from": [4.5, -7.5, 7.5],
-			"to": [5.5, -0.5, 9.5],
-			"rotation": {"angle": -22.5, "axis": "z", "origin": [5, -1, 8]},
+			"from": [3, 0.5, 5.5],
+			"to": [4, 7.5, 7.5],
+			"rotation": {"angle": -22.5, "axis": "z", "origin": [3.5, 7, 6]},
 			"faces": {
 				"north": {"uv": [4, 1, 3, 8], "rotation": 180, "texture": "#0"},
 				"east": {"uv": [3, 1, 1, 8], "rotation": 180, "texture": "#0"},
@@ -21,9 +21,9 @@
 		},
 		{
 			"name": "earRight",
-			"from": [10.5, -7.5, 7.5],
-			"to": [11.5, -0.5, 9.5],
-			"rotation": {"angle": 22.5, "axis": "z", "origin": [11, -1, 8]},
+			"from": [12, 0.5, 5.5],
+			"to": [13, 7.5, 7.5],
+			"rotation": {"angle": 22.5, "axis": "z", "origin": [12.5, 7, 6]},
 			"faces": {
 				"north": {"uv": [7, 1, 6, 8], "rotation": 180, "texture": "#0"},
 				"east": {"uv": [12, 1, 10, 8], "rotation": 180, "texture": "#0"},
@@ -35,9 +35,9 @@
 		},
 		{
 			"name": "earLeft2",
-			"from": [5.5, -1.5, 7.5],
-			"to": [6.5, -0.5, 9.5],
-			"rotation": {"angle": -22.5, "axis": "z", "origin": [5, -1, 8]},
+			"from": [4, 6.5, 5.5],
+			"to": [5, 7.5, 7.5],
+			"rotation": {"angle": -22.5, "axis": "z", "origin": [3.5, 7, 6]},
 			"faces": {
 				"north": {"uv": [4, 9, 3, 10], "rotation": 180, "texture": "#0"},
 				"east": {"uv": [3, 9, 1, 10], "rotation": 180, "texture": "#0"},
@@ -49,9 +49,9 @@
 		},
 		{
 			"name": "earRight2",
-			"from": [9.5, -1.5, 7.5],
-			"to": [10.5, -0.5, 9.5],
-			"rotation": {"angle": 22.5, "axis": "z", "origin": [11, -1, 8]},
+			"from": [11, 6.5, 5.5],
+			"to": [12, 7.5, 7.5],
+			"rotation": {"angle": 22.5, "axis": "z", "origin": [12.5, 7, 6]},
 			"faces": {
 				"north": {"uv": [1, 9, 0, 10], "rotation": 180, "texture": "#0"},
 				"east": {"uv": [6, 9, 4, 10], "rotation": 180, "texture": "#0"},
@@ -64,8 +64,7 @@
 	],
 	"display": {
 		"head": {
-			"translation": [0, 21.25, -3.25],
-			"scale": [1.8, 1.8, 1.8]
+			"scale": [1.6, 1.6, 1.6]
 		}
 	}
 }

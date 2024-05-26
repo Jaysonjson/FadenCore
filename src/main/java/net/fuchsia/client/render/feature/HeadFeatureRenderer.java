@@ -44,8 +44,7 @@ public class HeadFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEnt
 
 
     public static void translate(MatrixStack matrices) {
-        //TODO: MAYBE REMOVE THE -0.99f, BUT REQUIRES A RE-DO OF THE MODELS
-        matrices.translate(0.31F, -0.99F, -0.30F);
+        matrices.translate(0.31F, 0F, -0.30F);
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0F));
         matrices.scale(0.625F, -0.625F, -0.625F);
     }
