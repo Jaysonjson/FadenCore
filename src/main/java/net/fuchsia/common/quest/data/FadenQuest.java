@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 
 public abstract class FadenQuest implements IQuest {
@@ -69,5 +70,9 @@ public abstract class FadenQuest implements IQuest {
         if(QuestCache.getPlayerCache().newQuestForPlayer(player, this)) {
             QuestCache.addOrUpdate(player, this, getSteps().get(0));
         }
+    }
+
+    public void startQuest(ServerPlayerEntity player) {
+        startQuest(player.getUuid());
     }
 }
