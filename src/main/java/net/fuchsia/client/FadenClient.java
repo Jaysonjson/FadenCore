@@ -2,15 +2,18 @@ package net.fuchsia.client;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
+import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 import net.fuchsia.Faden;
 import net.fuchsia.client.handler.FadenItemModelHandler;
 import net.fuchsia.client.overlay.StatsOverlay;
 import net.fuchsia.client.registry.FadenItemModelRegistry;
+import net.fuchsia.client.render.entity.NPCEntityRenderer;
 import net.fuchsia.common.cape.FadenCape;
 import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.common.init.FadenCloths;
+import net.fuchsia.common.init.FadenEntities;
 import net.fuchsia.common.objects.tooltip.FadenTooltipComponent;
 import net.fuchsia.common.objects.tooltip.FadenTooltipData;
 import net.fuchsia.common.race.skin.client.ClientRaceSkinCache;
@@ -47,6 +50,9 @@ public class FadenClient implements ClientModInitializer {
         HudRenderCallback.EVENT.register(new StatsOverlay());
 
         registerModels();
+
+        EntityRendererRegistry.INSTANCE.register(FadenEntities.NPC, (context) -> new NPCEntityRenderer(context, true));
+
     }
 
     private static void tryToLoadTextures(Runnable action, String textureType) {

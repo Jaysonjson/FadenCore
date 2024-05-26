@@ -5,6 +5,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
 
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fuchsia.common.init.*;
+import net.fuchsia.common.npc.NPCEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,13 +25,6 @@ import net.fuchsia.common.CheckSums;
 import net.fuchsia.common.cape.FadenCapeCache;
 import net.fuchsia.common.cape.online.OnlineCapes;
 import net.fuchsia.common.data.ItemValues;
-import net.fuchsia.common.init.FadenBlocks;
-import net.fuchsia.common.init.FadenCloths;
-import net.fuchsia.common.init.FadenDataComponents;
-import net.fuchsia.common.init.FadenGear;
-import net.fuchsia.common.init.FadenItems;
-import net.fuchsia.common.init.FadenSoundEvents;
-import net.fuchsia.common.init.FadenTabs;
 import net.fuchsia.common.objects.CoinMap;
 import net.fuchsia.common.objects.command.FadenCommands;
 import net.fuchsia.common.objects.command.types.CapeArgumentType;
@@ -105,8 +101,12 @@ public class Faden implements ModInitializer {
 		FadenGear.register();
 		FadenBlocks.register();
 		OnlineCapes.retrieve();
+		FadenEntities.register();
+		entityAttributes();
+	}
 
-
+	public static void entityAttributes() {
+		FabricDefaultAttributeRegistry.register(FadenEntities.NPC, NPCEntity.createMobAttributes());
 	}
 
 	public static void argumentTypes() {
