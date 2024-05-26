@@ -47,7 +47,12 @@ public class RaceCosmetics {
         /*
         * ELF
         * */
-        ELF.addCosmetic("pale", "player_cosmetic/elf/ear/ear_0", RaceCosmeticType.HEAD, "ear_0");
+        ELF.addCosmetic("pale", "player_cosmetic/elf/ears/elf_ears_0_pale", RaceCosmeticType.HEAD, "ear_0");
+        ELF.addCosmetic("pale", "player_cosmetic/elf/ears/elf_ears_1_pale", RaceCosmeticType.HEAD, "ear_1");
+        ELF.addCosmetic("pale", "player_cosmetic/elf/ears/elf_ears_2_pale", RaceCosmeticType.HEAD, "ear_2");
+        ELF.addCosmetic("pale", "player_cosmetic/elf/ears/elf_ears_3_pale", RaceCosmeticType.HEAD, "ear_3");
+        ELF.addCosmetic("pale", "player_cosmetic/elf/ears/elf_ears_4_pale", RaceCosmeticType.HEAD, "ear_4");
+
 
     }
 
