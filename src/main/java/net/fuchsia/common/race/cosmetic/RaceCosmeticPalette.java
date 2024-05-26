@@ -18,6 +18,10 @@ public class RaceCosmeticPalette {
         cosmetics.put(id, cAr);
     }
 
+    public void addCosmetic(String id, String modelId, RaceCosmeticType type, String cosmeticId) {
+        addCosmetic(id, new RaceCosmetic(modelId, type, cosmeticId));
+    }
+
     public HashMap<String, ArrayList<RaceCosmetic>> getCosmetics() {
         return cosmetics;
     }
