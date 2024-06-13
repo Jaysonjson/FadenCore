@@ -30,12 +30,12 @@ public class FadenDataModelProvider extends FabricModelProvider {
 
     public final void addTexturedItem(Item item, String texture, ItemModelGenerator modelGenerator) {
         Identifier itemId = Registries.ITEM.getId(item);
-        Models.GENERATED.upload(ModelIds.getItemModelId(item), TextureMap.layer0(new Identifier(itemId.getNamespace(), "item/" + texture)), modelGenerator.writer);
+        Models.GENERATED.upload(ModelIds.getItemModelId(item), TextureMap.layer0(Identifier.of(itemId.getNamespace(), "item/" + texture)), modelGenerator.writer);
     }
 
     public final void addTexturedItemHandheld(Item item, String texture, ItemModelGenerator modelGenerator) {
         Identifier itemId = Registries.ITEM.getId(item);
-        Models.HANDHELD.upload(ModelIds.getItemModelId(item), TextureMap.layer0(new Identifier(itemId.getNamespace(), "item/" + texture)), modelGenerator.writer);
+        Models.HANDHELD.upload(ModelIds.getItemModelId(item), TextureMap.layer0(Identifier.of(itemId.getNamespace(), "item/" + texture)), modelGenerator.writer);
     }
 
 }

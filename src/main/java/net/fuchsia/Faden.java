@@ -8,6 +8,7 @@ import java.util.Random;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fuchsia.common.init.*;
 import net.fuchsia.common.npc.NPCEntity;
+import net.minecraft.item.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -84,9 +85,7 @@ public class Faden implements ModInitializer {
 	public static void init() {
 		try {
 			CHECKSUMS = Faden.GSON.fromJson(FadenOnlineUtil.getJSONData("https://raw.githubusercontent.com/FuchsiaTeam/FadenData/main/checksums.json"), CheckSums.class);
-		} catch (Exception ignored) {
-
-		}
+		} catch (Exception ignored) {}
 		RaceCosmetics.add();
 		FadenSoundEvents.register();
 		FadenItems.register();
@@ -116,6 +115,8 @@ public class Faden implements ModInitializer {
 	}
 
 	public static void serverEvents() {
+
+
 		ServerLifecycleEvents.SERVER_STARTING.register(server -> {
 			RaceSkinMap.Cache.load();
 			ServerRaceCache.Cache.load();
@@ -161,6 +162,7 @@ public class Faden implements ModInitializer {
 			ServerRaceCache.Cache.sendUpdate(handler.getPlayer(), handler.getPlayer().server, true);
 		});
 	}
+
 
 	public static Screen openConfig(Screen parent) {
 		if (FabricLoader.getInstance().isModLoaded("cloth-config2")) {

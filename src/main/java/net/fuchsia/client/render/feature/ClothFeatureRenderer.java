@@ -86,7 +86,7 @@ public class ClothFeatureRenderer <T extends LivingEntity, M extends BipedEntity
         model.rightArm.translate(new Vector3f(0.25f, 0f, 0f));
         model.leftSleeve.translate(new Vector3f(-0.25f, 0f, 0f));
         model.rightSleeve.translate(new Vector3f(0.25f, 0f, 0f));
-        model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, red, green, blue, 1.0F);
+        model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 0xFFFFFFFF);
         matrices.pop();
     }
 }

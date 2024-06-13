@@ -30,7 +30,7 @@ public class ItemValues {
     public static void reload(HashMap<String, Integer> map, String json) {
         VALUES.clear();
         for (String s : map.keySet()) {
-            Identifier id = new Identifier(s);
+            Identifier id = Identifier.of(s);
             if(Registries.ITEM.containsId(id)) {
                 Item item = Registries.ITEM.get(id);
                 VALUES.put(item, map.get(s));

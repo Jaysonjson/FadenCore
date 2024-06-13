@@ -38,26 +38,24 @@ public class FadenCloths {
     private static boolean loaded = false;
     @Environment(EnvType.CLIENT)
     public static void load() {
-        System.out.println("CALLING LOAD FUNCTION: " + loaded);
         if(!loaded) {
             try {
-                System.out.println("STARTING CLOTH");
+                Faden.LOGGER.debug("STARTING CLOTH LOADING");
                 for (ClothItem cloth : CLOTHS) {
-                    System.out.println("LOADING CLOTH");
                     byte[] data = SkinProvider.readSkin(Files.newInputStream(Faden.CONTAINER.findPath("assets/faden/textures/cloth/" + cloth.getFile() + ".png").get()));
                     SkinTexture skinTexture = new SkinTexture(cloth.getTexture());
                     skinTexture.setSkinData(data);
+                    Faden.LOGGER.debug("BINDING {}", cloth.getTexture());
                     MinecraftClient.getInstance().getTextureManager().registerTexture(cloth.getTexture(), skinTexture);
                     MinecraftClient.getInstance().getTextureManager().bindTexture(cloth.getTexture());
-                    System.out.println("BINDING " + cloth.getTexture());
 
                     data = SkinProvider.readSkin(Files.newInputStream(Faden.CONTAINER.findPath("assets/faden/textures/cloth/" + cloth.getFile() + "_wide.png").get()));
                     skinTexture = new SkinTexture(cloth.getTextureWide());
                     skinTexture.setSkinData(data);
                     MinecraftClient.getInstance().getTextureManager().registerTexture(cloth.getTextureWide(), skinTexture);
                     MinecraftClient.getInstance().getTextureManager().bindTexture(cloth.getTextureWide());
-
                 }
+                Faden.LOGGER.debug("FINISHED CLOTH LOADING");
             } catch (IOException e) {
                 System.out.println("ERROR CLOTH");
                 e.printStackTrace();

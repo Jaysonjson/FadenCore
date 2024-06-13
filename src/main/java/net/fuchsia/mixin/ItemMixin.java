@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Optional;
 
+import net.minecraft.item.tooltip.TooltipData;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -23,7 +24,6 @@ import net.fuchsia.common.objects.tooltip.FadenTooltipComponent;
 import net.fuchsia.common.objects.tooltip.FadenTooltipData;
 import net.fuchsia.common.objects.tooltip.ToolTipEntry;
 import net.fuchsia.server.FadenData;
-import net.minecraft.client.item.TooltipData;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.BundleItem;
 import net.minecraft.item.Item;

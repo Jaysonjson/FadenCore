@@ -41,7 +41,7 @@ public class ClientRaceSkinCache {
     }
 
     public static Identifier getSkin(UUID playerUuid) {
-        return getPlayerSkins().getOrDefault(playerUuid, new Identifier("missing"));
+        return getPlayerSkins().getOrDefault(playerUuid, Identifier.of("missing"));
     }
 
     public static HashMap<String, Identifier> getSKINS() {

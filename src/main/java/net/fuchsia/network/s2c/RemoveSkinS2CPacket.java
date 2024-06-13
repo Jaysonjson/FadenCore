@@ -12,7 +12,7 @@ import net.minecraft.network.packet.CustomPayload;
 public record RemoveSkinS2CPacket(UUID uuid) implements CustomPayload {
 
     public static final CustomPayload.Id<RemoveSkinS2CPacket> ID = new CustomPayload.Id<>(FadenIdentifier.create("remove_race"));
-    public static final PacketCodec<RegistryByteBuf, RemoveSkinS2CPacket> CODEC =new PacketCodec<RegistryByteBuf, RemoveSkinS2CPacket>() {
+    public static final PacketCodec<RegistryByteBuf, RemoveSkinS2CPacket> CODEC = new PacketCodec<>() {
         @Override
         public RemoveSkinS2CPacket decode(RegistryByteBuf buf) {
             return new RemoveSkinS2CPacket(buf.readUuid());

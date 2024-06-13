@@ -14,19 +14,11 @@ import net.fuchsia.common.race.data.ServerRaceCache;
 import net.fuchsia.common.race.skin.provider.SkinProvider;
 import net.fuchsia.common.race.skin.server.ServerSkinCache;
 import net.fuchsia.network.c2s.RequestCapeChangeC2SPacket;
-import net.fuchsia.network.s2c.RacePacket;
-import net.fuchsia.network.s2c.ReloadServerJSONS2CPacket;
-import net.fuchsia.network.s2c.RemoveSkinS2CPacket;
-import net.fuchsia.network.s2c.SendAllRaceSkinsS2CPacket;
-import net.fuchsia.network.s2c.SendAllRacesS2CPacket;
-import net.fuchsia.network.s2c.SendCapeUpdateS2CPacket;
-import net.fuchsia.network.s2c.SendCapesS2CPacket;
-import net.fuchsia.network.s2c.SendPlayerDatasS2CPacket;
-import net.fuchsia.network.s2c.SendRaceUpdateS2CPacket;
-import net.fuchsia.network.s2c.SendSinglePlayerDataS2CPacket;
-import net.fuchsia.network.s2c.SendSkinS2CPacket;
+import net.fuchsia.network.s2c.*;
 import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.ServerPlayerDatas;
+import net.minecraft.item.Item;
+import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 public class FadenNetwork {
@@ -42,6 +34,7 @@ public class FadenNetwork {
         PayloadTypeRegistry.playS2C().register(SendSinglePlayerDataS2CPacket.ID, SendSinglePlayerDataS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(SendCapesS2CPacket.ID, SendCapesS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(SendCapeUpdateS2CPacket.ID, SendCapeUpdateS2CPacket.CODEC);
+        PayloadTypeRegistry.playS2C().register(SendItemValueUpdateS2CPacket.ID, SendItemValueUpdateS2CPacket.CODEC);
 
         ClientPlayNetworking.registerGlobalReceiver(SendRaceUpdateS2CPacket.ID, SendRaceUpdateS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(RemoveSkinS2CPacket.ID, RemoveSkinS2CPacket::receive);
@@ -53,6 +46,7 @@ public class FadenNetwork {
         ClientPlayNetworking.registerGlobalReceiver(SendSinglePlayerDataS2CPacket.ID, SendSinglePlayerDataS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(SendCapesS2CPacket.ID, SendCapesS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(SendCapeUpdateS2CPacket.ID, SendCapeUpdateS2CPacket::receive);
+        ClientPlayNetworking.registerGlobalReceiver(SendItemValueUpdateS2CPacket.ID, SendItemValueUpdateS2CPacket::receive);
     }
 
     public static void registerC2S() {
@@ -128,6 +122,10 @@ public class FadenNetwork {
 
         public static void sendCapeUpdate(ServerPlayerEntity player, UUID uuid, String cape, boolean remove) {
             ServerPlayNetworking.send(player, new SendCapeUpdateS2CPacket(uuid, cape, remove));
+        }
+
+        public static void sendItemValueUpdate(ServerPlayerEntity player, Item item, int value) {
+            ServerPlayNetworking.send(player, new SendItemValueUpdateS2CPacket(Registries.ITEM.getId(item).toString(), value));
         }
     }
 

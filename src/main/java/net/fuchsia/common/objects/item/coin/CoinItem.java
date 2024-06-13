@@ -2,6 +2,7 @@ package net.fuchsia.common.objects.item.coin;
 
 import java.util.Optional;
 
+import net.minecraft.item.tooltip.TooltipData;
 import org.joml.Matrix4f;
 
 import net.fabricmc.api.EnvType;
@@ -14,7 +15,6 @@ import net.fuchsia.common.quest.FadenQuests;
 import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.item.TooltipData;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;

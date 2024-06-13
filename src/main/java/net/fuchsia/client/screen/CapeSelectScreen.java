@@ -129,7 +129,7 @@ public class CapeSelectScreen extends Screen {
                 context.getMatrices().scale(55, 55, 55);
                 context.getMatrices().multiply(RotationAxis.POSITIVE_Y.rotationDegrees(45));
                 context.getMatrices().translate(-5, 2, 12.5);
-                PlayerModelCache.elytraEntityModel.render(context.getMatrices(), ItemRenderer.getArmorGlintConsumer(context.getVertexConsumers(), RenderLayer.getArmorCutoutNoCull(cape.getTexture()), false, false), 15728880, OverlayTexture.DEFAULT_UV, 1f, 1f, 1f, 1f);
+                PlayerModelCache.elytraEntityModel.render(context.getMatrices(), ItemRenderer.getArmorGlintConsumer(context.getVertexConsumers(), RenderLayer.getArmorCutoutNoCull(cape.getTexture()), false), 15728880, OverlayTexture.DEFAULT_UV, 0xFFFFFFFF);
                 context.getMatrices().pop();
             }
         }
