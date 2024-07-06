@@ -8,7 +8,9 @@ import java.util.Random;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fuchsia.common.init.*;
 import net.fuchsia.common.npc.NPCEntity;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.Item;
+import net.minecraft.potion.Potions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -139,6 +141,8 @@ public class Faden implements ModInitializer {
 			if(!ServerPlayerDatas.getPlayerDatas().containsKey(serverPlayerEntity.getUuid())) {
 				ServerPlayerDatas.getPlayerDatas().put(serverPlayerEntity.getUuid(), new PlayerData());
 			}
+
+			serverPlayerEntity.getAttributes().set
 
 			FadenNetwork.Server.sendAllRaces(serverPlayerEntity);
 			RaceSkinMap.Cache.sendUpdate(serverPlayerEntity, server);
