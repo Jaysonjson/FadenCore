@@ -142,8 +142,6 @@ public class Faden implements ModInitializer {
 				ServerPlayerDatas.getPlayerDatas().put(serverPlayerEntity.getUuid(), new PlayerData());
 			}
 
-			serverPlayerEntity.getAttributes().set
-
 			FadenNetwork.Server.sendAllRaces(serverPlayerEntity);
 			RaceSkinMap.Cache.sendUpdate(serverPlayerEntity, server);
 			ServerRaceCache.Cache.sendUpdate(serverPlayerEntity, server, false);
