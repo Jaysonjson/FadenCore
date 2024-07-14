@@ -24,18 +24,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 public class FadenNetwork {
 
     public static void registerS2C() {
-        PayloadTypeRegistry.playS2C().register(SendRaceUpdateS2CPacket.ID, SendRaceUpdateS2CPacket.CODEC);
-        PayloadTypeRegistry.playS2C().register(RemoveSkinS2CPacket.ID, RemoveSkinS2CPacket.CODEC);
-        PayloadTypeRegistry.playS2C().register(SendSkinS2CPacket.ID, SendSkinS2CPacket.CODEC);
-        PayloadTypeRegistry.playS2C().register(SendAllRaceSkinsS2CPacket.ID, SendAllRaceSkinsS2CPacket.CODEC);
-        PayloadTypeRegistry.playS2C().register(ReloadServerJSONS2CPacket.ID, ReloadServerJSONS2CPacket.CODEC);
-        PayloadTypeRegistry.playS2C().register(SendAllRacesS2CPacket.ID, SendAllRacesS2CPacket.CODEC);
-        PayloadTypeRegistry.playS2C().register(SendPlayerDatasS2CPacket.ID, SendPlayerDatasS2CPacket.CODEC);
-        PayloadTypeRegistry.playS2C().register(SendSinglePlayerDataS2CPacket.ID, SendSinglePlayerDataS2CPacket.CODEC);
-        PayloadTypeRegistry.playS2C().register(SendCapesS2CPacket.ID, SendCapesS2CPacket.CODEC);
-        PayloadTypeRegistry.playS2C().register(SendCapeUpdateS2CPacket.ID, SendCapeUpdateS2CPacket.CODEC);
-        PayloadTypeRegistry.playS2C().register(SendItemValueUpdateS2CPacket.ID, SendItemValueUpdateS2CPacket.CODEC);
-
         ClientPlayNetworking.registerGlobalReceiver(SendRaceUpdateS2CPacket.ID, SendRaceUpdateS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(RemoveSkinS2CPacket.ID, RemoveSkinS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(SendSkinS2CPacket.ID, SendSkinS2CPacket::receive);
@@ -50,6 +38,21 @@ public class FadenNetwork {
     }
 
     public static void registerC2S() {
+
+        PayloadTypeRegistry.playS2C().register(SendRaceUpdateS2CPacket.ID, SendRaceUpdateS2CPacket.CODEC);
+        PayloadTypeRegistry.playS2C().register(RemoveSkinS2CPacket.ID, RemoveSkinS2CPacket.CODEC);
+        PayloadTypeRegistry.playS2C().register(SendSkinS2CPacket.ID, SendSkinS2CPacket.CODEC);
+        PayloadTypeRegistry.playS2C().register(SendAllRaceSkinsS2CPacket.ID, SendAllRaceSkinsS2CPacket.CODEC);
+        PayloadTypeRegistry.playS2C().register(ReloadServerJSONS2CPacket.ID, ReloadServerJSONS2CPacket.CODEC);
+        PayloadTypeRegistry.playS2C().register(SendAllRacesS2CPacket.ID, SendAllRacesS2CPacket.CODEC);
+        PayloadTypeRegistry.playS2C().register(SendPlayerDatasS2CPacket.ID, SendPlayerDatasS2CPacket.CODEC);
+        PayloadTypeRegistry.playS2C().register(SendSinglePlayerDataS2CPacket.ID, SendSinglePlayerDataS2CPacket.CODEC);
+        PayloadTypeRegistry.playS2C().register(SendCapesS2CPacket.ID, SendCapesS2CPacket.CODEC);
+        PayloadTypeRegistry.playS2C().register(SendCapeUpdateS2CPacket.ID, SendCapeUpdateS2CPacket.CODEC);
+        PayloadTypeRegistry.playS2C().register(SendItemValueUpdateS2CPacket.ID, SendItemValueUpdateS2CPacket.CODEC);
+
+
+
         PayloadTypeRegistry.playC2S().register(RequestCapeChangeC2SPacket.ID, RequestCapeChangeC2SPacket.CODEC);
         ServerPlayNetworking.registerGlobalReceiver(RequestCapeChangeC2SPacket.ID, RequestCapeChangeC2SPacket::receive);
 
