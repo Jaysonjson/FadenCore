@@ -143,6 +143,11 @@ public class Faden implements ModInitializer {
 			}
 
 			FadenNetwork.Server.sendAllRaces(serverPlayerEntity);
+
+			//EXP
+			FadenNetwork.Server.sendRaces(serverPlayerEntity);
+
+
 			RaceSkinMap.Cache.sendUpdate(serverPlayerEntity, server);
 			ServerRaceCache.Cache.sendUpdate(serverPlayerEntity, server, false);
 			FadenNetwork.Server.sendPlayerDatas(serverPlayerEntity);
