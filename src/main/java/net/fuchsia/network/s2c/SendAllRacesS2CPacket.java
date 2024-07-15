@@ -1,16 +1,12 @@
 package net.fuchsia.network.s2c;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.UUID;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fuchsia.common.race.data.ClientRaceCache;
 import net.fuchsia.common.race.data.ServerRaceCache;
+import net.fuchsia.network.PacketUtils;
 import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
@@ -22,36 +18,16 @@ public record SendAllRacesS2CPacket(ArrayList<RacePacket> packets) implements Cu
     public static final PacketCodec<RegistryByteBuf, SendAllRacesS2CPacket> CODEC = new PacketCodec<>() {
         @Override
         public SendAllRacesS2CPacket decode(RegistryByteBuf buf) {
-            ArrayList<RacePacket> map = new ArrayList<>();
-            try {
-                ByteArrayInputStream byteOut = new ByteArrayInputStream(Base64.getDecoder().decode(buf.readString()));
-                ObjectInputStream out = new ObjectInputStream(byteOut);
-                map = (ArrayList<RacePacket>) out.readObject();
-                byteOut.close();
-                out.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return new SendAllRacesS2CPacket(map);
+            return new SendAllRacesS2CPacket(PacketUtils.readByteData(buf));
         }
 
         @Override
         public void encode(RegistryByteBuf buf, SendAllRacesS2CPacket value) {
-            try {
-                ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
-                ObjectOutputStream out = new ObjectOutputStream(byteOut);
-                ArrayList<RacePacket> packets1 = new ArrayList<>();
-                for (UUID uuid : ServerRaceCache.getCache().keySet()) {
-                    packets1.add(new RacePacket(uuid, ServerRaceCache.getCache().get(uuid)));
-                }
-                out.writeObject(packets1);
-                byte[] data = byteOut.toByteArray();
-                byteOut.close();
-                out.close();
-                buf.writeString(new String(Base64.getEncoder().encode(data)));
-            } catch (Exception e) {
-                e.printStackTrace();
+            ArrayList<RacePacket> packets1 = new ArrayList<>();
+            for (UUID uuid : ServerRaceCache.getCache().keySet()) {
+                packets1.add(new RacePacket(uuid, ServerRaceCache.getCache().get(uuid)));
             }
+            PacketUtils.writeByteData(packets1, buf);
         }
     };
 
