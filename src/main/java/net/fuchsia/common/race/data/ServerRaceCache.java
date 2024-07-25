@@ -53,6 +53,7 @@ public class ServerRaceCache {
                 tag.putString("boots_cosmetic", cosmetics.getBootsCosmeticId());
                 slot.put("slot_0", tag);
                 CACHE.put(uuid.toString(), slot);
+                ServerRaceCache.getCache().put(uuid, new RaceData(id, sub_id, cosmetics));
                 new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/").mkdirs();
                 try {
                     NbtIo.writeCompressed(CACHE,  CACHE_PATH);
@@ -66,6 +67,7 @@ public class ServerRaceCache {
             new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/").mkdirs();
             try {
                 NbtIo.writeCompressed(CACHE,  CACHE_PATH);
+                System.out.println("Saving Race Cache");
             } catch (Exception e) {
                 e.printStackTrace();
             }

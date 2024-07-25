@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.UUID;
 
+import net.fuchsia.util.NetworkUtils;
 import org.apache.commons.io.FileUtils;
 
 import com.google.gson.reflect.TypeToken;
@@ -40,13 +41,5 @@ public class ServerPlayerDatas {
 
     public static HashMap<UUID, PlayerData> getPlayerDatas() {
         return playerDatas;
-    }
-
-    public static void sync(UUID playerUuid, PlayerData playerData) {
-        if(SERVER != null) {
-            for (ServerPlayerEntity player : SERVER.getPlayerManager().getPlayerList()) {
-                FadenNetwork.Server.syncPlayerData(player, playerUuid, playerData);
-            }
-        }
     }
 }
