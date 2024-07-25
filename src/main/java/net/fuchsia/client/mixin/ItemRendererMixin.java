@@ -22,7 +22,7 @@ public class ItemRendererMixin {
             FadenItemModelRegistry.ModelData data = FadenClient.getItemModels().getModel(itemStack.getItem());
             if(mode != data.getMode()) {
                 Identifier itemId = Registries.ITEM.getId(itemStack.getItem());
-                return ((ItemRendererAccessor) this).faden$getModels().getModelManager().getModel(new ModelIdentifier(itemId.getNamespace(), data.getPath().isEmpty() ? "model/" + itemId.getPath() : data.getPath(), data.getVariant()));
+                return ((ItemRendererAccessor) this).faden$getModels().getModelManager().getModel(new ModelIdentifier(Identifier.of(itemId.getNamespace(), data.getPath().isEmpty() ? "model/" + itemId.getPath() : data.getPath()), data.getVariant()));
             }
         }
         return model;

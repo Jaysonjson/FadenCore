@@ -64,7 +64,7 @@ public abstract class PlayerScreenHandlerMixin extends ScreenHandler{
 
                 public boolean canTakeItems(PlayerEntity playerEntity) {
                     ItemStack itemStack = this.getStack();
-                    return !itemStack.isEmpty() && !playerEntity.isCreative() && EnchantmentHelper.hasBindingCurse(itemStack) ? false : super.canTakeItems(playerEntity);
+                    return !itemStack.isEmpty() && !playerEntity.isCreative() && super.canTakeItems(playerEntity);
                 }
 
                 public Pair<Identifier, Identifier> getBackgroundSprite() {
@@ -93,7 +93,7 @@ public abstract class PlayerScreenHandlerMixin extends ScreenHandler{
 
                 public boolean canTakeItems(PlayerEntity playerEntity) {
                     ItemStack itemStack = this.getStack();
-                    return !itemStack.isEmpty() && !playerEntity.isCreative() && EnchantmentHelper.hasBindingCurse(itemStack) ? false : super.canTakeItems(playerEntity);
+                    return !itemStack.isEmpty() && !playerEntity.isCreative() && super.canTakeItems(playerEntity);
                 }
 
                 public Pair<Identifier, Identifier> getBackgroundSprite() {

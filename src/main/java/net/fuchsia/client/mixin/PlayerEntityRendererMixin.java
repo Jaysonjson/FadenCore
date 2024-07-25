@@ -114,7 +114,7 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
                 }
 
                 case BOTH -> {
-                    Identifier id = ClientRaceSkinCache.getPlayerSkins().getOrDefault(MinecraftClient.getInstance().player.getUuid(), new Identifier("empty"));
+                    Identifier id = ClientRaceSkinCache.getPlayerSkins().getOrDefault(MinecraftClient.getInstance().player.getUuid(), Identifier.of("empty"));
                     if (id.toString().toLowerCase().contains("_slim")) {
                         playerEntityModel = PlayerModelCache.slimModel;
                         slim = true;

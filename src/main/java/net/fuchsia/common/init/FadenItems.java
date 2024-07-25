@@ -6,8 +6,8 @@ import net.fuchsia.common.objects.item.TestItem;
 import net.fuchsia.datagen.DataItemModel;
 import net.fuchsia.datagen.FadenDataItem;
 import net.fuchsia.util.FadenIdentifier;
+import net.minecraft.item.DiscFragmentItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.MusicDiscItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Rarity;
@@ -50,7 +50,7 @@ public class FadenItems {
     public static Item WHITE_CLOTH = registerItem("white_cloth", new Item(new Item.Settings()), "crafting/cloth/white");
     public static Item YELLOW_CLOTH = registerItem("yellow_cloth", new Item(new Item.Settings()), "crafting/cloth/yellow");
 
-    public static Item FADEN_MUSIC_DISC = registerItem("music_disc_faden", new MusicDiscItem(14, FadenSoundEvents.FADEN, new Item.Settings().maxCount(1).rarity(Rarity.RARE), 140), "discs/faden");
+    //public static Item FADEN_MUSIC_DISC = registerItem("music_disc_faden", new DiscFragmentItem(14, FadenSoundEvents.FADEN, new Item.Settings().maxCount(1).rarity(Rarity.RARE), 140), "discs/faden");
 
     private static <T extends Item> T registerItem(String name, T item, String texture, DataItemModel itemModel) {
         T i = Registry.register(Registries.ITEM, FadenIdentifier.create(name), item);

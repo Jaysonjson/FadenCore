@@ -4,7 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fuchsia.common.init.FadenItems;
 import net.fuchsia.datagen.FadenDataItem;
-import net.minecraft.item.MusicDiscItem;
+import net.minecraft.item.DiscFragmentItem;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 import org.jetbrains.annotations.Nullable;
@@ -22,11 +22,11 @@ public class FadenItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup arg) {
-        for (FadenDataItem item : FadenItems.ITEMS) {
-            if(item.item() instanceof MusicDiscItem) {
-                getOrCreateTagBuilder(ItemTags.MUSIC_DISCS)
+        /*for (FadenDataItem item : FadenItems.ITEMS) {
+            if(item.item() instanceof DiscFragmentItem) {
+                getOrCreateTagBuilder(ItemTags.DIS)
                         .add(item.item());
             }
-        }
+        }*/
     }
 }

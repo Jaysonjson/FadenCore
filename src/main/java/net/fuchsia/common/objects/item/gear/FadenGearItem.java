@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
+import net.minecraft.item.tooltip.TooltipData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,7 +17,6 @@ import net.fuchsia.common.objects.tooltip.FadenTooltipData;
 import net.fuchsia.common.objects.tooltip.ToolTipEntry;
 import net.fuchsia.common.slot.GearSlot;
 import net.fuchsia.util.FadenIdentifier;
-import net.minecraft.client.item.TooltipData;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;

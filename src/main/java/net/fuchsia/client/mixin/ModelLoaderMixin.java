@@ -26,24 +26,23 @@ import java.util.Map;
 public abstract class ModelLoaderMixin {
 
     @Shadow
-    protected abstract void addModel(ModelIdentifier modelId);
+    protected abstract void loadItemModel(ModelIdentifier modelId);
 
-    @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/model/ModelLoader;addModel(Lnet/minecraft/client/util/ModelIdentifier;)V", ordinal = 3, shift = At.Shift.AFTER))
-    public void addModels(BlockColors blockColors, Profiler profiler, Map<Identifier, JsonUnbakedModel> jsonUnbakedModels, Map<Identifier, List<ModelLoader.SourceTrackedData>> blockStates, CallbackInfo ci) {
+    @Inject(method = "<init>", at = @At("TAIL"))
+    public void addModels(BlockColors blockColors, Profiler profiler, Map jsonUnbakedModels, Map blockStates, CallbackInfo ci) {
         for (Item item : FadenClient.getItemModels().getModels().keySet()) {
             Identifier itemId = Registries.ITEM.getId(item);
             FadenItemModelRegistry.ModelData data = FadenClient.getItemModels().getModel(item);
-            this.addModel(new ModelIdentifier(itemId.getNamespace(), data.getPath().isEmpty() ? "model/" + itemId.getPath() : data.getPath(), data.getVariant()));
+            this.loadItemModel(new ModelIdentifier(Identifier.of(itemId.getNamespace(), data.getPath().isEmpty() ? "model/" + itemId.getPath() : data.getPath()), data.getVariant()));
         }
 
         for (Race value : Race.values()) {
             for (ArrayList<RaceCosmetic> raceCosmetics : value.getCosmeticPalette().getCosmetics().values()) {
                 for (RaceCosmetic raceCosmetic : raceCosmetics) {
-                    this.addModel(raceCosmetic.getModel());
+                    this.loadItemModel(raceCosmetic.getModel());
                 }
             }
         }
-
     }
 
 }

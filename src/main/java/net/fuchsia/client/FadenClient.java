@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
+import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.fuchsia.Faden;
 import net.fuchsia.client.handler.FadenItemModelHandler;
 import net.fuchsia.client.overlay.StatsOverlay;
@@ -18,6 +19,8 @@ import net.fuchsia.common.objects.tooltip.FadenTooltipComponent;
 import net.fuchsia.common.objects.tooltip.FadenTooltipData;
 import net.fuchsia.common.race.skin.client.ClientRaceSkinCache;
 import net.fuchsia.network.FadenNetwork;
+import net.minecraft.item.Item;
+import net.minecraft.registry.Registries;
 
 public class FadenClient implements ClientModInitializer {
 

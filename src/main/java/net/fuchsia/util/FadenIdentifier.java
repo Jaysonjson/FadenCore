@@ -7,7 +7,7 @@ import net.minecraft.util.Identifier;
 public class FadenIdentifier {
 
     public static Identifier create(String name) {
-        return new Identifier(Faden.MOD_ID, name);
+        return Identifier.of(Faden.MOD_ID, name);
     }
 
 

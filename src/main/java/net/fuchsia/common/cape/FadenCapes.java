@@ -30,7 +30,6 @@ public class FadenCapes {
     public static final FadenCape DT10 = register("dt10");
     public static final FadenCape SAKURA = register("sakura");
     public static final FadenCape BLACKJACK = register("blackjack");
-    public static final FadenCape TEST = register("test");
 
     public static void setPlayerCapes(HashMap<UUID, ArrayList<String>> playerCapes) {
         PLAYER_CAPES = playerCapes;

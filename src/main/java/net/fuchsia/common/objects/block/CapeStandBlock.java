@@ -25,4 +25,6 @@ public class CapeStandBlock extends Block {
         }
         return ActionResult.CONSUME;
     }
+
+
 }

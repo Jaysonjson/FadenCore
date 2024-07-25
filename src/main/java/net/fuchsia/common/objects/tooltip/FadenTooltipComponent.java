@@ -63,15 +63,21 @@ public class FadenTooltipComponent implements TooltipComponent {
     @Override
     public int getHeight() {
         int height = 0;
+        boolean changesHeight = false;
         if(data.itemStack.getItem() instanceof ItemToolTipRenderer itemToolTipRenderer) {
             height += itemToolTipRenderer.toolTipHeight(this, height);
+            changesHeight = true;
         }
 
         int entrySize = 0;
         if(data.itemStack.getItem() instanceof ItemToolTipEntryRenderer entryRenderer) {
             entrySize = entryRenderer.getToolTipEntries(this).size();
             height += entrySize * 10;
+            if(entrySize != 0) changesHeight = true;
         }
+
+        //the + 1 killed the vanilla stuff, so this is the guard for it
+        if(!changesHeight) return -1;
 
         return height - entrySize + 1;
     }

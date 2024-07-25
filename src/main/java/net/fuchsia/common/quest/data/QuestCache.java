@@ -62,7 +62,7 @@ public class QuestCache {
         if(playerTag.contains(quest.id().toString())) {
             NbtCompound questTag = playerTag.getCompound(quest.id().toString());
             if(questTag.contains("step")) {
-                return new Identifier(questTag.getString("step"));
+                return Identifier.of(questTag.getString("step"));
             }
         }
         return null;

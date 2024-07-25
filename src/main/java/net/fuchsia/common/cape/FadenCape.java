@@ -62,7 +62,7 @@ public class FadenCape {
                 MinecraftClient.getInstance().getTextureManager().bindTexture(texture);
                 textureData = null;
             } catch (IOException e) {
-                Faden.LOGGER.error("Cape " + getId() + " failed to load", e);
+                Faden.LOGGER.error("{} failed to load", "Cape " + getId(), e);
             }
             loaded = true;
         }
