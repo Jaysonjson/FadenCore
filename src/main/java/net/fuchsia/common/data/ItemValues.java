@@ -37,6 +37,7 @@ public class ItemValues {
             }
         }
         try {
+            new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/client/").mkdirs();
             FileWriter writer = new FileWriter(CACHE_PATH.toFile());
             writer.write(json);
             writer.close();

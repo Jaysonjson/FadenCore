@@ -16,7 +16,6 @@ public class FadenCapes {
 
     private static ArrayList<FadenCape> CAPES = new ArrayList<>();
     private static HashMap<UUID, ArrayList<String>> PLAYER_CAPES = new HashMap<>();
-    private static final Path CACHE_PATH = new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/client/capes.json").toPath();
 
     public static final FadenCape FUCHSIA = register("fuchsia");
     public static final FadenCape DEVELOPER = register("developer");
