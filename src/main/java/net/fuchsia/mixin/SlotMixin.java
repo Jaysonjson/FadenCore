@@ -15,7 +15,7 @@ public class SlotMixin implements ISlot {
     boolean enabled = true;
 
     @Inject(method = "isEnabled", at = @At("TAIL"), cancellable = true)
-    public void readNbt(CallbackInfoReturnable<Boolean> cir) {
+    public void isEnabled(CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(enabled);
     }
 
