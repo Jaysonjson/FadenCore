@@ -1,6 +1,7 @@
 package net.fuchsia.network;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -28,13 +29,14 @@ public class FadenNetwork {
         ClientPlayNetworking.registerGlobalReceiver(RemoveSkinS2CPacket.ID, RemoveSkinS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(SendSkinS2CPacket.ID, SendSkinS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(SendAllRaceSkinsS2CPacket.ID, SendAllRaceSkinsS2CPacket::receive);
-        ClientPlayNetworking.registerGlobalReceiver(ReloadServerJSONS2CPacket.ID, ReloadServerJSONS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(SendAllRacesS2CPacket.ID, SendAllRacesS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(SendPlayerDatasS2CPacket.ID, SendPlayerDatasS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(SendSinglePlayerDataS2CPacket.ID, SendSinglePlayerDataS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(SendCapesS2CPacket.ID, SendCapesS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(SendCapeUpdateS2CPacket.ID, SendCapeUpdateS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(SendItemValueUpdateS2CPacket.ID, SendItemValueUpdateS2CPacket::receive);
+        ClientPlayNetworking.registerGlobalReceiver(ItemValuesS2CPacket.ID, ItemValuesS2CPacket::receive);
+
     }
 
     public static void registerC2S() {
@@ -43,13 +45,13 @@ public class FadenNetwork {
         PayloadTypeRegistry.playS2C().register(RemoveSkinS2CPacket.ID, RemoveSkinS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(SendSkinS2CPacket.ID, SendSkinS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(SendAllRaceSkinsS2CPacket.ID, SendAllRaceSkinsS2CPacket.CODEC);
-        PayloadTypeRegistry.playS2C().register(ReloadServerJSONS2CPacket.ID, ReloadServerJSONS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(SendAllRacesS2CPacket.ID, SendAllRacesS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(SendPlayerDatasS2CPacket.ID, SendPlayerDatasS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(SendSinglePlayerDataS2CPacket.ID, SendSinglePlayerDataS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(SendCapesS2CPacket.ID, SendCapesS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(SendCapeUpdateS2CPacket.ID, SendCapeUpdateS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(SendItemValueUpdateS2CPacket.ID, SendItemValueUpdateS2CPacket.CODEC);
+        PayloadTypeRegistry.playS2C().register(ItemValuesS2CPacket.ID, ItemValuesS2CPacket.CODEC);
 
 
 
@@ -103,14 +105,6 @@ public class FadenNetwork {
             ServerPlayNetworking.send(player, new RemoveSkinS2CPacket(uuid));
         }
 
-        public static void reloadCapes(ServerPlayerEntity player) {
-            ServerPlayNetworking.send(player, new ReloadServerJSONS2CPacket("cape", Faden.GSON.toJson(FadenCapes.getPlayerCapes())));
-        }
-
-        public static void reloadItemValues(ServerPlayerEntity player) {
-            ServerPlayNetworking.send(player, new ReloadServerJSONS2CPacket("item_values", Faden.GSON.toJson(ItemValues.VALUES)));
-        }
-
         public static void sendPlayerDatas(ServerPlayerEntity player) {
             ServerPlayNetworking.send(player, new SendPlayerDatasS2CPacket(ServerPlayerDatas.getPlayerDatas()));
         }
@@ -129,6 +123,15 @@ public class FadenNetwork {
 
         public static void sendItemValueUpdate(ServerPlayerEntity player, Item item, int value) {
             ServerPlayNetworking.send(player, new SendItemValueUpdateS2CPacket(Registries.ITEM.getId(item).toString(), value));
+        }
+
+        public static void sendItemValues(ServerPlayerEntity player) {
+            HashMap<String, Integer> map = new HashMap<>();
+            for (Item item : ItemValues.VALUES.keySet()) {
+                map.put(Registries.ITEM.getId(item).toString(), ItemValues.VALUES.get(item));
+            }
+            map.values().removeIf(integer -> integer == 0);
+
         }
     }
 

@@ -9,9 +9,6 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.fuchsia.common.init.*;
 import net.fuchsia.common.npc.NPCEntity;
 import net.fuchsia.util.NetworkUtils;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.item.Item;
-import net.minecraft.potion.Potions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +23,6 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fuchsia.common.CheckSums;
-import net.fuchsia.common.cape.FadenCapeCache;
 import net.fuchsia.common.cape.online.OnlineCapes;
 import net.fuchsia.common.data.ItemValues;
 import net.fuchsia.common.objects.CoinMap;
@@ -44,7 +40,6 @@ import net.fuchsia.config.FadenConfig;
 import net.fuchsia.config.FadenConfigScreen;
 import net.fuchsia.config.FadenOptions;
 import net.fuchsia.network.FadenNetwork;
-import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.ServerPlayerDatas;
 import net.fuchsia.util.FadenIdentifier;
 import net.fuchsia.util.FadenOnlineUtil;
@@ -86,16 +81,19 @@ public class Faden implements ModInitializer {
 	}
 
 	public static void init() {
-		try {
+
+		//I DONT USE CHECKSUMS ANYMORE, BUT IF WE EVER DO IT AGAIN, UNCOMMENT THIS
+		/*try {
 			CHECKSUMS = Faden.GSON.fromJson(FadenOnlineUtil.getJSONData("https://raw.githubusercontent.com/FuchsiaTeam/FadenData/main/checksums.json"), CheckSums.class);
 		} catch (Exception ignored) {}
+		*/
+
 		RaceCosmetics.add();
 		FadenSoundEvents.register();
 		FadenItems.register();
 		FadenTabs.register();
 		CoinMap.reloadCoins();
 		FadenNetwork.registerC2S();
-		ItemValues.add();
 		CommandRegistrationCallback.EVENT.register(new FadenCommands());
 		RaceSkinMap.addSkins();
 		FadenDataComponents.register();
@@ -126,7 +124,7 @@ public class Faden implements ModInitializer {
 			QuestCache.load();
 			ServerPlayerDatas.load();
 			ServerPlayerDatas.SERVER = server;
-			FadenCapeCache.load();
+			ItemValues.load();
 		});
 
 		ServerLifecycleEvents.AFTER_SAVE.register((server, flush, force) -> {
@@ -134,7 +132,7 @@ public class Faden implements ModInitializer {
 			ServerRaceCache.Cache.save();
 			QuestCache.save();
 			ServerPlayerDatas.save();
-			FadenCapeCache.save();
+			ItemValues.save();
 		});
 
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {

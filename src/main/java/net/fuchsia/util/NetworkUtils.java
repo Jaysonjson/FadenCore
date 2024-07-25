@@ -29,6 +29,7 @@ public class NetworkUtils {
         FadenNetwork.Server.sendPlayerDatas(serverPlayerEntity);
         FadenNetwork.Server.sendPlayerCapes(serverPlayerEntity);
         syncPlayer(server, serverPlayerEntity);
+        FadenNetwork.Server.sendItemValues(serverPlayerEntity);
     }
 
     public static void syncPlayer(MinecraftServer server, ServerPlayerEntity serverPlayerEntity) {

@@ -4,6 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
+import net.fuchsia.common.data.ItemValues;
 import net.fuchsia.network.FadenNetwork;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.ItemStackArgumentType;
@@ -30,6 +31,7 @@ public class ItemValueCommand {
         for (ServerPlayerEntity serverPlayerEntity : source.getSource().getServer().getPlayerManager().getPlayerList()) {
             FadenNetwork.Server.sendItemValueUpdate(serverPlayerEntity, item, value);
         }
+        ItemValues.VALUES.put(item, value);
         source.getSource().sendMessage(Text.literal("Set " + item.toString() + " value to " + value));
         return 0;
     }
