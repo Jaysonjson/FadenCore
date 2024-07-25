@@ -21,7 +21,7 @@ public enum Race implements IRace {
 	HUMAN(FadenIdentifier.create("textures/item_tier/rare.png"), new RaceCosmeticPalette(), new String[]{"default"}),
 	HARENGON(FadenIdentifier.create("textures/item_tier/rare.png"), RaceCosmetics.HARENGON, new String[]{"brown", "black", "gold", "salt", "toast", "white", "white_splotched"}, new Vector3f(0.80f, 0.78f, 0.80f), RaceModelType.SLIM),
 	TABAXI,
-	ELF(FadenIdentifier.create("textures/item_tier/rare.png"), RaceCosmetics.ELF, new String[]{"pale"}, new Vector3f(0.95f, 0.95f, 0.95f), RaceModelType.SLIM);
+	ELF(FadenIdentifier.create("textures/item_tier/rare.png"), RaceCosmetics.ELF, new String[]{"pale", "drow"}, new Vector3f(0.95f, 0.95f, 0.95f), RaceModelType.SLIM);
 
 	private HashMap<String, byte[]> skinMap;
 	private RaceCosmeticPalette palette;

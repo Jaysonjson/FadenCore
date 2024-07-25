@@ -53,6 +53,11 @@ public class RaceCosmetics {
         ELF.addCosmetic("pale", "player_cosmetic/elf/ears/elf_ears_3_pale", RaceCosmeticType.HEAD, "ear_3");
         ELF.addCosmetic("pale", "player_cosmetic/elf/ears/elf_ears_4_pale", RaceCosmeticType.HEAD, "ear_4");
 
+        ELF.addCosmetic("drow", "player_cosmetic/elf/ears/elf_ears_0_drow", RaceCosmeticType.HEAD, "ear_0");
+        ELF.addCosmetic("drow", "player_cosmetic/elf/ears/elf_ears_1_drow", RaceCosmeticType.HEAD, "ear_1");
+        ELF.addCosmetic("drow", "player_cosmetic/elf/ears/elf_ears_2_drow", RaceCosmeticType.HEAD, "ear_2");
+        ELF.addCosmetic("drow", "player_cosmetic/elf/ears/elf_ears_3_drow", RaceCosmeticType.HEAD, "ear_3");
+        ELF.addCosmetic("drow", "player_cosmetic/elf/ears/elf_ears_4_drow", RaceCosmeticType.HEAD, "ear_4");
 
     }
 
