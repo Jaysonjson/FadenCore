@@ -20,26 +20,13 @@ public class ReloadCommand {
                         //.then(CommandManager.literal("cape")
                                                 //.executes(context -> reloadCapes(context)))
 
-                        .then(CommandManager.literal("item_values")
+                        .then(CommandManager.literal("removed_due_to_changes_placeholder")
                                                 .executes(context -> reloadItemValues(context))));
 
         dispatcher.register(literalCommandNode);
     }
 
-    public static int reloadCapes(CommandContext<ServerCommandSource> source) throws CommandSyntaxException {
-        for (ServerPlayerEntity serverPlayerEntity : source.getSource().getServer().getPlayerManager().getPlayerList()) {
-            FadenNetwork.Server.reloadCapes(serverPlayerEntity);
-        }
-        source.getSource().sendMessage(Text.literal("Reloaded Capes!"));
-        return 0;
-    }
-
     public static int reloadItemValues(CommandContext<ServerCommandSource> source) throws CommandSyntaxException {
-        ItemValues.add();
-        for (ServerPlayerEntity serverPlayerEntity : source.getSource().getServer().getPlayerManager().getPlayerList()) {
-            FadenNetwork.Server.reloadItemValues(serverPlayerEntity);
-        }
-        source.getSource().sendMessage(Text.literal("Reloaded Item Values!"));
         return 0;
     }
 

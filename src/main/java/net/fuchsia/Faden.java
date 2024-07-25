@@ -81,16 +81,19 @@ public class Faden implements ModInitializer {
 	}
 
 	public static void init() {
-		try {
+
+		//I DONT USE CHECKSUMS ANYMORE, BUT IF WE EVER DO IT AGAIN, UNCOMMENT THIS
+		/*try {
 			CHECKSUMS = Faden.GSON.fromJson(FadenOnlineUtil.getJSONData("https://raw.githubusercontent.com/FuchsiaTeam/FadenData/main/checksums.json"), CheckSums.class);
 		} catch (Exception ignored) {}
+		*/
+
 		RaceCosmetics.add();
 		FadenSoundEvents.register();
 		FadenItems.register();
 		FadenTabs.register();
 		CoinMap.reloadCoins();
 		FadenNetwork.registerC2S();
-		ItemValues.add();
 		CommandRegistrationCallback.EVENT.register(new FadenCommands());
 		RaceSkinMap.addSkins();
 		FadenDataComponents.register();
@@ -121,6 +124,7 @@ public class Faden implements ModInitializer {
 			QuestCache.load();
 			ServerPlayerDatas.load();
 			ServerPlayerDatas.SERVER = server;
+			ItemValues.load();
 		});
 
 		ServerLifecycleEvents.AFTER_SAVE.register((server, flush, force) -> {
@@ -128,6 +132,7 @@ public class Faden implements ModInitializer {
 			ServerRaceCache.Cache.save();
 			QuestCache.save();
 			ServerPlayerDatas.save();
+			ItemValues.save();
 		});
 
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
