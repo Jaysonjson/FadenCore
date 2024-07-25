@@ -8,6 +8,7 @@ import java.util.Random;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fuchsia.common.init.*;
 import net.fuchsia.common.npc.NPCEntity;
+import net.fuchsia.util.NetworkUtils;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potions;
@@ -53,7 +54,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 
 public class Faden implements ModInitializer {
 	public static final String MOD_ID = "faden";
-	public static final String MC_VERSION = "1.20.6";
+	public static final String MC_VERSION = "1.21";
 	public static final String FADEN_VERSION = "0.0.1";
     public static final Logger LOGGER = LoggerFactory.getLogger("Faden");
 	public static ModContainer CONTAINER;
@@ -128,7 +129,7 @@ public class Faden implements ModInitializer {
 			FadenCapeCache.load();
 		});
 
-		ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
+		ServerLifecycleEvents.AFTER_SAVE.register((server, flush, force) -> {
 			RaceSkinMap.Cache.save();
 			ServerRaceCache.Cache.save();
 			QuestCache.save();
@@ -138,24 +139,7 @@ public class Faden implements ModInitializer {
 
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
 			ServerPlayerEntity serverPlayerEntity = handler.getPlayer();
-			if(!ServerPlayerDatas.getPlayerDatas().containsKey(serverPlayerEntity.getUuid())) {
-				ServerPlayerDatas.getPlayerDatas().put(serverPlayerEntity.getUuid(), new PlayerData());
-			}
-
-			FadenNetwork.Server.sendAllRaces(serverPlayerEntity);
-
-			//EXP
-			FadenNetwork.Server.sendRaces(serverPlayerEntity);
-
-
-			RaceSkinMap.Cache.sendUpdate(serverPlayerEntity, server);
-			ServerRaceCache.Cache.sendUpdate(serverPlayerEntity, server, false);
-			FadenNetwork.Server.sendPlayerDatas(serverPlayerEntity);
-			FadenNetwork.Server.sendPlayerCapes(serverPlayerEntity);
-			for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
-				FadenNetwork.Server.syncPlayerData(player, serverPlayerEntity.getUuid(), ServerPlayerDatas.getPlayerDatas().getOrDefault(serverPlayerEntity.getUuid(), new PlayerData()));
-			}
-			FadenNetwork.Server.syncPlayerData(serverPlayerEntity, serverPlayerEntity.getUuid(), ServerPlayerDatas.getPlayerDatas().getOrDefault(serverPlayerEntity.getUuid(), new PlayerData()));
+			NetworkUtils.fullyUpdatePlayer(serverPlayerEntity, server);
 			//TODO REMVOE: QUEST TESTING
 			FadenQuests.TEST.startQuest(serverPlayerEntity.getUuid());
 		});

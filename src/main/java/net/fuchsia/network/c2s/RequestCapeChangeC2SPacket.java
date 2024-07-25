@@ -9,6 +9,7 @@ import net.fuchsia.network.FadenNetwork;
 import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.ServerPlayerDatas;
 import net.fuchsia.util.FadenIdentifier;
+import net.fuchsia.util.NetworkUtils;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.packet.CustomPayload;
@@ -47,9 +48,7 @@ public record RequestCapeChangeC2SPacket(UUID uuid, String capeId) implements Cu
             }
         }
         ServerPlayerDatas.getPlayerDatas().put(uuid, data);
-        for (ServerPlayerEntity player : context.player().getServer().getPlayerManager().getPlayerList()) {
-            FadenNetwork.Server.syncPlayerData(player, uuid, data);
-        }
+        NetworkUtils.syncPlayer(context.server(), context.player());
     }
 }
 

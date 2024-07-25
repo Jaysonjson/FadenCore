@@ -60,7 +60,6 @@ public class RaceUtil {
         if(!skinId.isEmpty()) {
             RaceSkinUtil.setPlayerRaceSkin(player, skinId);
             ServerRaceCache.Cache.add(player.getUuid(), race.getId(), sub_id, cosmetics);
-
             for (ServerPlayerEntity serverPlayerEntity : player.getServer().getPlayerManager().getPlayerList()) {
                 FadenNetwork.Server.sendRace(serverPlayerEntity, player.getUuid(), race.getId(), sub_id, cosmetics,false);
             }
