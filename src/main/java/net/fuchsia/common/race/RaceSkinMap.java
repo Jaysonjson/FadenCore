@@ -132,6 +132,7 @@ public class RaceSkinMap {
 		public static void save() {
 			new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/").mkdirs();
 			try {
+				System.out.println("Saving Race Skin Cache");
 				NbtIo.writeCompressed(CACHE,  CACHE_PATH);
 			} catch (Exception e) {
 				e.printStackTrace();

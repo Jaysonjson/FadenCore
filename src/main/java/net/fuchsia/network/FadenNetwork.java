@@ -86,7 +86,7 @@ public class FadenNetwork {
             ServerPlayNetworking.send(player, new SendRaceUpdateS2CPacket(uuid, data, remove));
         }
 
-        public static void sendAllRaces(ServerPlayerEntity player) {
+        public static void sendAllRaceSkins(ServerPlayerEntity player) {
             ServerPlayNetworking.send(player, new SendAllRaceSkinsS2CPacket(ServerSkinCache.getPlayerSkins()));
         }
 
