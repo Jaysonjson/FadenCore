@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 import net.minecraft.item.tooltip.TooltipData;
+import net.minecraft.server.world.ServerWorld;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -129,6 +130,20 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
             });
         }
 
+        if(itemStack.contains(FadenDataComponents.FALL_DAMAGE_DECREASE_BLOCKS)) {
+            entries.add(new ToolTipEntry() {
+                @Override
+                public @Nullable Item getItem(FadenTooltipComponent component) {
+                    return Items.DIAMOND_BOOTS;
+                }
+
+                @Override
+                public Text getText(FadenTooltipComponent component) {
+                    return Text.literal(Text.translatable("tooltip.faden.fall_damage_decrease_blocks").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenDataComponents.FALL_DAMAGE_DECREASE_BLOCKS, 0f))));
+                }
+            });
+        }
+
         if(itemStack.contains(FadenDataComponents.JUMP_INCREASE_VALUE)) {
             entries.add(new ToolTipEntry() {
                 @Override
@@ -203,7 +218,13 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
         return dmg;
     }
 
-    public int onLivingFallDamage(PlayerEntity player, LivingEntity livingEntity, ItemStack itemStack, int damageAmount) {
+    public int onLivingFallDamage(PlayerEntity player, float fallDistance, LivingEntity livingEntity, ItemStack itemStack, int damageAmount) {
+        if(itemStack.contains(FadenDataComponents.FALL_DAMAGE_DECREASE_BLOCKS)) {
+            if(itemStack.get(FadenDataComponents.FALL_DAMAGE_DECREASE_BLOCKS) >= fallDistance) {
+                return 0;
+            }
+        }
+
         int dmg = damageAmount;
         boolean damageItem = false;
         if(itemStack.contains(FadenDataComponents.FALL_DAMAGE_DECREASE_PERCENTAGE)) {
@@ -211,7 +232,8 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
             damageItem = true;
         }
         if(damageItem) {
-            itemStack.damage(1, player, EquipmentSlot.CHEST);
+            itemStack.setDamage(itemStack.getDamage() + 1);
+            itemStack.damage(0, player, EquipmentSlot.CHEST);
         }
         return dmg;
     }

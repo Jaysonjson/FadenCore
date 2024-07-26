@@ -43,7 +43,7 @@ public abstract class LivingEntityMixin {
             int dmg = i;
             for (ItemStack gear : gearInventory.getGears()) {
                 if(gear.getItem() instanceof FadenGearItem gearItem) {
-                    dmg = gearItem.onLivingFallDamage(player, entity, gear, dmg);
+                    dmg = gearItem.onLivingFallDamage(player, fallDistance, entity, gear, dmg);
                 }
             }
             return dmg;

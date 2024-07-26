@@ -19,6 +19,7 @@ public class FadenDataComponents {
     public static final ComponentType<Float> JUMP_INCREASE_VALUE = register("jump_increase", (builder) -> builder.codec(Codecs.POSITIVE_FLOAT).packetCodec(PacketCodecs.FLOAT));
     public static final ComponentType<Float> JUMP_INCREASE_PERCENTAGE = register("jump_increase_percentage", (builder) -> builder.codec(Codecs.POSITIVE_FLOAT).packetCodec(PacketCodecs.FLOAT));
     public static final ComponentType<Float> FALL_DAMAGE_DECREASE_PERCENTAGE = register("falldamage_decrease_percentage", (builder) -> builder.codec(Codecs.POSITIVE_FLOAT).packetCodec(PacketCodecs.FLOAT));
+    public static final ComponentType<Float> FALL_DAMAGE_DECREASE_BLOCKS = register("falldamage_decrease_blocks", (builder) -> builder.codec(Codecs.POSITIVE_FLOAT).packetCodec(PacketCodecs.FLOAT));
 
     private static <T> ComponentType<T> register(String id, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
         return (ComponentType<T>) Registry.register(Registries.DATA_COMPONENT_TYPE, FadenIdentifier.create(id), ((ComponentType.Builder)builderOperator.apply(ComponentType.builder())).build());

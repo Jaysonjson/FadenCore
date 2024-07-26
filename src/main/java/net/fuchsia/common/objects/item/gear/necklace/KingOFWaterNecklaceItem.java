@@ -25,6 +25,7 @@ public class KingOFWaterNecklaceItem extends NecklaceItem {
     @Override
     public ItemStack randomize(ItemStack itemStack, PlayerEntity player, ItemTier itemTier) {
         itemStack.set(DataComponentTypes.MAX_DAMAGE, Faden.RANDOM.nextInt(50 + (int)(50.0f * itemTier.getDurabilityMultiplier()), (int)(500.0f * itemTier.getDurabilityMultiplier())));
+        itemStack.set(DataComponentTypes.DAMAGE, 0);
         itemStack.set(FadenDataComponents.ITEM_TIER, itemTier.name());
         itemStack.set(FadenDataComponents.FREE_WATER_MOVEMENT, true);
         return itemStack;
