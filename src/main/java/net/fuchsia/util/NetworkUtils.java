@@ -16,7 +16,7 @@ public class NetworkUtils {
 
     public static void fullyUpdatePlayer(ServerPlayerEntity serverPlayerEntity, MinecraftServer server) {
         if(!ServerPlayerDatas.getPlayerDatas().containsKey(serverPlayerEntity.getUuid())) {
-            ServerPlayerDatas.getPlayerDatas().put(serverPlayerEntity.getUuid(), new PlayerData());
+            ServerPlayerDatas.getPlayerDatas().put(serverPlayerEntity.getUuid(), ServerPlayerDatas.getOrLoadPlayerData(serverPlayerEntity.getUuid()));
         }
 
         FadenNetwork.Server.sendAllRaceSkins(serverPlayerEntity);
@@ -27,16 +27,15 @@ public class NetworkUtils {
 
         broadcastRaceUpdate(serverPlayerEntity, server);
         FadenNetwork.Server.sendPlayerDatas(serverPlayerEntity);
-        FadenNetwork.Server.sendPlayerCapes(serverPlayerEntity);
         syncPlayer(server, serverPlayerEntity);
         FadenNetwork.Server.sendItemValues(serverPlayerEntity);
     }
 
     public static void syncPlayer(MinecraftServer server, ServerPlayerEntity serverPlayerEntity) {
-        FadenNetwork.Server.syncPlayerData(serverPlayerEntity, serverPlayerEntity.getUuid(), ServerPlayerDatas.getPlayerDatas().getOrDefault(serverPlayerEntity.getUuid(), new PlayerData()));
+        FadenNetwork.Server.syncPlayerData(serverPlayerEntity, serverPlayerEntity.getUuid(), ServerPlayerDatas.getOrLoadPlayerData(serverPlayerEntity.getUuid()));
         for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
             if(player.getUuid().toString().equalsIgnoreCase(serverPlayerEntity.getUuid().toString())) continue;
-            FadenNetwork.Server.syncPlayerData(player, serverPlayerEntity.getUuid(), ServerPlayerDatas.getPlayerDatas().getOrDefault(serverPlayerEntity.getUuid(), new PlayerData()));
+            FadenNetwork.Server.syncPlayerData(player, serverPlayerEntity.getUuid(), ServerPlayerDatas.getOrLoadPlayerData(serverPlayerEntity.getUuid()));
         }
     }
 

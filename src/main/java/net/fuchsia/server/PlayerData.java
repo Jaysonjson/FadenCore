@@ -3,6 +3,7 @@ package net.fuchsia.server;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -16,10 +17,15 @@ public class PlayerData implements Serializable {
 
 
     private String selectedCape = "";
+    private ArrayList<String> capes = new ArrayList<>();
 
 
     public String getSelectedCapeId() {
         return selectedCape;
+    }
+
+    public ArrayList<String> getCapes() {
+        return capes;
     }
 
     @Nullable

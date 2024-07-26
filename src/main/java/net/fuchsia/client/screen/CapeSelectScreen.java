@@ -1,6 +1,8 @@
 package net.fuchsia.client.screen;
 
 import net.fuchsia.common.cape.FadenCapes;
+import net.fuchsia.server.PlayerData;
+import net.fuchsia.util.PlayerDataUtil;
 import net.minecraft.client.gui.widget.CheckboxWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import org.joml.Quaternionf;
@@ -31,6 +33,7 @@ public class CapeSelectScreen extends Screen {
     public ButtonWidget selectCapeWidget = null;
     public CheckboxWidget lockedWidget = null;
     public TextFieldWidget searchBox;
+    public PlayerData playerData;
     public CapeSelectScreen() {
         super(Text.literal(""));
     }
@@ -65,6 +68,7 @@ public class CapeSelectScreen extends Screen {
         this.addDrawableChild(searchBox = new TextFieldWidget(MinecraftClient.getInstance().textRenderer, lockedWidget.getX() + textRenderer.getWidth(Text.translatable("screen.faden.show_locked")) + 25, lockedWidget.getY(), 95, 18, Text.of("")));
 
         this.addSelectableChild(this.capes);
+        playerData = PlayerDataUtil.getClientOrServer(client.player.getUuid());
     }
 
     @Override
@@ -94,8 +98,8 @@ public class CapeSelectScreen extends Screen {
 
     @Override
     public boolean mouseReleased(double mouseX, double mouseY, int button) {
-        if(capes.getSelectedOrNull() != null) {
-            selectCapeWidget.visible = FadenCapes.getPlayerCapes().getOrDefault(MinecraftClient.getInstance().player.getUuid(), new ArrayList<>()).contains(capes.getSelectedOrNull().cape.getId());
+        if(capes.getSelectedOrNull() != null && playerData != null) {
+            selectCapeWidget.visible = playerData.getCapes().contains(capes.getSelectedOrNull().cape.getId());
         }
         return super.mouseReleased(mouseX, mouseY, button);
     }
