@@ -33,7 +33,7 @@ public class ItemValues {
 
     public static void load() {
         try {
-            HashMap<String, Integer> map  = Faden.GSON.fromJson(new FileReader(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/item_values.json"), new TypeToken<HashMap<UUID, PlayerData>>() {}.getType());
+            HashMap<String, Integer> map  = Faden.GSON.fromJson(new FileReader(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/item_values.json"), new TypeToken<HashMap<String, Integer>>() {}.getType());
             reload(map);
         } catch (Exception e) {
             e.printStackTrace();
@@ -48,6 +48,18 @@ public class ItemValues {
                 map.put(Registries.ITEM.getId(item).toString(), VALUES.get(item));
             }
             FileUtils.writeStringToFile(new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/item_values.json"), Faden.GSON.toJson(map), StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void saveClient() {
+        try {
+            HashMap<String, Integer> map = new HashMap<>();
+            for (Item item : ItemValues.VALUES.keySet()) {
+                map.put(Registries.ITEM.getId(item).toString(), ItemValues.VALUES.get(item));
+            }
+            FileUtils.writeStringToFile(new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/client/" + Faden.MC_VERSION + "/item_values.json"), Faden.GSON.toJson(map), StandardCharsets.UTF_8);
         } catch (Exception e) {
             e.printStackTrace();
         }

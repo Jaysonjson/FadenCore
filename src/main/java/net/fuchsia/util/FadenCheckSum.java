@@ -1,5 +1,7 @@
 package net.fuchsia.util;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.MessageDigest;
@@ -18,7 +20,27 @@ public class FadenCheckSum {
 		}
 		return digest.digest();
 	}
-	
+
+	public static byte[] create(String string) throws NoSuchAlgorithmException, IOException {
+		MessageDigest digest = MessageDigest.getInstance("MD5");
+ 		digest.update(string.getBytes(), 0, string.getBytes().length);
+		return digest.digest();
+	}
+
+	public static String checkSum(String string) {
+		try {
+			byte[] digest = create(string);
+			StringBuilder checksum = new StringBuilder();
+			for (byte b : digest) {
+				checksum.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
+			}
+			return checksum.toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+
 	public static String checkSum(InputStream inputStream) {
 		try {
 			byte[] digest = create(inputStream);
@@ -27,6 +49,18 @@ public class FadenCheckSum {
                 checksum.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
             }
 			return checksum.toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+
+	public static String checkSum(File file) {
+		try {
+			InputStream inputStream = new FileInputStream(file);
+			String checkSum = checkSum(inputStream);
+			inputStream.close();
+			return checkSum;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

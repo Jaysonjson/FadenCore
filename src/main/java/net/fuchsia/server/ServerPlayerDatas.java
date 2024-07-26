@@ -36,10 +36,12 @@ public class ServerPlayerDatas {
 
     public static PlayerData load(UUID uuid) {
         File dataFile = new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/player_datas/" + uuid.toString() + ".json");
-        try {
-           return Faden.GSON.fromJson(new FileReader(dataFile), PlayerData.class);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if(dataFile.exists()) {
+            try {
+                return Faden.GSON.fromJson(new FileReader(dataFile), PlayerData.class);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }

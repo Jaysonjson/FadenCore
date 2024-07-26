@@ -1,15 +1,19 @@
 package net.fuchsia.util;
 
 import net.fuchsia.Faden;
+import net.fuchsia.common.data.ItemValues;
 import net.fuchsia.common.race.RaceSkinMap;
 import net.fuchsia.common.race.data.ServerRaceCache;
 import net.fuchsia.common.race.skin.server.ServerSkinCache;
 import net.fuchsia.network.FadenNetwork;
 import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.ServerPlayerDatas;
+import net.minecraft.item.Item;
+import net.minecraft.registry.Registries;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 public class NetworkUtils {
@@ -28,7 +32,7 @@ public class NetworkUtils {
         broadcastRaceUpdate(serverPlayerEntity, server);
         FadenNetwork.Server.sendPlayerDatas(serverPlayerEntity);
         syncPlayer(server, serverPlayerEntity);
-        FadenNetwork.Server.sendItemValues(serverPlayerEntity);
+        FadenNetwork.Server.askItemValues(serverPlayerEntity);
     }
 
     public static void syncPlayer(MinecraftServer server, ServerPlayerEntity serverPlayerEntity) {
@@ -42,6 +46,15 @@ public class NetworkUtils {
     public static void broadcastRaceUpdate(ServerPlayerEntity serverPlayerEntity, MinecraftServer server) {
         RaceSkinMap.Cache.sendUpdate(serverPlayerEntity, server);
         ServerRaceCache.Cache.sendUpdate(serverPlayerEntity, server, false);
+    }
+
+    public static HashMap<String, Integer> trimItemValueMap() {
+        HashMap<String, Integer> map = new HashMap<>();
+        for (Item item : ItemValues.VALUES.keySet()) {
+            map.put(Registries.ITEM.getId(item).toString(), ItemValues.VALUES.get(item));
+        }
+        map.values().removeIf(integer -> integer == 0);
+        return map;
     }
 
 }

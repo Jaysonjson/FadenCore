@@ -32,5 +32,6 @@ public record SendItemValueUpdateS2CPacket(String item, int value) implements Cu
 
     public void receive(ClientPlayNetworking.Context context) {
         ItemValues.VALUES.put(Registries.ITEM.get(Identifier.of(item)), value);
+        ItemValues.saveClient();
     }
 }
