@@ -119,10 +119,10 @@ public class Faden implements ModInitializer {
 
 
 		ServerLifecycleEvents.SERVER_STARTING.register(server -> {
+			new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/player_datas/").mkdirs();
 			RaceSkinMap.Cache.load();
 			ServerRaceCache.Cache.load();
 			QuestCache.load();
-			ServerPlayerDatas.load();
 			ServerPlayerDatas.SERVER = server;
 			ItemValues.load();
 		});

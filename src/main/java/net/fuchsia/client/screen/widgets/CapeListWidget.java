@@ -24,7 +24,7 @@ public class CapeListWidget extends AlwaysSelectedEntryListWidget<CapeListEntry>
             if(showAll) {
                 for (FadenCape cape : FadenCapes.getCapes()) {
                     if(cape.getName().getString().toLowerCase().contains(searchBox.toLowerCase())) {
-                        addEntry(new CapeListEntry(cape));
+                        if(!entryExists(cape.getId())) addEntry(new CapeListEntry(cape, data));
                         if (data.getSelectedCapeId().equalsIgnoreCase(cape.getId())) {
                             setSelected(getEntry(f));
                         }
@@ -32,20 +32,27 @@ public class CapeListWidget extends AlwaysSelectedEntryListWidget<CapeListEntry>
                     }
                 }
             } else {
-                if (FadenCapes.getPlayerCapes().containsKey(MinecraftClient.getInstance().player.getUuid())) {
-                    for (String s : FadenCapes.getPlayerCapes().get(MinecraftClient.getInstance().player.getUuid())) {
-                        FadenCape cape = FadenCapes.getCapeById(s);
-                        if (cape != null && cape.getName().getString().toLowerCase().contains(searchBox.toLowerCase())) {
-                            addEntry(new CapeListEntry(cape));
-                            if (data.getSelectedCapeId().equalsIgnoreCase(s)) {
-                                setSelected(getEntry(f));
-                            }
-                            ++f;
+                for (String s : data.getCapes()) {
+                    FadenCape cape = FadenCapes.getCapeById(s);
+                    if (cape != null && cape.getName().getString().toLowerCase().contains(searchBox.toLowerCase())) {
+                        if(!entryExists(cape.getId())) addEntry(new CapeListEntry(cape, data));
+                        if (data.getSelectedCapeId().equalsIgnoreCase(s)) {
+                            setSelected(getEntry(f));
                         }
+                        ++f;
                     }
                 }
             }
         }
+    }
+
+    public boolean entryExists(String id) {
+        for (CapeListEntry child : children()) {
+            if(child.cape != null && child.cape.getId().equalsIgnoreCase(id)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

@@ -32,7 +32,6 @@ public class FadenNetwork {
         ClientPlayNetworking.registerGlobalReceiver(SendAllRacesS2CPacket.ID, SendAllRacesS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(SendPlayerDatasS2CPacket.ID, SendPlayerDatasS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(SendSinglePlayerDataS2CPacket.ID, SendSinglePlayerDataS2CPacket::receive);
-        ClientPlayNetworking.registerGlobalReceiver(SendCapesS2CPacket.ID, SendCapesS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(SendCapeUpdateS2CPacket.ID, SendCapeUpdateS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(SendItemValueUpdateS2CPacket.ID, SendItemValueUpdateS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(ItemValuesS2CPacket.ID, ItemValuesS2CPacket::receive);
@@ -48,7 +47,6 @@ public class FadenNetwork {
         PayloadTypeRegistry.playS2C().register(SendAllRacesS2CPacket.ID, SendAllRacesS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(SendPlayerDatasS2CPacket.ID, SendPlayerDatasS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(SendSinglePlayerDataS2CPacket.ID, SendSinglePlayerDataS2CPacket.CODEC);
-        PayloadTypeRegistry.playS2C().register(SendCapesS2CPacket.ID, SendCapesS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(SendCapeUpdateS2CPacket.ID, SendCapeUpdateS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(SendItemValueUpdateS2CPacket.ID, SendItemValueUpdateS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(ItemValuesS2CPacket.ID, ItemValuesS2CPacket.CODEC);
@@ -113,9 +111,6 @@ public class FadenNetwork {
             ServerPlayNetworking.send(player, new SendSinglePlayerDataS2CPacket(playerUuid, playerData));
         }
 
-        public static void sendPlayerCapes(ServerPlayerEntity player) {
-            ServerPlayNetworking.send(player, new SendCapesS2CPacket(FadenCapes.getPlayerCapes()));
-        }
 
         public static void sendCapeUpdate(ServerPlayerEntity player, UUID uuid, String cape, boolean remove) {
             ServerPlayNetworking.send(player, new SendCapeUpdateS2CPacket(uuid, cape, remove));

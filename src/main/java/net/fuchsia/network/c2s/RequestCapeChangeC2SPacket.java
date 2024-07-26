@@ -37,11 +37,11 @@ public record RequestCapeChangeC2SPacket(UUID uuid, String capeId) implements Cu
     }
 
     public void receive(ServerPlayNetworking.Context context) {
-        PlayerData data = ServerPlayerDatas.getPlayerDatas().getOrDefault(uuid, new PlayerData());
+        PlayerData data = ServerPlayerDatas.getOrLoadPlayerData(uuid);
         if(capeId.isEmpty()) {
             data.setSelectedCape("");
         } else {
-            for (String s : FadenCapes.getPlayerCapes().getOrDefault(uuid, new ArrayList<>())) {
+            for (String s : data.getCapes()) {
                 if (s.equalsIgnoreCase(capeId)) {
                     data.setSelectedCape(capeId);
                 }

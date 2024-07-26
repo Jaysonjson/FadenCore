@@ -3,6 +3,7 @@ package net.fuchsia.client.screen.widgets;
 import net.fuchsia.client.screen.ScreenUtil;
 import net.fuchsia.common.cape.FadenCape;
 import net.fuchsia.common.cape.FadenCapes;
+import net.fuchsia.server.PlayerData;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.widget.AlwaysSelectedEntryListWidget;
@@ -13,7 +14,8 @@ import java.util.ArrayList;
 public class CapeListEntry extends AlwaysSelectedEntryListWidget.Entry<CapeListEntry> {
 
     public FadenCape cape;
-    public CapeListEntry(FadenCape cape) {
+    public PlayerData playerData;
+    public CapeListEntry(FadenCape cape, PlayerData playerData) {
         this.cape = cape;
     }
 
@@ -25,7 +27,7 @@ public class CapeListEntry extends AlwaysSelectedEntryListWidget.Entry<CapeListE
     @Override
     public void render(DrawContext context, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean hovered, float tickDelta) {
         int color = 0xFFFFFFFF;
-        if(!FadenCapes.getPlayerCapes().getOrDefault(MinecraftClient.getInstance().player.getUuid(), new ArrayList<>()).contains(cape.getId())) {
+        if(playerData != null && playerData.getCapes().contains(cape.getId())) {
             color = 0xFFFFAAAA;
         }
         context.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, cape.getName(), x, y, color);

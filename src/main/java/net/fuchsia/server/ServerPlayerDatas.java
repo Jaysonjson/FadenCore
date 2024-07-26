@@ -16,27 +16,42 @@ import net.fuchsia.Faden;
 import net.fuchsia.network.FadenNetwork;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ServerPlayerDatas {
 
     private static HashMap<UUID, PlayerData> playerDatas = new HashMap<>();
     public static MinecraftServer SERVER = null;
 
-    public static void load() {
-        try {
-            playerDatas = Faden.GSON.fromJson(new FileReader(new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/player_data.json")), new TypeToken<HashMap<UUID, PlayerData>>() {}.getType());
-        } catch (Exception e) {
-            e.printStackTrace();
+    public static void save() {
+        for (UUID uuid : getPlayerDatas().keySet()) {
+            try {
+                FileUtils.writeStringToFile(new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/player_datas/" + uuid + ".json"), Faden.GSON.toJson(getPlayerDatas().get(uuid)), StandardCharsets.UTF_8);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    public static void save() {
-        new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/").mkdirs();
+    public static PlayerData load(UUID uuid) {
+        File dataFile = new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/player_datas/" + uuid.toString() + ".json");
         try {
-            FileUtils.writeStringToFile(new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/player_data.json"), Faden.GSON.toJson(getPlayerDatas()), StandardCharsets.UTF_8);
+           return Faden.GSON.fromJson(new FileReader(dataFile), PlayerData.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
+    }
+
+    @NotNull
+    public static PlayerData getOrLoadPlayerData(UUID uuid) {
+        if(playerDatas.containsKey(uuid)) {
+            return getPlayerDatas().get(uuid);
+        }
+        PlayerData data = load(uuid);
+        if(data == null) data = new PlayerData();
+        return data;
     }
 
     public static HashMap<UUID, PlayerData> getPlayerDatas() {

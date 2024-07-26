@@ -1,6 +1,7 @@
 package net.fuchsia.common.objects.command;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -11,6 +12,9 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.common.objects.command.types.CapeArgumentType;
 import net.fuchsia.network.FadenNetwork;
+import net.fuchsia.server.PlayerData;
+import net.fuchsia.server.ServerPlayerDatas;
+import net.fuchsia.util.PlayerDataUtil;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.CommandManager;
@@ -41,11 +45,10 @@ public class CapeCommand {
         PlayerEntity player = EntityArgumentType.getPlayer(source, "player");
         String cape = StringArgumentType.getString(source, "cape");
         source.getSource().sendFeedback(() -> Text.literal("Gave Cape: " + cape), false);
-        ArrayList<String> capes = FadenCapes.getPlayerCapes().getOrDefault(player.getUuid(), new ArrayList<>());
-        if(!capes.contains(cape)) {
-            capes.add(cape);
+        PlayerData playerData = ServerPlayerDatas.getOrLoadPlayerData(player.getUuid());
+        if(!playerData.getCapes().contains(cape)) {
+            playerData.getCapes().add(cape);
         }
-        FadenCapes.getPlayerCapes().put(player.getUuid(), capes);
         for (ServerPlayerEntity serverPlayerEntity : source.getSource().getServer().getPlayerManager().getPlayerList()) {
             FadenNetwork.Server.sendCapeUpdate(serverPlayerEntity, player.getUuid(), cape, false);
         }
@@ -56,7 +59,8 @@ public class CapeCommand {
         PlayerEntity player = EntityArgumentType.getPlayer(source, "player");
         String cape = StringArgumentType.getString(source, "cape");
         source.getSource().sendFeedback(() -> Text.literal("Removed Cape: " + cape), false);
-        FadenCapes.getPlayerCapes().getOrDefault(player.getUuid(), new ArrayList<>()).remove(cape);
+        PlayerData playerData = ServerPlayerDatas.getOrLoadPlayerData(player.getUuid());
+        playerData.getCapes().remove(cape);
         for (ServerPlayerEntity serverPlayerEntity : source.getSource().getServer().getPlayerManager().getPlayerList()) {
             FadenNetwork.Server.sendCapeUpdate(serverPlayerEntity, player.getUuid(), cape, true);
         }

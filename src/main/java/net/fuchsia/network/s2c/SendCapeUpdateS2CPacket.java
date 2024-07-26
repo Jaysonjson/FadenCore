@@ -2,7 +2,9 @@ package net.fuchsia.network.s2c;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fuchsia.common.cape.FadenCapes;
+import net.fuchsia.server.PlayerData;
 import net.fuchsia.util.FadenIdentifier;
+import net.fuchsia.util.PlayerDataUtil;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.packet.CustomPayload;
@@ -33,14 +35,16 @@ public record SendCapeUpdateS2CPacket(UUID uuid, String cape, boolean remove) im
     }
 
     public void receive(ClientPlayNetworking.Context context) {
-        if(!remove) {
-            ArrayList<String> capes = FadenCapes.getPlayerCapes().getOrDefault(uuid, new ArrayList<>());
-            if (!capes.contains(cape)) {
-                capes.add(cape);
+        PlayerData data = PlayerDataUtil.getClientOrServer(uuid);
+        if(data != null) {
+            if (!remove) {
+                if (!data.getCapes().contains(cape)) {
+                    data.getCapes().add(cape);
+                }
+                data.getCapes().add(cape);
+            } else {
+                data.getCapes().remove(cape);
             }
-            FadenCapes.getPlayerCapes().put(uuid, capes);
-        } else {
-            FadenCapes.getPlayerCapes().getOrDefault(uuid, new ArrayList<>()).remove(cape);
         }
     }
 }
