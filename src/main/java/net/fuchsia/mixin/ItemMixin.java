@@ -73,6 +73,11 @@ public abstract class ItemMixin implements IValue, ItemWithValues, ItemToolTipEn
     }
 
     @Override
+    public void resetItemMap() {
+        valueMap = null;
+    }
+
+    @Override
     public Collection<ToolTipEntry> getToolTipEntries(FadenTooltipComponent component) {
         ArrayList<ToolTipEntry> entries = new ArrayList<>();
         for (Item item : getValues(component.data.itemStack).keySet()) {

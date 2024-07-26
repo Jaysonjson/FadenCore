@@ -8,5 +8,6 @@ import java.util.LinkedHashMap;
 public interface ItemWithValues {
 
     LinkedHashMap<Item, Integer> getValues(ItemStack itemStack);
+    void resetItemMap();
 
 }

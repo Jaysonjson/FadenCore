@@ -14,10 +14,6 @@ public class FadenCommands implements CommandRegistrationCallback {
         RaceCommand.register(dispatcher);
         ReloadCommand.register(dispatcher);
         CapeCommand.register(dispatcher);
-
-        //Disabled for now, as I think having the ItemValues on the git is better, since the list will be larger than 50kb and sending this Packet everytime a player joins
-        //might have a big impact on the servers performance.
-
-        //ItemValueCommand.register(dispatcher, registryAccess);
+        ItemValueCommand.register(dispatcher, registryAccess);
     }
 }

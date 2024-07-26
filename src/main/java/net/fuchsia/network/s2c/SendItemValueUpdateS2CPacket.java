@@ -2,7 +2,10 @@ package net.fuchsia.network.s2c;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fuchsia.common.data.ItemValues;
+import net.fuchsia.common.objects.ItemWithValues;
+import net.fuchsia.mixin.ItemMixin;
 import net.fuchsia.util.FadenIdentifier;
+import net.minecraft.item.Item;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.packet.CustomPayload;
@@ -31,7 +34,11 @@ public record SendItemValueUpdateS2CPacket(String item, int value) implements Cu
     }
 
     public void receive(ClientPlayNetworking.Context context) {
-        ItemValues.VALUES.put(Registries.ITEM.get(Identifier.of(item)), value);
+        Item item1 = Registries.ITEM.get(Identifier.of(item));
+        ItemValues.VALUES.put(item1, value);
+        if(item1 instanceof ItemWithValues itemWithValues) {
+            itemWithValues.resetItemMap();
+        }
         ItemValues.saveClient();
     }
 }
