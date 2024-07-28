@@ -1,5 +1,6 @@
 package net.fuchsia.common.npc;
 
+import net.fuchsia.common.init.FadenEntities;
 import net.fuchsia.common.init.FadenNPCs;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
@@ -26,8 +27,8 @@ public class NPCEntity extends PathAwareEntity {
         NPC_DATA = DataTracker.registerData(NPCEntity.class, TrackedDataHandlerRegistry.STRING);
     }
 
-    public NPCEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
-        super(entityType, world);
+    public NPCEntity(World world) {
+        super(FadenEntities.NPC, world);
     }
 
     @Override
@@ -40,7 +41,7 @@ public class NPCEntity extends PathAwareEntity {
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
-        builder.add(NPC_DATA, "");
+        builder.add(NPC_DATA, FadenNPCs.TEST.getId().toString());
     }
 
     public INPC getNpc() {

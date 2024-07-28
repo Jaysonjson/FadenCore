@@ -36,4 +36,12 @@ public class InGameHudMixin {
         }
     }
 
+    @Inject(at = @At("HEAD"), method = "renderArmor", cancellable = true)
+    private static void renderArmor(DrawContext context, PlayerEntity player, int i, int j, int k, int x, CallbackInfo ci) {
+        if(FadenOptions.getConfig().FADEN_HEALTH) {
+            ci.cancel();
+        }
+    }
+
+
 }

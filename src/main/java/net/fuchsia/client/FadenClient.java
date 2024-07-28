@@ -3,7 +3,7 @@ package net.fuchsia.client;
 import com.google.common.reflect.TypeToken;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
@@ -62,7 +62,7 @@ public class FadenClient implements ClientModInitializer {
 
         registerModels();
 
-        EntityRendererRegistry.INSTANCE.register(FadenEntities.NPC, (context) -> new NPCEntityRenderer(context, true));
+        EntityRendererRegistry.register(FadenEntities.NPC, (context) -> new NPCEntityRenderer(context, true));
 
     }
 

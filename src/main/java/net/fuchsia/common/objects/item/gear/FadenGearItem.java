@@ -243,15 +243,11 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
     * */
     public float jumpVelocity(PlayerEntity player, ItemStack itemStack, float velocityAmount) {
         float strength = 0f;
-        boolean damageItem = false;
         if(itemStack.contains(FadenDataComponents.JUMP_INCREASE_VALUE)) {
             strength += itemStack.get(FadenDataComponents.JUMP_INCREASE_VALUE);
-            damageItem = true;
+            itemStack.damage(1, player, EquipmentSlot.CHEST);
         } else if(itemStack.contains(FadenDataComponents.JUMP_INCREASE_PERCENTAGE)) {
             strength = velocityAmount + (velocityAmount / 100.0f * itemStack.get(FadenDataComponents.JUMP_INCREASE_PERCENTAGE));
-            damageItem = true;
-        }
-        if(damageItem) {
             itemStack.damage(1, player, EquipmentSlot.CHEST);
         }
         return strength;

@@ -2,7 +2,9 @@ package net.fuchsia.common.objects.item;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 
+import net.fuchsia.common.objects.item.coin.IValue;
 import org.jetbrains.annotations.Nullable;
 
 import net.fuchsia.common.objects.ItemWithValues;
@@ -23,7 +25,8 @@ public class FadenItem extends Item implements ItemToolTipEntryRenderer {
     public Collection<ToolTipEntry> getToolTipEntries(FadenTooltipComponent component) {
         ArrayList<ToolTipEntry> entries = new ArrayList<>();
         if(component.data.itemStack.getItem() instanceof ItemWithValues itemWithValues) {
-            for (Item item : itemWithValues.getValues(component.data.itemStack).keySet()) {
+            LinkedHashMap<Item, Integer> values = itemWithValues.getValues(component.data.itemStack);
+            for (Item item : values.keySet()) {
                 entries.add(new ToolTipEntry() {
                     @Override
                     public @Nullable Item getItem(FadenTooltipComponent component) {
@@ -37,9 +40,15 @@ public class FadenItem extends Item implements ItemToolTipEntryRenderer {
 
                     @Override
                     public Text getText(FadenTooltipComponent component) {
-                        return Text.literal(String.valueOf(itemWithValues.getValues(component.data.itemStack).get(item)));
+                        return Text.literal(String.valueOf(values.get(item)));
                     }
                 });
+            }
+            if(component.data.itemStack.getItem() instanceof IValue value) {
+                int val = value.getValue(component.data.itemStack);
+                if (val > 4) {
+                    entries.add(component1 -> Text.literal("Total: " + val));
+                }
             }
         }
         return entries;

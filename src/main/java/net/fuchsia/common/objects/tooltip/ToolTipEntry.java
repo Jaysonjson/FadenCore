@@ -51,7 +51,8 @@ public interface ToolTipEntry {
     }
 
     default void renderText(FadenTooltipComponent component, TextRenderer textRenderer, int x, int y, Matrix4f matrix, VertexConsumerProvider.Immediate vertexConsumers) {
-        textRenderer.draw(getText(component), x + 10, y, getTextColor(component), true, matrix, vertexConsumers, TextRenderer.TextLayerType.NORMAL, getTextBackgroundColor(component), 15728880);
+        int xOffset = getItem(component) != null || getTexture(component) != null ? 10 : 0;
+        textRenderer.draw(getText(component), x + xOffset, y, getTextColor(component), true, matrix, vertexConsumers, TextRenderer.TextLayerType.NORMAL, getTextBackgroundColor(component), 15728880);
     }
 
 

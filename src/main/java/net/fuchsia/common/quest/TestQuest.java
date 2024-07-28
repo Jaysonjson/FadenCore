@@ -16,8 +16,6 @@ public class TestQuest extends FadenQuest {
         return FadenIdentifier.create("test_quest");
     }
 
-
-
     @Override
     public void setupQuestSteps() {
         getSteps().add(new IQuestStep() {

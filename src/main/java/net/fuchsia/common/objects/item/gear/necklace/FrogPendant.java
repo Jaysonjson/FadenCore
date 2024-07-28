@@ -24,13 +24,13 @@ public class FrogPendant extends NecklaceItem {
 
     @Override
     public ItemStack randomize(ItemStack itemStack, PlayerEntity player, ItemTier itemTier) {
-        itemStack.set(DataComponentTypes.MAX_DAMAGE, Faden.RANDOM.nextInt(10 + (int)(10.0f * itemTier.getDurabilityMultiplier()), (int)(100.0f * itemTier.getDurabilityMultiplier())));
+        itemStack.set(DataComponentTypes.MAX_DAMAGE, Faden.RANDOM.nextInt(10 + (int)(100.0f * itemTier.getDurabilityMultiplier()), (int)(375.0f * itemTier.getDurabilityMultiplier())));
         itemStack.set(DataComponentTypes.DAMAGE, 0);
         itemStack.set(FadenDataComponents.JUMP_INCREASE_VALUE, Faden.RANDOM.nextFloat(0.001f, 0.05f) * itemTier.getDurabilityMultiplier());
         itemStack.set(FadenDataComponents.ITEM_TIER, itemTier.name());
         itemStack.set(FadenDataComponents.FREE_WATER_MOVEMENT, true);
-        itemStack.set(FadenDataComponents.FALL_DAMAGE_DECREASE_PERCENTAGE, 10f);
-        itemStack.set(FadenDataComponents.FALL_DAMAGE_DECREASE_BLOCKS, 7f);
+        itemStack.set(FadenDataComponents.FALL_DAMAGE_DECREASE_PERCENTAGE, 50f);
+        itemStack.set(FadenDataComponents.FALL_DAMAGE_DECREASE_BLOCKS, 8f);
         return itemStack;
     }
 }
