@@ -10,7 +10,9 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 
-import net.fuchsia.common.race.Race;
+import net.fuchsia.common.init.FadenRaces;
+import net.fuchsia.common.objects.race.Race;
+import net.fuchsia.common.objects.race.RaceEnum;
 
 public class RaceSubIdArgumentType implements ArgumentType<String> {
 
@@ -30,7 +32,7 @@ public class RaceSubIdArgumentType implements ArgumentType<String> {
     @Override
     public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> context, SuggestionsBuilder builder) {
         String id = StringArgumentType.getString(context, "race");
-        for (Race value : Race.values()) {
+        for (Race value : FadenRaces.getRegistry().values()) {
             if(value.getId().equalsIgnoreCase(id)) {
                 for (String s : value.subIds()) {
                     builder.suggest(s);

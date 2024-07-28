@@ -3,8 +3,8 @@ package net.fuchsia.client.overlay;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.fuchsia.common.race.data.ClientRaceCache;
-import net.fuchsia.common.race.data.RaceData;
+import net.fuchsia.common.objects.race.data.ClientRaceCache;
+import net.fuchsia.common.objects.race.data.RaceData;
 import net.fuchsia.config.FadenOptions;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;

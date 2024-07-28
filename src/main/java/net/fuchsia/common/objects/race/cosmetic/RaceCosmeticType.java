@@ -1,4 +1,4 @@
-package net.fuchsia.common.race.cosmetic;
+package net.fuchsia.common.objects.race.cosmetic;
 
 public enum RaceCosmeticType {
 

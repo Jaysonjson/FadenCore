@@ -1,11 +1,11 @@
-package net.fuchsia.common.race;
+package net.fuchsia.common.objects.race;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import net.fuchsia.common.race.cosmetic.RaceCosmetic;
-import net.fuchsia.common.race.data.RaceData;
-import net.fuchsia.common.race.data.ServerRaceCache;
+import net.fuchsia.common.objects.race.cosmetic.RaceCosmetic;
+import net.fuchsia.common.objects.race.data.RaceData;
+import net.fuchsia.common.objects.race.data.ServerRaceCache;
 import net.fuchsia.network.FadenNetwork;
 import net.minecraft.server.network.ServerPlayerEntity;
 

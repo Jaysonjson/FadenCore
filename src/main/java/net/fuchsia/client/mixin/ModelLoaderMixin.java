@@ -2,11 +2,12 @@ package net.fuchsia.client.mixin;
 
 import net.fuchsia.client.FadenClient;
 import net.fuchsia.client.registry.FadenItemModelRegistry;
-import net.fuchsia.common.race.Race;
-import net.fuchsia.common.race.cosmetic.RaceCosmetic;
+import net.fuchsia.common.init.FadenRaces;
+import net.fuchsia.common.objects.race.Race;
+import net.fuchsia.common.objects.race.RaceEnum;
+import net.fuchsia.common.objects.race.cosmetic.RaceCosmetic;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.render.model.ModelLoader;
-import net.minecraft.client.render.model.json.JsonUnbakedModel;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -19,7 +20,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 @Mixin(ModelLoader.class)
@@ -36,7 +36,7 @@ public abstract class ModelLoaderMixin {
             this.loadItemModel(new ModelIdentifier(Identifier.of(itemId.getNamespace(), data.getPath().isEmpty() ? "model/" + itemId.getPath() : data.getPath()), data.getVariant()));
         }
 
-        for (Race value : Race.values()) {
+        for (Race value : FadenRaces.getRegistry().values()) {
             for (ArrayList<RaceCosmetic> raceCosmetics : value.getCosmeticPalette().getCosmetics().values()) {
                 for (RaceCosmetic raceCosmetic : raceCosmetics) {
                     this.loadItemModel(raceCosmetic.getModel());

@@ -1,9 +1,9 @@
 package net.fuchsia.client.render.feature;
 
-import net.fuchsia.common.race.cosmetic.RaceCosmetic;
-import net.fuchsia.common.race.cosmetic.RaceCosmeticType;
-import net.fuchsia.common.race.data.ClientRaceCache;
-import net.fuchsia.common.race.data.RaceData;
+import net.fuchsia.common.objects.race.cosmetic.RaceCosmetic;
+import net.fuchsia.common.objects.race.cosmetic.RaceCosmeticType;
+import net.fuchsia.common.objects.race.data.ClientRaceCache;
+import net.fuchsia.common.objects.race.data.RaceData;
 import net.fuchsia.util.FadenRenderUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;

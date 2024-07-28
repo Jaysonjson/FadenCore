@@ -2,9 +2,9 @@ package net.fuchsia.util;
 
 import net.fuchsia.Faden;
 import net.fuchsia.common.data.ItemValues;
-import net.fuchsia.common.race.RaceSkinMap;
-import net.fuchsia.common.race.data.ServerRaceCache;
-import net.fuchsia.common.race.skin.server.ServerSkinCache;
+import net.fuchsia.common.objects.race.RaceSkinMap;
+import net.fuchsia.common.objects.race.data.ServerRaceCache;
+import net.fuchsia.common.objects.race.skin.server.ServerSkinCache;
 import net.fuchsia.network.FadenNetwork;
 import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.ServerPlayerDatas;

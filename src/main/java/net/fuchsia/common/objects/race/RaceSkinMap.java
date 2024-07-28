@@ -1,4 +1,4 @@
-package net.fuchsia.common.race;
+package net.fuchsia.common.objects.race;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.UUID;
 
+import net.fuchsia.common.init.FadenRaces;
 import net.fuchsia.network.FadenNetwork;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -17,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.fuchsia.Faden;
-import net.fuchsia.common.race.skin.provider.SkinProvider;
+import net.fuchsia.common.objects.race.skin.provider.SkinProvider;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.NbtSizeTracker;
@@ -25,7 +26,7 @@ import net.minecraft.nbt.NbtSizeTracker;
 public class RaceSkinMap {
 
 	public static void addSkins() {
-		for (Race value : Race.values()) {
+		for (Race value : FadenRaces.getRegistry().values()) {
 			for (String s : value.subIds()) {
 				if(!s.isEmpty()) loadSkin(value, s);
 			}
@@ -34,6 +35,10 @@ public class RaceSkinMap {
 
 	private static void loadSkin(IRace race, String subId) {
 		String skinPath = getSkinPath(race, Faden.MOD_ID);
+		if(Faden.CONTAINER.findPath(skinPath + subId + "/").isEmpty()) {
+			Faden.LOGGER.error("Could not find Race Skins for SubId " + subId);
+			return;
+		}
 		Path skins = Faden.CONTAINER.findPath(skinPath + subId + "/").get();
 		try {
 			Path[] ar = Files.list(skins).toArray(Path[]::new);
@@ -60,7 +65,7 @@ public class RaceSkinMap {
 
 	@Nullable
 	public static byte[] getSkin(String name) {
-		for (Race value : Race.values()) {
+		for (Race value : FadenRaces.getRegistry().values()) {
 			if(value.getSkinMap().containsKey(name)) return value.getSkinMap().get(name);
 		}
 		return null;
@@ -68,7 +73,7 @@ public class RaceSkinMap {
 
 	public static HashMap<String, byte[]> getAllMaps() {
 		HashMap<String, byte[]> skins = new HashMap<>();
-		for (Race value : Race.values()) {
+		for (Race value : FadenRaces.getRegistry().values()) {
 			skins.putAll(value.getSkinMap());
 		}
 		return skins;
