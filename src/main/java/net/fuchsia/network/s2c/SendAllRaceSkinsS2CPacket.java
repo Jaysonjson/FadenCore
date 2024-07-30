@@ -9,9 +9,9 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fuchsia.race.skin.client.ClientRaceSkinCache;
-import net.fuchsia.race.skin.provider.SkinProvider;
-import net.fuchsia.race.skin.server.ServerSkinCache;
+import net.fuchsia.common.objects.race.skin.client.ClientRaceSkinCache;
+import net.fuchsia.common.objects.race.skin.provider.SkinProvider;
+import net.fuchsia.common.objects.race.skin.server.ServerSkinCache;
 import net.fuchsia.network.PacketUtils;
 import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.network.RegistryByteBuf;

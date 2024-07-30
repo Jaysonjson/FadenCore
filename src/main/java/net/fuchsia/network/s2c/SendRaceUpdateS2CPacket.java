@@ -3,8 +3,8 @@ package net.fuchsia.network.s2c;
 import java.util.UUID;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fuchsia.race.cache.ClientRaceCache;
-import net.fuchsia.race.cache.RaceData;
+import net.fuchsia.common.objects.race.cache.ClientRaceCache;
+import net.fuchsia.common.objects.race.cache.RaceData;
 import net.fuchsia.network.PacketUtils;
 import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.network.RegistryByteBuf;

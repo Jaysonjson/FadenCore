@@ -1,8 +1,8 @@
 package net.fuchsia.client.overlay;
 
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.fuchsia.race.cache.ClientRaceCache;
-import net.fuchsia.race.cache.RaceData;
+import net.fuchsia.common.objects.race.cache.ClientRaceCache;
+import net.fuchsia.common.objects.race.cache.RaceData;
 import net.fuchsia.config.FadenOptions;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;

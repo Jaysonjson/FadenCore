@@ -11,8 +11,8 @@ import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 
 import net.fuchsia.common.init.FadenRaces;
-import net.fuchsia.race.Race;
-import net.fuchsia.race.RaceEnum;
+import net.fuchsia.common.objects.race.Race;
+import net.fuchsia.common.objects.race.RaceEnum;
 
 public class RaceSubIdArgumentType implements ArgumentType<String> {
 

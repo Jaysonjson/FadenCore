@@ -1,9 +1,9 @@
 package net.fuchsia.mixin;
 
 import net.fuchsia.common.cape.FadenCapes;
-import net.fuchsia.race.cache.ClientRaceCache;
-import net.fuchsia.race.cache.RaceData;
-import net.fuchsia.race.cache.ServerRaceCache;
+import net.fuchsia.common.objects.race.cache.ClientRaceCache;
+import net.fuchsia.common.objects.race.cache.RaceData;
+import net.fuchsia.common.objects.race.cache.ServerRaceCache;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;

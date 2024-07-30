@@ -1,10 +1,10 @@
 package net.fuchsia.common.init;
 
-import net.fuchsia.race.Race;
-import net.fuchsia.race.types.ElfRace;
-import net.fuchsia.race.types.HarengonRace;
-import net.fuchsia.race.types.HumanRace;
-import net.fuchsia.race.types.TabaxiRace;
+import net.fuchsia.common.objects.race.Race;
+import net.fuchsia.common.objects.race.types.ElfRace;
+import net.fuchsia.common.objects.race.types.HarengonRace;
+import net.fuchsia.common.objects.race.types.HumanRace;
+import net.fuchsia.common.objects.race.types.TabaxiRace;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 

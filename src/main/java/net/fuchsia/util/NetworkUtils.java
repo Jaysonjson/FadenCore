@@ -1,8 +1,8 @@
 package net.fuchsia.util;
 
 import net.fuchsia.common.data.ItemValues;
-import net.fuchsia.race.RaceSkinMap;
-import net.fuchsia.race.cache.ServerRaceCache;
+import net.fuchsia.common.objects.race.RaceSkinMap;
+import net.fuchsia.common.objects.race.cache.ServerRaceCache;
 import net.fuchsia.network.FadenNetwork;
 import net.fuchsia.server.ServerPlayerDatas;
 import net.minecraft.item.Item;
