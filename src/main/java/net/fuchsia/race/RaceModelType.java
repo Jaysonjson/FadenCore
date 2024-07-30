@@ -1,4 +1,4 @@
-package net.fuchsia.common.objects.race;
+package net.fuchsia.race;
 
 public enum RaceModelType {
     SLIM, WIDE, BOTH;

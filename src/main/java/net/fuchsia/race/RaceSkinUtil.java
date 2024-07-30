@@ -1,7 +1,7 @@
-package net.fuchsia.common.objects.race;
+package net.fuchsia.race;
 
 import net.fuchsia.network.FadenNetwork;
-import net.fuchsia.common.objects.race.skin.server.ServerSkinCache;
+import net.fuchsia.race.skin.server.ServerSkinCache;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 public class RaceSkinUtil {

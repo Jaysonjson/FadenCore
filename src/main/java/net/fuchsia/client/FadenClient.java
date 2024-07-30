@@ -20,7 +20,7 @@ import net.fuchsia.common.init.FadenCloths;
 import net.fuchsia.common.init.FadenEntities;
 import net.fuchsia.common.objects.tooltip.FadenTooltipComponent;
 import net.fuchsia.common.objects.tooltip.FadenTooltipData;
-import net.fuchsia.common.objects.race.skin.client.ClientRaceSkinCache;
+import net.fuchsia.race.skin.client.ClientRaceSkinCache;
 import net.fuchsia.network.FadenNetwork;
 import net.fuchsia.util.FadenCheckSum;
 import net.minecraft.item.Item;

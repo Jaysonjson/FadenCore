@@ -1,19 +1,14 @@
 package net.fuchsia.client.overlay;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.fuchsia.common.objects.race.data.ClientRaceCache;
-import net.fuchsia.common.objects.race.data.RaceData;
+import net.fuchsia.race.cache.ClientRaceCache;
+import net.fuchsia.race.cache.RaceData;
 import net.fuchsia.config.FadenOptions;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
-import net.minecraft.client.item.CompassAnglePredicateProvider;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.RenderTickCounter;
-import net.minecraft.item.CompassItem;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class StatsOverlay implements HudRenderCallback {

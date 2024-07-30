@@ -1,4 +1,4 @@
-package net.fuchsia.common.objects.race.skin.server;
+package net.fuchsia.race.skin.server;
 
 import java.util.HashMap;
 import java.util.UUID;

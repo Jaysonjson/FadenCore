@@ -2,7 +2,7 @@ package net.fuchsia.client.render.entity;
 
 import net.fuchsia.Faden;
 import net.fuchsia.common.npc.NPCEntity;
-import net.fuchsia.common.objects.race.skin.client.ClientRaceSkinCache;
+import net.fuchsia.race.skin.client.ClientRaceSkinCache;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.LivingEntityRenderer;

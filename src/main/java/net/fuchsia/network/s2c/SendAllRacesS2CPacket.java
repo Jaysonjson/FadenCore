@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fuchsia.common.objects.race.data.ClientRaceCache;
-import net.fuchsia.common.objects.race.data.ServerRaceCache;
+import net.fuchsia.race.cache.ClientRaceCache;
+import net.fuchsia.race.cache.ServerRaceCache;
 import net.fuchsia.network.PacketUtils;
 import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.network.RegistryByteBuf;

@@ -1,4 +1,4 @@
-package net.fuchsia.common.objects.race;
+package net.fuchsia.race;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Multimap;

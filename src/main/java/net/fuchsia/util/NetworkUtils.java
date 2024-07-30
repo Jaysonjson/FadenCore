@@ -1,12 +1,9 @@
 package net.fuchsia.util;
 
-import net.fuchsia.Faden;
 import net.fuchsia.common.data.ItemValues;
-import net.fuchsia.common.objects.race.RaceSkinMap;
-import net.fuchsia.common.objects.race.data.ServerRaceCache;
-import net.fuchsia.common.objects.race.skin.server.ServerSkinCache;
+import net.fuchsia.race.RaceSkinMap;
+import net.fuchsia.race.cache.ServerRaceCache;
 import net.fuchsia.network.FadenNetwork;
-import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.ServerPlayerDatas;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -14,7 +11,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.HashMap;
-import java.util.UUID;
 
 public class NetworkUtils {
 
