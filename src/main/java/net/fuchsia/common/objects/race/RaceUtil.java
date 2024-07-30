@@ -11,12 +11,12 @@ import net.minecraft.server.network.ServerPlayerEntity;
 
 public class RaceUtil {
 
-    public static void setPlayerRace(ServerPlayerEntity player, IRace race) {
+    public static void setPlayerRace(ServerPlayerEntity player, Race race) {
         String sub_id = race.subIds()[new Random().nextInt(race.subIds().length)];
         setPlayerRace(player, race, sub_id);
     }
 
-    public static void setPlayerRace(ServerPlayerEntity player, IRace race, String sub_id) {
+    public static void setPlayerRace(ServerPlayerEntity player, Race race, String sub_id) {
         ArrayList<RaceCosmetic> headCosmetics = new ArrayList<>();
         ArrayList<RaceCosmetic> chestCosmetics = new ArrayList<>();
         ArrayList<RaceCosmetic> legCosmetics = new ArrayList<>();
@@ -52,10 +52,11 @@ public class RaceUtil {
         if(bootsCosmetics.size() != 0) dataCosmetics.setLegCosmeticId(bootsCosmetics.get(random.nextInt(bootsCosmetics.size())).getId());
 
         setPlayerRace(player, race, sub_id, dataCosmetics);
+
     }
 
 
-    public static void setPlayerRace(ServerPlayerEntity player, IRace race, String sub_id, RaceData.RaceDataCosmetics cosmetics) {
+    public static void setPlayerRace(ServerPlayerEntity player, Race race, String sub_id, RaceData.RaceDataCosmetics cosmetics) {
         String skinId = RaceSkinMap.getRandomSkin(race, sub_id);
         if(!skinId.isEmpty()) {
             RaceSkinUtil.setPlayerRaceSkin(player, skinId);
@@ -63,6 +64,7 @@ public class RaceUtil {
             for (ServerPlayerEntity serverPlayerEntity : player.getServer().getPlayerManager().getPlayerList()) {
                 FadenNetwork.Server.sendRace(serverPlayerEntity, player.getUuid(), race.getId(), sub_id, cosmetics,false);
             }
+            race.applyEntityAttributes(player);
             //FadenNetwork.Server.sendRace(player, player.getUuid(), race.getId(), sub_id, false);
         }
     }

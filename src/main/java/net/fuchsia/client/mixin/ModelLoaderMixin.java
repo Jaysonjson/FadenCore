@@ -9,6 +9,7 @@ import net.fuchsia.common.objects.race.cosmetic.RaceCosmetic;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.render.model.ModelLoader;
 import net.minecraft.client.util.ModelIdentifier;
+import net.minecraft.data.client.Model;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
@@ -28,7 +29,7 @@ public abstract class ModelLoaderMixin {
     @Shadow
     protected abstract void loadItemModel(ModelIdentifier modelId);
 
-    @Inject(method = "<init>", at = @At("TAIL"))
+    @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiler/Profiler;swap(Ljava/lang/String;)V", ordinal = 1, shift = At.Shift.AFTER, by = 1))
     public void addModels(BlockColors blockColors, Profiler profiler, Map jsonUnbakedModels, Map blockStates, CallbackInfo ci) {
         for (Item item : FadenClient.getItemModels().getModels().keySet()) {
             Identifier itemId = Registries.ITEM.getId(item);

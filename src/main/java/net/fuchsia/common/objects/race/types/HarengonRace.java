@@ -33,7 +33,7 @@ public class HarengonRace extends Race {
     @Override
     protected void addEntityAttributes(Multimap<RegistryEntry<EntityAttribute>, EntityAttributeModifier> modifiers) {
         modifiers.put(EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier(FadenIdentifier.create("speed"), 0.03, EntityAttributeModifier.Operation.ADD_VALUE));
-        modifiers.put(EntityAttributes.GENERIC_JUMP_STRENGTH, new EntityAttributeModifier(FadenIdentifier.create("jump_strength"), 0.2, EntityAttributeModifier.Operation.ADD_VALUE));
+        modifiers.put(EntityAttributes.GENERIC_JUMP_STRENGTH, new EntityAttributeModifier(FadenIdentifier.create("jump_strength"), 0.3, EntityAttributeModifier.Operation.ADD_VALUE));
         modifiers.put(EntityAttributes.GENERIC_LUCK, new EntityAttributeModifier(FadenIdentifier.create("jump_strength"), 0.2, EntityAttributeModifier.Operation.ADD_VALUE));
         modifiers.put(EntityAttributes.GENERIC_SAFE_FALL_DISTANCE, new EntityAttributeModifier(FadenIdentifier.create("jump_strength"), 0.4, EntityAttributeModifier.Operation.ADD_VALUE));
         modifiers.put(EntityAttributes.GENERIC_MAX_HEALTH, new EntityAttributeModifier(FadenIdentifier.create("max_health"), -8, EntityAttributeModifier.Operation.ADD_VALUE));
