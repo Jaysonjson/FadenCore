@@ -1,9 +1,9 @@
-package net.fuchsia.race.types;
+package net.fuchsia.common.objects.race.types;
 
-import net.fuchsia.race.Race;
-import net.fuchsia.race.RaceCosmetics;
-import net.fuchsia.race.RaceModelType;
-import net.fuchsia.race.cosmetic.RaceCosmeticPalette;
+import net.fuchsia.common.objects.race.Race;
+import net.fuchsia.common.objects.race.RaceCosmetics;
+import net.fuchsia.common.objects.race.RaceModelType;
+import net.fuchsia.common.objects.race.cosmetic.RaceCosmeticPalette;
 import net.fuchsia.util.FadenIdentifier;
 import org.joml.Vector3f;
 

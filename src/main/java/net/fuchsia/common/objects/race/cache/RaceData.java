@@ -1,7 +1,7 @@
-package net.fuchsia.race.cache;
+package net.fuchsia.common.objects.race.cache;
 
 import net.fuchsia.common.init.FadenRaces;
-import net.fuchsia.race.Race;
+import net.fuchsia.common.objects.race.Race;
 
 import java.io.Serial;
 import java.io.Serializable;

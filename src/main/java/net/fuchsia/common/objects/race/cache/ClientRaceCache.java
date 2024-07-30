@@ -1,4 +1,4 @@
-package net.fuchsia.race.cache;
+package net.fuchsia.common.objects.race.cache;
 
 import java.util.HashMap;
 import java.util.UUID;

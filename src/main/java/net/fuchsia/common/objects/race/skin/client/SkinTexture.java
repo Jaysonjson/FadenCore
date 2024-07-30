@@ -1,4 +1,4 @@
-package net.fuchsia.race.skin.client;
+package net.fuchsia.common.objects.race.skin.client;
 
 import org.jetbrains.annotations.Nullable;
 

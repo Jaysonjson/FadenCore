@@ -1,4 +1,4 @@
-package net.fuchsia.race.cache;
+package net.fuchsia.common.objects.race.cache;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -7,7 +7,7 @@ import java.util.UUID;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.fuchsia.Faden;
-import net.fuchsia.race.Race;
+import net.fuchsia.common.objects.race.Race;
 import net.fuchsia.network.FadenNetwork;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtIo;

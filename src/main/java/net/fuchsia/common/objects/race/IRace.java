@@ -1,4 +1,4 @@
-package net.fuchsia.race;
+package net.fuchsia.common.objects.race;
 
 import java.util.HashMap;
 
@@ -12,7 +12,7 @@ import org.joml.Vector3f;
 
 import com.google.common.collect.ImmutableMap;
 
-import net.fuchsia.race.cosmetic.RaceCosmeticPalette;
+import net.fuchsia.common.objects.race.cosmetic.RaceCosmeticPalette;
 import net.minecraft.entity.EntityDimensions;
 
 public interface IRace {

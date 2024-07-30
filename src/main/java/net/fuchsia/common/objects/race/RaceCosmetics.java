@@ -1,8 +1,8 @@
-package net.fuchsia.race;
+package net.fuchsia.common.objects.race;
 
-import net.fuchsia.race.cosmetic.RaceCosmetic;
-import net.fuchsia.race.cosmetic.RaceCosmeticPalette;
-import net.fuchsia.race.cosmetic.RaceCosmeticType;
+import net.fuchsia.common.objects.race.cosmetic.RaceCosmetic;
+import net.fuchsia.common.objects.race.cosmetic.RaceCosmeticPalette;
+import net.fuchsia.common.objects.race.cosmetic.RaceCosmeticType;
 
 public class RaceCosmetics {
 
