@@ -34,6 +34,16 @@ public class ServerPlayerDatas {
         }
     }
 
+    public static void save(UUID uuid) {
+        if(playerDatas.containsKey(uuid)) {
+            try {
+                FileUtils.writeStringToFile(new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/player_datas/" + uuid + ".json"), Faden.GSON.toJson(getPlayerDatas().get(uuid)), StandardCharsets.UTF_8);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public static PlayerData load(UUID uuid) {
         File dataFile = new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/player_datas/" + uuid.toString() + ".json");
         if(dataFile.exists()) {

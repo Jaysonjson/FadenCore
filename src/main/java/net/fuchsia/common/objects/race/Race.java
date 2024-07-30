@@ -1,11 +1,17 @@
 package net.fuchsia.common.objects.race;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.MultimapBuilder;
 import net.minecraft.entity.EntityAttachmentType;
 import net.minecraft.entity.EntityAttachments;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import org.joml.Vector3f;
 
@@ -74,5 +80,15 @@ public abstract class Race implements IRace {
     @Override
     public ImmutableMap<Object, Object> poseDimensions() {
         return poseDimensions;
+    }
+
+    protected void addEntityAttributes(Multimap<RegistryEntry<EntityAttribute>, EntityAttributeModifier> modifiers) {
+
+    }
+
+    public void applyEntityAttributes(ServerPlayerEntity serverPlayerEntity) {
+        Multimap<RegistryEntry<EntityAttribute>, EntityAttributeModifier> attributeMap = MultimapBuilder.hashKeys().arrayListValues().build();
+        addEntityAttributes(attributeMap);
+        serverPlayerEntity.getAttributes().addTemporaryModifiers(attributeMap);
     }
 }

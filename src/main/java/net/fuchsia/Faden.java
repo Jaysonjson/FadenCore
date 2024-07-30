@@ -3,12 +3,26 @@ package net.fuchsia;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
+import com.google.common.collect.Multimap;
+import com.google.common.collect.MultimapBuilder;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fuchsia.common.init.*;
 import net.fuchsia.common.npc.NPCEntity;
+import net.fuchsia.common.objects.race.Race;
 import net.fuchsia.util.NetworkUtils;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.potion.Potions;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -139,15 +153,27 @@ public class Faden implements ModInitializer {
 			ServerPlayerEntity serverPlayerEntity = handler.getPlayer();
 			NetworkUtils.fullyUpdatePlayer(serverPlayerEntity, server);
 			//TODO REMVOE: QUEST TESTING
-			FadenQuests.TEST.startQuest(serverPlayerEntity.getUuid());
+			FadenQuests.TEST.startQuest(serverPlayerEntity);
+			Race race = ServerRaceCache.get(serverPlayerEntity.getUuid());
+			if(race != null) {
+				race.applyEntityAttributes(serverPlayerEntity);
+			}
 		});
 
+		ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
+			Race race = ServerRaceCache.get(newPlayer.getUuid());
+			if(race != null) {
+				race.applyEntityAttributes(newPlayer);
+			}
+		});
 
 		ServerPlayConnectionEvents.DISCONNECT.register((handler, sender) -> {
 			ServerSkinCache.removeSkin(handler.getPlayer().getUuid());
 			for (ServerPlayerEntity serverPlayerEntity : sender.getPlayerManager().getPlayerList()) {
 				FadenNetwork.Server.removeSkin(serverPlayerEntity, handler.getPlayer().getUuid());
 			}
+			ServerPlayerDatas.save(handler.getPlayer().getUuid());
+			ServerPlayerDatas.getPlayerDatas().remove(handler.getPlayer().getUuid());
 			ServerRaceCache.Cache.sendUpdate(handler.getPlayer(), handler.getPlayer().server, true);
 		});
 	}
