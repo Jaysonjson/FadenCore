@@ -1,15 +1,12 @@
 package net.fuchsia.network;
 
 import net.fuchsia.Faden;
-import net.fuchsia.network.s2c.RacePacket;
-import net.fuchsia.network.s2c.SendRaceUpdateS2CPacket;
 import net.minecraft.network.RegistryByteBuf;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.Base64;
 
 public class PacketUtils {

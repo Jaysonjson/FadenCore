@@ -2,8 +2,8 @@ package net.fuchsia.client.render.feature;
 
 import net.fuchsia.common.objects.race.cosmetic.RaceCosmetic;
 import net.fuchsia.common.objects.race.cosmetic.RaceCosmeticType;
-import net.fuchsia.common.objects.race.cache.ClientRaceCache;
-import net.fuchsia.common.objects.race.cache.RaceData;
+import net.fuchsia.server.PlayerData;
+import net.fuchsia.server.client.ClientPlayerDatas;
 import net.fuchsia.util.FadenRenderUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -24,10 +24,10 @@ public class ChestFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEn
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
         if(!entity.isInvisible()) {
-            RaceData raceData = ClientRaceCache.get(entity.getUuid());
-            if (raceData.getRace() != null) {
-                for (RaceCosmetic cosmetic : raceData.getRace().getCosmeticPalette().getCosmetics(raceData.getSubId())) {
-                    if (cosmetic.getType() == RaceCosmeticType.CHEST && cosmetic.getId().equalsIgnoreCase(raceData.getCosmetics().getChestCosmeticId())) {
+            PlayerData data = ClientPlayerDatas.getPlayerData(entity.getUuid());
+            if (data != null && data.getRaceSaveData().getRace() != null) {
+                for (RaceCosmetic cosmetic : data.getRaceSaveData().getRace().getCosmeticPalette().getCosmetics(data.getRaceSaveData().getRaceSub())) {
+                    if (cosmetic.getType() == RaceCosmeticType.CHEST && cosmetic.getId().equalsIgnoreCase(data.getRaceSaveData().getCosmetics().getChest())) {
                         matrices.push();
                         BakedModel model = MinecraftClient.getInstance().getBakedModelManager().getModel(cosmetic.getModel());
                         if(!entity.isSneaking()) {

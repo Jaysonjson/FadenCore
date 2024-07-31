@@ -1,9 +1,9 @@
 package net.fuchsia.mixin;
 
 import net.fuchsia.common.cape.FadenCapes;
-import net.fuchsia.common.objects.race.cache.ClientRaceCache;
-import net.fuchsia.common.objects.race.cache.RaceData;
-import net.fuchsia.common.objects.race.cache.ServerRaceCache;
+import net.fuchsia.common.objects.race.Race;
+import net.fuchsia.server.PlayerData;
+import net.fuchsia.server.client.ClientPlayerDatas;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
@@ -38,13 +38,11 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Inject(at = @At("HEAD"), method = "getBaseDimensions", cancellable = true)
     public void baseDimensions(EntityPose pose, CallbackInfoReturnable<EntityDimensions> cir) {
-        RaceData data = ServerRaceCache.getCache().get(uuid);
-        if(data == null) {
-            data = ClientRaceCache.get(uuid);
-        }
-        if (data != null && data.getRace() != null) {
-            if(data.getRace().poseDimensions() != null) {
-                cir.setReturnValue((EntityDimensions) data.getRace().poseDimensions().getOrDefault(pose, data.getRace().dimensions()));
+        PlayerData data = ClientPlayerDatas.getPlayerData(uuid);
+        Race race = data.getRaceSaveData().getRace();
+        if (race != null) {
+            if(race.poseDimensions() != null) {
+                cir.setReturnValue((EntityDimensions) race.poseDimensions().getOrDefault(pose, race.dimensions()));
             }
         }
     }

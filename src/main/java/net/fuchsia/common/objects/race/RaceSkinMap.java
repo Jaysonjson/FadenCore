@@ -1,6 +1,5 @@
 package net.fuchsia.common.objects.race;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -8,20 +7,12 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-import java.util.UUID;
 
 import net.fuchsia.common.init.FadenRaces;
-import net.fuchsia.network.FadenNetwork;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.network.ServerPlayerEntity;
 import org.jetbrains.annotations.Nullable;
 
-import net.fabricmc.loader.api.FabricLoader;
 import net.fuchsia.Faden;
 import net.fuchsia.common.objects.race.skin.provider.SkinProvider;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtIo;
-import net.minecraft.nbt.NbtSizeTracker;
 
 public class RaceSkinMap {
 
@@ -98,71 +89,4 @@ public class RaceSkinMap {
 		//return race.getSkinMap().keySet().toArray(new String[] {})[random.nextInt(race.getSkinMap().size())];
 		return buffer.get(random.nextInt(buffer.size()));
 	}
-	
-	public static class Cache {
-		private static NbtCompound CACHE = new NbtCompound();
-		private static final Path CACHE_PATH = new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/skin.nbt").toPath();
-
-		public static void load() {
-			try {
-				if(CACHE_PATH.toFile().exists()) {
-					CACHE = NbtIo.readCompressed(CACHE_PATH, NbtSizeTracker.ofUnlimitedBytes());
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		public static NbtCompound get() {
-			return CACHE;
-		}
-
-		public static void add(UUID uuid, String id) {
-			new Thread(() -> {
-				if(CACHE.contains(id)) CACHE.remove(id);
-				NbtCompound slot = new NbtCompound();
-				NbtCompound tag = new NbtCompound();
-				tag.putString("id", id);
-				slot.put("slot_0", tag);
-				CACHE.put(uuid.toString(), slot);
-				new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/").mkdirs();
-				try {
-					NbtIo.writeCompressed(CACHE,  CACHE_PATH);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}).start();
-		}
-
-		public static void save() {
-			new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/").mkdirs();
-			try {
-				System.out.println("Saving Race Skin Cache");
-				NbtIo.writeCompressed(CACHE,  CACHE_PATH);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		public static String getId(UUID uuid) {
-			if(get().contains(uuid.toString())) {
-				NbtCompound compound = get().getCompound(uuid.toString());
-				if(compound.contains("slot_0")) {
-					return compound.getCompound("slot_0").getString("id");
-				}
-			}
-			return "";
-		}
-
-		public static void sendUpdate(ServerPlayerEntity updatedPlayer, MinecraftServer server) {
-			String id = RaceSkinMap.Cache.getId(updatedPlayer.getUuid());
-			if(!id.isEmpty()) {
-				for (ServerPlayerEntity playerEntity : server.getPlayerManager().getPlayerList()) {
-					FadenNetwork.Server.sendRaceSkin(playerEntity, updatedPlayer.getUuid(), id);
-				}
-				FadenNetwork.Server.sendRaceSkin(updatedPlayer, updatedPlayer.getUuid(), id);
-			}
-		}
-	}
-	
 }

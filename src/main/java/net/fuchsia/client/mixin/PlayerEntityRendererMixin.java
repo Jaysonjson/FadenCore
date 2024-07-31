@@ -1,17 +1,18 @@
 package net.fuchsia.client.mixin;
 
 import net.fuchsia.client.PlayerModelCache;
+import net.fuchsia.common.objects.race.Race;
 import net.fuchsia.mixin_interfaces.IClothInventory;
 import net.fuchsia.client.IPlayerEntityRenderer;
 import net.fuchsia.client.render.feature.ChestFeatureRenderer;
 import net.fuchsia.client.render.feature.ClothFeatureRenderer;
 import net.fuchsia.client.render.feature.HeadFeatureRenderer;
 import net.fuchsia.common.objects.item.cloth.ClothItem;
-import net.fuchsia.common.objects.race.cache.ClientRaceCache;
-import net.fuchsia.common.objects.race.cache.RaceData;
 import net.fuchsia.common.objects.race.skin.client.ClientRaceSkinCache;
 import net.fuchsia.common.slot.ClothSlot;
 import net.fuchsia.config.FadenOptions;
+import net.fuchsia.server.PlayerData;
+import net.fuchsia.server.client.ClientPlayerDatas;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -65,7 +66,7 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
     private void getTextureAbstractPlayer(AbstractClientPlayerEntity abstractClientPlayerEntity, CallbackInfoReturnable<Identifier> cir) {
         if(FadenOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
         	if(ClientRaceSkinCache.hasSkin(abstractClientPlayerEntity.getUuid())) {
-        		cir.setReturnValue(ClientRaceSkinCache.getPlayerSkins().get(abstractClientPlayerEntity.getUuid()));
+        		cir.setReturnValue(ClientRaceSkinCache.getSkin(abstractClientPlayerEntity.getUuid()));
         	}
         }
     }
@@ -97,10 +98,11 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
 
     @Override
     public PlayerEntityModel<AbstractClientPlayerEntity> getPlayerModel() {
-        RaceData data = ClientRaceCache.get(MinecraftClient.getInstance().player.getUuid());
+        PlayerData data = ClientPlayerDatas.getPlayerData(MinecraftClient.getInstance().player.getUuid());
         PlayerEntityModel<AbstractClientPlayerEntity> playerEntityModel = getModel();
-        if (data.getRace() != null) {
-            switch (data.getRace().model()) {
+        if (data != null && data.getRaceSaveData().getRace() != null) {
+            Race race = data.getRaceSaveData().getRace();
+            switch (race.model()) {
                 case SLIM -> {
                     playerEntityModel = PlayerModelCache.slimModel;
                     slim = true;
@@ -114,7 +116,7 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
                 }
 
                 case BOTH -> {
-                    Identifier id = ClientRaceSkinCache.getPlayerSkins().getOrDefault(MinecraftClient.getInstance().player.getUuid(), Identifier.of("empty"));
+                    Identifier id = ClientRaceSkinCache.getSkin(MinecraftClient.getInstance().player.getUuid());
                     if (id.toString().toLowerCase().contains("_slim")) {
                         playerEntityModel = PlayerModelCache.slimModel;
                         slim = true;
@@ -190,9 +192,10 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
     @Inject(at = @At("HEAD"), method = "render(Lnet/minecraft/client/network/AbstractClientPlayerEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", cancellable = true)
     private void size(AbstractClientPlayerEntity abstractClientPlayerEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
         matrixStack.push();
-        if(ClientRaceCache.getCache().containsKey(abstractClientPlayerEntity.getUuid())) {
-            RaceData data = ClientRaceCache.get(abstractClientPlayerEntity.getUuid());
-            matrixStack.scale(data.getRace().size().x, data.getRace().size().y, data.getRace().size().z);
+        PlayerData data = ClientPlayerDatas.getPlayerData(abstractClientPlayerEntity.getUuid());
+        if(data.getRaceSaveData().hasRace()) {
+            Race race = data.getRaceSaveData().getRace();
+            matrixStack.scale(race.size().x, race.size().y, race.size().z);
         }
     }
 

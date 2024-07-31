@@ -1,6 +1,7 @@
 package net.fuchsia.server.client;
 
 import net.fuchsia.server.PlayerData;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -11,9 +12,9 @@ public class ClientPlayerDatas {
     private static HashMap<UUID, PlayerData> playerDatas = new HashMap<>();
 
 
-    @Nullable
+    @NotNull
     public static PlayerData getPlayerData(UUID uuid) {
-        return playerDatas.getOrDefault(uuid, new PlayerData());
+        return getPlayerDatas().getOrDefault(uuid, new PlayerData());
     }
 
     public static void setPlayerDatas(HashMap<UUID, PlayerData> playerDatas) {
@@ -21,6 +22,7 @@ public class ClientPlayerDatas {
     }
 
     public static HashMap<UUID, PlayerData> getPlayerDatas() {
+        if(playerDatas == null) playerDatas = new HashMap<>();
         return playerDatas;
     }
 }

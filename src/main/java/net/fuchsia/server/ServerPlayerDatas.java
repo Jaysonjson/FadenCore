@@ -58,11 +58,14 @@ public class ServerPlayerDatas {
 
     @NotNull
     public static PlayerData getOrLoadPlayerData(UUID uuid) {
+        PlayerData data = null;
         if(playerDatas.containsKey(uuid)) {
-            return getPlayerDatas().get(uuid);
+            data = getPlayerDatas().get(uuid);
+        } else {
+            data = load(uuid);
+            if (data == null) data = new PlayerData();
         }
-        PlayerData data = load(uuid);
-        if(data == null) data = new PlayerData();
+        data.setUuid(uuid);
         return data;
     }
 

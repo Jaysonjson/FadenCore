@@ -1,9 +1,10 @@
 package net.fuchsia.client.render.feature;
 
+import net.fuchsia.common.objects.race.Race;
 import net.fuchsia.common.objects.race.cosmetic.RaceCosmetic;
 import net.fuchsia.common.objects.race.cosmetic.RaceCosmeticType;
-import net.fuchsia.common.objects.race.cache.ClientRaceCache;
-import net.fuchsia.common.objects.race.cache.RaceData;
+import net.fuchsia.server.PlayerData;
+import net.fuchsia.server.client.ClientPlayerDatas;
 import net.fuchsia.util.FadenRenderUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -25,10 +26,11 @@ public class HeadFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEnt
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
         if(!entity.isInvisible()) {
-            RaceData raceData = ClientRaceCache.get(entity.getUuid());
-            if (raceData.getRace() != null) {
-                for (RaceCosmetic cosmetic : raceData.getRace().getCosmeticPalette().getCosmetics(raceData.getSubId())) {
-                    if (cosmetic.getType() == RaceCosmeticType.HEAD && cosmetic.getId().equalsIgnoreCase(raceData.getCosmetics().getHeadCosmeticId())) {
+            PlayerData data = ClientPlayerDatas.getPlayerData(entity.getUuid());
+            if (data.getRaceSaveData().hasRace()) {
+                Race race = data.getRaceSaveData().getRace();
+                for (RaceCosmetic cosmetic : race.getCosmeticPalette().getCosmetics(data.getRaceSaveData().getRaceSub())) {
+                    if (cosmetic.getType() == RaceCosmeticType.HEAD && cosmetic.getId().equalsIgnoreCase(data.getRaceSaveData().getCosmetics().getHead())) {
                         matrices.push();
                         BakedModel model = MinecraftClient.getInstance().getBakedModelManager().getModel(cosmetic.getModel());
                         ((ModelWithHead) this.getContextModel()).getHead().rotate(matrices);

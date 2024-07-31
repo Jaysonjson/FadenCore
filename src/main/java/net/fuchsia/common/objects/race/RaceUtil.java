@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import net.fuchsia.common.objects.race.cosmetic.RaceCosmetic;
-import net.fuchsia.common.objects.race.cache.RaceData;
-import net.fuchsia.common.objects.race.cache.ServerRaceCache;
+import net.fuchsia.common.objects.race.skin.provider.SkinProvider;
 import net.fuchsia.network.FadenNetwork;
+import net.fuchsia.server.PlayerData;
+import net.fuchsia.server.ServerPlayerDatas;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 public class RaceUtil {
@@ -45,25 +46,26 @@ public class RaceUtil {
             }
         }
         Random random = new Random();
-        RaceData.RaceDataCosmetics dataCosmetics = new RaceData.RaceDataCosmetics();
-        if(headCosmetics.size() != 0) dataCosmetics.setHeadCosmeticId(headCosmetics.get(random.nextInt(headCosmetics.size())).getId());
-        if(chestCosmetics.size() != 0) dataCosmetics.setChestCosmeticId(chestCosmetics.get(random.nextInt(chestCosmetics.size())).getId());
-        if(legCosmetics.size() != 0) dataCosmetics.setLegCosmeticId(legCosmetics.get(random.nextInt(legCosmetics.size())).getId());
-        if(bootsCosmetics.size() != 0) dataCosmetics.setLegCosmeticId(bootsCosmetics.get(random.nextInt(bootsCosmetics.size())).getId());
+        PlayerData.RaceDataCosmetics dataCosmetics = new PlayerData.RaceDataCosmetics();
+        if(headCosmetics.size() != 0) dataCosmetics.setHead(headCosmetics.get(random.nextInt(headCosmetics.size())).getId());
+        if(chestCosmetics.size() != 0) dataCosmetics.setChest(chestCosmetics.get(random.nextInt(chestCosmetics.size())).getId());
+        if(legCosmetics.size() != 0) dataCosmetics.setLeg(legCosmetics.get(random.nextInt(legCosmetics.size())).getId());
+        if(bootsCosmetics.size() != 0) dataCosmetics.setLeg(bootsCosmetics.get(random.nextInt(bootsCosmetics.size())).getId());
 
         setPlayerRace(player, race, sub_id, dataCosmetics);
 
     }
 
 
-    public static void setPlayerRace(ServerPlayerEntity player, Race race, String sub_id, RaceData.RaceDataCosmetics cosmetics) {
+    public static void setPlayerRace(ServerPlayerEntity player, Race race, String sub_id, PlayerData.RaceDataCosmetics cosmetics) {
         String skinId = RaceSkinMap.getRandomSkin(race, sub_id);
         if(!skinId.isEmpty()) {
-            RaceSkinUtil.setPlayerRaceSkin(player, skinId);
-            ServerRaceCache.Cache.add(player.getUuid(), race.getId(), sub_id, cosmetics);
-            for (ServerPlayerEntity serverPlayerEntity : player.getServer().getPlayerManager().getPlayerList()) {
-                FadenNetwork.Server.sendRace(serverPlayerEntity, player.getUuid(), race.getId(), sub_id, cosmetics,false);
-            }
+            PlayerData data = ServerPlayerDatas.getOrLoadPlayerData(player.getUuid());
+            data.getRaceSaveData().setSkin(SkinProvider.getSkinIdentifier(skinId).toString());
+            data.getRaceSaveData().setRace(race.getId());
+            data.getRaceSaveData().setRaceSub(sub_id);
+            data.getRaceSaveData().setCosmetics(cosmetics);
+            data.sync();
             race.applyEntityAttributes(player);
             //FadenNetwork.Server.sendRace(player, player.getUuid(), race.getId(), sub_id, false);
         }

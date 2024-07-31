@@ -6,10 +6,6 @@ import java.util.UUID;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.fuchsia.common.objects.race.cache.RaceData;
-import net.fuchsia.common.objects.race.cache.ServerRaceCache;
-import net.fuchsia.common.objects.race.skin.provider.SkinProvider;
-import net.fuchsia.common.objects.race.skin.server.ServerSkinCache;
 import net.fuchsia.network.c2s.RequestCapeChangeC2SPacket;
 import net.fuchsia.network.c2s.SendItemValuesCheckC2SPacket;
 import net.fuchsia.network.s2c.*;
@@ -23,11 +19,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 public class FadenNetwork {
 
     public static void registerS2C() {
-        ClientPlayNetworking.registerGlobalReceiver(SendRaceUpdateS2CPacket.ID, SendRaceUpdateS2CPacket::receive);
-        ClientPlayNetworking.registerGlobalReceiver(RemoveSkinS2CPacket.ID, RemoveSkinS2CPacket::receive);
-        ClientPlayNetworking.registerGlobalReceiver(SendSkinS2CPacket.ID, SendSkinS2CPacket::receive);
-        ClientPlayNetworking.registerGlobalReceiver(SendAllRaceSkinsS2CPacket.ID, SendAllRaceSkinsS2CPacket::receive);
-        ClientPlayNetworking.registerGlobalReceiver(SendAllRacesS2CPacket.ID, SendAllRacesS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(SendPlayerDatasS2CPacket.ID, SendPlayerDatasS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(SendSinglePlayerDataS2CPacket.ID, SendSinglePlayerDataS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(SendCapeUpdateS2CPacket.ID, SendCapeUpdateS2CPacket::receive);
@@ -38,19 +29,12 @@ public class FadenNetwork {
     }
 
     public static void registerC2S() {
-
-        PayloadTypeRegistry.playS2C().register(SendRaceUpdateS2CPacket.ID, SendRaceUpdateS2CPacket.CODEC);
-        PayloadTypeRegistry.playS2C().register(RemoveSkinS2CPacket.ID, RemoveSkinS2CPacket.CODEC);
-        PayloadTypeRegistry.playS2C().register(SendSkinS2CPacket.ID, SendSkinS2CPacket.CODEC);
-        PayloadTypeRegistry.playS2C().register(SendAllRaceSkinsS2CPacket.ID, SendAllRaceSkinsS2CPacket.CODEC);
-        PayloadTypeRegistry.playS2C().register(SendAllRacesS2CPacket.ID, SendAllRacesS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(SendPlayerDatasS2CPacket.ID, SendPlayerDatasS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(SendSinglePlayerDataS2CPacket.ID, SendSinglePlayerDataS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(SendCapeUpdateS2CPacket.ID, SendCapeUpdateS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(SendItemValueUpdateS2CPacket.ID, SendItemValueUpdateS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(ItemValuesS2CPacket.ID, ItemValuesS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(AskItemValuesS2CPacket.ID, AskItemValuesS2CPacket.CODEC);
-
 
 
         PayloadTypeRegistry.playC2S().register(RequestCapeChangeC2SPacket.ID, RequestCapeChangeC2SPacket.CODEC);
@@ -76,35 +60,6 @@ public class FadenNetwork {
      * Server to Client
      * */
     public static class Server {
-
-        public static void sendRaceSkin(ServerPlayerEntity player, UUID uuid, String id) {
-            ServerPlayNetworking.send(player, new SendSkinS2CPacket(uuid, SkinProvider.getSkinIdentifier(id)));
-        }
-
-        public static void sendRace(ServerPlayerEntity player, UUID uuid, String id, String sub_id, RaceData.RaceDataCosmetics cosmetics, boolean remove) {
-            ServerPlayNetworking.send(player, new SendRaceUpdateS2CPacket(uuid, new RaceData(id, sub_id, cosmetics), remove));
-        }
-
-        public static void sendRace(ServerPlayerEntity player, UUID uuid, RaceData data, boolean remove) {
-            ServerPlayNetworking.send(player, new SendRaceUpdateS2CPacket(uuid, data, remove));
-        }
-
-        public static void sendAllRaceSkins(ServerPlayerEntity player) {
-            ServerPlayNetworking.send(player, new SendAllRaceSkinsS2CPacket(ServerSkinCache.getPlayerSkins()));
-        }
-
-        public static void sendRaces(ServerPlayerEntity player) {
-            ArrayList<RacePacket> packets1 = new ArrayList<>();
-            for (UUID uuid : ServerRaceCache.getCache().keySet()) {
-                packets1.add(new RacePacket(uuid, ServerRaceCache.getCache().get(uuid)));
-            }
-            ServerPlayNetworking.send(player, new SendAllRacesS2CPacket(packets1));
-        }
-
-
-        public static void removeSkin(ServerPlayerEntity player, UUID uuid) {
-            ServerPlayNetworking.send(player, new RemoveSkinS2CPacket(uuid));
-        }
 
         public static void sendPlayerDatas(ServerPlayerEntity player) {
             ServerPlayNetworking.send(player, new SendPlayerDatasS2CPacket(ServerPlayerDatas.getPlayerDatas()));

@@ -9,9 +9,10 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.fuchsia.common.init.FadenRaces;
 import net.fuchsia.common.objects.command.types.RaceArgumentType;
 import net.fuchsia.common.objects.command.types.RaceSubIdArgumentType;
+import net.fuchsia.common.objects.race.Race;
 import net.fuchsia.common.objects.race.RaceUtil;
-import net.fuchsia.common.objects.race.cache.ClientRaceCache;
-import net.fuchsia.common.objects.race.cache.RaceData;
+import net.fuchsia.server.PlayerData;
+import net.fuchsia.server.client.ClientPlayerDatas;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.CommandManager;
@@ -37,9 +38,10 @@ public class RaceCommand {
 
     public static int getRace(CommandContext<ServerCommandSource> source) throws CommandSyntaxException {
         PlayerEntity player = EntityArgumentType.getPlayer(source, "player");
-        RaceData data = ClientRaceCache.getCache().getOrDefault(player.getUuid(), new RaceData());
-        if(data.getRace() != null) {
-            source.getSource().sendFeedback(() -> Text.literal("Race: " + data.getRace().getId() + " with SubId:" + data.getSubId()), false);
+        PlayerData data = ClientPlayerDatas.getPlayerData(player.getUuid());
+        if(data != null && data.getRaceSaveData().getRace() != null) {
+            Race race = data.getRaceSaveData().getRace();
+            source.getSource().sendFeedback(() -> Text.literal("Race: " + race.getId() + " with SubId:" + data.getRaceSaveData().getRaceSub()), false);
         } else {
             source.getSource().sendFeedback(() -> Text.literal("Player does not have a race!"), false);
         }

@@ -6,11 +6,12 @@ import java.util.UUID;
 import net.fuchsia.common.objects.race.RaceSkinMap;
 import net.fuchsia.common.objects.race.skin.provider.SkinProvider;
 import net.fuchsia.config.FadenOptions;
+import net.fuchsia.server.PlayerData;
+import net.fuchsia.server.client.ClientPlayerDatas;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.Identifier;
 
 public class ClientRaceSkinCache {
-    private static HashMap<UUID, Identifier> PLAYER_SKINS = new HashMap<>();
     private static HashMap<String, Identifier> SKINS = new HashMap<>();
     private static boolean added = false;
 
@@ -36,12 +37,12 @@ public class ClientRaceSkinCache {
         }
     }
 
-    public static HashMap<UUID, Identifier> getPlayerSkins() {
-        return PLAYER_SKINS;
-    }
-
     public static Identifier getSkin(UUID playerUuid) {
-        return getPlayerSkins().getOrDefault(playerUuid, Identifier.of("missing"));
+        PlayerData data = ClientPlayerDatas.getPlayerData(playerUuid);
+        if(data != null) {
+            return Identifier.of(data.getRaceSaveData().getSkin());
+        }
+        return Identifier.of("missing");
     }
 
     public static HashMap<String, Identifier> getSKINS() {
@@ -49,14 +50,10 @@ public class ClientRaceSkinCache {
     }
 
     public static boolean hasSkin(UUID playerUuid) {
-        return getPlayerSkins().containsKey(playerUuid);
-    }
-
-    public static void removeSkin(UUID playerUuid) {
-        getPlayerSkins().remove(playerUuid);
-    }
-
-    public static void setSkin(UUID playerUuid, Identifier skinId) {
-        getPlayerSkins().put(playerUuid, skinId);
+        PlayerData data = ClientPlayerDatas.getPlayerData(playerUuid);
+        if(data != null) {
+            return !data.getRaceSaveData().getSkin().isEmpty();
+        }
+        return false;
     }
 }

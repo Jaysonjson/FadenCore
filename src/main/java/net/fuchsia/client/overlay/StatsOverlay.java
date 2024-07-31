@@ -1,9 +1,9 @@
 package net.fuchsia.client.overlay;
 
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.fuchsia.common.objects.race.cache.ClientRaceCache;
-import net.fuchsia.common.objects.race.cache.RaceData;
 import net.fuchsia.config.FadenOptions;
+import net.fuchsia.server.PlayerData;
+import net.fuchsia.server.client.ClientPlayerDatas;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
@@ -17,9 +17,9 @@ public class StatsOverlay implements HudRenderCallback {
     public void onHudRender(DrawContext drawContext, RenderTickCounter tickCounter) {
         if(FadenOptions.getConfig().FADEN_HEALTH && MinecraftClient.isHudEnabled()) {
             ClientPlayerEntity player = MinecraftClient.getInstance().player;
-            RaceData data = ClientRaceCache.getCache().getOrDefault(player.getUuid(), null);
-            if(data != null && data.getRace() != null && data.getRace().getIcon() != null) {
-                drawContext.drawGuiTexture(data.getRace().getIcon(), 25, 10, 16, 16);
+            PlayerData data = ClientPlayerDatas.getPlayerData(player.getUuid());
+            if(data != null && data.getRaceSaveData().getRace() != null && data.getRaceSaveData().getRace().getIcon() != null) {
+                drawContext.drawGuiTexture(data.getRaceSaveData().getRace().getIcon(), 25, 10, 16, 16);
             }
 
             drawContext.drawTexture(Identifier.of("textures/gui/sprites/hud/armor_full.png"), 25, 22, 0, 0, 4, 4, 4, 4);

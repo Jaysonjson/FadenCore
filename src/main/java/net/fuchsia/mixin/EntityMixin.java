@@ -2,6 +2,8 @@ package net.fuchsia.mixin;
 
 import java.util.UUID;
 
+import net.fuchsia.server.PlayerData;
+import net.fuchsia.server.client.ClientPlayerDatas;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,9 +15,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fuchsia.Faden;
 import net.fuchsia.common.init.FadenDataComponents;
-import net.fuchsia.common.objects.race.cache.ClientRaceCache;
-import net.fuchsia.common.objects.race.cache.RaceData;
-import net.fuchsia.common.objects.race.cache.ServerRaceCache;
 import net.fuchsia.mixin_interfaces.IGearInventory;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -52,9 +51,9 @@ public abstract class EntityMixin {
     @Inject(at = @At("HEAD"), method = "getStandingEyeHeight", cancellable = true)
     private void eyeHeightClient(CallbackInfoReturnable<Float> cir) {
         if(entity instanceof PlayerEntity) {
-            RaceData data = ClientRaceCache.get(uuid);
-            if (data.getRace() != null && data.getRace().size().y != 1f) {
-                cir.setReturnValue(this.standingEyeHeight - (1 - data.getRace().size().y * data.getRace().size().y - data.getRace().size().y / 10.0f));
+            PlayerData data = ClientPlayerDatas.getPlayerData(uuid);
+            if (data.getRaceSaveData().hasRace() && data.getRaceSaveData().getRace().size().y != 1f) {
+                cir.setReturnValue(this.standingEyeHeight - (1 - data.getRaceSaveData().getRace().size().y * data.getRaceSaveData().getRace().size().y - data.getRaceSaveData().getRace().size().y / 10.0f));
             }
         }
     }
@@ -63,9 +62,9 @@ public abstract class EntityMixin {
     @Inject(at = @At("HEAD"), method = "getStandingEyeHeight", cancellable = true)
     private void eyeHeightServer(CallbackInfoReturnable<Float> cir) {
         if(entity instanceof PlayerEntity) {
-            RaceData data = ServerRaceCache.getCache().get(uuid);
-            if (data.getRace() != null && data.getRace().size().y != 1f) {
-                cir.setReturnValue(this.standingEyeHeight - (1 - data.getRace().size().y * data.getRace().size().y - data.getRace().size().y / 10.0f));
+            PlayerData data = ClientPlayerDatas.getPlayerData(uuid);
+            if (data.getRaceSaveData().hasRace() && data.getRaceSaveData().getRace().size().y != 1f) {
+                cir.setReturnValue(this.standingEyeHeight - (1 - data.getRaceSaveData().getRace().size().y * data.getRaceSaveData().getRace().size().y - data.getRaceSaveData().getRace().size().y / 10.0f));
             }
         }
     }
