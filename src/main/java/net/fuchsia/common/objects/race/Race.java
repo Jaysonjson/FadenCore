@@ -82,6 +82,10 @@ public abstract class Race implements IRace {
         return poseDimensions;
     }
 
+    public float waterMovementSpeed() {
+        return 0;
+    }
+
     protected void addEntityAttributes(Multimap<RegistryEntry<EntityAttribute>, EntityAttributeModifier> modifiers) {
 
     }

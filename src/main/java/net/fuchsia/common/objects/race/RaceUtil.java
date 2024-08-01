@@ -2,10 +2,10 @@ package net.fuchsia.common.objects.race;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.UUID;
 
 import net.fuchsia.common.objects.race.cosmetic.RaceCosmetic;
 import net.fuchsia.common.objects.race.skin.provider.SkinProvider;
-import net.fuchsia.network.FadenNetwork;
 import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.ServerPlayerDatas;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -70,5 +70,4 @@ public class RaceUtil {
             //FadenNetwork.Server.sendRace(player, player.getUuid(), race.getId(), sub_id, false);
         }
     }
-
 }

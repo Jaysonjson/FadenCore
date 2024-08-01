@@ -1,5 +1,7 @@
 package net.fuchsia.mixin;
 
+import net.fuchsia.common.objects.race.Race;
+import net.fuchsia.util.PlayerDataUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -21,6 +23,8 @@ public abstract class LivingEntityMixin {
 
     @Shadow public abstract void remove(Entity.RemovalReason reason);
 
+    @Shadow public abstract void endCombat();
+
     @ModifyVariable(method = "damage", at = @At(value = "HEAD"), argsOnly = true)
     public float damage(float amount, DamageSource source) {
         if(source.getAttacker() instanceof PlayerEntity player) {
@@ -34,6 +38,21 @@ public abstract class LivingEntityMixin {
             return amount + dmgIncrease;
         }
         return amount;
+    }
+
+
+    @ModifyVariable(method = "travel", at = @At(value = "STORE"), ordinal = 1)
+    public float travel(float value) {
+        if(entity instanceof PlayerEntity player) {
+            Race race = PlayerDataUtil.getClientOrServer(player.getUuid()).getRaceSaveData().getRace();
+            if(race != null) {
+                if(race.waterMovementSpeed() != 0) {
+                    System.out.println(race.waterMovementSpeed());
+                    return race.waterMovementSpeed();
+                }
+            }
+        }
+        return value;
     }
 
     @ModifyVariable(method = "handleFallDamage", at = @At(value = "STORE"))

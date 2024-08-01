@@ -1,10 +1,7 @@
 package net.fuchsia.common.init;
 
 import net.fuchsia.common.objects.race.Race;
-import net.fuchsia.common.objects.race.types.ElfRace;
-import net.fuchsia.common.objects.race.types.HarengonRace;
-import net.fuchsia.common.objects.race.types.HumanRace;
-import net.fuchsia.common.objects.race.types.TabaxiRace;
+import net.fuchsia.common.objects.race.types.*;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
@@ -18,6 +15,7 @@ public class FadenRaces {
     public static Race HARENGON = register(new HarengonRace());
     public static Race ELF = register(new ElfRace());
     public static Race TABAXI = register(new TabaxiRace());
+    public static Race LOCATHAH = register(new LocathahRace());
 
     private static Race register(Race race) {
         RACES.put(Identifier.of(race.getId()), race);

@@ -64,6 +64,7 @@ public class ServerPlayerDatas {
         } else {
             data = load(uuid);
             if (data == null) data = new PlayerData();
+            getPlayerDatas().put(uuid, data);
         }
         data.setUuid(uuid);
         return data;

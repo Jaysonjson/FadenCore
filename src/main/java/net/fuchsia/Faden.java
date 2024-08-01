@@ -7,9 +7,11 @@ import java.util.Random;
 
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fuchsia.common.events.FadenServerEvents;
 import net.fuchsia.common.init.*;
 import net.fuchsia.common.npc.NPCEntity;
 import net.fuchsia.common.objects.race.Race;
+import net.fuchsia.common.objects.race.RaceUtil;
 import net.fuchsia.server.FadenData;
 import net.fuchsia.util.NetworkUtils;
 import org.slf4j.Logger;
@@ -64,7 +66,7 @@ public class Faden implements ModInitializer {
 		CONTAINER = FabricLoader.getInstance().getModContainer(MOD_ID).get();
 		init();
         loadConfig();
-		serverEvents();
+		FadenServerEvents.init();
 		argumentTypes();
 	}
 
@@ -115,48 +117,6 @@ public class Faden implements ModInitializer {
 		ArgumentTypeRegistry.registerArgumentType(FadenIdentifier.create("race_sub_id_argument"), RaceSubIdArgumentType.class, ConstantArgumentSerializer.of(RaceSubIdArgumentType::empty));
 		ArgumentTypeRegistry.registerArgumentType(FadenIdentifier.create("race_argument"), RaceArgumentType.class, ConstantArgumentSerializer.of(RaceArgumentType::empty));
 	}
-
-	public static void serverEvents() {
-
-
-		ServerLifecycleEvents.SERVER_STARTING.register(server -> {
-			new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/player_datas/").mkdirs();
-			QuestCache.load();
-			ServerPlayerDatas.SERVER = server;
-			ItemValues.load();
-			DATA.load();
-		});
-
-		ServerLifecycleEvents.AFTER_SAVE.register((server, flush, force) -> {
-			QuestCache.save();
-			ServerPlayerDatas.save();
-			ItemValues.save();
-			DATA.save();
-		});
-
-		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
-			ServerPlayerEntity serverPlayerEntity = handler.getPlayer();
-			NetworkUtils.fullyUpdatePlayer(serverPlayerEntity, server);
-			//TODO REMVOE: QUEST TESTING
-			FadenQuests.TEST.startQuest(serverPlayerEntity);
-			Race race = ServerPlayerDatas.getOrLoadPlayerData(serverPlayerEntity.getUuid()).getRaceSaveData().getRace();
-			if(race != null) {
-				race.applyEntityAttributes(serverPlayerEntity);
-			}
-		});
-
-		ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
-			Race race = ServerPlayerDatas.getOrLoadPlayerData(newPlayer.getUuid()).getRaceSaveData().getRace();
-			if(race != null) {
-				race.applyEntityAttributes(newPlayer);
-			}
-		});
-
-		ServerPlayConnectionEvents.DISCONNECT.register((handler, sender) -> {
-			ServerPlayerDatas.unloadPlayerData(handler.getPlayer().getUuid());
-		});
-	}
-
 
 	public static Screen openConfig(Screen parent) {
 		if (FabricLoader.getInstance().isModLoaded("cloth-config2")) {
