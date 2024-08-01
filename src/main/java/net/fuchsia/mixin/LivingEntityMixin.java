@@ -47,8 +47,9 @@ public abstract class LivingEntityMixin {
             Race race = PlayerDataUtil.getClientOrServer(player.getUuid()).getRaceSaveData().getRace();
             if(race != null) {
                 if(race.waterMovementSpeed() != 0) {
-                    System.out.println(race.waterMovementSpeed());
-                    return race.waterMovementSpeed();
+                    if(player.isInFluid()) {
+                        return race.waterMovementSpeed();
+                    }
                 }
             }
         }

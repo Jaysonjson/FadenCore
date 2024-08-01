@@ -12,3 +12,4 @@ accessible field net/minecraft/entity/player/PlayerEntity POSE_DIMENSIONS Ljava/
 accessible field net/minecraft/entity/LivingEntity SLEEPING_DIMENSIONS Lnet/minecraft/entity/EntityDimensions;
 accessible field net/minecraft/client/gl/PostEffectProcessor targetsByName Ljava/util/Map;
 accessible field net/minecraft/client/gl/PostEffectProcessor defaultSizedTargets Ljava/util/List;
+accessible method net/minecraft/entity/LivingEntity getBaseMovementSpeedMultiplier ()F
