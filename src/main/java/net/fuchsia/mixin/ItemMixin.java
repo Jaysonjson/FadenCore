@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Optional;
 
+import net.fuchsia.Faden;
 import net.minecraft.client.Keyboard;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.input.KeyboardInput;
@@ -65,7 +66,7 @@ public abstract class ItemMixin implements IValue, ItemWithValues, ItemToolTipEn
 
     @Override
     public int getBuyValue(ItemStack stack) {
-        return getValue(stack) * FadenData.BUY_MULTIPLIER;
+        return getValue(stack) * Faden.DATA.BUY_MULTIPLIER;
     }
 
     @Override

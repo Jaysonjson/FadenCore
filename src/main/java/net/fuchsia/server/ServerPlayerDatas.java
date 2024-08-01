@@ -69,6 +69,11 @@ public class ServerPlayerDatas {
         return data;
     }
 
+    public static void unloadPlayerData(UUID uuid) {
+        save(uuid);
+        getPlayerDatas().remove(uuid);
+    }
+
     public static HashMap<UUID, PlayerData> getPlayerDatas() {
         return playerDatas;
     }

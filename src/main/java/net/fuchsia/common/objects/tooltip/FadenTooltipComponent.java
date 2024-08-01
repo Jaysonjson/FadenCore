@@ -49,9 +49,9 @@ public class FadenTooltipComponent implements TooltipComponent {
         int toAdd = amount;
         LinkedHashMap<Item, Integer> itemStacks = new LinkedHashMap<>();
         while(toAdd > 0) {
-            for (Integer i : CoinMap.COINS.keySet()) {
+            for (Integer i : CoinMap.getCoinMap().keySet()) {
                 if(i <= toAdd) {
-                    itemStacks.put(CoinMap.COINS.get(i), itemStacks.getOrDefault(CoinMap.COINS.get(i), 0) + 1);
+                    itemStacks.put(CoinMap.getCoinMap().get(i), itemStacks.getOrDefault(CoinMap.getCoinMap().get(i), 0) + 1);
                     toAdd -= i;
                     break;
                 }

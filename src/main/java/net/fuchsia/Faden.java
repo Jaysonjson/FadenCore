@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.fuchsia.common.init.*;
 import net.fuchsia.common.npc.NPCEntity;
 import net.fuchsia.common.objects.race.Race;
+import net.fuchsia.server.FadenData;
 import net.fuchsia.util.NetworkUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,6 +56,7 @@ public class Faden implements ModInitializer {
 	public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 	public static final Random RANDOM = new Random();
 	public static CheckSums CHECKSUMS = new CheckSums();
+	public static FadenData DATA = new FadenData();
 
 	@Override
 	public void onInitialize() {
@@ -122,12 +124,14 @@ public class Faden implements ModInitializer {
 			QuestCache.load();
 			ServerPlayerDatas.SERVER = server;
 			ItemValues.load();
+			DATA.load();
 		});
 
 		ServerLifecycleEvents.AFTER_SAVE.register((server, flush, force) -> {
 			QuestCache.save();
 			ServerPlayerDatas.save();
 			ItemValues.save();
+			DATA.save();
 		});
 
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
@@ -149,8 +153,7 @@ public class Faden implements ModInitializer {
 		});
 
 		ServerPlayConnectionEvents.DISCONNECT.register((handler, sender) -> {
-			ServerPlayerDatas.save(handler.getPlayer().getUuid());
-			ServerPlayerDatas.getPlayerDatas().remove(handler.getPlayer().getUuid());
+			ServerPlayerDatas.unloadPlayerData(handler.getPlayer().getUuid());
 		});
 	}
 
