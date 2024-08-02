@@ -33,12 +33,13 @@ public class LocathahRace extends Race {
         modifiers.put(EntityAttributes.GENERIC_MAX_HEALTH, new EntityAttributeModifier(FadenIdentifier.create("health"), -8, EntityAttributeModifier.Operation.ADD_VALUE));
         modifiers.put(EntityAttributes.GENERIC_OXYGEN_BONUS, new EntityAttributeModifier(FadenIdentifier.create("oxygen"), 10, EntityAttributeModifier.Operation.ADD_VALUE));
         modifiers.put(EntityAttributes.GENERIC_BURNING_TIME, new EntityAttributeModifier(FadenIdentifier.create("burning_time"), -5, EntityAttributeModifier.Operation.ADD_VALUE));
-        modifiers.put(EntityAttributes.GENERIC_WATER_MOVEMENT_EFFICIENCY, new EntityAttributeModifier(FadenIdentifier.create("water_efficiency"), 20, EntityAttributeModifier.Operation.ADD_VALUE));
-        modifiers.put(EntityAttributes.PLAYER_SUBMERGED_MINING_SPEED, new EntityAttributeModifier(FadenIdentifier.create("water_mining"), 4, EntityAttributeModifier.Operation.ADD_VALUE));
+        modifiers.put(EntityAttributes.GENERIC_WATER_MOVEMENT_EFFICIENCY, new EntityAttributeModifier(FadenIdentifier.create("water_efficiency"), 10, EntityAttributeModifier.Operation.ADD_VALUE));
+        modifiers.put(EntityAttributes.PLAYER_SUBMERGED_MINING_SPEED, new EntityAttributeModifier(FadenIdentifier.create("water_mining"), 2.5, EntityAttributeModifier.Operation.ADD_VALUE));
+        modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(FadenIdentifier.create("attack_damage"), -4, EntityAttributeModifier.Operation.ADD_VALUE));
     }
 
     @Override
     public float waterMovementSpeed() {
-        return 0.155F;
+        return 0.15F;
     }
 }
