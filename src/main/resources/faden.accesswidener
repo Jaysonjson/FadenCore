@@ -13,4 +13,6 @@ accessible field net/minecraft/entity/LivingEntity SLEEPING_DIMENSIONS Lnet/mine
 accessible field net/minecraft/client/gl/PostEffectProcessor targetsByName Ljava/util/Map;
 accessible field net/minecraft/client/gl/PostEffectProcessor defaultSizedTargets Ljava/util/List;
 accessible method net/minecraft/entity/LivingEntity getBaseMovementSpeedMultiplier ()F
-accessible field net/minecraft/client/sound/AbstractSoundInstance volume F
+accessible field net/minecraft/client/sound/SoundManager soundSystem Lnet/minecraft/client/sound/SoundSystem;
+accessible field net/minecraft/client/sound/SoundSystem sources Ljava/util/Map;
+accessible field net/minecraft/client/sound/Source pointer I

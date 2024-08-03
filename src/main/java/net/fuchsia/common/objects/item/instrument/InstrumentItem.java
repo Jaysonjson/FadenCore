@@ -5,9 +5,7 @@ import net.fuchsia.common.init.FadenMusicInstances;
 import net.fuchsia.common.init.FadenSoundEvents;
 import net.fuchsia.common.objects.music_instance.InstrumentedMusic;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.sound.AbstractSoundInstance;
-import net.minecraft.client.sound.PositionedSoundInstance;
-import net.minecraft.client.sound.SoundInstance;
+import net.minecraft.client.sound.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -16,6 +14,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
+import org.lwjgl.openal.AL10;
 
 import java.util.Random;
 
@@ -51,7 +50,6 @@ public class InstrumentItem extends Item {
         InstrumentedMusic instance = FadenMusicInstances.getMusic(handItem.get(FadenDataComponents.MUSIC_INSTANCE));
 
         MinecraftClient.getInstance().getSoundManager().play(music);
-        music.volume = new Random().nextInt(9);
 
         return super.use(world, user, hand);
     }
@@ -63,7 +61,15 @@ public class InstrumentItem extends Item {
                 stack.remove(FadenDataComponents.MUSIC_INSTANCE);
             }
         }
-        music.volume = new Random().nextFloat();
+        Channel.SourceManager source = MinecraftClient.getInstance().getSoundManager().soundSystem.sources.get(music);
+        if(source != null) {
+            source.run(this::testFunc);
+        }
+    }
+
+    public void testFunc(Source source) {
+        AL10.alSourcef(source.pointer, 4106, 0f);
+        AL10.alSourcef(source.pointer, AL10.AL_GAIN, 0f);
     }
 
     public InstrumentType getInstrumentType() {
