@@ -15,6 +15,7 @@
 	"license": "MIT",
 	"icon": "assets/faden/icon.png",
 	"environment": "*",
+	"accessWidener": "faden.accesswidener",
 	"entrypoints": {
 		"main": [
           "net.fuchsia.Faden"

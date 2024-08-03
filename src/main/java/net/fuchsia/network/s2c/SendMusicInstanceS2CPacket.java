@@ -39,10 +39,12 @@ public record SendMusicInstanceS2CPacket(MusicInstance musicInstance) implements
 
     public void receive(ClientPlayNetworking.Context context) {
         if(musicInstance != null) {
-            ClientMusicInstance clientMusicInstance = new ClientMusicInstance();
+            ClientMusicInstance clientMusicInstance = ClientMusicInstances.getInstances().getOrDefault(musicInstance.getUuid(), new ClientMusicInstance());
             clientMusicInstance.setInstance(musicInstance);
             ClientMusicInstances.getInstances().put(musicInstance.getUuid(), clientMusicInstance);
-            clientMusicInstance.startPlaying();
+            if(!clientMusicInstance.playing) {
+                clientMusicInstance.startPlaying();
+            }
         } else {
             System.out.println("NULL");
         }

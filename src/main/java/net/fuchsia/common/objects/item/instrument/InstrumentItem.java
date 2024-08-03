@@ -35,37 +35,39 @@ public class InstrumentItem extends Item {
         if(!world.isClient) {
             //HOLY SHIT WHAT A NESTED CLUSTERFUCK
             ItemStack handItem = user.getStackInHand(hand);
-            if (handItem.contains(FadenDataComponents.MUSIC_INSTANCE)) {
-                for (Entity otherEntity : world.getOtherEntities(user, new Box(user.getPos().x - 15, user.getPos().y - 15, user.getPos().z - 15, user.getPos().x + 15, user.getPos().y + 15, user.getPos().z + 15))) {
-                    if (otherEntity instanceof PlayerEntity player) {
-                        ItemStack otherStack = player.getMainHandStack();
-                        if (otherStack.getItem() instanceof InstrumentItem instrumentItem && !otherStack.contains(FadenDataComponents.MUSIC_INSTANCE)) {
-                            InstrumentedMusic instance = FadenMusicInstances.getMusic(handItem.get(FadenDataComponents.MUSIC_INSTANCE));
-                            if (instance != null && instance.getInstrumentTypes().keySet().contains(instrumentItem.getInstrumentType())) {
-                                otherStack.set(FadenDataComponents.MUSIC_INSTANCE, handItem.get(FadenDataComponents.MUSIC_INSTANCE));
-                            }
+            for (Entity otherEntity : world.getOtherEntities(user, new Box(user.getPos().x - 15, user.getPos().y - 15, user.getPos().z - 15, user.getPos().x + 15, user.getPos().y + 15, user.getPos().z + 15))) {
+                if (otherEntity instanceof PlayerEntity player) {
+                    ItemStack otherStack = player.getMainHandStack();
+                    if (otherStack.getItem() instanceof InstrumentItem instrumentItem && otherStack.contains(FadenDataComponents.MUSIC_INSTANCE)) {
+                        MusicInstance instance = FadenMusicInstances.getInstance(UUID.fromString(otherStack.get(FadenDataComponents.MUSIC_INSTANCE)));
+                        if(instance != null) {
+                            handItem.set(FadenDataComponents.MUSIC_INSTANCE, instance.getUuid().toString());
+                            user.setStackInHand(hand, handItem);
                         }
+                        break;
+                    } else {
+                        UUID uuid = UUID.randomUUID();
+                        MusicInstance musicInstance = new MusicInstance();
+                        musicInstance.setUuid(uuid);
+                        musicInstance.setPosition(user.getPos().toVector3f());
+                        musicInstance.getInstruments().add(getInstrumentType());
+                        for (InstrumentType type : new BurningMemory().getInstrumentTypes().keySet()) {
+                            musicInstance.getSoundEvents().put(type, new BurningMemory().getInstrumentTypes().get(type).getId().toString());
+                        }
+                        FadenMusicInstances.getInstances().put(uuid, musicInstance);
+                        handItem.set(FadenDataComponents.MUSIC_INSTANCE, uuid.toString());
+                        user.setStackInHand(hand, handItem);
+                        for (ServerPlayerEntity serverPlayerEntity : world.getServer().getPlayerManager().getPlayerList()) {
+                            FadenNetwork.Server.sendMusicInstance(serverPlayerEntity, musicInstance);
+                        }
+                        break;
                     }
-                }
-            } else {
-                UUID uuid = UUID.randomUUID();
-                MusicInstance musicInstance = new MusicInstance();
-                musicInstance.setUuid(uuid);
-                musicInstance.setPosition(user.getPos().toVector3f());
-                musicInstance.getInstruments().add(getInstrumentType());
-                for (InstrumentType type : new BurningMemory().getInstrumentTypes().keySet()) {
-                    musicInstance.getSoundEvents().put(type, new BurningMemory().getInstrumentTypes().get(type).getId().toString());
-                }
-                FadenMusicInstances.getInstances().put(uuid, musicInstance);
-                handItem.set(FadenDataComponents.MUSIC_INSTANCE, uuid.toString());
-                user.setStackInHand(hand, handItem);
-                for (ServerPlayerEntity serverPlayerEntity : world.getServer().getPlayerManager().getPlayerList()) {
-                    FadenNetwork.Server.sendMusicInstance(serverPlayerEntity, musicInstance);
                 }
             }
 
             MusicInstance instance = FadenMusicInstances.getInstance(UUID.fromString(handItem.get(FadenDataComponents.MUSIC_INSTANCE)));
             if (instance != null) {
+                System.out.println("Playing: " + instance.getUuid());
                 if (!instance.getInstruments().contains(getInstrumentType())) {
                     instance.getInstruments().add(getInstrumentType());
                     //JUST SEND IT TO ALL, SO PLAYERS CAN JOIN
@@ -82,7 +84,21 @@ public class InstrumentItem extends Item {
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         if(entity instanceof PlayerEntity player) {
             if(!stack.isOf(player.getMainHandStack().getItem())) {
-                stack.remove(FadenDataComponents.MUSIC_INSTANCE);
+                if(stack.contains(FadenDataComponents.MUSIC_INSTANCE)) {
+                    MusicInstance instance = FadenMusicInstances.getInstance(UUID.fromString(stack.get(FadenDataComponents.MUSIC_INSTANCE)));
+                    if (instance != null) {
+                        if(instance.getInstruments().contains(getInstrumentType())) {
+                            instance.getInstruments().remove(getInstrumentType());
+                        }
+                    }
+                    if(!world.isClient) {
+                        System.out.println("NOT CLIENT");
+                        for (ServerPlayerEntity serverPlayerEntity : world.getServer().getPlayerManager().getPlayerList()) {
+                            FadenNetwork.Server.sendMusicInstance(serverPlayerEntity, instance);
+                        }
+                    }
+                    stack.remove(FadenDataComponents.MUSIC_INSTANCE);
+                }
             }
         }
     }
