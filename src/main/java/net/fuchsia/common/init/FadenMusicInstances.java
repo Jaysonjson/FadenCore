@@ -36,4 +36,10 @@ public class FadenMusicInstances {
         return getMusic(Identifier.of(id));
     }
 
+    @Nullable
+    public static MusicInstance getInstance(UUID uuid) {
+        return INSTANCES.getOrDefault(uuid, null);
+    }
+
+
 }

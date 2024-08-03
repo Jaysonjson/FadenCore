@@ -22,6 +22,7 @@ public class PacketUtils {
             buf.writeString(new String(Base64.getEncoder().encode(bytes)));
         } catch (Exception e) {
             Faden.LOGGER.error("Could not encode Packet - {}", e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -36,6 +37,7 @@ public class PacketUtils {
             out.close();
         } catch (Exception e) {
             Faden.LOGGER.error("Could not decode Packet - {}", e.getMessage());
+            e.printStackTrace();
         }
         return t;
     }

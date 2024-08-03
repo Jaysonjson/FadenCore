@@ -6,6 +6,7 @@ import java.util.UUID;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.fuchsia.common.objects.music_instance.MusicInstance;
 import net.fuchsia.network.c2s.RequestCapeChangeC2SPacket;
 import net.fuchsia.network.c2s.SendItemValuesCheckC2SPacket;
 import net.fuchsia.network.s2c.*;
@@ -25,6 +26,7 @@ public class FadenNetwork {
         ClientPlayNetworking.registerGlobalReceiver(SendItemValueUpdateS2CPacket.ID, SendItemValueUpdateS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(ItemValuesS2CPacket.ID, ItemValuesS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(AskItemValuesS2CPacket.ID, AskItemValuesS2CPacket::receive);
+        ClientPlayNetworking.registerGlobalReceiver(SendMusicInstanceS2CPacket.ID, SendMusicInstanceS2CPacket::receive);
 
     }
 
@@ -35,6 +37,7 @@ public class FadenNetwork {
         PayloadTypeRegistry.playS2C().register(SendItemValueUpdateS2CPacket.ID, SendItemValueUpdateS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(ItemValuesS2CPacket.ID, ItemValuesS2CPacket.CODEC);
         PayloadTypeRegistry.playS2C().register(AskItemValuesS2CPacket.ID, AskItemValuesS2CPacket.CODEC);
+        PayloadTypeRegistry.playS2C().register(SendMusicInstanceS2CPacket.ID, SendMusicInstanceS2CPacket.CODEC);
 
 
         PayloadTypeRegistry.playC2S().register(RequestCapeChangeC2SPacket.ID, RequestCapeChangeC2SPacket.CODEC);
@@ -84,6 +87,10 @@ public class FadenNetwork {
 
         public static void askItemValues(ServerPlayerEntity player) {
             ServerPlayNetworking.send(player, new AskItemValuesS2CPacket());
+        }
+
+        public static void sendMusicInstance(ServerPlayerEntity player, MusicInstance musicInstance) {
+            ServerPlayNetworking.send(player, new SendMusicInstanceS2CPacket(musicInstance));
         }
     }
 

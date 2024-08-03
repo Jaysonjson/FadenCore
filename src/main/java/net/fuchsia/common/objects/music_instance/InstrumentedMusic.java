@@ -1,14 +1,16 @@
 package net.fuchsia.common.objects.music_instance;
 
 import net.fuchsia.common.objects.item.instrument.InstrumentType;
+import net.minecraft.sound.SoundEvent;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class InstrumentedMusic {
 
-    private ArrayList<InstrumentType> instrumentTypes = new ArrayList<>();
+    private HashMap<InstrumentType, SoundEvent> instrumentTypes = new HashMap<>();
 
-    public ArrayList<InstrumentType> getInstrumentTypes() {
+    public HashMap<InstrumentType, SoundEvent> getInstrumentTypes() {
         return instrumentTypes;
     }
 }

@@ -4,6 +4,7 @@ import net.fuchsia.common.objects.item.TooltipTestItem;
 import net.fuchsia.common.objects.item.coin.CoinItem;
 import net.fuchsia.common.objects.item.TestItem;
 import net.fuchsia.common.objects.item.instrument.InstrumentItem;
+import net.fuchsia.common.objects.item.instrument.InstrumentType;
 import net.fuchsia.datagen.DataItemModel;
 import net.fuchsia.datagen.FadenDataItem;
 import net.fuchsia.util.FadenIdentifier;
@@ -51,7 +52,10 @@ public class FadenItems {
     public static Item WHITE_CLOTH = registerItem("white_cloth", new Item(new Item.Settings()), "crafting/cloth/white");
     public static Item YELLOW_CLOTH = registerItem("yellow_cloth", new Item(new Item.Settings()), "crafting/cloth/yellow");
 
-    public static Item TEST_INSTRUMENT = registerItem("test_instrument", new InstrumentItem(new Item.Settings()), "test");
+    public static Item TEST_LUTE = registerItem("test_lute", new InstrumentItem(new Item.Settings(), InstrumentType.LUTE), "test");
+    public static Item TEST_PANFLUTE = registerItem("test_panflute", new InstrumentItem(new Item.Settings(), InstrumentType.PAN_FLUTE), "test");
+    public static Item TEST_HURTY = registerItem("test_hurty", new InstrumentItem(new Item.Settings(), InstrumentType.HURDY), "test");
+    public static Item TEST_DRUM = registerItem("test_drum", new InstrumentItem(new Item.Settings(), InstrumentType.DRUM), "test");
 
     //public static Item FADEN_MUSIC_DISC = registerItem("music_disc_faden", new DiscFragmentItem(14, FadenSoundEvents.FADEN, new Item.Settings().maxCount(1).rarity(Rarity.RARE), 140), "discs/faden");
 

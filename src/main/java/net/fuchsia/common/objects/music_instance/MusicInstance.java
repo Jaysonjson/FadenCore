@@ -1,40 +1,33 @@
 package net.fuchsia.common.objects.music_instance;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fuchsia.common.init.FadenSoundEvents;
+import net.fuchsia.common.objects.item.instrument.InstrumentType;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.sound.AbstractSoundInstance;
-import net.minecraft.client.sound.PositionedSoundInstance;
-import net.minecraft.client.sound.SoundInstance;
+import net.minecraft.client.sound.*;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.joml.Vector3f;
+import org.lwjgl.openal.AL10;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
-public class MusicInstance {
 
-    private Vector3f position = new Vector3f();
-    private ArrayList<UUID> players = new ArrayList<>();
-    private UUID uuid = UUID.randomUUID();
-    private transient AbstractSoundInstance sound;
-    private ArrayList<Identifier> soundEvents = new ArrayList<>();
+public class MusicInstance implements Serializable {
 
-    public void tick() {
-        if(!MinecraftClient.getInstance().getSoundManager().isPlaying(sound)) {
-            MinecraftClient.getInstance().getSoundManager().play(sound, 5);
-            //sound.volume = 5;
-        }
-    }
+    protected Vector3f position = new Vector3f();
+    protected ArrayList<UUID> players = new ArrayList<>();
+    protected UUID uuid = UUID.randomUUID();
+    protected HashMap<InstrumentType, String> soundEvents = new HashMap<>();
+    protected ArrayList<InstrumentType> instruments = new ArrayList<>();
 
-    public void startPlaying(World world) {
-        for (Identifier soundEvent : soundEvents) {
-
-        }
-    }
-
-
-    public ArrayList<Identifier> getSoundEvents() {
+    public HashMap<InstrumentType, String> getSoundEvents() {
         return soundEvents;
     }
 
@@ -56,5 +49,9 @@ public class MusicInstance {
 
     public void setPosition(Vector3f position) {
         this.position = position;
+    }
+
+    public ArrayList<InstrumentType> getInstruments() {
+        return instruments;
     }
 }
