@@ -7,6 +7,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.dynamic.Codecs;
 
+import java.util.UUID;
 import java.util.function.UnaryOperator;
 
 public class FadenDataComponents {
@@ -20,6 +21,8 @@ public class FadenDataComponents {
     public static final ComponentType<Float> JUMP_INCREASE_PERCENTAGE = register("jump_increase_percentage", (builder) -> builder.codec(Codecs.POSITIVE_FLOAT).packetCodec(PacketCodecs.FLOAT));
     public static final ComponentType<Float> FALL_DAMAGE_DECREASE_PERCENTAGE = register("falldamage_decrease_percentage", (builder) -> builder.codec(Codecs.POSITIVE_FLOAT).packetCodec(PacketCodecs.FLOAT));
     public static final ComponentType<Float> FALL_DAMAGE_DECREASE_BLOCKS = register("falldamage_decrease_blocks", (builder) -> builder.codec(Codecs.POSITIVE_FLOAT).packetCodec(PacketCodecs.FLOAT));
+
+    public static final ComponentType<String> MUSIC_INSTANCE = register("music_instance", (builder) -> builder.codec(Codecs.ESCAPED_STRING).packetCodec(PacketCodecs.STRING));
 
     private static <T> ComponentType<T> register(String id, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
         return (ComponentType<T>) Registry.register(Registries.DATA_COMPONENT_TYPE, FadenIdentifier.create(id), ((ComponentType.Builder)builderOperator.apply(ComponentType.builder())).build());

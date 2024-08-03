@@ -3,6 +3,7 @@ package net.fuchsia.common.init;
 import net.fuchsia.common.objects.item.TooltipTestItem;
 import net.fuchsia.common.objects.item.coin.CoinItem;
 import net.fuchsia.common.objects.item.TestItem;
+import net.fuchsia.common.objects.item.instrument.InstrumentItem;
 import net.fuchsia.datagen.DataItemModel;
 import net.fuchsia.datagen.FadenDataItem;
 import net.fuchsia.util.FadenIdentifier;
@@ -49,6 +50,8 @@ public class FadenItems {
     public static Item RED_CLOTH = registerItem("red_cloth", new Item(new Item.Settings()), "crafting/cloth/red");
     public static Item WHITE_CLOTH = registerItem("white_cloth", new Item(new Item.Settings()), "crafting/cloth/white");
     public static Item YELLOW_CLOTH = registerItem("yellow_cloth", new Item(new Item.Settings()), "crafting/cloth/yellow");
+
+    public static Item TEST_INSTRUMENT = registerItem("test_instrument", new InstrumentItem(new Item.Settings()), "test");
 
     //public static Item FADEN_MUSIC_DISC = registerItem("music_disc_faden", new DiscFragmentItem(14, FadenSoundEvents.FADEN, new Item.Settings().maxCount(1).rarity(Rarity.RARE), 140), "discs/faden");
 
