@@ -33,7 +33,6 @@ bin/
 run/
 config/
 downloads/
-faden/
 saves/
 command_history.txt
 options.txt

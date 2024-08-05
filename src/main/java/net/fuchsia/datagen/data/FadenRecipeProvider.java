@@ -80,7 +80,7 @@ public class FadenRecipeProvider extends FabricRecipeProvider {
     }
 
     public void stairAltRecipe(Block out, Block in, RecipeExporter exporter) {
-         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, out, 6)
+         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, out, 4)
                 .input('R', in)
                 .pattern("  R")
                 .pattern(" RR")
