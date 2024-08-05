@@ -1,9 +1,13 @@
-// 1.21	2024-08-05T04:04:09.049506	Faden Core/Block Loot Tables
+// 1.21	2024-08-05T04:17:12.483160846	Faden Core/Block Loot Tables
 f512b2dcfd72e8f2195b5632ae23f46d18d37320 data/faden/loot_table/blocks/granud_brick_stairs.json
 3ae849735a1d1fba66faff3e6e53bce0698557da data/faden/loot_table/blocks/granite_brick_stairs.json
 ae8644434268973fc4d1d461b07b5b3b6a35c3cb data/faden/loot_table/blocks/granite_brick_slab.json
 428df87dcd10b6af4540ad5c02007f3187b28052 data/faden/loot_table/blocks/granud_brick_slab.json
+1f47dd580f11551533ae9e28cb481fb7b977f06f data/faden/loot_table/blocks/granud_brick_button.json
+e543879c16a17f1d6c8ca0bf0f5e997b01298ec1 data/faden/loot_table/blocks/granite_brick_button.json
 ad3484a8c80512d40b9745514c09605e8200caeb data/faden/loot_table/blocks/granud_tiles.json
+f8f72b36f0bea50dac985a924d7c9f0038b82dfb data/faden/loot_table/blocks/granud_brick_pressure_plate.json
 b0eef21c4b66002380245e935ab88ffb92517a25 data/faden/loot_table/blocks/granud_brick_wall.json
 cde89cb20a9ba50e641c668cdac3807afc0edf07 data/faden/loot_table/blocks/granite_brick_wall.json
 d10da79852addffbe1177cb7b01bc04d9b7e41cc data/faden/loot_table/blocks/granite_bricks.json
+029cf0577d41b8ada70be1f8b15e142b112fc223 data/faden/loot_table/blocks/granite_brick_pressure_plate.json

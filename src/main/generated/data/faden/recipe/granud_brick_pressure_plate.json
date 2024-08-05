@@ -3,16 +3,14 @@
   "category": "building",
   "key": {
     "R": {
-      "item": "faden:granud_tiles"
+      "item": "faden:granite_bricks"
     }
   },
   "pattern": [
-    "  R",
-    " RR",
-    "RRR"
+    "RR"
   ],
   "result": {
-    "count": 4,
-    "id": "faden:granud_brick_stairs"
+    "count": 1,
+    "id": "faden:granud_brick_pressure_plate"
   }
 }

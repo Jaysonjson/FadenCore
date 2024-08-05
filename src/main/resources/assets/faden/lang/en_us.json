@@ -58,5 +58,9 @@
 	"block.faden.granud_brick_slab": "Granud Brick Slab",
 	"block.faden.granud_brick_stairs": "Granud Brick Stairs",
 	"block.faden.granud_brick_wall": "Granud Brick Wall",
-	"block.faden.granud_tiles": "Granud Tiles"
+	"block.faden.granud_tiles": "Granud Tiles",
+	"block.faden.granite_brick_button": "Granite Bricks Button",
+	"block.faden.granite_brick_pressure_plate": "Granite Bricks Pressure Plate",
+	"block.faden.granud_brick_button": "Granud Bricks Button",
+	"block.faden.granud_brick_pressure_plate": "Granud Bricks Pressure Plate"
 }

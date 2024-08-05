@@ -39,6 +39,12 @@ public class FadenRecipeProvider extends FabricRecipeProvider {
                 case WALL -> {
                     wallRecipe(buildingBlock.block(), buildingBlock.base(), exporter);
                 }
+                case BUTTON -> {
+                    buttonRecipe(buildingBlock.block(), buildingBlock.base(), exporter);
+                }
+                case PRESSURE_PLATE -> {
+                    pressurePlateRecipe(buildingBlock.block(), buildingBlock.base(), exporter);
+                }
             }
         }
 
@@ -102,6 +108,20 @@ public class FadenRecipeProvider extends FabricRecipeProvider {
                 .input('R', in)
                 .pattern("RRR")
                 .pattern("RRR")
+                .criterion(hasItem(in), conditionsFromItem(in)).offerTo(exporter, FadenIdentifier.create(Registries.BLOCK.getId(out).getPath()));
+    }
+
+    public void buttonRecipe(Block out, Block in, RecipeExporter exporter) {
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, out, 1)
+                .input('R', in)
+                .pattern("R")
+                .criterion(hasItem(in), conditionsFromItem(in)).offerTo(exporter, FadenIdentifier.create(Registries.BLOCK.getId(out).getPath()));
+    }
+
+    public void pressurePlateRecipe(Block out, Block in, RecipeExporter exporter) {
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, out, 1)
+                .input('R', in)
+                .pattern("RR")
                 .criterion(hasItem(in), conditionsFromItem(in)).offerTo(exporter, FadenIdentifier.create(Registries.BLOCK.getId(out).getPath()));
     }
 
