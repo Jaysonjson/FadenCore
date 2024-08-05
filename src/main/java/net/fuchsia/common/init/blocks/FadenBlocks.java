@@ -1,4 +1,4 @@
-package net.fuchsia.common.init;
+package net.fuchsia.common.init.blocks;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fuchsia.common.objects.block.CapeStandBlock;

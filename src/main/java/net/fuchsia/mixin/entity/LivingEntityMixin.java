@@ -1,4 +1,4 @@
-package net.fuchsia.mixin;
+package net.fuchsia.mixin.entity;
 
 import net.fuchsia.common.objects.race.Race;
 import net.fuchsia.util.PlayerDataUtil;

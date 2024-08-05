@@ -20,4 +20,7 @@ public class FadenIdentifier {
         return create("data/" + name);
     }
 
+    public static Identifier minecraft(String name) {
+        return Identifier.of(name);
+    }
 }

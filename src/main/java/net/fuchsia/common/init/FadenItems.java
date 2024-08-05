@@ -6,13 +6,11 @@ import net.fuchsia.common.objects.item.TestItem;
 import net.fuchsia.common.objects.item.instrument.InstrumentItem;
 import net.fuchsia.common.objects.item.instrument.InstrumentType;
 import net.fuchsia.datagen.DataItemModel;
-import net.fuchsia.datagen.FadenDataItem;
+import net.fuchsia.datagen.holders.FadenDataItem;
 import net.fuchsia.util.FadenIdentifier;
-import net.minecraft.item.DiscFragmentItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.util.Rarity;
 
 import java.util.ArrayList;
 import java.util.List;

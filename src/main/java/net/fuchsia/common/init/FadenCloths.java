@@ -7,7 +7,7 @@ import net.fuchsia.common.objects.item.cloth.ClothItem;
 import net.fuchsia.common.objects.race.skin.client.SkinTexture;
 import net.fuchsia.common.objects.race.skin.provider.SkinProvider;
 import net.fuchsia.datagen.DataItemModel;
-import net.fuchsia.datagen.FadenDataItem;
+import net.fuchsia.datagen.holders.FadenDataItem;
 import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.Item;

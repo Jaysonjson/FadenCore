@@ -8,6 +8,7 @@ import java.util.Random;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fuchsia.common.events.FadenServerEvents;
 import net.fuchsia.common.init.*;
+import net.fuchsia.common.init.blocks.FadenBlocks;
 import net.fuchsia.common.npc.NPCEntity;
 import net.fuchsia.server.FadenData;
 import org.slf4j.Logger;

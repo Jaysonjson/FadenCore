@@ -1,4 +1,4 @@
-package net.fuchsia.mixin;
+package net.fuchsia.mixin.inventory;
 
 import com.mojang.datafixers.util.Pair;
 import net.fuchsia.common.objects.item.gear.Gear;
@@ -7,7 +7,6 @@ import net.fuchsia.mixin_interfaces.ExtraInventory;
 import net.fuchsia.common.objects.item.cloth.Cloth;
 import net.fuchsia.common.slot.GearSlot;
 import net.fuchsia.util.FadenIdentifier;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;

@@ -1,4 +1,4 @@
-package net.fuchsia.mixin;
+package net.fuchsia.mixin.entity;
 
 import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.common.objects.race.Race;

@@ -7,7 +7,7 @@ import net.fuchsia.common.objects.item.gear.necklace.FrogPendant;
 import net.fuchsia.common.objects.item.gear.necklace.KingOFWaterNecklaceItem;
 import net.fuchsia.common.objects.item.gear.necklace.NecklaceItem;
 import net.fuchsia.datagen.DataItemModel;
-import net.fuchsia.datagen.FadenDataItem;
+import net.fuchsia.datagen.holders.FadenDataItem;
 import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;

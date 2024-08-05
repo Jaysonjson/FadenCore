@@ -1,4 +1,4 @@
-package net.fuchsia.mixin;
+package net.fuchsia.mixin.entity;
 
 import java.util.UUID;
 

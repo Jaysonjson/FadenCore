@@ -3,14 +3,14 @@
   "package": "net.fuchsia.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "EntityMixin",
+    "entity.EntityMixin",
     "ItemMixin",
-    "LivingEntityMixin",
-    "PlayerEntityMixin",
-    "PlayerInventoryMixin",
-    "PlayerScreenHandlerMixin",
-    "SlotMixin",
-    "packets.StringEncodingMixin"
+    "entity.LivingEntityMixin",
+    "entity.PlayerEntityMixin",
+    "inventory.PlayerInventoryMixin",
+    "inventory.PlayerScreenHandlerMixin",
+    "inventory.SlotMixin",
+    "packet.StringEncodingMixin"
   ],
   "injectors": {
     "defaultRequire": 1

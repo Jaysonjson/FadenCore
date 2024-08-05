@@ -1,4 +1,4 @@
-package net.fuchsia.mixin;
+package net.fuchsia.mixin.inventory;
 
 import com.google.common.collect.ImmutableList;
 import net.fuchsia.mixin_interfaces.ExtraInventory;

@@ -5,7 +5,7 @@ import net.fuchsia.common.objects.item.cloth.Cloth;
 import net.fuchsia.common.objects.item.cloth.ClothItem;
 import net.fuchsia.common.objects.item.gear.Gear;
 import net.fuchsia.common.objects.item.gear.necklace.NecklaceItem;
-import net.fuchsia.datagen.FadenDataItem;
+import net.fuchsia.datagen.holders.FadenDataItem;
 import net.fuchsia.util.FadenIdentifier;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;

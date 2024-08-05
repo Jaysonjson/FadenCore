@@ -36,6 +36,7 @@ public class LocathahRace extends Race {
         modifiers.put(EntityAttributes.GENERIC_WATER_MOVEMENT_EFFICIENCY, new EntityAttributeModifier(FadenIdentifier.create("water_efficiency"), 10, EntityAttributeModifier.Operation.ADD_VALUE));
         modifiers.put(EntityAttributes.PLAYER_SUBMERGED_MINING_SPEED, new EntityAttributeModifier(FadenIdentifier.create("water_mining"), 2.5, EntityAttributeModifier.Operation.ADD_VALUE));
         modifiers.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(FadenIdentifier.create("attack_damage"), -4, EntityAttributeModifier.Operation.ADD_VALUE));
+        modifiers.put(EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier(FadenIdentifier.create("speed"), -0.25f, EntityAttributeModifier.Operation.ADD_VALUE));
     }
 
     @Override

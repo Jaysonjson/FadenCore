@@ -1,4 +1,4 @@
-package net.fuchsia.mixin;
+package net.fuchsia.mixin.inventory;
 
 import net.fuchsia.common.slot.ISlot;
 import net.minecraft.screen.slot.Slot;
