@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "faden:block/building/crafting_table/jungle_crafting_table"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "faden:block/building/crafting_table/dark_oak_crafting_table"
+    }
+  }
+}

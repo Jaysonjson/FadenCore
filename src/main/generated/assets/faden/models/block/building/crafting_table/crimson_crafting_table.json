@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "minecraft:block/crimson_planks",
+    "east": "faden:block/building/crafting_table/crimson/side",
+    "north": "faden:block/building/crafting_table/crimson/front",
+    "particle": "faden:block/building/crafting_table/crimson/front",
+    "south": "faden:block/building/crafting_table/crimson/side",
+    "up": "faden:block/building/crafting_table/crimson/top",
+    "west": "faden:block/building/crafting_table/crimson/front"
+  }
+}

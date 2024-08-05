@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "faden:block/building/titanitol_block",
+    "side": "faden:block/building/titanitol_block",
+    "top": "faden:block/building/titanitol_block"
+  }
+}

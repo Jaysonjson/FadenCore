@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/button_inventory",
   "textures": {
-    "texture": "faden:block/building/granite_bricks"
+    "texture": "faden:block/building/granud_tiles"
   }
 }

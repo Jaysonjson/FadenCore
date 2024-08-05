@@ -76,7 +76,11 @@ public class FadenDataModelProvider extends FabricModelProvider {
                     blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createPressurePlateBlockState(buildingBlock.block(), Identifier.of(blockId.getNamespace(), "block/building/pressure_plate/down/" + blockId.getPath()), Identifier.of(blockId.getNamespace(), "block/building/pressure_plate/up/" + blockId.getPath())));
                     new Model(Optional.of(FadenIdentifier.minecraft("block/pressure_plate_up")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/pressure_plate/up/" + blockId.getPath()), textureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
                     new Model(Optional.of(FadenIdentifier.minecraft("block/pressure_plate_down")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/pressure_plate/down/" + blockId.getPath()), textureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
+                }
 
+                case CRAFTING_TABLE -> {
+                    blockStateModelGenerator.blockStateCollector.accept(VariantsBlockStateSupplier.create(buildingBlock.block(), BlockStateVariant.create().put(VariantSettings.MODEL, Identifier.of(blockId.getNamespace(), "block/building/crafting_table/" + blockId.getPath()))));
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/cube")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/crafting_table/" + blockId.getPath()), craftingTable(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
                 }
             }
         }
@@ -120,6 +124,10 @@ public class FadenDataModelProvider extends FabricModelProvider {
                 case PRESSURE_PLATE -> {
                     itemModelGenerator.register(buildingBlock.item(), new Model(Optional.of(Identifier.of(blockId.getNamespace(),"block/building/pressure_plate/up/" + blockId.getPath())), Optional.empty()));
                 }
+
+                case CRAFTING_TABLE -> {
+                    itemModelGenerator.register(buildingBlock.item(), new Model(Optional.of(Identifier.of(blockId.getNamespace(),"block/building/crafting_table/" + blockId.getPath())), Optional.empty()));
+                }
             }
         }
 
@@ -161,6 +169,27 @@ public class FadenDataModelProvider extends FabricModelProvider {
             id = Registries.BLOCK.getId(dataEntry.base());
         }
         map.register(TextureKey.of("wall"), Identifier.of(id.getNamespace(), "block/building/" + id.getPath()));
+        return map;
+    }
+
+    public TextureMap craftingTable(BuildingBlockDataEntry dataEntry, Identifier id) {
+        TextureMap map = new TextureMap();
+        Identifier otherId = id;
+        if(dataEntry.base() != null) {
+            otherId = Registries.BLOCK.getId(dataEntry.base());
+        }
+        if(otherId.getNamespace().equalsIgnoreCase("minecraft")) {
+            map.register(TextureKey.of("down"), Identifier.of(otherId.getNamespace(), "block/" + otherId.getPath()));
+        } else {
+            map.register(TextureKey.of("down"), Identifier.of(id.getNamespace(), "block/building/crafting_table/" + id.getPath().substring(0, id.getPath().indexOf("_")) + "/" + id.getPath()));
+        }
+        map.register(TextureKey.of("east"), Identifier.of(id.getNamespace(), "block/building/crafting_table/" + id.getPath().substring(0, id.getPath().indexOf("_")) + "/" + "side"));
+        map.register(TextureKey.of("north"), Identifier.of(id.getNamespace(), "block/building/crafting_table/" + id.getPath().substring(0, id.getPath().indexOf("_")) + "/" + "front"));
+        map.register(TextureKey.of("particle"), Identifier.of(id.getNamespace(), "block/building/crafting_table/" + id.getPath().substring(0, id.getPath().indexOf("_")) + "/" + "front"));
+        map.register(TextureKey.of("south"), Identifier.of(id.getNamespace(), "block/building/crafting_table/" + id.getPath().substring(0, id.getPath().indexOf("_")) + "/" + "side"));
+        map.register(TextureKey.of("up"), Identifier.of(id.getNamespace(), "block/building/crafting_table/" + id.getPath().substring(0, id.getPath().indexOf("_")) + "/" + "top"));
+        map.register(TextureKey.of("west"), Identifier.of(id.getNamespace(), "block/building/crafting_table/" + id.getPath().substring(0, id.getPath().indexOf("_")) + "/" + "front"));
+
         return map;
     }
 

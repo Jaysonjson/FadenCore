@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "faden:block/building/crafting_table/birch_crafting_table"
+    }
+  }
+}

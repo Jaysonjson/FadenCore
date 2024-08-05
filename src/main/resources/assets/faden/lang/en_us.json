@@ -62,5 +62,21 @@
 	"block.faden.granite_brick_button": "Granite Bricks Button",
 	"block.faden.granite_brick_pressure_plate": "Granite Bricks Pressure Plate",
 	"block.faden.granud_brick_button": "Granud Bricks Button",
-	"block.faden.granud_brick_pressure_plate": "Granud Bricks Pressure Plate"
+	"block.faden.granud_brick_pressure_plate": "Granud Bricks Pressure Plate",
+	"block.faden.titanitol_block": "Titanitol Block",
+	"block.faden.titanitol_button": "Titanitol Button",
+	"block.faden.titanitol_pressure_plate": "Titanitol Pressure Plate",
+	"block.faden.titanitol_slab": "Titanitol Slab",
+	"block.faden.titanitol_stairs": "Titanitol Stairs",
+	"block.faden.titanitol_wall": "Titanitol Wall",
+	"block.faden.acacia_crafting_table": "Acacia Crafting Table",
+	"block.faden.bamboo_crafting_table": "Bamboo Crafting Table",
+	"block.faden.birch_crafting_table": "Birch Crafting Table",
+	"block.faden.cherry_crafting_table": "Cherry Crafting Table",
+	"block.faden.crimson_crafting_table": "Crimson Crafting Table",
+	"block.faden.dark_oak_crafting_table": "Dark Oak Crafting Table",
+	"block.faden.jungle_crafting_table": "Jungle Crafting Table",
+	"block.faden.mangrove_crafting_table": "Mangrove Crafting Table",
+	"block.faden.spruce_crafting_table": "Spruce Crafting Table",
+	"block.faden.warped_crafting_table": "Warped Crafting Table"
 }

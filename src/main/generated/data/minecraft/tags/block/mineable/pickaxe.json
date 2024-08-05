@@ -11,6 +11,12 @@
     "faden:granud_brick_wall",
     "faden:granud_brick_stairs",
     "faden:granud_brick_button",
-    "faden:granud_brick_pressure_plate"
+    "faden:granud_brick_pressure_plate",
+    "faden:titanitol_block",
+    "faden:titanitol_slab",
+    "faden:titanitol_wall",
+    "faden:titanitol_stairs",
+    "faden:titanitol_button",
+    "faden:titanitol_pressure_plate"
   ]
 }

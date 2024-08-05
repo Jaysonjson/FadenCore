@@ -45,6 +45,9 @@ public class FadenRecipeProvider extends FabricRecipeProvider {
                 case PRESSURE_PLATE -> {
                     pressurePlateRecipe(buildingBlock.block(), buildingBlock.base(), exporter);
                 }
+                case CRAFTING_TABLE -> {
+                    fourByFour(buildingBlock.block(), buildingBlock.base(), exporter, 1);
+                }
             }
         }
 
@@ -63,6 +66,14 @@ public class FadenRecipeProvider extends FabricRecipeProvider {
 
     public void fourByFour(Block out, Block in, RecipeExporter exporter) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, out, 4)
+                .input('R', in)
+                .pattern("RR")
+                .pattern("RR")
+                .criterion(hasItem(in), conditionsFromItem(in)).offerTo(exporter, FadenIdentifier.create(Registries.BLOCK.getId(out).getPath()));
+    }
+
+    public void fourByFour(Block out, Block in, RecipeExporter exporter, int count) {
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, out, count)
                 .input('R', in)
                 .pattern("RR")
                 .pattern("RR")
