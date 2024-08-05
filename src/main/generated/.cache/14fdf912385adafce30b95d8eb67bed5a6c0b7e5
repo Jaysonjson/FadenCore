@@ -1,8 +1,8 @@
-// 1.21	2024-08-05T04:43:37.138237627	Faden Core/Tags for minecraft:block
-3427fe61fa6290c0d11e7088607720c8f0b0f88d data/minecraft/tags/block/mineable/pickaxe.json
-68c3015262984a77f284795e98bd84a032d2c1e2 data/minecraft/tags/block/needs_stone_tool.json
-efa9122749d6ed64de1bc6cbffc41ea8e9df5e0c data/minecraft/tags/block/slabs.json
-089c74559eaf79847a89f0d913670c3a269625ae data/minecraft/tags/block/walls.json
-09573d2db597cb393460d7aff1ba2dd1249b07f2 data/minecraft/tags/block/stairs.json
+// 1.21	2024-08-05T04:53:13.82315562	Faden Core/Tags for minecraft:block
+56f83d99001153199b2c44dc9b72d2070004f171 data/minecraft/tags/block/needs_stone_tool.json
+c03b57c9758e5e529e3441606c96e9e11b085504 data/minecraft/tags/block/mineable/pickaxe.json
+052977c8f8e8b2f96b3a787649f5fe984e4f9bda data/minecraft/tags/block/slabs.json
+9d2784fa32cf20049078a5cc10db852ea2de703d data/minecraft/tags/block/walls.json
+ced29603137189e7467bf7acd92279a4914acd7f data/minecraft/tags/block/stairs.json
 e203bbf8f895a1e4383bda085668e264230df4f4 data/minecraft/tags/block/mineable/axe.json
 38cb1156deef04e320f24458bb362870490cbeba data/minecraft/tags/block/needs_iron_tool.json

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "faden:block/building/slabs/bot/granite_tiles_slab"
+    },
+    "type=double": {
+      "model": "faden:block/building/granite_tiles"
+    },
+    "type=top": {
+      "model": "faden:block/building/slabs/top/granite_tiles_slab"
+    }
+  }
+}

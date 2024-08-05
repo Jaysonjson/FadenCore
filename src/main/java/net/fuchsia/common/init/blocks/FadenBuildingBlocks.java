@@ -28,6 +28,14 @@ public class FadenBuildingBlocks {
     public static Block GRANITE_BRICK_BUTTON = registerBlock("granite_brick_button", new ButtonBlock(BlockSetType.STONE, 20, AbstractBlock.Settings.create()), GRANITE_BRICKS, DataToolType.PICKAXE, DataToolTier.WOOD, DataBlockType.BUTTON, true, true);
     public static Block GRANITE_BRICK_PRESSURE_PLATE = registerBlock("granite_brick_pressure_plate", new PressurePlateBlock(BlockSetType.STONE, AbstractBlock.Settings.create()), GRANITE_BRICKS, DataToolType.PICKAXE, DataToolTier.WOOD, DataBlockType.PRESSURE_PLATE, true, true);
 
+    public static Block GRANITE_TILES = registerBlock("granite_tiles", new Block(AbstractBlock.Settings.create()), null, DataToolType.PICKAXE, DataToolTier.WOOD, DataBlockType.CUBE, true, true);
+    public static Block GRANITE_TILES_SLAB = registerBlock("granite_tiles_slab", new SlabBlock(AbstractBlock.Settings.create()), GRANITE_TILES, DataToolType.PICKAXE, DataToolTier.WOOD, DataBlockType.SLAB, true, true);
+    public static Block GRANITE_TILES_WALL = registerBlock("granite_tiles_wall", new WallBlock(AbstractBlock.Settings.create()), GRANITE_TILES, DataToolType.PICKAXE, DataToolTier.WOOD, DataBlockType.WALL, true, true);
+    public static Block GRANITE_TILES_STAIRS = registerBlock("granite_tiles_stairs", new StairsBlock(GRANITE_TILES.getDefaultState(), AbstractBlock.Settings.create()), GRANITE_TILES, DataToolType.PICKAXE, DataToolTier.WOOD, DataBlockType.STAIR, true, true);
+    public static Block GRANITE_TILES_BUTTON = registerBlock("granite_tiles_button", new ButtonBlock(BlockSetType.STONE, 20, AbstractBlock.Settings.create()), GRANITE_TILES, DataToolType.PICKAXE, DataToolTier.WOOD, DataBlockType.BUTTON, true, true);
+    public static Block GRANITE_TILES_PRESSURE_PLATE = registerBlock("granite_tiles_pressure_plate", new PressurePlateBlock(BlockSetType.STONE, AbstractBlock.Settings.create()), GRANITE_TILES, DataToolType.PICKAXE, DataToolTier.WOOD, DataBlockType.PRESSURE_PLATE, true, true);
+
+
     public static Block GRANUD_TILES = registerBlock("granud_tiles", new Block(AbstractBlock.Settings.create()), null, DataToolType.PICKAXE, DataToolTier.WOOD, DataBlockType.CUBE, true, true);
     public static Block GRANUD_BRICK_SLAB = registerBlock("granud_brick_slab", new SlabBlock(AbstractBlock.Settings.create()), GRANUD_TILES, DataToolType.PICKAXE, DataToolTier.WOOD, DataBlockType.SLAB, true, true);
     public static Block GRANUD_BRICK_WALL = registerBlock("granud_brick_wall", new WallBlock(AbstractBlock.Settings.create()), GRANUD_TILES, DataToolType.PICKAXE, DataToolTier.WOOD, DataBlockType.WALL, true, true);

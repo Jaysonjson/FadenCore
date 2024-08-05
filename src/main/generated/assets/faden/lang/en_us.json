@@ -1,1 +1,8 @@
-{}
+{
+  "block.faden.granite_tiles": "Granite Tiles",
+  "block.faden.granite_tiles_button": "Granite Tiles Button",
+  "block.faden.granite_tiles_pressure_plate": "Granite Tiles Pressure Plate",
+  "block.faden.granite_tiles_slab": "Granite Tiles Slab",
+  "block.faden.granite_tiles_stairs": "Granite Tiles Stairs",
+  "block.faden.granite_tiles_wall": "Granite Tiles Wall"
+}

@@ -78,5 +78,11 @@
 	"block.faden.jungle_crafting_table": "Jungle Crafting Table",
 	"block.faden.mangrove_crafting_table": "Mangrove Crafting Table",
 	"block.faden.spruce_crafting_table": "Spruce Crafting Table",
-	"block.faden.warped_crafting_table": "Warped Crafting Table"
+	"block.faden.warped_crafting_table": "Warped Crafting Table",
+	"block.faden.granite_tiles": "Granite Tiles",
+	"block.faden.granite_tiles_button": "Granite Tiles Button",
+	"block.faden.granite_tiles_pressure_plate": "Granite Tiles Pressure Plate",
+	"block.faden.granite_tiles_slab": "Granite Tiles Slab",
+	"block.faden.granite_tiles_stairs": "Granite Tiles Stairs",
+	"block.faden.granite_tiles_wall": "Granite Tiles Wall"
 }

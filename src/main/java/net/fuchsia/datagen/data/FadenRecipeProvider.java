@@ -52,6 +52,7 @@ public class FadenRecipeProvider extends FabricRecipeProvider {
         }
 
         fourByFour(FadenBuildingBlocks.GRANITE_BRICKS, Blocks.POLISHED_GRANITE, exporter);
+        fourByFour(FadenBuildingBlocks.GRANITE_TILES, FadenBuildingBlocks.GRANITE_BRICKS, exporter);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, FadenBuildingBlocks.GRANUD_TILES, 4)
                 .input('R', FadenBuildingBlocks.GRANITE_BRICKS)
