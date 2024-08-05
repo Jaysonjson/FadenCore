@@ -1,10 +1,12 @@
 package net.fuchsia.common.init;
 
+import net.fuchsia.common.init.blocks.FadenBuildingBlocks;
 import net.fuchsia.common.objects.item.gear.bracelet.BraceletItem;
 import net.fuchsia.common.objects.item.cloth.Cloth;
 import net.fuchsia.common.objects.item.cloth.ClothItem;
 import net.fuchsia.common.objects.item.gear.Gear;
 import net.fuchsia.common.objects.item.gear.necklace.NecklaceItem;
+import net.fuchsia.datagen.holders.BuildingBlockDataEntry;
 import net.fuchsia.datagen.holders.FadenDataItem;
 import net.fuchsia.util.FadenIdentifier;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -43,6 +45,14 @@ public class FadenTabs {
                     entries.add(necklace);
                 }
             }).build());
+
+    public static final ItemGroup FADEN_BUILDING = Registry.register(Registries.ITEM_GROUP, FadenIdentifier.create("building_tabd"),
+            FabricItemGroup.builder().displayName(Text.translatable("itemgroup.faden.building")).icon(() -> new ItemStack(FadenBuildingBlocks.GRANITE_BRICKS)).entries((displayContext, entries) -> {
+                for (BuildingBlockDataEntry buildingBlock : FadenBuildingBlocks.BUILDING_BLOCKS) {
+                    entries.add(buildingBlock.block());
+                }
+            }).build());
+
 
     public static void register() {}
 

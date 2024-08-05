@@ -49,5 +49,14 @@
 	"cape.faden.dt10": "Cape of DT10",
 	"cape.faden.sakura": "Sakura",
 
-	"cape.faden.fuchsia.description": "Lorem ipsum dolor sit amet. Qui autem quis ut labore dolor est molestias laudantium. Non explicabo consequuntur eum neque omnis non autem voluptate eos perspiciatis eveniet vel omnis odio.\n\nAut perspiciatis quaerat aut laudantium omnis eum cupiditate asperiores. Ut laudantium laborum a aliquid eveniet et omnis laboriosam et similique ipsam qui dolores totam est consequatur quam. Id corrupti voluptatibus aut provident assumenda non atque repudiandae est nulla officiis sit galisum facere sed possimus assumenda.\n\nEos reprehenderit debitis non sint numquam et nisi distinctio ut maxime dolore. Non aperiam veritatis qui Quis iusto et pariatur voluptatem."
+	"cape.faden.fuchsia.description": "Lorem ipsum dolor sit amet. Qui autem quis ut labore dolor est molestias laudantium. Non explicabo consequuntur eum neque omnis non autem voluptate eos perspiciatis eveniet vel omnis odio.\n\nAut perspiciatis quaerat aut laudantium omnis eum cupiditate asperiores. Ut laudantium laborum a aliquid eveniet et omnis laboriosam et similique ipsam qui dolores totam est consequatur quam. Id corrupti voluptatibus aut provident assumenda non atque repudiandae est nulla officiis sit galisum facere sed possimus assumenda.\n\nEos reprehenderit debitis non sint numquam et nisi distinctio ut maxime dolore. Non aperiam veritatis qui Quis iusto et pariatur voluptatem.",
+
+	"block.faden.granite_brick_slab": "Granite Brick Slab",
+	"block.faden.granite_brick_stairs": "Granite Brick Stairs",
+	"block.faden.granite_brick_wall": "Granite Brick Wall",
+	"block.faden.granite_bricks": "Granite Bricks",
+	"block.faden.granud_brick_slab": "Granud Brick Slab",
+	"block.faden.granud_brick_stairs": "Granud Brick Stairs",
+	"block.faden.granud_brick_wall": "Granud Brick Wall",
+	"block.faden.granud_tiles": "Granud Tiles"
 }

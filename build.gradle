@@ -74,11 +74,10 @@ dependencies {
 
 	modApi "com.terraformersmc:modmenu:11.0.0-beta.1"
 
-	//RE-ADD ONCE 1.20.5 VERSIONS RE OUT!
-	//modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${rei_version}"
-	//modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rei_version}"
-	//modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${rei_version}"
-	//modCompileOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rei_version}"
+	modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${rei_version}"
+	modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rei_version}"
+	modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${rei_version}"
+	modCompileOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rei_version}"
 
 	//modImplementation "software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}"
 
@@ -102,6 +101,7 @@ dependencies {
 }*/
 
 processResources {
+	duplicatesStrategy = DuplicatesStrategy.WARN
 	inputs.property "version", project.version
 
 	filesMatching("fabric.mod.json") {

@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.fuchsia.common.events.FadenServerEvents;
 import net.fuchsia.common.init.*;
 import net.fuchsia.common.init.blocks.FadenBlocks;
+import net.fuchsia.common.init.blocks.FadenBuildingBlocks;
 import net.fuchsia.common.npc.NPCEntity;
 import net.fuchsia.server.FadenData;
 import org.slf4j.Logger;
@@ -95,6 +96,7 @@ public class Faden implements ModInitializer {
 		FadenBlocks.register();
 		OnlineCapes.retrieve();
 		FadenEntities.register();
+		FadenBuildingBlocks.register();
 		entityAttributes();
 	}
 

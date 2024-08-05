@@ -1,0 +1,9 @@
+// 1.21	2024-08-05T04:04:09.049506	Faden Core/Block Loot Tables
+f512b2dcfd72e8f2195b5632ae23f46d18d37320 data/faden/loot_table/blocks/granud_brick_stairs.json
+3ae849735a1d1fba66faff3e6e53bce0698557da data/faden/loot_table/blocks/granite_brick_stairs.json
+ae8644434268973fc4d1d461b07b5b3b6a35c3cb data/faden/loot_table/blocks/granite_brick_slab.json
+428df87dcd10b6af4540ad5c02007f3187b28052 data/faden/loot_table/blocks/granud_brick_slab.json
+ad3484a8c80512d40b9745514c09605e8200caeb data/faden/loot_table/blocks/granud_tiles.json
+b0eef21c4b66002380245e935ab88ffb92517a25 data/faden/loot_table/blocks/granud_brick_wall.json
+cde89cb20a9ba50e641c668cdac3807afc0edf07 data/faden/loot_table/blocks/granite_brick_wall.json
+d10da79852addffbe1177cb7b01bc04d9b7e41cc data/faden/loot_table/blocks/granite_bricks.json

@@ -19,8 +19,27 @@ public class FadenBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup arg) {
-        for (BuildingBlockDataEntry roundel : FadenBuildingBlocks.BUILDING_BLOCKS) {
-            doTags(roundel.block(), roundel.toolType(), roundel.toolTier());
+        for (BuildingBlockDataEntry block : FadenBuildingBlocks.BUILDING_BLOCKS) {
+            doTags(block.block(), block.toolType(), block.toolTier());
+
+            switch (block.blockType()) {
+                case WALL -> {
+                    getOrCreateTagBuilder(BlockTags.WALLS).add(block.block());
+                }
+
+                case SLAB -> {
+                    getOrCreateTagBuilder(BlockTags.SLABS).add(block.block());
+                }
+
+                case DOOR -> {
+                    getOrCreateTagBuilder(BlockTags.DOORS).add(block.block());
+                }
+
+                case STAIR -> {
+                    getOrCreateTagBuilder(BlockTags.STAIRS).add(block.block());
+                }
+            }
+
         }
     }
 
