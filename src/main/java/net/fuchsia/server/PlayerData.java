@@ -32,6 +32,10 @@ public class PlayerData implements Serializable {
         return race;
     }
 
+    public void resetRaceData() {
+        race = new RaceSaveData();
+    }
+
     public String getSelectedCapeId() {
         return selectedCape;
     }

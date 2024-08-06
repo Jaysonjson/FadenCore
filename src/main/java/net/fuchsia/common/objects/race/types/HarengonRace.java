@@ -1,24 +1,15 @@
 package net.fuchsia.common.objects.race.types;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.MultimapBuilder;
 import net.fuchsia.common.objects.race.Race;
 import net.fuchsia.common.objects.race.RaceCosmetics;
 import net.fuchsia.common.objects.race.RaceModelType;
 import net.fuchsia.common.objects.race.cosmetic.RaceCosmeticPalette;
 import net.fuchsia.util.FadenIdentifier;
-import net.minecraft.entity.EntityAttachmentType;
-import net.minecraft.entity.EntityAttachments;
-import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
 import org.joml.Vector3f;
 
 public class HarengonRace extends Race {

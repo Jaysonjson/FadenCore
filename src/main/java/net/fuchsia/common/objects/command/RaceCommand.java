@@ -13,6 +13,7 @@ import net.fuchsia.common.objects.race.Race;
 import net.fuchsia.common.objects.race.RaceUtil;
 import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.client.ClientPlayerDatas;
+import net.fuchsia.util.PlayerDataUtil;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.CommandManager;
@@ -30,6 +31,8 @@ public class RaceCommand {
                                         .then(CommandManager.argument("race", RaceArgumentType.empty()).then(CommandManager.argument("sub_id", RaceSubIdArgumentType.empty())
                                                 .executes(context -> setRace(context))))))
 
+                        .then(CommandManager.literal("remove").then(CommandManager.argument("player", EntityArgumentType.player())
+                                        .executes(context -> removeRace(context))))
                         .then(CommandManager.literal("get")
                                 .then(CommandManager.argument("player", EntityArgumentType.player())
                                         .executes(context -> getRace(context)))));
@@ -38,8 +41,8 @@ public class RaceCommand {
 
     public static int getRace(CommandContext<ServerCommandSource> source) throws CommandSyntaxException {
         PlayerEntity player = EntityArgumentType.getPlayer(source, "player");
-        PlayerData data = ClientPlayerDatas.getPlayerData(player.getUuid());
-        if(data != null && data.getRaceSaveData().getRace() != null) {
+        PlayerData data = PlayerDataUtil.getClientOrServer(player.getUuid());
+        if(data.getRaceSaveData().getRace() != null) {
             Race race = data.getRaceSaveData().getRace();
             source.getSource().sendFeedback(() -> Text.literal("Race: " + race.getId() + " with SubId:" + data.getRaceSaveData().getRaceSub()), false);
         } else {
@@ -59,6 +62,18 @@ public class RaceCommand {
                 RaceUtil.setPlayerRace((ServerPlayerEntity) player, FadenRaces.getRace(race), sub_id);
             }
             source.getSource().sendFeedback(() -> Text.literal("Set Race to : " + race + " with SubId: " + sub_id), false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public static int removeRace(CommandContext<ServerCommandSource> source) throws CommandSyntaxException {
+        try {
+            PlayerEntity player = EntityArgumentType.getPlayer(source, "player");
+            PlayerData data = PlayerDataUtil.getClientOrServer(player.getUuid());
+            data.resetRaceData();
+            source.getSource().sendFeedback(() -> Text.literal("Removed race data from " + player.getName().getString()), false);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -73,7 +73,7 @@ public class FadenDataModelProvider extends FabricModelProvider {
                 }
 
                 case PRESSURE_PLATE -> {
-                    blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createPressurePlateBlockState(buildingBlock.block(), Identifier.of(blockId.getNamespace(), "block/building/pressure_plate/down/" + blockId.getPath()), Identifier.of(blockId.getNamespace(), "block/building/pressure_plate/up/" + blockId.getPath())));
+                    blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createPressurePlateBlockState(buildingBlock.block(), Identifier.of(blockId.getNamespace(), "block/building/pressure_plate/up/" + blockId.getPath()), Identifier.of(blockId.getNamespace(), "block/building/pressure_plate/down/" + blockId.getPath())));
                     new Model(Optional.of(FadenIdentifier.minecraft("block/pressure_plate_up")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/pressure_plate/up/" + blockId.getPath()), textureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
                     new Model(Optional.of(FadenIdentifier.minecraft("block/pressure_plate_down")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/pressure_plate/down/" + blockId.getPath()), textureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
                 }

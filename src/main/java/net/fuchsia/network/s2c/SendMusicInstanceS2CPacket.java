@@ -45,8 +45,6 @@ public record SendMusicInstanceS2CPacket(MusicInstance musicInstance) implements
             if(!clientMusicInstance.playing) {
                 clientMusicInstance.startPlaying();
             }
-        } else {
-            System.out.println("NULL");
         }
     }
 }

@@ -1,6 +1,6 @@
-// 1.21	2024-08-05T04:53:13.82315562	Faden Core/Tags for minecraft:block
-56f83d99001153199b2c44dc9b72d2070004f171 data/minecraft/tags/block/needs_stone_tool.json
+// 1.21	2024-08-06T20:54:23.663336471	Faden Core/Tags for minecraft:block
 c03b57c9758e5e529e3441606c96e9e11b085504 data/minecraft/tags/block/mineable/pickaxe.json
+56f83d99001153199b2c44dc9b72d2070004f171 data/minecraft/tags/block/needs_stone_tool.json
 052977c8f8e8b2f96b3a787649f5fe984e4f9bda data/minecraft/tags/block/slabs.json
 9d2784fa32cf20049078a5cc10db852ea2de703d data/minecraft/tags/block/walls.json
 ced29603137189e7467bf7acd92279a4914acd7f data/minecraft/tags/block/stairs.json
