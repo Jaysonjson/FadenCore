@@ -39,6 +39,12 @@ public class FadenConfigScreen {
                 .setDefaultValue(FadenOptions.getConfig().VANILLA_BLUR)
                 .build();
 
+        BooleanListEntry enableMusicUI = configEntryBuilder
+                .startBooleanToggle(Text.translatable("config.faden.enable_music_ui"), FadenOptions.getConfig().SHOW_PLAYING_MUSIC)
+                .setDefaultValue(FadenOptions.getConfig().SHOW_PLAYING_MUSIC)
+                .build();
+
+
         BooleanListEntry fadenHealth = configEntryBuilder
                 .startBooleanToggle(Text.translatable("config.faden.faden_health_ui"), FadenOptions.getConfig().FADEN_HEALTH)
                 .setDefaultValue(FadenOptions.getConfig().FADEN_HEALTH)
@@ -50,6 +56,7 @@ public class FadenConfigScreen {
         ConfigCategory inter = builder.getOrCreateCategory(Text.translatable("config.faden.category.interface"));
         inter.addEntry(enableVanillaBlur);
         inter.addEntry(fadenHealth);
+        inter.addEntry(enableMusicUI);
 
         ConfigCategory vanilla = builder.getOrCreateCategory(Text.translatable("config.faden.category.vanilla"));
         vanilla.addEntry(enableVanillaBlur);
@@ -65,9 +72,10 @@ public class FadenConfigScreen {
         client.addEntry(enableCustomCapes);
         client.addEntry(fadenHealth);
         client.addEntry(enableVanillaBlur);
+        client.addEntry(enableMusicUI);
 
         builder.setSavingRunnable(() -> {
-            FadenOptions.setConfig(new FadenConfig(enablePlayerRaceSkins.getValue(),  enableVanillaBlur.getValue(), enableCustomCapes.getValue(), fadenHealth.getValue()));
+            FadenOptions.setConfig(new FadenConfig(enablePlayerRaceSkins.getValue(),  enableVanillaBlur.getValue(), enableCustomCapes.getValue(), fadenHealth.getValue(), enableMusicUI.getValue()));
             try {
                 FileUtils.writeStringToFile(new File(FabricLoader.getInstance().getConfigDir().toFile() + "/faden.json"), Faden.GSON.toJson(FadenOptions.getConfig()), StandardCharsets.UTF_8);
             } catch (IOException e) {

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "R": {
+      "item": "faden:diorite_bricks"
+    }
+  },
+  "pattern": [
+    "  R",
+    " RR",
+    "RRR"
+  ],
+  "result": {
+    "count": 4,
+    "id": "faden:diorite_brick_stairs"
+  }
+}

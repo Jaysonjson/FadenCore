@@ -16,3 +16,4 @@ accessible method net/minecraft/entity/LivingEntity getBaseMovementSpeedMultipli
 accessible field net/minecraft/client/sound/SoundManager soundSystem Lnet/minecraft/client/sound/SoundSystem;
 accessible field net/minecraft/client/sound/SoundSystem sources Ljava/util/Map;
 accessible field net/minecraft/client/sound/Source pointer I
+accessible field net/minecraft/client/gui/screen/SplashTextRenderer text Ljava/lang/String;

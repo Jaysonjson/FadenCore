@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "R": {
+      "item": "faden:granud_tiles"
+    }
+  },
+  "pattern": [
+    "R"
+  ],
+  "result": {
+    "count": 1,
+    "id": "faden:granud_tile_button"
+  }
+}

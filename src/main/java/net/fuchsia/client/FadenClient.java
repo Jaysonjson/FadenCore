@@ -29,6 +29,7 @@ import net.fuchsia.common.objects.race.skin.client.ClientRaceSkinCache;
 import net.fuchsia.network.FadenNetwork;
 import net.fuchsia.util.FadenCheckSum;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.LogoDrawer;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -36,15 +37,18 @@ import net.minecraft.world.WorldEvents;
 
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
 public class FadenClient implements ClientModInitializer {
 
     private static FadenItemModelRegistry ITEM_MODELS = new FadenItemModelRegistry();
+    public static ArrayList<String> SPLASHES = new ArrayList<>();
 
     @Override
     public void onInitializeClient() {
+        addSplashes();
         FadenNetwork.registerS2C();
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
             tryToLoadTextures(FadenCloths::load, "CLOTH");
@@ -128,4 +132,10 @@ public class FadenClient implements ClientModInitializer {
         return ITEM_MODELS;
     }
 
+    private void addSplashes() {
+        SPLASHES.add("Blame Derpy!");
+        SPLASHES.add("Rabbit superiority!");
+        SPLASHES.add("NOT a Furry Mod!");
+        SPLASHES.add("Also try Wynncraft!");
+    }
 }

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "faden:block/building/slabs/bot/andesite_brick_slab"
+    },
+    "type=double": {
+      "model": "faden:block/building/andesite_bricks"
+    },
+    "type=top": {
+      "model": "faden:block/building/slabs/top/andesite_brick_slab"
+    }
+  }
+}

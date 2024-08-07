@@ -7,9 +7,11 @@ import net.fuchsia.datagen.holders.FadenDataItem;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.fuchsia.util.FadenIdentifier;
+import net.minecraft.block.enums.SlabType;
 import net.minecraft.data.client.*;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.NotImplementedException;
 
@@ -82,6 +84,21 @@ public class FadenDataModelProvider extends FabricModelProvider {
                     blockStateModelGenerator.blockStateCollector.accept(VariantsBlockStateSupplier.create(buildingBlock.block(), BlockStateVariant.create().put(VariantSettings.MODEL, Identifier.of(blockId.getNamespace(), "block/building/crafting_table/" + blockId.getPath()))));
                     new Model(Optional.of(FadenIdentifier.minecraft("block/cube")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/crafting_table/" + blockId.getPath()), craftingTable(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
                 }
+
+                case BULB -> {
+                    blockStateModelGenerator.blockStateCollector.accept(VariantsBlockStateSupplier.create(buildingBlock.block()).coordinate(BlockStateVariantMap.create(Properties.LIT, Properties.POWERED)
+                            .register(true, true, BlockStateVariant.create().put(VariantSettings.MODEL, Identifier.of(blockId.getNamespace(), "block/building/bulb/lit_powered/" + blockId.getPath())))
+                            .register(false, false, BlockStateVariant.create().put(VariantSettings.MODEL, Identifier.of(blockId.getNamespace(), "block/building/bulb/" + blockId.getPath())))
+                            .register(true, false, BlockStateVariant.create().put(VariantSettings.MODEL, Identifier.of(blockId.getNamespace(), "block/building/bulb/lit/" + blockId.getPath())))
+                            .register(false, true, BlockStateVariant.create().put(VariantSettings.MODEL, Identifier.of(blockId.getNamespace(), "block/building/bulb/powered/" + blockId.getPath())))
+                    ));
+                    new Model(Optional.of(Identifier.of("block/cube_all")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/bulb/" + blockId.getPath()), new TextureMap().register(TextureKey.of("all"), Identifier.of(blockId.getNamespace(), "block/building/" + blockId.getPath() + "/base")), blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(Identifier.of("block/cube_all")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/bulb/lit_powered/" + blockId.getPath()), new TextureMap().register(TextureKey.of("all"), Identifier.of(blockId.getNamespace(), "block/building/" + blockId.getPath() + "/lit_powered")), blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(Identifier.of("block/cube_all")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/bulb/lit/" + blockId.getPath()), new TextureMap().register(TextureKey.of("all"), Identifier.of(blockId.getNamespace(), "block/building/" + blockId.getPath() + "/lit")), blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(Identifier.of("block/cube_all")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/bulb/powered/" + blockId.getPath()), new TextureMap().register(TextureKey.of("all"), Identifier.of(blockId.getNamespace(), "block/building/" + blockId.getPath() + "/powered")), blockStateModelGenerator.modelCollector);
+
+                }
+
             }
         }
     }
@@ -127,6 +144,10 @@ public class FadenDataModelProvider extends FabricModelProvider {
 
                 case CRAFTING_TABLE -> {
                     itemModelGenerator.register(buildingBlock.item(), new Model(Optional.of(Identifier.of(blockId.getNamespace(),"block/building/crafting_table/" + blockId.getPath())), Optional.empty()));
+                }
+
+                case BULB -> {
+                    itemModelGenerator.register(buildingBlock.item(), new Model(Optional.of(Identifier.of(blockId.getNamespace(),"block/building/bulb/" + blockId.getPath())), Optional.empty()));
                 }
             }
         }

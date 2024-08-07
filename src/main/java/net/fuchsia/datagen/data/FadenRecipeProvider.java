@@ -51,6 +51,8 @@ public class FadenRecipeProvider extends FabricRecipeProvider {
             }
         }
 
+        fourByFour(FadenBuildingBlocks.ANDESITE_BRICKS, Blocks.POLISHED_ANDESITE, exporter);
+        fourByFour(FadenBuildingBlocks.DIORITE_BRICKS, Blocks.POLISHED_DIORITE, exporter);
         fourByFour(FadenBuildingBlocks.GRANITE_BRICKS, Blocks.POLISHED_GRANITE, exporter);
         fourByFour(FadenBuildingBlocks.GRANITE_TILES, FadenBuildingBlocks.GRANITE_BRICKS, exporter);
 

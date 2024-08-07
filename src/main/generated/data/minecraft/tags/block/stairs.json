@@ -1,8 +1,12 @@
 {
   "values": [
     "faden:granite_brick_stairs",
-    "faden:granite_tiles_stairs",
-    "faden:granud_brick_stairs",
-    "faden:titanitol_stairs"
+    "faden:granite_tile_stairs",
+    "faden:granud_tile_stairs",
+    "faden:titanitol_stairs",
+    "faden:diorite_brick_stairs",
+    "faden:diorite_tile_stairs",
+    "faden:andesite_brick_stairs",
+    "faden:andesite_tile_stairs"
   ]
 }

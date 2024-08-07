@@ -10,10 +10,12 @@
     "ItemRendererAccessor",
     "ItemRendererMixin",
     "LivingEntityRendererMixin",
+    "LogoDrawerMixin",
     "ModelLoaderMixin",
     "PlayerEntityRendererMixin",
     "PlayerInventoryScreenMixin",
     "SoundManagerMixin",
+    "SplashTextRendererMixin",
     "TitlescreenMixin"
   ],
   "injectors": {

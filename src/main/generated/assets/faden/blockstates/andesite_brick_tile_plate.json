@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "faden:block/building/pressure_plate/up/andesite_brick_tile_plate"
+    },
+    "powered=true": {
+      "model": "faden:block/building/pressure_plate/down/andesite_brick_tile_plate"
+    }
+  }
+}

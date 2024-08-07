@@ -73,6 +73,7 @@ public class RaceCommand {
             PlayerEntity player = EntityArgumentType.getPlayer(source, "player");
             PlayerData data = PlayerDataUtil.getClientOrServer(player.getUuid());
             data.resetRaceData();
+            data.sync();
             source.getSource().sendFeedback(() -> Text.literal("Removed race data from " + player.getName().getString()), false);
         } catch (Exception e) {
             e.printStackTrace();
