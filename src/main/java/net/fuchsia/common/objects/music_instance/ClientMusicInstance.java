@@ -40,6 +40,10 @@ public class ClientMusicInstance {
         }
     }
 
+    public HashMap<InstrumentType, PositionedSoundInstance> getSoundInstances() {
+        return soundInstances;
+    }
+
     @Environment(EnvType.CLIENT)
     public void openVolume(Source source) {
         AL10.alSourcef(source.pointer, 4106, 1f);

@@ -2,6 +2,7 @@ package net.fuchsia.network.s2c;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fuchsia.client.ClientMusicInstances;
+import net.fuchsia.client.overlay.InstrumentMusicOverlay;
 import net.fuchsia.common.init.FadenMusicInstances;
 import net.fuchsia.common.objects.music_instance.ClientMusicInstance;
 import net.fuchsia.common.objects.music_instance.MusicInstance;
@@ -13,6 +14,7 @@ import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.packet.CustomPayload;
+import net.minecraft.util.math.Vec3d;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -44,6 +46,10 @@ public record SendMusicInstanceS2CPacket(MusicInstance musicInstance) implements
             ClientMusicInstances.getInstances().put(musicInstance.getUuid(), clientMusicInstance);
             if(!clientMusicInstance.playing) {
                 clientMusicInstance.startPlaying();
+            }
+            if(50 >= context.player().getPos().distanceTo(new Vec3d(clientMusicInstance.getInstance().getPosition().x, clientMusicInstance.getInstance().getPosition().y, clientMusicInstance.getInstance().getPosition().z))) {
+                InstrumentMusicOverlay.CLIENT_MUSIC_INSTANCE = clientMusicInstance;
+                InstrumentMusicOverlay.SHOW_TICKS = 0;
             }
         }
     }

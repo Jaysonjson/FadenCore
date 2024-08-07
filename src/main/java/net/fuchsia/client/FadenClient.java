@@ -11,6 +11,7 @@ import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fuchsia.Faden;
 import net.fuchsia.client.handler.FadenItemModelHandler;
+import net.fuchsia.client.overlay.InstrumentMusicOverlay;
 import net.fuchsia.client.overlay.StatsOverlay;
 import net.fuchsia.client.registry.FadenItemModelRegistry;
 import net.fuchsia.client.render.entity.NPCEntityRenderer;
@@ -27,6 +28,8 @@ import net.fuchsia.common.objects.tooltip.FadenTooltipData;
 import net.fuchsia.common.objects.race.skin.client.ClientRaceSkinCache;
 import net.fuchsia.network.FadenNetwork;
 import net.fuchsia.util.FadenCheckSum;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.world.WorldEvents;
@@ -34,6 +37,7 @@ import net.minecraft.world.WorldEvents;
 import java.io.File;
 import java.io.FileReader;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class FadenClient implements ClientModInitializer {
 
@@ -64,12 +68,21 @@ public class FadenClient implements ClientModInitializer {
         });
 
         ClientTickEvents.START_CLIENT_TICK.register(client -> {
-            for (ClientMusicInstance value : ClientMusicInstances.getInstances().values()) {
-                value.tick();
+            Iterator<ClientMusicInstance> iterator = ClientMusicInstances.getInstances().values().iterator();
+            while (iterator.hasNext()) {
+                ClientMusicInstance instance = iterator.next();
+                instance.tick();
+                if(instance.getInstance().getInstruments().isEmpty()) {
+                    for (PositionedSoundInstance value : instance.getSoundInstances().values()) {
+                        MinecraftClient.getInstance().getSoundManager().stop(value);
+                    }
+                    iterator.remove();
+                }
             }
         });
 
         HudRenderCallback.EVENT.register(new StatsOverlay());
+        HudRenderCallback.EVENT.register(new InstrumentMusicOverlay());
 
         registerModels();
 

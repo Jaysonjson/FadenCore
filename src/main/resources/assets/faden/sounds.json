@@ -28,5 +28,29 @@
     "sounds": [
       "faden:music.burning_memory_drum"
     ]
+  },
+  "the_mist_drum": {
+    "subtitle": "sounds.faden.music.the_mist_drum",
+    "sounds": [
+      "faden:music.the_mist_drum"
+    ]
+  },
+  "the_mist_flute": {
+    "subtitle": "sounds.faden.music.the_mist_flute",
+    "sounds": [
+      "faden:music.the_mist_flute"
+    ]
+  },
+  "the_mist_hurdy": {
+    "subtitle": "sounds.faden.music.the_mist_hurdy",
+    "sounds": [
+      "faden:music.the_mist_hurdy"
+    ]
+  },
+  "the_mist_lute": {
+    "subtitle": "sounds.faden.music.the_mist_lute",
+    "sounds": [
+      "faden:music.the_mist_lute"
+    ]
   }
 }

@@ -2,10 +2,12 @@ package net.fuchsia.common.init;
 
 import net.fuchsia.common.objects.music_instance.InstrumentedMusic;
 import net.fuchsia.common.objects.music_instance.MusicInstance;
+import net.fuchsia.common.objects.music_instance.songs.BurningMemoryMusic;
+import net.fuchsia.common.objects.music_instance.songs.TheMistMusic;
+import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -13,9 +15,12 @@ public class FadenMusicInstances {
     private static HashMap<Identifier, InstrumentedMusic> INSTRUMENTED = new HashMap<>();
     private static HashMap<UUID, MusicInstance> INSTANCES = new HashMap<>();
 
-    private static InstrumentedMusic register(InstrumentedMusic musicInstance) {
-        INSTRUMENTED.put(Identifier.of(""), musicInstance);
-        return INSTRUMENTED.get(Identifier.of(""));
+    public static InstrumentedMusic BURNING_MEMORY = register(FadenIdentifier.create("burning_memory"), new BurningMemoryMusic());
+    public static InstrumentedMusic THE_MIST = register(FadenIdentifier.create("the_mist"), new TheMistMusic());
+
+    private static InstrumentedMusic register(Identifier id, InstrumentedMusic musicInstance) {
+        INSTRUMENTED.put(id, musicInstance);
+        return INSTRUMENTED.get(id);
     }
 
     public static HashMap<UUID, MusicInstance> getInstances() {

@@ -2,13 +2,9 @@ package net.fuchsia.common.objects.item.instrument;
 
 import net.fuchsia.common.init.FadenDataComponents;
 import net.fuchsia.common.init.FadenMusicInstances;
-import net.fuchsia.common.init.FadenSoundEvents;
-import net.fuchsia.common.objects.music_instance.BurningMemory;
 import net.fuchsia.common.objects.music_instance.InstrumentedMusic;
 import net.fuchsia.common.objects.music_instance.MusicInstance;
 import net.fuchsia.network.FadenNetwork;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.sound.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -18,7 +14,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
-import org.lwjgl.openal.AL10;
 
 import java.util.Random;
 import java.util.UUID;
@@ -59,9 +54,9 @@ public class InstrumentItem extends Item {
                 musicInstance.setUuid(uuid);
                 musicInstance.setPosition(user.getPos().toVector3f());
                 musicInstance.getInstruments().add(getInstrumentType());
-                for (InstrumentType type : new BurningMemory().getInstrumentTypes().keySet()) {
-                    musicInstance.getSoundEvents().put(type, new BurningMemory().getInstrumentTypes().get(type).getId().toString());
-                }
+                InstrumentedMusic music = FadenMusicInstances.getRegistry().values().toArray(new InstrumentedMusic[0])[new Random().nextInt(FadenMusicInstances.getRegistry().size())];
+                for (InstrumentType type : music.getInstrumentTypes().keySet()) musicInstance.getSoundEvents().put(type, music.getInstrumentTypes().get(type).getId().toString());
+                musicInstance.setMusicId(music.getId());
                 FadenMusicInstances.getInstances().put(uuid, musicInstance);
                 handItem.set(FadenDataComponents.MUSIC_INSTANCE, uuid.toString());
                 user.setStackInHand(hand, handItem);

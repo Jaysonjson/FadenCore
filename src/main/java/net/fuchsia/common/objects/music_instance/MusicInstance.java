@@ -26,9 +26,19 @@ public class MusicInstance implements Serializable {
     protected UUID uuid = UUID.randomUUID();
     protected HashMap<InstrumentType, String> soundEvents = new HashMap<>();
     protected ArrayList<InstrumentType> instruments = new ArrayList<>();
+    protected String musicId = "";
 
     public HashMap<InstrumentType, String> getSoundEvents() {
         return soundEvents;
+    }
+
+
+    public String getMusicId() {
+        return musicId;
+    }
+
+    public void setMusicId(String musicId) {
+        this.musicId = musicId;
     }
 
     public UUID getUuid() {
