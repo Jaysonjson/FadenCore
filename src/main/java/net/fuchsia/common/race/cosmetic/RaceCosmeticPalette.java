@@ -1,4 +1,4 @@
-package net.fuchsia.common.objects.race.cosmetic;
+package net.fuchsia.common.race.cosmetic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,8 +18,12 @@ public class RaceCosmeticPalette {
         cosmetics.put(id, cAr);
     }
 
-    public void addCosmetic(String id, String modelId, RaceCosmeticType type, String cosmeticId) {
+    public void addCosmetic(String id, String modelId, RaceCosmeticSlot type, String cosmeticId) {
         addCosmetic(id, new RaceCosmetic(modelId, type, cosmeticId));
+    }
+
+    public void addCosmetic(String id, String modelId, RaceCosmeticSlot type, String slot, String cosmeticId) {
+        addCosmetic(id, new RaceCosmetic(modelId, type, cosmeticId, slot));
     }
 
     public HashMap<String, ArrayList<RaceCosmetic>> getCosmetics() {

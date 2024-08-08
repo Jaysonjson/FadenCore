@@ -1,8 +1,8 @@
 package net.fuchsia.client.render.feature;
 
-import net.fuchsia.common.objects.race.Race;
-import net.fuchsia.common.objects.race.cosmetic.RaceCosmetic;
-import net.fuchsia.common.objects.race.cosmetic.RaceCosmeticType;
+import net.fuchsia.common.race.Race;
+import net.fuchsia.common.race.cosmetic.RaceCosmetic;
+import net.fuchsia.common.race.cosmetic.RaceCosmeticSlot;
 import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.client.ClientPlayerDatas;
 import net.fuchsia.util.FadenRenderUtil;
@@ -30,7 +30,7 @@ public class HeadFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEnt
             if (data.getRaceSaveData().hasRace()) {
                 Race race = data.getRaceSaveData().getRace();
                 for (RaceCosmetic cosmetic : race.getCosmeticPalette().getCosmetics(data.getRaceSaveData().getRaceSub())) {
-                    if (cosmetic.getType() == RaceCosmeticType.HEAD && cosmetic.getId().equalsIgnoreCase(data.getRaceSaveData().getCosmetics().getHead())) {
+                    if (cosmetic.getSlot() == RaceCosmeticSlot.HEAD && data.getRaceSaveData().getCosmetics().getHead().contains(cosmetic.getId())) {
                         matrices.push();
                         BakedModel model = MinecraftClient.getInstance().getBakedModelManager().getModel(cosmetic.getModel());
                         ((ModelWithHead) this.getContextModel()).getHead().rotate(matrices);

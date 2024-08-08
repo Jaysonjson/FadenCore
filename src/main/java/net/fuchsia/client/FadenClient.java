@@ -25,7 +25,7 @@ import net.fuchsia.common.objects.music_instance.ClientMusicInstance;
 import net.fuchsia.common.objects.music_instance.MusicInstance;
 import net.fuchsia.common.objects.tooltip.FadenTooltipComponent;
 import net.fuchsia.common.objects.tooltip.FadenTooltipData;
-import net.fuchsia.common.objects.race.skin.client.ClientRaceSkinCache;
+import net.fuchsia.common.race.skin.client.ClientRaceSkinCache;
 import net.fuchsia.network.FadenNetwork;
 import net.fuchsia.util.FadenCheckSum;
 import net.minecraft.client.MinecraftClient;

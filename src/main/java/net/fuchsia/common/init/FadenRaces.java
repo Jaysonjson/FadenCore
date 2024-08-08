@@ -1,7 +1,7 @@
 package net.fuchsia.common.init;
 
-import net.fuchsia.common.objects.race.Race;
-import net.fuchsia.common.objects.race.types.*;
+import net.fuchsia.common.race.Race;
+import net.fuchsia.common.race.types.*;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 

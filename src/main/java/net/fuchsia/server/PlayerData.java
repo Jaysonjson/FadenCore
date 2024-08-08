@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import net.fuchsia.common.init.FadenRaces;
-import net.fuchsia.common.objects.race.Race;
+import net.fuchsia.common.race.Race;
 import net.fuchsia.network.FadenNetwork;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
@@ -135,52 +135,45 @@ public class PlayerData implements Serializable {
 
     public static class RaceDataCosmetics implements Serializable {
         private static final long serialVersionUID = 0L;
-        private String head = "";
-        private String chest = "";
-        private String leg = "";
-        private String boots = "";
+        private ArrayList<String> head = new ArrayList<>();
+        private ArrayList<String> chest = new ArrayList<>();
+        private ArrayList<String> leg = new ArrayList<>();
+        private ArrayList<String> boots = new ArrayList<>();
 
         public RaceDataCosmetics() {
 
         }
 
-        public RaceDataCosmetics(String head_cosmetic, String chest_cosmetic_id, String leg_cosmetic_id, String boots_cosmetic_id) {
-            this.head = head_cosmetic;
-            this.chest = chest_cosmetic_id;
-            this.leg = leg_cosmetic_id;
-            this.boots = boots_cosmetic_id;
-        }
-
-        public String getHead() {
+        public ArrayList<String> getHead() {
             return head;
         }
 
-        public String getChest() {
-            return chest;
-        }
-
-        public String getLeg() {
-            return leg;
-        }
-
-        public String getBoots() {
+        public ArrayList<String> getBoots() {
             return boots;
         }
 
-        public void setBoots(String boots_cosmetic_id) {
-            this.boots = boots_cosmetic_id;
+        public ArrayList<String> getChest() {
+            return chest;
         }
 
-        public void setChest(String chest_cosmetic_id) {
-            this.chest = chest_cosmetic_id;
+        public ArrayList<String> getLeg() {
+            return leg;
         }
 
-        public void setHead(String head_cosmetic_id) {
-            this.head = head_cosmetic_id;
+        public void setBoots(ArrayList<String> boots) {
+            this.boots = boots;
         }
 
-        public void setLeg(String leg_cosmetic_id) {
-            this.leg = leg_cosmetic_id;
+        public void setChest(ArrayList<String> chest) {
+            this.chest = chest;
+        }
+
+        public void setHead(ArrayList<String> head) {
+            this.head = head;
+        }
+
+        public void setLeg(ArrayList<String> leg) {
+            this.leg = leg;
         }
     }
 }

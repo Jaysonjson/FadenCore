@@ -1,4 +1,4 @@
-package net.fuchsia.common.objects.race.skin.provider;
+package net.fuchsia.common.race.skin.provider;
 
 import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.util.Identifier;

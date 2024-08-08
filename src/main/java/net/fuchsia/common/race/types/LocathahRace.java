@@ -1,9 +1,9 @@
-package net.fuchsia.common.objects.race.types;
+package net.fuchsia.common.race.types;
 
 import com.google.common.collect.Multimap;
-import net.fuchsia.common.objects.race.Race;
-import net.fuchsia.common.objects.race.RaceModelType;
-import net.fuchsia.common.objects.race.cosmetic.RaceCosmeticPalette;
+import net.fuchsia.common.race.Race;
+import net.fuchsia.common.race.RaceModelType;
+import net.fuchsia.common.race.cosmetic.RaceCosmeticPalette;
 import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;

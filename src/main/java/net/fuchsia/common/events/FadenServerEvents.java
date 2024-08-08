@@ -11,7 +11,7 @@ import net.fuchsia.common.data.ItemValues;
 import net.fuchsia.common.init.FadenMusicInstances;
 import net.fuchsia.common.objects.music_instance.ClientMusicInstance;
 import net.fuchsia.common.objects.music_instance.MusicInstance;
-import net.fuchsia.common.objects.race.Race;
+import net.fuchsia.common.race.Race;
 import net.fuchsia.common.quest.FadenQuests;
 import net.fuchsia.common.quest.data.QuestCache;
 import net.fuchsia.server.ServerPlayerDatas;

@@ -1,7 +1,7 @@
 package net.fuchsia.client.render.feature;
 
-import net.fuchsia.common.objects.race.cosmetic.RaceCosmetic;
-import net.fuchsia.common.objects.race.cosmetic.RaceCosmeticType;
+import net.fuchsia.common.race.cosmetic.RaceCosmetic;
+import net.fuchsia.common.race.cosmetic.RaceCosmeticSlot;
 import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.client.ClientPlayerDatas;
 import net.fuchsia.util.FadenRenderUtil;
@@ -27,7 +27,7 @@ public class ChestFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEn
             PlayerData data = ClientPlayerDatas.getPlayerData(entity.getUuid());
             if (data != null && data.getRaceSaveData().getRace() != null) {
                 for (RaceCosmetic cosmetic : data.getRaceSaveData().getRace().getCosmeticPalette().getCosmetics(data.getRaceSaveData().getRaceSub())) {
-                    if (cosmetic.getType() == RaceCosmeticType.CHEST && cosmetic.getId().equalsIgnoreCase(data.getRaceSaveData().getCosmetics().getChest())) {
+                    if (cosmetic.getSlot() == RaceCosmeticSlot.CHEST && data.getRaceSaveData().getCosmetics().getChest().contains(cosmetic.getId())) {
                         matrices.push();
                         BakedModel model = MinecraftClient.getInstance().getBakedModelManager().getModel(cosmetic.getModel());
                         if(!entity.isSneaking()) {

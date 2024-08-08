@@ -1,27 +1,29 @@
-package net.fuchsia.common.objects.race;
+package net.fuchsia.common.race;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
+import net.fuchsia.common.race.cosmetic.RaceCosmetic;
+import net.fuchsia.common.race.cosmetic.RaceCosmeticPalette;
+import net.fuchsia.server.PlayerData;
 import net.minecraft.entity.EntityAttachmentType;
 import net.minecraft.entity.EntityAttachments;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.joml.Vector3f;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
-public abstract class Race implements IRace {
+public abstract class Race {
 
     protected Identifier identifier = Identifier.of("");
     protected String[] subIds = new String[0];
@@ -47,42 +49,34 @@ public abstract class Race implements IRace {
         this.poseDimensions = ImmutableMap.builder().put(EntityPose.STANDING, dimensions()).put(EntityPose.SLEEPING, EntityDimensions.fixed(0.2F, 0.2F).withEyeHeight(0.2F)).put(EntityPose.FALL_FLYING, EntityDimensions.changing(0.6F, 0.6F).withEyeHeight(0.4F)).put(EntityPose.SWIMMING, EntityDimensions.changing(0.6F, 0.6F).withEyeHeight(0.4F)).put(EntityPose.SPIN_ATTACK, EntityDimensions.changing(0.6F, 0.6F).withEyeHeight(0.4F)).put(EntityPose.CROUCHING, EntityDimensions.changing(0.6F, 1.5F).withEyeHeight(1.27F).withAttachments(EntityAttachments.builder().add(EntityAttachmentType.VEHICLE, PlayerEntity.VEHICLE_ATTACHMENT_POS))).put(EntityPose.DYING, EntityDimensions.fixed(0.2F, 0.2F).withEyeHeight(1.62F)).build();
     }
 
-    @Override
     public Identifier getIcon() {
         return null;
     }
 
-    @Override
     public HashMap<String, byte[]> getSkinMap() {
         return skinMap;
     }
 
-    @Override
     public String getId() {
         return identifier.getPath();
     }
 
-    @Override
     public Identifier getIdentifier() {
         return identifier;
     }
 
-    @Override
     public String[] subIds() {
         return subIds;
     }
 
-    @Override
     public Vector3f size() {
         return size;
     }
 
-    @Override
     public EntityDimensions dimensions() {
         return entityDimensions;
     }
 
-    @Override
     public ImmutableMap<Object, Object> poseDimensions() {
         return poseDimensions;
     }
@@ -107,4 +101,30 @@ public abstract class Race implements IRace {
             System.out.println("water_movement: " + waterMovementSpeed());
         }
     }
+
+    //Uses 1 single Cosmetic for each type, override for special races like the tabaxi
+    public PlayerData.RaceDataCosmetics randomizeCosmetics(String subId) {
+        ArrayList<RaceCosmetic> headCosmetics = new ArrayList<>();
+        ArrayList<RaceCosmetic> chestCosmetics = new ArrayList<>();
+        ArrayList<RaceCosmetic> legCosmetics = new ArrayList<>();
+        ArrayList<RaceCosmetic> bootsCosmetics = new ArrayList<>();
+        for (RaceCosmetic cosmetic : getCosmeticPalette().getCosmetics(subId)) {
+            switch (cosmetic.getSlot()) {
+                case HEAD -> headCosmetics.add(cosmetic);
+                case CHEST -> chestCosmetics.add(cosmetic);
+                case LEG -> legCosmetics.add(cosmetic);
+                case BOOTS -> bootsCosmetics.add(cosmetic);
+            }
+        }
+        Random random = new Random();
+        PlayerData.RaceDataCosmetics dataCosmetics = new PlayerData.RaceDataCosmetics();
+        if(!headCosmetics.isEmpty()) dataCosmetics.getHead().add(headCosmetics.get(random.nextInt(headCosmetics.size())).getId());
+        if(!chestCosmetics.isEmpty()) dataCosmetics.getChest().add(chestCosmetics.get(random.nextInt(chestCosmetics.size())).getId());
+        if(!legCosmetics.isEmpty()) dataCosmetics.getLeg().add(legCosmetics.get(random.nextInt(legCosmetics.size())).getId());
+        if(!bootsCosmetics.isEmpty()) dataCosmetics.getBoots().add(bootsCosmetics.get(random.nextInt(bootsCosmetics.size())).getId());
+        return dataCosmetics;
+    }
+
+    public abstract RaceCosmeticPalette getCosmeticPalette();
+    public abstract RaceModelType model();
 }

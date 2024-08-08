@@ -1,7 +1,7 @@
 package net.fuchsia.mixin.entity;
 
 import net.fuchsia.common.cape.FadenCapes;
-import net.fuchsia.common.objects.race.Race;
+import net.fuchsia.common.race.Race;
 import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.client.ClientPlayerDatas;
 import net.minecraft.entity.EntityDimensions;

@@ -1,4 +1,4 @@
-package net.fuchsia.common.objects.race;
+package net.fuchsia.common.race;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,7 +12,7 @@ import net.fuchsia.common.init.FadenRaces;
 import org.jetbrains.annotations.Nullable;
 
 import net.fuchsia.Faden;
-import net.fuchsia.common.objects.race.skin.provider.SkinProvider;
+import net.fuchsia.common.race.skin.provider.SkinProvider;
 
 public class RaceSkinMap {
 
@@ -24,7 +24,7 @@ public class RaceSkinMap {
 		}
 	}
 
-	private static void loadSkin(IRace race, String subId) {
+	private static void loadSkin(Race race, String subId) {
 		String skinPath = getSkinPath(race, Faden.MOD_ID);
 		if(Faden.CONTAINER.findPath(skinPath + subId + "/").isEmpty()) {
 			Faden.LOGGER.error("Could not find Race Skins for SubId " + subId);
@@ -50,7 +50,7 @@ public class RaceSkinMap {
 	}
 
 
-	public static String getSkinPath(IRace race, String modid) {
+	public static String getSkinPath(Race race, String modid) {
 		return "assets/" + modid + "/textures/skin/" + race.getId().toLowerCase() + "/";
 	}
 
@@ -73,7 +73,7 @@ public class RaceSkinMap {
 	/**
 	 * Returns an empty string if no skin could be found
 	 */
-	public static String getRandomSkin(IRace race, String subId) {
+	public static String getRandomSkin(Race race, String subId) {
 		Random random = new Random();
 		ArrayList<String> buffer = new ArrayList<>();
 		for (String s : race.getSkinMap().keySet()) {

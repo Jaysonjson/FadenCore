@@ -1,14 +1,14 @@
 package net.fuchsia.client.mixin;
 
 import net.fuchsia.client.PlayerModelCache;
-import net.fuchsia.common.objects.race.Race;
+import net.fuchsia.common.race.Race;
 import net.fuchsia.mixin_interfaces.IClothInventory;
 import net.fuchsia.client.IPlayerEntityRenderer;
 import net.fuchsia.client.render.feature.ChestFeatureRenderer;
 import net.fuchsia.client.render.feature.ClothFeatureRenderer;
 import net.fuchsia.client.render.feature.HeadFeatureRenderer;
 import net.fuchsia.common.objects.item.cloth.ClothItem;
-import net.fuchsia.common.objects.race.skin.client.ClientRaceSkinCache;
+import net.fuchsia.common.race.skin.client.ClientRaceSkinCache;
 import net.fuchsia.common.slot.ClothSlot;
 import net.fuchsia.config.FadenOptions;
 import net.fuchsia.server.PlayerData;

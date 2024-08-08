@@ -1,6 +1,6 @@
 package net.fuchsia.mixin.entity;
 
-import net.fuchsia.common.objects.race.Race;
+import net.fuchsia.common.race.Race;
 import net.fuchsia.util.PlayerDataUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
