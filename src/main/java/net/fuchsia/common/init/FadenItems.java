@@ -51,8 +51,8 @@ public class FadenItems {
     public static Item WHITE_CLOTH = registerItem("white_cloth", new Item(new Item.Settings()), "crafting/cloth/white");
     public static Item YELLOW_CLOTH = registerItem("yellow_cloth", new Item(new Item.Settings()), "crafting/cloth/yellow");
 
-    public static Item TEST_LUTE = registerItem("test_lute", new InstrumentItem(new Item.Settings(), InstrumentType.LUTE), "test");
-    public static Item TEST_PANFLUTE = registerItem("test_panflute", new InstrumentItem(new Item.Settings(), InstrumentType.PAN_FLUTE), "test");
+    public static Item TEST_LUTE = registerItem("test_lute", new InstrumentItem(new Item.Settings(), InstrumentType.LUTE), "instruments/lute/default");
+    public static Item TEST_PANFLUTE = registerItem("test_panflute", new InstrumentItem(new Item.Settings(), InstrumentType.PAN_FLUTE), "instruments/panflute/default");
     public static Item TEST_HURTY = registerItem("test_hurty", new InstrumentItem(new Item.Settings(), InstrumentType.HURDY), "test");
     public static Item TEST_DRUM = registerItem("test_drum", new InstrumentItem(new Item.Settings(), InstrumentType.DRUM), "test");
 
