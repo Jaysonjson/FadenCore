@@ -2,15 +2,17 @@ package net.fuchsia.client;
 
 import com.google.common.reflect.TypeToken;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
-import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fuchsia.Faden;
 import net.fuchsia.client.handler.FadenItemModelHandler;
+import net.fuchsia.client.objects.particles.BlossomParticle;
 import net.fuchsia.client.overlay.InstrumentMusicOverlay;
 import net.fuchsia.client.overlay.StatsOverlay;
 import net.fuchsia.client.registry.FadenItemModelRegistry;
@@ -20,20 +22,18 @@ import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.common.data.ItemValues;
 import net.fuchsia.common.init.FadenCloths;
 import net.fuchsia.common.init.FadenEntities;
-import net.fuchsia.common.init.FadenMusicInstances;
+import net.fuchsia.common.init.FadenParticles;
+import net.fuchsia.common.init.blocks.FadenBuildingBlocks;
 import net.fuchsia.common.objects.music_instance.ClientMusicInstance;
-import net.fuchsia.common.objects.music_instance.MusicInstance;
 import net.fuchsia.common.objects.tooltip.FadenTooltipComponent;
 import net.fuchsia.common.objects.tooltip.FadenTooltipData;
 import net.fuchsia.common.race.skin.client.ClientRaceSkinCache;
 import net.fuchsia.network.FadenNetwork;
 import net.fuchsia.util.FadenCheckSum;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.LogoDrawer;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.sound.PositionedSoundInstance;
-import net.minecraft.item.Item;
-import net.minecraft.registry.Registries;
-import net.minecraft.world.WorldEvents;
+import net.minecraft.screen.PlayerScreenHandler;
 
 import java.io.File;
 import java.io.FileReader;
@@ -91,7 +91,16 @@ public class FadenClient implements ClientModInitializer {
         registerModels();
 
         EntityRendererRegistry.register(FadenEntities.NPC, (context) -> new NPCEntityRenderer(context, true));
+        setBlockRenderMaps();
+        registerParticles();
+    }
 
+    public void registerParticles() {
+        ParticleFactoryRegistry.getInstance().register(FadenParticles.BLOSSOM, BlossomParticle.Factory::new);
+    }
+
+    public void setBlockRenderMaps() {
+        BlockRenderLayerMap.INSTANCE.putBlock(FadenBuildingBlocks.BLOSSOM_LANTERN, RenderLayer.getCutout());
     }
 
     private static void tryToLoadTextures(Runnable action, String textureType) {

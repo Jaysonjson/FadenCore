@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "faden:block/building/rod/blossom_rod",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "faden:block/building/rod/blossom_rod",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "faden:block/building/rod/blossom_rod",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "faden:block/building/rod/blossom_rod",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "faden:block/building/rod/blossom_rod"
+    },
+    "facing=west": {
+      "model": "faden:block/building/rod/blossom_rod",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

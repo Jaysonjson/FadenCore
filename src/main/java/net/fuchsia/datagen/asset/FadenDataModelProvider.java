@@ -13,6 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Direction;
 import org.apache.commons.lang3.NotImplementedException;
 
 import java.util.Optional;
@@ -33,7 +34,26 @@ public class FadenDataModelProvider extends FabricModelProvider {
                 }
 
                 case DOOR -> {
-                    blockStateModelGenerator.registerDoor(buildingBlock.block());
+                    //blockStateModelGenerator.registerDoor(buildingBlock.block());
+                    blockStateModelGenerator.blockStateCollector.accept(
+                            BlockStateModelGenerator.createDoorBlockState(buildingBlock.block(),
+                                    Identifier.of(blockId.getNamespace(), "block/building/door/bot/left/" + blockId.getPath()),
+                                    Identifier.of(blockId.getNamespace(), "block/building/door/bot/left/open/" + blockId.getPath()),
+                                    Identifier.of(blockId.getNamespace(), "block/building/door/bot/right/" + blockId.getPath()),
+                                    Identifier.of(blockId.getNamespace(), "block/building/door/bot/right/open/" + blockId.getPath()),
+                                    Identifier.of(blockId.getNamespace(), "block/building/door/top/left/" + blockId.getPath()),
+                                    Identifier.of(blockId.getNamespace(), "block/building/door/top/left/open/" + blockId.getPath()),
+                                    Identifier.of(blockId.getNamespace(), "block/building/door/top/right/" + blockId.getPath()),
+                                    Identifier.of(blockId.getNamespace(), "block/building/door/top/right/open/" + blockId.getPath())));
+                    TextureMap textureMap = TextureMap.topBottom(buildingBlock.block());
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/door_bottom_left_open")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/door/bot/left/open/" + blockId.getPath()), textureMap, blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/door_bottom_left")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/door/bot/left/" + blockId.getPath()), textureMap, blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/door_bottom_right_open")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/door/bot/right/open/" + blockId.getPath()), textureMap, blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/door_bottom_right")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/door/bot/right/" + blockId.getPath()), textureMap, blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/door_top_left_open")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/door/top/left/open/" + blockId.getPath()), textureMap, blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/door_top_left")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/door/top/left/" + blockId.getPath()), textureMap, blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/door_top_right_open")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/door/top/right/open/" + blockId.getPath()), textureMap, blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/door_top_right")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/door/tpü/right/" + blockId.getPath()), textureMap, blockStateModelGenerator.modelCollector);
                 }
 
                 case SLAB -> {
@@ -99,6 +119,28 @@ public class FadenDataModelProvider extends FabricModelProvider {
 
                 }
 
+                case LANTERN -> {
+                    blockStateModelGenerator.blockStateCollector.accept(VariantsBlockStateSupplier.create(buildingBlock.block()).coordinate(BlockStateVariantMap.create(Properties.HANGING)
+                            .register(true, BlockStateVariant.create().put(VariantSettings.MODEL, Identifier.of(blockId.getNamespace(), "block/building/lantern/hanging/" + blockId.getPath())))
+                            .register(false, BlockStateVariant.create().put(VariantSettings.MODEL, Identifier.of(blockId.getNamespace(), "block/building/lantern/" + blockId.getPath())))
+                    ));
+                    new Model(Optional.of(Identifier.of("block/template_lantern")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/lantern/" + blockId.getPath()), new TextureMap().register(TextureKey.of("lantern"), Identifier.of(blockId.getNamespace(), "block/building/" + blockId.getPath())), blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(Identifier.of("block/template_hanging_lantern")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/lantern/hanging/" + blockId.getPath()), new TextureMap().register(TextureKey.of("lantern"), Identifier.of(blockId.getNamespace(), "block/building/" + blockId.getPath())), blockStateModelGenerator.modelCollector);
+                }
+
+                case ROD -> {
+                    blockStateModelGenerator.blockStateCollector.accept(VariantsBlockStateSupplier.create(buildingBlock.block()).coordinate(BlockStateVariantMap.create(Properties.FACING)
+                            .register(Direction.DOWN, BlockStateVariant.create().put(VariantSettings.MODEL, Identifier.of(blockId.getNamespace(), "block/building/rod/" + blockId.getPath())).put(VariantSettings.X, VariantSettings.Rotation.R180))
+                            .register(Direction.EAST, BlockStateVariant.create().put(VariantSettings.MODEL, Identifier.of(blockId.getNamespace(), "block/building/rod/" + blockId.getPath())).put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+                            .register(Direction.NORTH, BlockStateVariant.create().put(VariantSettings.MODEL, Identifier.of(blockId.getNamespace(), "block/building/rod/" + blockId.getPath())).put(VariantSettings.X, VariantSettings.Rotation.R90))
+                            .register(Direction.SOUTH, BlockStateVariant.create().put(VariantSettings.MODEL, Identifier.of(blockId.getNamespace(), "block/building/rod/" + blockId.getPath())).put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R180))
+                            .register(Direction.UP, BlockStateVariant.create().put(VariantSettings.MODEL, Identifier.of(blockId.getNamespace(), "block/building/rod/" + blockId.getPath())))
+                            .register(Direction.WEST, BlockStateVariant.create().put(VariantSettings.MODEL, Identifier.of(blockId.getNamespace(), "block/building/rod/" + blockId.getPath())).put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+
+                    ));
+                    new Model(Optional.of(Identifier.of("block/end_rod")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/rod/" + blockId.getPath()), new TextureMap().register(TextureKey.of("end_rod"), Identifier.of(blockId.getNamespace(), "block/building/" + blockId.getPath())).register(TextureKey.of("particle"), Identifier.of(blockId.getNamespace(), "block/building/" + blockId.getPath())), blockStateModelGenerator.modelCollector);
+                }
+
             }
         }
     }
@@ -115,40 +157,17 @@ public class FadenDataModelProvider extends FabricModelProvider {
         for (BuildingBlockDataEntry buildingBlock : FadenBuildingBlocks.BUILDING_BLOCKS) {
             Identifier blockId = Registries.BLOCK.getId(buildingBlock.block());
             switch (buildingBlock.blockType()) {
-                case CUBE -> {
-                    itemModelGenerator.register(buildingBlock.item(), new Model(Optional.of(Identifier.of(blockId.getNamespace(),"block/building/" + blockId.getPath())), Optional.empty()));
-                }
-
-                case DOOR -> {
-                }
-
-                case SLAB -> {
-                    itemModelGenerator.register(buildingBlock.item(), new Model(Optional.of(Identifier.of(blockId.getNamespace(),"block/building/slabs/bot/" + blockId.getPath())), Optional.empty()));
-                }
-
-                case STAIR -> {
-                    itemModelGenerator.register(buildingBlock.item(), new Model(Optional.of(Identifier.of(blockId.getNamespace(),"block/building/stairs/base/" + blockId.getPath())), Optional.empty()));
-                }
-
-                case WALL -> {
-                    itemModelGenerator.register(buildingBlock.item(), new Model(Optional.of(Identifier.of(blockId.getNamespace(),"block/building/walls/" + blockId.getPath())), Optional.empty()));
-                }
-
-                case BUTTON -> {
-                    itemModelGenerator.register(buildingBlock.item(), new Model(Optional.of(Identifier.of(blockId.getNamespace(),"block/building/button/" + blockId.getPath())), Optional.empty()));
-                }
-
-                case PRESSURE_PLATE -> {
-                    itemModelGenerator.register(buildingBlock.item(), new Model(Optional.of(Identifier.of(blockId.getNamespace(),"block/building/pressure_plate/up/" + blockId.getPath())), Optional.empty()));
-                }
-
-                case CRAFTING_TABLE -> {
-                    itemModelGenerator.register(buildingBlock.item(), new Model(Optional.of(Identifier.of(blockId.getNamespace(),"block/building/crafting_table/" + blockId.getPath())), Optional.empty()));
-                }
-
-                case BULB -> {
-                    itemModelGenerator.register(buildingBlock.item(), new Model(Optional.of(Identifier.of(blockId.getNamespace(),"block/building/bulb/" + blockId.getPath())), Optional.empty()));
-                }
+                case CUBE -> itemModelGenerator.register(buildingBlock.item(), new Model(Optional.of(Identifier.of(blockId.getNamespace(),"block/building/" + blockId.getPath())), Optional.empty()));
+                case DOOR -> addTexturedItem(buildingBlock.item(), "building/door/" + blockId.getPath(), itemModelGenerator);
+                case SLAB -> itemModelGenerator.register(buildingBlock.item(), new Model(Optional.of(Identifier.of(blockId.getNamespace(),"block/building/slabs/bot/" + blockId.getPath())), Optional.empty()));
+                case STAIR -> itemModelGenerator.register(buildingBlock.item(), new Model(Optional.of(Identifier.of(blockId.getNamespace(),"block/building/stairs/base/" + blockId.getPath())), Optional.empty()));
+                case WALL -> itemModelGenerator.register(buildingBlock.item(), new Model(Optional.of(Identifier.of(blockId.getNamespace(),"block/building/walls/" + blockId.getPath())), Optional.empty()));
+                case BUTTON -> itemModelGenerator.register(buildingBlock.item(), new Model(Optional.of(Identifier.of(blockId.getNamespace(),"block/building/button/" + blockId.getPath())), Optional.empty()));
+                case PRESSURE_PLATE -> itemModelGenerator.register(buildingBlock.item(), new Model(Optional.of(Identifier.of(blockId.getNamespace(),"block/building/pressure_plate/up/" + blockId.getPath())), Optional.empty()));
+                case CRAFTING_TABLE -> itemModelGenerator.register(buildingBlock.item(), new Model(Optional.of(Identifier.of(blockId.getNamespace(),"block/building/crafting_table/" + blockId.getPath())), Optional.empty()));
+                case BULB -> itemModelGenerator.register(buildingBlock.item(), new Model(Optional.of(Identifier.of(blockId.getNamespace(),"block/building/bulb/" + blockId.getPath())), Optional.empty()));
+                case LANTERN -> addTexturedItem(buildingBlock.item(), "building/lantern/" + blockId.getPath(), itemModelGenerator);
+                case ROD -> itemModelGenerator.register(buildingBlock.item(), new Model(Optional.of(Identifier.of(blockId.getNamespace(),"block/building/rod/" + blockId.getPath())), Optional.empty()));
             }
         }
 

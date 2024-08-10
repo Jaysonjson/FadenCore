@@ -36,4 +36,23 @@ public class RaceCosmeticPalette {
         }
         return new ArrayList<>();
     }
+
+    public RaceCosmetic getCosmetic(ArrayList<RaceCosmetic> cosmetics, String id) {
+        for (RaceCosmetic cosmetic : cosmetics) {
+            if(cosmetic.getId().equalsIgnoreCase(id)) {
+                return cosmetic;
+            }
+        }
+        return null;
+    }
+
+    public RaceCosmetic getCosmetic(ArrayList<RaceCosmetic> cosmetics, RaceCosmeticSlot slot, String id) {
+        for (RaceCosmetic cosmetic : cosmetics) {
+            if(cosmetic.getId().equalsIgnoreCase(id) && cosmetic.getSlot() == slot) {
+                return cosmetic;
+            }
+        }
+        return null;
+    }
+
 }

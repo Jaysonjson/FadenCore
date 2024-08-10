@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/end_rod",
+  "textures": {
+    "end_rod": "faden:block/building/blossom_rod",
+    "particle": "faden:block/building/blossom_rod"
+  }
+}

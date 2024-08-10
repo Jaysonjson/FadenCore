@@ -48,6 +48,8 @@
     "faden:andesite_tile_wall",
     "faden:andesite_tile_stairs",
     "faden:andesite_tile_button",
-    "faden:andesite_brick_tile_plate"
+    "faden:andesite_brick_tile_plate",
+    "faden:blossom_lantern",
+    "faden:blossom_rod"
   ]
 }

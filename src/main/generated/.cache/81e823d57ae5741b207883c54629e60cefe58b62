@@ -1,4 +1,4 @@
-// 1.21	2024-08-08T20:23:52.921760517	Faden Core/Block Loot Tables
+// 1.21	2024-08-10T05:37:16.81479024	Faden Core/Block Loot Tables
 f086323ad572392573f2585fea8b8e8bb92bc8e8 data/faden/loot_table/blocks/granite_tile_wall.json
 3ae849735a1d1fba66faff3e6e53bce0698557da data/faden/loot_table/blocks/granite_brick_stairs.json
 5ad3685019d3c1cd826454959fe08333756dc1d7 data/faden/loot_table/blocks/diorite_brick_button.json
@@ -10,6 +10,7 @@ ce7a8d0dd3df210f867ffefbeb0e69f85fd1bbf4 data/faden/loot_table/blocks/andesite_t
 61807aa9f2326366158a37376c76f96c6c2a56d0 data/faden/loot_table/blocks/andesite_brick_slab.json
 fd36ec1276ab061325c2b1f26e6c9d3f4bb7945d data/faden/loot_table/blocks/granite_tile_pressure_plate.json
 59680b1672ef441af10a37345c1d695509cd9484 data/faden/loot_table/blocks/cherry_crafting_table.json
+1c57096c9168aceb64f99b2862a217cb4ee9ef91 data/faden/loot_table/blocks/blossom_rod.json
 c1c741235851f2f761f8398d7a116e46489c1aab data/faden/loot_table/blocks/titanitol_button.json
 c3fd422e323d6e583663f0f8dc60029fb01aa3c3 data/faden/loot_table/blocks/andesite_tile_wall.json
 9c1fa4f2c72cfdebcbf742cc5e15367deeed766f data/faden/loot_table/blocks/diorite_tile_button.json
@@ -37,6 +38,7 @@ eb9997e5a97f3c03b8b2fd96caffd55c8e061cec data/faden/loot_table/blocks/diorite_ti
 e550bcb68a701f45e45c9969738bf4a127825a8a data/faden/loot_table/blocks/dark_oak_crafting_table.json
 2b12a8f36e2ab977809af35d02e25426bf1df4bc data/faden/loot_table/blocks/andesite_brick_stairs.json
 c82e68aac5747ac4b4955a721b1be14ebb2b8ba8 data/faden/loot_table/blocks/diorite_tile_slab.json
+3f4d3cbecdde8499c0d65db84cec830915fd031c data/faden/loot_table/blocks/blossom_lantern.json
 0f1b6be44a854b9373791b2e0e7b984f71c5d211 data/faden/loot_table/blocks/crimson_crafting_table.json
 203439cc11dd2ff06423ec33b6d4f740fbf25002 data/faden/loot_table/blocks/diorite_bricks.json
 f4b532e02b7f9d3bf2d56bdf2db1626d66ef6c45 data/faden/loot_table/blocks/andesite_bricks.json

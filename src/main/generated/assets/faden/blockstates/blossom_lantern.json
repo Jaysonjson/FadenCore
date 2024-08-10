@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "faden:block/building/lantern/blossom_lantern"
+    },
+    "hanging=true": {
+      "model": "faden:block/building/lantern/hanging/blossom_lantern"
+    }
+  }
+}

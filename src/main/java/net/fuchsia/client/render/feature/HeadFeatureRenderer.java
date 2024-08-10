@@ -18,6 +18,8 @@ import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.RotationAxis;
 
+import java.util.ArrayList;
+
 public class HeadFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
     public HeadFeatureRenderer(FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> context) {
         super(context);
@@ -29,16 +31,17 @@ public class HeadFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEnt
             PlayerData data = ClientPlayerDatas.getPlayerData(entity.getUuid());
             if (data.getRaceSaveData().hasRace()) {
                 Race race = data.getRaceSaveData().getRace();
-                for (RaceCosmetic cosmetic : race.getCosmeticPalette().getCosmetics(data.getRaceSaveData().getRaceSub())) {
-                    if (cosmetic.getSlot() == RaceCosmeticSlot.HEAD && data.getRaceSaveData().getCosmetics().getHead().contains(cosmetic.getId())) {
-                        matrices.push();
-                        BakedModel model = MinecraftClient.getInstance().getBakedModelManager().getModel(cosmetic.getModel());
-                        ((ModelWithHead) this.getContextModel()).getHead().rotate(matrices);
-                        model.getTransformation().getTransformation(ModelTransformationMode.HEAD).apply(false, matrices);
-                        translate(matrices);
-                        FadenRenderUtil.renderBakedModel(matrices, vertexConsumers, model, (int) (light * 0.5f));
-                        matrices.pop();
-                    }
+                ArrayList<RaceCosmetic> cosmetics = race.getCosmeticPalette().getCosmetics(data.getRaceSaveData().getRaceSub());
+                for (String s : data.getRaceSaveData().getCosmetics().getHead()) {
+                    RaceCosmetic cosmetic = race.getCosmeticPalette().getCosmetic(cosmetics, RaceCosmeticSlot.HEAD, s);
+                    if(cosmetic == null) continue;
+                    matrices.push();
+                    BakedModel model = MinecraftClient.getInstance().getBakedModelManager().getModel(cosmetic.getModel());
+                    ((ModelWithHead) this.getContextModel()).getHead().rotate(matrices);
+                    model.getTransformation().getTransformation(ModelTransformationMode.HEAD).apply(false, matrices);
+                    translate(matrices);
+                    FadenRenderUtil.renderBakedModel(matrices, vertexConsumers, model, (int) (light * 0.5f));
+                    matrices.pop();
                 }
             }
         }

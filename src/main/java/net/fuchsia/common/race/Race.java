@@ -97,8 +97,8 @@ public abstract class Race {
         //Attribute Listing test, can later be used for race selection just in a GUI
         for (EntityAttribute entityAttribute : Registries.ATTRIBUTE) {
             if(!serverPlayerEntity.getAttributes().hasAttribute(Registries.ATTRIBUTE.getEntry(entityAttribute))) continue;
-            System.out.println(entityAttribute.getTranslationKey() + ":" + serverPlayerEntity.getAttributes().getValue(Registries.ATTRIBUTE.getEntry(entityAttribute)));
-            System.out.println("water_movement: " + waterMovementSpeed());
+            //System.out.println(entityAttribute.getTranslationKey() + ":" + serverPlayerEntity.getAttributes().getValue(Registries.ATTRIBUTE.getEntry(entityAttribute)));
+            //System.out.println("water_movement: " + waterMovementSpeed());
         }
     }
 

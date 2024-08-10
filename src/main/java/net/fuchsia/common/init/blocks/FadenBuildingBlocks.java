@@ -1,6 +1,7 @@
 package net.fuchsia.common.init.blocks;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fuchsia.common.objects.block.BlossomRodBlock;
 import net.fuchsia.common.objects.block.FadenCraftingTable;
 import net.fuchsia.datagen.DataBlockType;
 import net.fuchsia.datagen.DataToolTier;
@@ -42,8 +43,7 @@ public class FadenBuildingBlocks {
     public static Block GRANUD_TILES_STAIRS = registerBlock("granud_tile_stairs", new StairsBlock(GRANUD_TILES.getDefaultState(), AbstractBlock.Settings.create()), GRANUD_TILES, DataToolType.PICKAXE, DataToolTier.WOOD, DataBlockType.STAIR, true, true);
     public static Block GRANUD_TILES_BUTTON = registerBlock("granud_tile_button", new ButtonBlock(BlockSetType.STONE, 20, AbstractBlock.Settings.create()), GRANUD_TILES, DataToolType.PICKAXE, DataToolTier.WOOD, DataBlockType.BUTTON, true, true);
     public static Block GRANUD_TILES_PRESSURE_PLATE = registerBlock("granud_tile_pressure_plate", new PressurePlateBlock(BlockSetType.STONE, AbstractBlock.Settings.create()), GRANUD_TILES, DataToolType.PICKAXE, DataToolTier.WOOD, DataBlockType.PRESSURE_PLATE, true, true);
-    public static Block GRANUDE_BULB = registerBlock("granude_bulb", new BulbBlock(AbstractBlock.Settings.create()), null, DataToolType.PICKAXE, DataToolTier.WOOD, DataBlockType.BULB, true, true);
-
+    public static Block GRANUDE_BULB = registerBlock("granude_bulb", new BulbBlock(AbstractBlock.Settings.create().luminance(Blocks.createLightLevelFromLitBlockState(4))), null, DataToolType.PICKAXE, DataToolTier.WOOD, DataBlockType.BULB, true, true);
 
     public static Block TITANITOL_BLOCK = registerBlock("titanitol_block", new Block(AbstractBlock.Settings.create()), null, DataToolType.PICKAXE, DataToolTier.IRON, DataBlockType.CUBE, true, true);
     public static Block TITANITOL_SLAB = registerBlock("titanitol_slab", new SlabBlock(AbstractBlock.Settings.create()), TITANITOL_BLOCK, DataToolType.PICKAXE, DataToolTier.IRON, DataBlockType.SLAB, true, true);
@@ -92,6 +92,9 @@ public class FadenBuildingBlocks {
     public static Block BAMBOO_CRAFTING_TABLE = registerBlock("bamboo_crafting_table", new FadenCraftingTable(AbstractBlock.Settings.create()), Blocks.BAMBOO_PLANKS, DataToolType.AXE, DataToolTier.NONE, DataBlockType.CRAFTING_TABLE, true, true);
     public static Block BIRCH_CRAFTING_TABLE = registerBlock("birch_crafting_table", new FadenCraftingTable(AbstractBlock.Settings.create()), Blocks.BIRCH_PLANKS, DataToolType.AXE, DataToolTier.NONE, DataBlockType.CRAFTING_TABLE, true, true);
     public static Block ACACIA_CRAFTING_TABLE = registerBlock("acacia_crafting_table", new FadenCraftingTable(AbstractBlock.Settings.create()), Blocks.ACACIA_PLANKS, DataToolType.AXE, DataToolTier.NONE, DataBlockType.CRAFTING_TABLE, true, true);
+
+    public static Block BLOSSOM_LANTERN = registerBlock("blossom_lantern", new LanternBlock(AbstractBlock.Settings.create().nonOpaque()), null, DataToolType.PICKAXE, DataToolTier.NONE, DataBlockType.LANTERN, true, true);
+    public static Block BLOSSOM_ROD = registerBlock("blossom_rod", new BlossomRodBlock(AbstractBlock.Settings.create()), null, DataToolType.PICKAXE, DataToolTier.NONE, DataBlockType.ROD, true, true);
 
 
     protected static Block registerBlock(String name, Block block, @Nullable Block base, DataToolType toolType, DataToolTier tier, DataBlockType blockType, boolean dropSelf, boolean language) {
