@@ -7,12 +7,12 @@ import org.joml.Matrix4f;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fuchsia.common.init.items.FadenCoreItems;
+import net.fuchsia.common.init.items.FadenItems;
 import net.fuchsia.common.objects.item.ItemToolTipRenderer;
 import net.fuchsia.common.objects.tooltip.FadenTooltipComponent;
 import net.fuchsia.common.objects.tooltip.FadenTooltipData;
 import net.fuchsia.common.quest.FadenQuests;
-import net.fuchsia.util.FadenCoreIdentifier;
+import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -43,7 +43,7 @@ public class CoinItem extends Item implements ItemToolTipRenderer {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if(!world.isClient) {
             //QUESTS SHOULD BE IN A STATIC CONTEXT LATER, JUST FOR TESTING
-            FadenQuests.TEST.checkAndRewardStep(user, FadenCoreIdentifier.create("use_coin"));
+            FadenQuests.TEST.checkAndRewardStep(user, FadenIdentifier.create("use_coin"));
         }
         return super.use(world, user, hand);
     }
@@ -58,7 +58,7 @@ public class CoinItem extends Item implements ItemToolTipRenderer {
     public void toolTipDrawItem(FadenTooltipComponent component, TextRenderer textRenderer, int x, int y, DrawContext context) {
         context.getMatrices().push();
         context.getMatrices().scale(0.5f, 0.5f,0.5f);
-        context.drawItem(FadenCoreItems.MAIN_COIN.getDefaultStack(), x * 2, y * 2);
+        context.drawItem(FadenItems.COPPER_COIN.getDefaultStack(), x * 2, y * 2);
         context.getMatrices().pop();
     }
 

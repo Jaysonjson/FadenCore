@@ -1,0 +1,10 @@
+{
+	"item.faden.copper_coin": "Copp'r Coinage",
+	"item.faden.iron_coin": "Iron Coinage",
+	"item.faden.silver_coin": "Silver Coinage",
+	"item.faden.gold_coin": "Gold Coinage",
+	"item.faden.amethyst_coin": "Amethyst Coinage",
+	"item.faden.silver_ingot": "Silver Ingot",
+	"item.faden.random_coin_giver": "Giver of a Random Quantity of Coinage",
+	"itemgroup.faden.misc": "Faden Misc"
+}

@@ -6,7 +6,11 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Optional;
 
-import net.fuchsia.FadenCore;
+import net.fuchsia.Faden;
+import net.minecraft.client.Keyboard;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.input.KeyboardInput;
+import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.tooltip.TooltipData;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
@@ -17,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.fuchsia.common.data.ItemValues;
-import net.fuchsia.common.init.FadenCoreDataComponents;
+import net.fuchsia.common.init.FadenDataComponents;
 import net.fuchsia.common.objects.ItemWithValues;
 import net.fuchsia.common.objects.item.ItemTier;
 import net.fuchsia.common.objects.item.ItemToolTipEntryRenderer;
@@ -25,6 +29,7 @@ import net.fuchsia.common.objects.item.coin.IValue;
 import net.fuchsia.common.objects.tooltip.FadenTooltipComponent;
 import net.fuchsia.common.objects.tooltip.FadenTooltipData;
 import net.fuchsia.common.objects.tooltip.ToolTipEntry;
+import net.fuchsia.server.FadenData;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.BundleItem;
 import net.minecraft.item.Item;
@@ -49,9 +54,9 @@ public abstract class ItemMixin implements IValue, ItemWithValues, ItemToolTipEn
 	@Override
 	public int getValue(ItemStack stack) {
 		int initialValue = ItemValues.VALUES.getOrDefault(stack.getItem(), 0);
-        //sstack.set(FadenCoreDataComponents.EXTRA_VALUE, 35343);
-        initialValue = (int) ((float)initialValue * ItemTier.valueOf(stack.getOrDefault(FadenCoreDataComponents.ITEM_TIER, ItemTier.COMMON.name())).getSellValueMultiplier());
-        initialValue += stack.getOrDefault(FadenCoreDataComponents.EXTRA_VALUE, 0);
+        //sstack.set(FadenDataComponents.EXTRA_VALUE, 35343);
+        initialValue = (int) ((float)initialValue * ItemTier.valueOf(stack.getOrDefault(FadenDataComponents.ITEM_TIER, ItemTier.COMMON.name())).getSellValueMultiplier());
+        initialValue += stack.getOrDefault(FadenDataComponents.EXTRA_VALUE, 0);
         if(stack.contains(DataComponentTypes.DAMAGE)) {
             initialValue = (int) ((float) stack.getOrDefault(DataComponentTypes.DAMAGE, 0) / (float) stack.getOrDefault(DataComponentTypes.MAX_DAMAGE, 1) * (float) initialValue);
         }
@@ -61,7 +66,7 @@ public abstract class ItemMixin implements IValue, ItemWithValues, ItemToolTipEn
 
     @Override
     public int getBuyValue(ItemStack stack) {
-        return getValue(stack) * FadenCore.DATA.BUY_MULTIPLIER;
+        return getValue(stack) * Faden.DATA.BUY_MULTIPLIER;
     }
 
     @Override

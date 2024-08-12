@@ -4,7 +4,7 @@ import org.jetbrains.annotations.Nullable;
 
 import net.fuchsia.client.screen.CapeSelectScreen;
 import net.fuchsia.common.cape.FadenCape;
-import net.fuchsia.common.cape.FadenCoreCapes;
+import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.client.ClientPlayerDatas;
 import net.minecraft.client.MinecraftClient;
@@ -22,7 +22,7 @@ public class CapeListWidget extends AlwaysSelectedEntryListWidget<CapeListEntry>
         int f = 0;
         if(data != null) {
             if(showAll) {
-                for (FadenCape cape : FadenCoreCapes.getCapes()) {
+                for (FadenCape cape : FadenCapes.getCapes()) {
                     if(cape.getName().getString().toLowerCase().contains(searchBox.toLowerCase())) {
                         if(!entryExists(cape.getId())) addEntry(new CapeListEntry(cape, data));
                         if (data.getSelectedCapeId().equalsIgnoreCase(cape.getId())) {
@@ -33,7 +33,7 @@ public class CapeListWidget extends AlwaysSelectedEntryListWidget<CapeListEntry>
                 }
             } else {
                 for (String s : data.getCapes()) {
-                    FadenCape cape = FadenCoreCapes.getCapeById(s);
+                    FadenCape cape = FadenCapes.getCapeById(s);
                     if (cape != null && cape.getName().getString().toLowerCase().contains(searchBox.toLowerCase())) {
                         if(!entryExists(cape.getId())) addEntry(new CapeListEntry(cape, data));
                         if (data.getSelectedCapeId().equalsIgnoreCase(s)) {

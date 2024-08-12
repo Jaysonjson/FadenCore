@@ -10,7 +10,7 @@ import net.fuchsia.client.render.feature.player.HeadFeatureRenderer;
 import net.fuchsia.common.objects.item.cloth.ClothItem;
 import net.fuchsia.common.race.skin.client.ClientRaceSkinCache;
 import net.fuchsia.common.slot.ClothSlot;
-import net.fuchsia.config.FadenCoreOptions;
+import net.fuchsia.config.FadenOptions;
 import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.client.ClientPlayerDatas;
 import net.minecraft.client.MinecraftClient;
@@ -22,6 +22,7 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
+import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
@@ -57,7 +58,7 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
 
     @Inject(at = @At("HEAD"), method = "getTexture(Lnet/minecraft/client/network/AbstractClientPlayerEntity;)Lnet/minecraft/util/Identifier;", cancellable = true)
     private void getTextureAbstractPlayer(AbstractClientPlayerEntity abstractClientPlayerEntity, CallbackInfoReturnable<Identifier> cir) {
-        if(FadenCoreOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
+        if(FadenOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
         	if(ClientRaceSkinCache.hasSkin(abstractClientPlayerEntity.getUuid())) {
         		cir.setReturnValue(ClientRaceSkinCache.getSkin(abstractClientPlayerEntity.getUuid()));
         	}
@@ -67,7 +68,7 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
 
     @Inject(at = @At("HEAD"), method = "render(Lnet/minecraft/client/network/AbstractClientPlayerEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", cancellable = true)
     private void render2(AbstractClientPlayerEntity abstractClientPlayerEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
-        if(FadenCoreOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
+        if(FadenOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
             this.model = getPlayerModel();
         }
     }
@@ -75,7 +76,7 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
 
     @ModifyVariable(method = "renderArm", at = @At("STORE"), ordinal = 0)
     private Identifier injected(Identifier x, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve) {
-        if(FadenCoreOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
+        if(FadenOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
             ClientPlayerEntity clientPlayer = MinecraftClient.getInstance().player;
             if (ClientRaceSkinCache.hasSkin(clientPlayer.getUuid())) {
                 return ClientRaceSkinCache.getSkin(clientPlayer.getUuid());
@@ -128,7 +129,7 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
 
     @Inject(at = @At("HEAD"), method = "renderArm", cancellable = true)
     private void renderArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve, CallbackInfo ci) {
-        if(FadenCoreOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
+        if(FadenOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
             PlayerEntityModel<AbstractClientPlayerEntity> playerEntityModel = getPlayerModel();
             if(playerEntityModel != null) {
                 playerEntityModel.handSwingProgress = 0.0F;

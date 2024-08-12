@@ -3,7 +3,7 @@ package net.fuchsia.common.objects.command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
-import net.fuchsia.common.init.FadenCoreNPCs;
+import net.fuchsia.common.init.FadenNPCs;
 import net.fuchsia.common.npc.INPC;
 import net.fuchsia.common.npc.NPCUtil;
 import net.fuchsia.common.objects.command.types.NPCArgumentType;
@@ -25,7 +25,7 @@ public class NPCCommand {
 
     public static int summonNPC(CommandContext<ServerCommandSource> source) {
         Identifier id = IdentifierArgumentType.getIdentifier(source, "npc");
-        for (INPC npc : FadenCoreNPCs.getNPCS()) {
+        for (INPC npc : FadenNPCs.getNPCS()) {
             if(npc.getId().toString().equalsIgnoreCase(id.toString())) {
                 NPCUtil.summon(npc, source.getSource().getWorld(), source.getSource().getPosition());
                 break;

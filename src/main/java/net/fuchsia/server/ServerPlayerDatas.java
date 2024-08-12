@@ -6,12 +6,18 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.UUID;
 
+import net.fuchsia.util.NetworkUtils;
 import org.apache.commons.io.FileUtils;
 
+import com.google.gson.reflect.TypeToken;
+
 import net.fabricmc.loader.api.FabricLoader;
-import net.fuchsia.FadenCore;
+import net.fuchsia.Faden;
+import net.fuchsia.network.FadenNetwork;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerPlayerEntity;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ServerPlayerDatas {
 
@@ -21,7 +27,7 @@ public class ServerPlayerDatas {
     public static void save() {
         for (UUID uuid : getPlayerDatas().keySet()) {
             try {
-                FileUtils.writeStringToFile(new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + FadenCore.MC_VERSION + "/player_datas/" + uuid + ".json"), FadenCore.GSON.toJson(getPlayerDatas().get(uuid)), StandardCharsets.UTF_8);
+                FileUtils.writeStringToFile(new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/player_datas/" + uuid + ".json"), Faden.GSON.toJson(getPlayerDatas().get(uuid)), StandardCharsets.UTF_8);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -31,7 +37,7 @@ public class ServerPlayerDatas {
     public static void save(UUID uuid) {
         if(playerDatas.containsKey(uuid)) {
             try {
-                FileUtils.writeStringToFile(new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + FadenCore.MC_VERSION + "/player_datas/" + uuid + ".json"), FadenCore.GSON.toJson(getPlayerDatas().get(uuid)), StandardCharsets.UTF_8);
+                FileUtils.writeStringToFile(new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/player_datas/" + uuid + ".json"), Faden.GSON.toJson(getPlayerDatas().get(uuid)), StandardCharsets.UTF_8);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -39,10 +45,10 @@ public class ServerPlayerDatas {
     }
 
     public static PlayerData load(UUID uuid) {
-        File dataFile = new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + FadenCore.MC_VERSION + "/player_datas/" + uuid.toString() + ".json");
+        File dataFile = new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/player_datas/" + uuid.toString() + ".json");
         if(dataFile.exists()) {
             try {
-                return FadenCore.GSON.fromJson(new FileReader(dataFile), PlayerData.class);
+                return Faden.GSON.fromJson(new FileReader(dataFile), PlayerData.class);
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -2,7 +2,7 @@ package net.fuchsia.common.objects.item.cloth;
 
 import net.fuchsia.common.objects.item.FadenItem;
 import net.fuchsia.common.slot.ClothSlot;
-import net.fuchsia.util.FadenCoreIdentifier;
+import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.util.Identifier;
 
 public class ClothItem extends FadenItem implements Cloth {
@@ -13,8 +13,8 @@ public class ClothItem extends FadenItem implements Cloth {
     public ClothItem(Settings settings, String file) {
         super(settings.maxCount(1));
         this.file = file;
-        this.texture = FadenCoreIdentifier.create("cloth/" + file);
-        this.textureWide = FadenCoreIdentifier.create("cloth/" + file + "_wide");
+        this.texture = FadenIdentifier.create("cloth/" + file);
+        this.textureWide = FadenIdentifier.create("cloth/" + file + "_wide");
     }
 
     public String getFile() {

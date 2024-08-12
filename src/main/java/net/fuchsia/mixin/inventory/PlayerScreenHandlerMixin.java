@@ -6,7 +6,7 @@ import net.fuchsia.common.slot.ClothSlot;
 import net.fuchsia.mixin_interfaces.ExtraInventory;
 import net.fuchsia.common.objects.item.cloth.Cloth;
 import net.fuchsia.common.slot.GearSlot;
-import net.fuchsia.util.FadenCoreIdentifier;
+import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -27,9 +27,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class PlayerScreenHandlerMixin extends ScreenHandler{
 
     @Unique
-    private static final Identifier[] EMPTY_CLOTH_SLOT_TEXTURES = new Identifier[]{FadenCoreIdentifier.create("item/feet"), FadenCoreIdentifier.create("item/leg"), FadenCoreIdentifier.create("item/chest"), FadenCoreIdentifier.create("item/head")};
+    private static final Identifier[] EMPTY_CLOTH_SLOT_TEXTURES = new Identifier[]{FadenIdentifier.create("item/feet"), FadenIdentifier.create("item/leg"), FadenIdentifier.create("item/chest"), FadenIdentifier.create("item/head")};
     @Unique
-    private static final Identifier[] EMPTY_GEAR_SLOT_TEXTURES = new Identifier[]{FadenCoreIdentifier.create("item/empty_bracelet_slot"), FadenCoreIdentifier.create("item/empty_bracelet_slot"), FadenCoreIdentifier.create("item/empty_belt_slot"), FadenCoreIdentifier.create("item/empty_necklace_slot")};
+    private static final Identifier[] EMPTY_GEAR_SLOT_TEXTURES = new Identifier[]{FadenIdentifier.create("item/empty_bracelet_slot"), FadenIdentifier.create("item/empty_bracelet_slot"), FadenIdentifier.create("item/empty_belt_slot"), FadenIdentifier.create("item/empty_necklace_slot")};
 
 
     @Unique

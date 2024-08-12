@@ -2,10 +2,10 @@ package net.fuchsia.common.cape;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fuchsia.FadenCore;
+import net.fuchsia.Faden;
 import net.fuchsia.common.race.skin.client.SkinTexture;
 import net.fuchsia.common.race.skin.provider.SkinProvider;
-import net.fuchsia.util.FadenCoreIdentifier;
+import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -23,7 +23,7 @@ public class FadenCape {
     private byte[] textureData = null;
 
     public FadenCape(String id, Text name, Text description) {
-        this.texture = FadenCoreIdentifier.create("cape/" + id);
+        this.texture = FadenIdentifier.create("cape/" + id);
         this.id = id;
         this.name = name;
         this.description = description;
@@ -54,7 +54,7 @@ public class FadenCape {
         if(!loaded) {
             try {
                 if(textureData == null) {
-                    textureData = SkinProvider.readSkin(Files.newInputStream(FadenCore.CONTAINER.findPath("assets/faden/textures/cape/" + id + ".png").get()));
+                    textureData = SkinProvider.readSkin(Files.newInputStream(Faden.CONTAINER.findPath("assets/faden/textures/cape/" + id + ".png").get()));
                 }
                 SkinTexture skinTexture = new SkinTexture(texture);
                 skinTexture.setSkinData(textureData);
@@ -62,7 +62,7 @@ public class FadenCape {
                 MinecraftClient.getInstance().getTextureManager().bindTexture(texture);
                 textureData = null;
             } catch (IOException e) {
-                FadenCore.LOGGER.error("{} failed to load", "Cape " + getId(), e);
+                Faden.LOGGER.error("{} failed to load", "Cape " + getId(), e);
             }
             loaded = true;
         }

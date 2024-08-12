@@ -1,7 +1,17 @@
 package net.fuchsia.common.objects.music_instance;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fuchsia.common.init.FadenSoundEvents;
 import net.fuchsia.common.objects.item.instrument.InstrumentType;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.sound.*;
+import net.minecraft.registry.Registries;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.World;
 import org.joml.Vector3f;
+import org.lwjgl.openal.AL10;
 
 import java.io.Serializable;
 import java.util.ArrayList;

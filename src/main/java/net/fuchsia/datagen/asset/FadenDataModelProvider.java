@@ -1,12 +1,12 @@
 package net.fuchsia.datagen.asset;
 
-import net.fuchsia.common.init.items.FadenCoreItems;
-import net.fuchsia.common.init.blocks.FadenCoreBlocks;
+import net.fuchsia.common.init.items.FadenItems;
+import net.fuchsia.common.init.blocks.FadenBuildingBlocks;
 import net.fuchsia.datagen.holders.BuildingBlockDataEntry;
 import net.fuchsia.datagen.holders.FadenDataItem;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
-import net.fuchsia.util.FadenCoreIdentifier;
+import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.data.client.*;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -23,7 +23,7 @@ public class FadenDataModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-        for (BuildingBlockDataEntry buildingBlock : FadenCoreBlocks.BUILDING_BLOCKS) {
+        for (BuildingBlockDataEntry buildingBlock : FadenBuildingBlocks.BUILDING_BLOCKS) {
             Identifier blockId = Registries.BLOCK.getId(buildingBlock.block());
             switch (buildingBlock.blockType()) {
                 case CUBE -> {
@@ -44,14 +44,14 @@ public class FadenDataModelProvider extends FabricModelProvider {
                                     Identifier.of(blockId.getNamespace(), "block/building/door/top/right/" + blockId.getPath()),
                                     Identifier.of(blockId.getNamespace(), "block/building/door/top/right/open/" + blockId.getPath())));
                     TextureMap textureMap = TextureMap.topBottom(buildingBlock.block());
-                    new Model(Optional.of(FadenCoreIdentifier.minecraft("block/door_bottom_left_open")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/door/bot/left/open/" + blockId.getPath()), textureMap, blockStateModelGenerator.modelCollector);
-                    new Model(Optional.of(FadenCoreIdentifier.minecraft("block/door_bottom_left")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/door/bot/left/" + blockId.getPath()), textureMap, blockStateModelGenerator.modelCollector);
-                    new Model(Optional.of(FadenCoreIdentifier.minecraft("block/door_bottom_right_open")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/door/bot/right/open/" + blockId.getPath()), textureMap, blockStateModelGenerator.modelCollector);
-                    new Model(Optional.of(FadenCoreIdentifier.minecraft("block/door_bottom_right")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/door/bot/right/" + blockId.getPath()), textureMap, blockStateModelGenerator.modelCollector);
-                    new Model(Optional.of(FadenCoreIdentifier.minecraft("block/door_top_left_open")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/door/top/left/open/" + blockId.getPath()), textureMap, blockStateModelGenerator.modelCollector);
-                    new Model(Optional.of(FadenCoreIdentifier.minecraft("block/door_top_left")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/door/top/left/" + blockId.getPath()), textureMap, blockStateModelGenerator.modelCollector);
-                    new Model(Optional.of(FadenCoreIdentifier.minecraft("block/door_top_right_open")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/door/top/right/open/" + blockId.getPath()), textureMap, blockStateModelGenerator.modelCollector);
-                    new Model(Optional.of(FadenCoreIdentifier.minecraft("block/door_top_right")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/door/tpü/right/" + blockId.getPath()), textureMap, blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/door_bottom_left_open")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/door/bot/left/open/" + blockId.getPath()), textureMap, blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/door_bottom_left")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/door/bot/left/" + blockId.getPath()), textureMap, blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/door_bottom_right_open")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/door/bot/right/open/" + blockId.getPath()), textureMap, blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/door_bottom_right")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/door/bot/right/" + blockId.getPath()), textureMap, blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/door_top_left_open")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/door/top/left/open/" + blockId.getPath()), textureMap, blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/door_top_left")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/door/top/left/" + blockId.getPath()), textureMap, blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/door_top_right_open")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/door/top/right/open/" + blockId.getPath()), textureMap, blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/door_top_right")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/door/tpü/right/" + blockId.getPath()), textureMap, blockStateModelGenerator.modelCollector);
                 }
 
                 case SLAB -> {
@@ -61,8 +61,8 @@ public class FadenDataModelProvider extends FabricModelProvider {
                         Identifier id = Registries.BLOCK.getId(buildingBlock.base());
                         blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createSlabBlockState(buildingBlock.block(), Identifier.of(blockId.getNamespace(), "block/building/slabs/bot/" + blockId.getPath()), Identifier.of(blockId.getNamespace(), "block/building/slabs/top/" + blockId.getPath()), Identifier.of(blockId.getNamespace(), "block/building/" + id.getPath())));
                     }
-                    new Model(Optional.of(FadenCoreIdentifier.minecraft("block/slab")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/slabs/bot/" + blockId.getPath()), slabTextureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
-                    new Model(Optional.of(FadenCoreIdentifier.minecraft("block/slab_top")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/slabs/top/" + blockId.getPath()), slabTextureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/slab")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/slabs/bot/" + blockId.getPath()), slabTextureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/slab_top")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/slabs/top/" + blockId.getPath()), slabTextureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
                     //TexturedModel.CUBE_ALL.upload(buildingBlock.getBlock(), blockStateModelGenerator.modelCollector);
                     if(buildingBlock.base() == null) {
                         new Model(Optional.of(Identifier.of("block/cube_all")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/" + blockId.getPath()), new TextureMap().register(TextureKey.of("all"), Identifier.of(blockId.getNamespace(), "block/building/" + blockId.getPath())), blockStateModelGenerator.modelCollector);
@@ -71,36 +71,36 @@ public class FadenDataModelProvider extends FabricModelProvider {
 
                 case WALL -> {
                     blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createWallBlockState(buildingBlock.block(), Identifier.of(blockId.getNamespace(), "block/building/walls/post/" + blockId.getPath()), Identifier.of(blockId.getNamespace(), "block/building/walls/low/" + blockId.getPath()), Identifier.of(blockId.getNamespace(), "block/building/walls/tall/" + blockId.getPath())));
-                    new Model(Optional.of(FadenCoreIdentifier.minecraft("block/template_wall_post")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/walls/post/" + blockId.getPath()), wallTextureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
-                    new Model(Optional.of(FadenCoreIdentifier.minecraft("block/template_wall_side")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/walls/low/" + blockId.getPath()), wallTextureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
-                    new Model(Optional.of(FadenCoreIdentifier.minecraft("block/template_wall_side_tall")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/walls/tall/" + blockId.getPath()), wallTextureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
-                    new Model(Optional.of(FadenCoreIdentifier.minecraft("block/wall_inventory")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/walls/" + blockId.getPath()), wallTextureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/template_wall_post")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/walls/post/" + blockId.getPath()), wallTextureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/template_wall_side")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/walls/low/" + blockId.getPath()), wallTextureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/template_wall_side_tall")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/walls/tall/" + blockId.getPath()), wallTextureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/wall_inventory")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/walls/" + blockId.getPath()), wallTextureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
 
                 }
 
                 case STAIR -> {
                     blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createStairsBlockState(buildingBlock.block(), Identifier.of(blockId.getNamespace(), "block/building/stairs/inner/" + blockId.getPath()), Identifier.of(blockId.getNamespace(), "block/building/stairs/base/" + blockId.getPath()), Identifier.of(blockId.getNamespace(), "block/building/stairs/outer/" + blockId.getPath())));
-                    new Model(Optional.of(FadenCoreIdentifier.minecraft("block/inner_stairs")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/stairs/inner/" + blockId.getPath()), slabTextureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
-                    new Model(Optional.of(FadenCoreIdentifier.minecraft("block/stairs")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/stairs/base/" + blockId.getPath()), slabTextureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
-                    new Model(Optional.of(FadenCoreIdentifier.minecraft("block/outer_stairs")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/stairs/outer/" + blockId.getPath()), slabTextureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/inner_stairs")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/stairs/inner/" + blockId.getPath()), slabTextureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/stairs")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/stairs/base/" + blockId.getPath()), slabTextureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/outer_stairs")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/stairs/outer/" + blockId.getPath()), slabTextureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
                 }
 
                 case BUTTON -> {
                     blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createButtonBlockState(buildingBlock.block(), Identifier.of(blockId.getNamespace(), "block/building/button/base/" + blockId.getPath()), Identifier.of(blockId.getNamespace(), "block/building/button/pressed/" + blockId.getPath())));
-                    new Model(Optional.of(FadenCoreIdentifier.minecraft("block/button_pressed")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/button/pressed/" + blockId.getPath()), textureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
-                    new Model(Optional.of(FadenCoreIdentifier.minecraft("block/button")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/button/base/" + blockId.getPath()), textureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
-                    new Model(Optional.of(FadenCoreIdentifier.minecraft("block/button_inventory")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/button/" + blockId.getPath()), textureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/button_pressed")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/button/pressed/" + blockId.getPath()), textureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/button")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/button/base/" + blockId.getPath()), textureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/button_inventory")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/button/" + blockId.getPath()), textureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
                 }
 
                 case PRESSURE_PLATE -> {
                     blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createPressurePlateBlockState(buildingBlock.block(), Identifier.of(blockId.getNamespace(), "block/building/pressure_plate/up/" + blockId.getPath()), Identifier.of(blockId.getNamespace(), "block/building/pressure_plate/down/" + blockId.getPath())));
-                    new Model(Optional.of(FadenCoreIdentifier.minecraft("block/pressure_plate_up")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/pressure_plate/up/" + blockId.getPath()), textureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
-                    new Model(Optional.of(FadenCoreIdentifier.minecraft("block/pressure_plate_down")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/pressure_plate/down/" + blockId.getPath()), textureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/pressure_plate_up")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/pressure_plate/up/" + blockId.getPath()), textureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/pressure_plate_down")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/pressure_plate/down/" + blockId.getPath()), textureMap(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
                 }
 
                 case CRAFTING_TABLE -> {
                     blockStateModelGenerator.blockStateCollector.accept(VariantsBlockStateSupplier.create(buildingBlock.block(), BlockStateVariant.create().put(VariantSettings.MODEL, Identifier.of(blockId.getNamespace(), "block/building/crafting_table/" + blockId.getPath()))));
-                    new Model(Optional.of(FadenCoreIdentifier.minecraft("block/cube")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/crafting_table/" + blockId.getPath()), craftingTable(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
+                    new Model(Optional.of(FadenIdentifier.minecraft("block/cube")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/crafting_table/" + blockId.getPath()), craftingTable(buildingBlock, blockId), blockStateModelGenerator.modelCollector);
                 }
 
                 case BULB -> {
@@ -145,14 +145,14 @@ public class FadenDataModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-        for (FadenDataItem item : FadenCoreItems.ITEMS) {
+        for (FadenDataItem item : FadenItems.ITEMS) {
             switch (item.itemModel()) {
                 case GENERATED -> addTexturedItem(item.item(), item.texture(), itemModelGenerator);
                 case HANDHELD -> addTexturedItemHandheld(item.item(), item.texture(), itemModelGenerator);
             }
         }
 
-        for (BuildingBlockDataEntry buildingBlock : FadenCoreBlocks.BUILDING_BLOCKS) {
+        for (BuildingBlockDataEntry buildingBlock : FadenBuildingBlocks.BUILDING_BLOCKS) {
             Identifier blockId = Registries.BLOCK.getId(buildingBlock.block());
             switch (buildingBlock.blockType()) {
                 case CUBE -> itemModelGenerator.register(buildingBlock.item(), new Model(Optional.of(Identifier.of(blockId.getNamespace(),"block/building/" + blockId.getPath())), Optional.empty()));

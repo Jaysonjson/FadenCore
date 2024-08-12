@@ -6,14 +6,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import net.fuchsia.common.init.FadenCoreRaces;
+import net.fuchsia.common.init.FadenRaces;
 import net.fuchsia.common.race.Race;
 import net.fuchsia.network.FadenNetwork;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 import net.fuchsia.common.cape.FadenCape;
-import net.fuchsia.common.cape.FadenCoreCapes;
+import net.fuchsia.common.cape.FadenCapes;
 
 public class PlayerData implements Serializable {
 
@@ -53,7 +54,7 @@ public class PlayerData implements Serializable {
 
     @Nullable
     public FadenCape getSelectedCape() {
-        for (FadenCape cape : FadenCoreCapes.getCapes()) {
+        for (FadenCape cape : FadenCapes.getCapes()) {
             if(cape.getId().equalsIgnoreCase(selectedCape)) {
                 return cape;
             }
@@ -110,7 +111,7 @@ public class PlayerData implements Serializable {
         @Nullable
         public Race getRace() {
             if(raceObj == null) {
-                raceObj = FadenCoreRaces.getRace(race);
+                raceObj = FadenRaces.getRace(race);
             }
             return raceObj;
         }

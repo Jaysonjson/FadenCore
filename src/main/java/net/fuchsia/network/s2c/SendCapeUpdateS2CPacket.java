@@ -1,18 +1,20 @@
 package net.fuchsia.network.s2c;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.server.PlayerData;
-import net.fuchsia.util.FadenCoreIdentifier;
+import net.fuchsia.util.FadenIdentifier;
 import net.fuchsia.util.PlayerDataUtil;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.packet.CustomPayload;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 public record SendCapeUpdateS2CPacket(UUID uuid, String cape, boolean remove) implements CustomPayload {
 
-    public static final CustomPayload.Id<SendCapeUpdateS2CPacket> ID = new CustomPayload.Id<>(FadenCoreIdentifier.create("send_cape_update"));
+    public static final CustomPayload.Id<SendCapeUpdateS2CPacket> ID = new CustomPayload.Id<>(FadenIdentifier.create("send_cape_update"));
     public static final PacketCodec<RegistryByteBuf, SendCapeUpdateS2CPacket> CODEC = new PacketCodec<>() {
         @Override
         public SendCapeUpdateS2CPacket decode(RegistryByteBuf buf) {

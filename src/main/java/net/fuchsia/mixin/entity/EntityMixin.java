@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import net.fuchsia.FadenCore;
-import net.fuchsia.common.init.FadenCoreDataComponents;
+import net.fuchsia.Faden;
+import net.fuchsia.common.init.FadenDataComponents;
 import net.fuchsia.mixin_interfaces.IGearInventory;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -76,9 +76,9 @@ public abstract class EntityMixin {
         if(entity instanceof PlayerEntity player) {
             IGearInventory playerInventory = (IGearInventory) player.getInventory();
             for (ItemStack gear : playerInventory.getGears()) {
-                if(gear.getOrDefault(FadenCoreDataComponents.FREE_WATER_MOVEMENT, false)) {
+                if(gear.getOrDefault(FadenDataComponents.FREE_WATER_MOVEMENT, false)) {
                     if (!player.getWorld().isClient && player.isSubmergedIn(FluidTags.WATER)) {
-                        if (FadenCore.RANDOM.nextInt(175) == 1) {
+                        if (Faden.RANDOM.nextInt(175) == 1) {
                             gear.damage(1, player, EquipmentSlot.CHEST);
                         }
                     }
@@ -96,9 +96,9 @@ public abstract class EntityMixin {
             if (entity instanceof PlayerEntity player) {
                 IGearInventory playerInventory = (IGearInventory) player.getInventory();
                 for (ItemStack gear : playerInventory.getGears()) {
-                    if(gear.getOrDefault(FadenCoreDataComponents.FREE_WATER_MOVEMENT, false)) {
+                    if(gear.getOrDefault(FadenDataComponents.FREE_WATER_MOVEMENT, false)) {
                         if (!player.getWorld().isClient && player.isSubmergedIn(FluidTags.WATER)) {
-                            if (FadenCore.RANDOM.nextInt(175) == 1) {
+                            if (Faden.RANDOM.nextInt(175) == 1) {
                                 gear.damage(1, player, EquipmentSlot.CHEST);
                             }
                         }

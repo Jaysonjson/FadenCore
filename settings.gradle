@@ -8,4 +8,4 @@ pluginManagement {
 		gradlePluginPortal()
 	}
 }
-rootProject.name = 'faden-core'
+rootProject.name = 'FadenServer'

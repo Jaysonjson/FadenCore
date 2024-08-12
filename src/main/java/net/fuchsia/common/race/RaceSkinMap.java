@@ -8,16 +8,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-import net.fuchsia.common.init.FadenCoreRaces;
+import net.fuchsia.common.init.FadenRaces;
 import org.jetbrains.annotations.Nullable;
 
-import net.fuchsia.FadenCore;
+import net.fuchsia.Faden;
 import net.fuchsia.common.race.skin.provider.SkinProvider;
 
 public class RaceSkinMap {
 
 	public static void addSkins() {
-		for (Race value : FadenCoreRaces.getRegistry().values()) {
+		for (Race value : FadenRaces.getRegistry().values()) {
 			for (String s : value.subIds()) {
 				if(!s.isEmpty()) loadSkin(value, s);
 			}
@@ -25,12 +25,12 @@ public class RaceSkinMap {
 	}
 
 	private static void loadSkin(Race race, String subId) {
-		String skinPath = getSkinPath(race, FadenCore.MOD_ID);
-		if(FadenCore.CONTAINER.findPath(skinPath + subId + "/").isEmpty()) {
-			FadenCore.LOGGER.error("Could not find Race Skins for SubId " + subId);
+		String skinPath = getSkinPath(race, Faden.MOD_ID);
+		if(Faden.CONTAINER.findPath(skinPath + subId + "/").isEmpty()) {
+			Faden.LOGGER.error("Could not find Race Skins for SubId " + subId);
 			return;
 		}
-		Path skins = FadenCore.CONTAINER.findPath(skinPath + subId + "/").get();
+		Path skins = Faden.CONTAINER.findPath(skinPath + subId + "/").get();
 		try {
 			Path[] ar = Files.list(skins).toArray(Path[]::new);
 			for (int i = 0; i < ar.length; i++) {
@@ -56,7 +56,7 @@ public class RaceSkinMap {
 
 	@Nullable
 	public static byte[] getSkin(String name) {
-		for (Race value : FadenCoreRaces.getRegistry().values()) {
+		for (Race value : FadenRaces.getRegistry().values()) {
 			if(value.getSkinMap().containsKey(name)) return value.getSkinMap().get(name);
 		}
 		return null;
@@ -64,7 +64,7 @@ public class RaceSkinMap {
 
 	public static HashMap<String, byte[]> getAllMaps() {
 		HashMap<String, byte[]> skins = new HashMap<>();
-		for (Race value : FadenCoreRaces.getRegistry().values()) {
+		for (Race value : FadenRaces.getRegistry().values()) {
 			skins.putAll(value.getSkinMap());
 		}
 		return skins;

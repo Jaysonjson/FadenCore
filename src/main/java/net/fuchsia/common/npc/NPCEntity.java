@@ -1,7 +1,8 @@
 package net.fuchsia.common.npc;
 
-import net.fuchsia.common.init.FadenCoreEntities;
-import net.fuchsia.common.init.FadenCoreNPCs;
+import net.fuchsia.common.init.FadenEntities;
+import net.fuchsia.common.init.FadenNPCs;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
 import net.minecraft.entity.damage.DamageSource;
@@ -9,8 +10,14 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
+import net.minecraft.server.network.EntityTrackerEntry;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
@@ -27,10 +34,10 @@ public class NPCEntity extends PathAwareEntity {
     }
 
     public NPCEntity(World world) {
-        super(FadenCoreEntities.NPC, world);
+        super(FadenEntities.NPC, world);
     }
     public NPCEntity(World world, String npc) {
-        super(FadenCoreEntities.NPC, world);
+        super(FadenEntities.NPC, world);
         preNpc = npc;
     }
 
@@ -59,7 +66,7 @@ public class NPCEntity extends PathAwareEntity {
     public INPC getNpc() {
         if(getDataTracker().get(NPC_DATA).isBlank()) return null;
         if(npc == null) {
-            for (INPC inpc : FadenCoreNPCs.getNPCS()) {
+            for (INPC inpc : FadenNPCs.getNPCS()) {
                 if(inpc.getId().toString().equalsIgnoreCase(getDataTracker().get(NPC_DATA))) {
                     npc = inpc;
                     return npc;

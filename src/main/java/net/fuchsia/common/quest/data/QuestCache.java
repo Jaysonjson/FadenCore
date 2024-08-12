@@ -11,7 +11,7 @@ import java.util.UUID;
 import org.apache.commons.io.FileUtils;
 
 import net.fabricmc.loader.api.FabricLoader;
-import net.fuchsia.FadenCore;
+import net.fuchsia.Faden;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.NbtSizeTracker;
@@ -21,8 +21,8 @@ public class QuestCache {
 
     private static NbtCompound CACHE = new NbtCompound();
     private static PlayerQuests PLAYER_CACHE = new PlayerQuests();
-    private static final Path CACHE_PATH = new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + FadenCore.MC_VERSION + "/quests.nbt").toPath();
-    private static final Path PLAYER_CACHE_PATH = new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + FadenCore.MC_VERSION + "/quests_player.json").toPath();
+    private static final Path CACHE_PATH = new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/quests.nbt").toPath();
+    private static final Path PLAYER_CACHE_PATH = new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/quests_player.json").toPath();
 
     public static void load() {
         try {
@@ -32,7 +32,7 @@ public class QuestCache {
                 save();
             }
 
-            PLAYER_CACHE = FadenCore.GSON.fromJson(new FileReader(PLAYER_CACHE_PATH.toFile()), PlayerQuests.class);
+            PLAYER_CACHE = Faden.GSON.fromJson(new FileReader(PLAYER_CACHE_PATH.toFile()), PlayerQuests.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -98,7 +98,7 @@ public class QuestCache {
             }
             QuestCache.getPlayerCache().onGoing.put(uuid, onGoing);
 
-            new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + FadenCore.MC_VERSION + "/").mkdirs();
+            new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/").mkdirs();
             try {
                 NbtIo.writeCompressed(CACHE, CACHE_PATH);
             } catch (Exception e) {
@@ -124,10 +124,10 @@ public class QuestCache {
     }
 
     public static void save() {
-        new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + FadenCore.MC_VERSION + "/").mkdirs();
+        new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + Faden.MC_VERSION + "/").mkdirs();
         try {
             NbtIo.writeCompressed(CACHE,  CACHE_PATH);
-            FileUtils.writeStringToFile(PLAYER_CACHE_PATH.toFile(), FadenCore.GSON.toJson(getPlayerCache()), StandardCharsets.UTF_8);
+            FileUtils.writeStringToFile(PLAYER_CACHE_PATH.toFile(), Faden.GSON.toJson(getPlayerCache()), StandardCharsets.UTF_8);
         } catch (Exception e) {
             e.printStackTrace();
         }

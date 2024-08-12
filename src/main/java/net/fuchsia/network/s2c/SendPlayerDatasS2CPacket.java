@@ -8,14 +8,14 @@ import net.fuchsia.network.PacketUtils;
 import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.ServerPlayerDatas;
 import net.fuchsia.server.client.ClientPlayerDatas;
-import net.fuchsia.util.FadenCoreIdentifier;
+import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.packet.CustomPayload;
 
 public record SendPlayerDatasS2CPacket(HashMap<UUID, PlayerData> map) implements CustomPayload {
 
-    public static final CustomPayload.Id<SendPlayerDatasS2CPacket> ID = new CustomPayload.Id<>(FadenCoreIdentifier.create("send_player_datas"));
+    public static final CustomPayload.Id<SendPlayerDatasS2CPacket> ID = new CustomPayload.Id<>(FadenIdentifier.create("send_player_datas"));
     public static final PacketCodec<RegistryByteBuf, SendPlayerDatasS2CPacket> CODEC = new PacketCodec<>() {
         @Override
         public SendPlayerDatasS2CPacket decode(RegistryByteBuf buf) {

@@ -2,9 +2,10 @@ package net.fuchsia.datagen.data;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.fuchsia.common.init.blocks.FadenCoreBlocks;
+import net.fuchsia.common.init.blocks.FadenBlocks;
+import net.fuchsia.common.init.blocks.FadenBuildingBlocks;
 import net.fuchsia.datagen.holders.BuildingBlockDataEntry;
-import net.fuchsia.util.FadenCoreIdentifier;
+import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.RecipeExporter;
@@ -22,7 +23,7 @@ public class FadenRecipeProvider extends FabricRecipeProvider {
 
     @Override
     public void generate(RecipeExporter exporter) {
-        for (BuildingBlockDataEntry buildingBlock : FadenCoreBlocks.BUILDING_BLOCKS) {
+        for (BuildingBlockDataEntry buildingBlock : FadenBuildingBlocks.BUILDING_BLOCKS) {
             if(buildingBlock.base() == null) continue;
             switch (buildingBlock.blockType()) {
                 case SLAB -> {
@@ -49,78 +50,93 @@ public class FadenRecipeProvider extends FabricRecipeProvider {
                 }
             }
         }
+
+        fourByFour(FadenBuildingBlocks.ANDESITE_BRICKS, Blocks.POLISHED_ANDESITE, exporter);
+        fourByFour(FadenBuildingBlocks.DIORITE_BRICKS, Blocks.POLISHED_DIORITE, exporter);
+        fourByFour(FadenBuildingBlocks.GRANITE_BRICKS, Blocks.POLISHED_GRANITE, exporter);
+        fourByFour(FadenBuildingBlocks.GRANITE_TILES, FadenBuildingBlocks.GRANITE_BRICKS, exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, FadenBuildingBlocks.GRANUD_TILES, 4)
+                .input('R', FadenBuildingBlocks.GRANITE_BRICKS)
+                .input('C', Blocks.MUD_BRICKS)
+                .pattern("RC")
+                .pattern("CR")
+                .criterion(hasItem(FadenBuildingBlocks.GRANITE_BRICKS), conditionsFromItem(FadenBuildingBlocks.GRANITE_BRICKS))
+                .criterion(hasItem(Blocks.MUD_BRICKS), conditionsFromItem(Blocks.MUD_BRICKS))
+                .offerTo(exporter, FadenIdentifier.create(Registries.BLOCK.getId(FadenBuildingBlocks.GRANUD_TILES).getPath()));
+
     }
 
-    public static void fourByFour(Block out, Block in, RecipeExporter exporter) {
+    public void fourByFour(Block out, Block in, RecipeExporter exporter) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, out, 4)
                 .input('R', in)
                 .pattern("RR")
                 .pattern("RR")
-                .criterion(hasItem(in), conditionsFromItem(in)).offerTo(exporter, FadenCoreIdentifier.create(Registries.BLOCK.getId(out).getPath()));
+                .criterion(hasItem(in), conditionsFromItem(in)).offerTo(exporter, FadenIdentifier.create(Registries.BLOCK.getId(out).getPath()));
     }
 
-    public static void fourByFour(Block out, Block in, RecipeExporter exporter, int count) {
+    public void fourByFour(Block out, Block in, RecipeExporter exporter, int count) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, out, count)
                 .input('R', in)
                 .pattern("RR")
                 .pattern("RR")
-                .criterion(hasItem(in), conditionsFromItem(in)).offerTo(exporter, FadenCoreIdentifier.create(Registries.BLOCK.getId(out).getPath()));
+                .criterion(hasItem(in), conditionsFromItem(in)).offerTo(exporter, FadenIdentifier.create(Registries.BLOCK.getId(out).getPath()));
     }
 
-    public static void slabRecipe(Block out, Block in, RecipeExporter exporter) {
+    public void slabRecipe(Block out, Block in, RecipeExporter exporter) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, out, 6)
                 .input('R', in)
                 .pattern("RRR")
-                .criterion(hasItem(in), conditionsFromItem(in)).offerTo(exporter, FadenCoreIdentifier.create(Registries.BLOCK.getId(out).getPath()));
+                .criterion(hasItem(in), conditionsFromItem(in)).offerTo(exporter, FadenIdentifier.create(Registries.BLOCK.getId(out).getPath()));
     }
 
-    public static void stairRecipe(Block out, Block in, RecipeExporter exporter) {
+    public void stairRecipe(Block out, Block in, RecipeExporter exporter) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, out, 4)
                 .input('R', in)
                 .pattern("R  ")
                 .pattern("RR ")
                 .pattern("RRR")
-                .criterion(hasItem(in), conditionsFromItem(in)).offerTo(exporter, FadenCoreIdentifier.create(Registries.BLOCK.getId(out).getPath()));
+                .criterion(hasItem(in), conditionsFromItem(in)).offerTo(exporter, FadenIdentifier.create(Registries.BLOCK.getId(out).getPath()));
     }
 
-    public static void stairAltRecipe(Block out, Block in, RecipeExporter exporter) {
+    public void stairAltRecipe(Block out, Block in, RecipeExporter exporter) {
          ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, out, 4)
                 .input('R', in)
                 .pattern("  R")
                 .pattern(" RR")
                 .pattern("RRR")
-                .criterion(hasItem(in), conditionsFromItem(in)).offerTo(exporter, FadenCoreIdentifier.create(Registries.BLOCK.getId(out).getPath() + "_alt"));
+                .criterion(hasItem(in), conditionsFromItem(in)).offerTo(exporter, FadenIdentifier.create(Registries.BLOCK.getId(out).getPath() + "_alt"));
     }
 
-    public static void doorRecipe(Block out, Block in, RecipeExporter exporter) {
+    public void doorRecipe(Block out, Block in, RecipeExporter exporter) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, out, 3)
                 .input('R', in)
                 .pattern("RR")
                 .pattern("RR")
                 .pattern("RR")
-                .criterion(hasItem(in), conditionsFromItem(in)).offerTo(exporter, FadenCoreIdentifier.create(Registries.BLOCK.getId(out).getPath()));
+                .criterion(hasItem(in), conditionsFromItem(in)).offerTo(exporter, FadenIdentifier.create(Registries.BLOCK.getId(out).getPath()));
     }
 
-    public static void wallRecipe(Block out, Block in, RecipeExporter exporter) {
+    public void wallRecipe(Block out, Block in, RecipeExporter exporter) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, out, 6)
                 .input('R', in)
                 .pattern("RRR")
                 .pattern("RRR")
-                .criterion(hasItem(in), conditionsFromItem(in)).offerTo(exporter, FadenCoreIdentifier.create(Registries.BLOCK.getId(out).getPath()));
+                .criterion(hasItem(in), conditionsFromItem(in)).offerTo(exporter, FadenIdentifier.create(Registries.BLOCK.getId(out).getPath()));
     }
 
-    public static void buttonRecipe(Block out, Block in, RecipeExporter exporter) {
+    public void buttonRecipe(Block out, Block in, RecipeExporter exporter) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, out, 1)
                 .input('R', in)
                 .pattern("R")
-                .criterion(hasItem(in), conditionsFromItem(in)).offerTo(exporter, FadenCoreIdentifier.create(Registries.BLOCK.getId(out).getPath()));
+                .criterion(hasItem(in), conditionsFromItem(in)).offerTo(exporter, FadenIdentifier.create(Registries.BLOCK.getId(out).getPath()));
     }
 
-    public static void pressurePlateRecipe(Block out, Block in, RecipeExporter exporter) {
+    public void pressurePlateRecipe(Block out, Block in, RecipeExporter exporter) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, out, 1)
                 .input('R', in)
                 .pattern("RR")
-                .criterion(hasItem(in), conditionsFromItem(in)).offerTo(exporter, FadenCoreIdentifier.create(Registries.BLOCK.getId(out).getPath()));
+                .criterion(hasItem(in), conditionsFromItem(in)).offerTo(exporter, FadenIdentifier.create(Registries.BLOCK.getId(out).getPath()));
     }
 
 }

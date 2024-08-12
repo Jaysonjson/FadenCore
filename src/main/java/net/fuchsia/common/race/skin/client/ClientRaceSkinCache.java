@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import net.fuchsia.common.race.RaceSkinMap;
 import net.fuchsia.common.race.skin.provider.SkinProvider;
-import net.fuchsia.config.FadenCoreOptions;
+import net.fuchsia.config.FadenOptions;
 import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.client.ClientPlayerDatas;
 import net.minecraft.client.MinecraftClient;
@@ -22,7 +22,7 @@ public class ClientRaceSkinCache {
      *  ~Jayson
      * */
     public static void add() {
-        if(!added && FadenCoreOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
+        if(!added && FadenOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
             HashMap<String, byte[]> maps = RaceSkinMap.getAllMaps();
             for (String s : maps.keySet()) {
                 byte[] data = maps.get(s);

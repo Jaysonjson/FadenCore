@@ -1,7 +1,7 @@
 package net.fuchsia.client.overlay;
 
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.fuchsia.config.FadenCoreOptions;
+import net.fuchsia.config.FadenOptions;
 import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.client.ClientPlayerDatas;
 import net.minecraft.client.MinecraftClient;
@@ -15,7 +15,7 @@ public class StatsOverlay implements HudRenderCallback {
 
     @Override
     public void onHudRender(DrawContext drawContext, RenderTickCounter tickCounter) {
-        if(FadenCoreOptions.getConfig().FADEN_HEALTH && MinecraftClient.isHudEnabled()) {
+        if(FadenOptions.getConfig().FADEN_HEALTH && MinecraftClient.isHudEnabled()) {
             ClientPlayerEntity player = MinecraftClient.getInstance().player;
             PlayerData data = ClientPlayerDatas.getPlayerData(player.getUuid());
             if(data != null && data.getRaceSaveData().getRace() != null && data.getRaceSaveData().getRace().getIcon() != null) {

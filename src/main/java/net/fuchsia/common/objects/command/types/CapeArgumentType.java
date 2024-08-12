@@ -12,7 +12,7 @@ import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 
 import net.fuchsia.common.cape.FadenCape;
-import net.fuchsia.common.cape.FadenCoreCapes;
+import net.fuchsia.common.cape.FadenCapes;
 
 public class CapeArgumentType implements ArgumentType<String> {
 
@@ -31,7 +31,7 @@ public class CapeArgumentType implements ArgumentType<String> {
     @Override
     public Collection<String> getExamples() {
         Collection<String> ex = new ArrayList<>();
-        for (FadenCape cape : FadenCoreCapes.getCapes()) {
+        for (FadenCape cape : FadenCapes.getCapes()) {
         	ex.add(cape.getId());
         }
         return ex;
@@ -39,7 +39,7 @@ public class CapeArgumentType implements ArgumentType<String> {
 
     @Override
     public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> context, SuggestionsBuilder builder) {
-        for (FadenCape cape : FadenCoreCapes.getCapes()) {
+        for (FadenCape cape : FadenCapes.getCapes()) {
         	builder.suggest(cape.getId());
         }
         return builder.buildFuture();

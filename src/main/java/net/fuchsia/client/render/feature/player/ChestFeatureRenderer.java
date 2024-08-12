@@ -6,7 +6,7 @@ import net.fuchsia.common.race.cosmetic.RaceCosmetic;
 import net.fuchsia.common.race.cosmetic.RaceCosmeticSlot;
 import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.client.ClientPlayerDatas;
-import net.fuchsia.util.FadenCoreRenderUtil;
+import net.fuchsia.util.FadenRenderUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -71,7 +71,7 @@ public class ChestFeatureRenderer<T extends LivingEntity> extends FeatureRendere
                             matrices.scale(0.625F, -0.625F, -0.625F);
                         }
                     }
-                    FadenCoreRenderUtil.renderBakedModel(matrices, vertexConsumers, model, (int) (light * 0.5f));
+                    FadenRenderUtil.renderBakedModel(matrices, vertexConsumers, model, (int) (light * 0.5f));
                     matrices.pop();
                 }
             }

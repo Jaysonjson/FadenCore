@@ -2,9 +2,8 @@ package net.fuchsia.common.race.cosmetic;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fuchsia.util.FadenCoreIdentifier;
+import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.client.util.ModelIdentifier;
-import net.minecraft.util.Identifier;
 
 public class RaceCosmetic {
     @Environment(EnvType.CLIENT)
@@ -42,7 +41,7 @@ public class RaceCosmetic {
 
     @Environment(EnvType.CLIENT)
     public ModelIdentifier getModel() {
-        return new ModelIdentifier(Identifier.of(modelId), "inventory");
+        return FadenIdentifier.modelId(modelId);
     }
 
     public RaceCosmeticSlot getSlot() {
