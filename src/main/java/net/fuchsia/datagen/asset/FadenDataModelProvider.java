@@ -1,20 +1,18 @@
 package net.fuchsia.datagen.asset;
 
-import net.fuchsia.common.init.FadenItems;
+import net.fuchsia.common.init.items.FadenItems;
 import net.fuchsia.common.init.blocks.FadenBuildingBlocks;
 import net.fuchsia.datagen.holders.BuildingBlockDataEntry;
 import net.fuchsia.datagen.holders.FadenDataItem;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.fuchsia.util.FadenIdentifier;
-import net.minecraft.block.enums.SlabType;
 import net.minecraft.data.client.*;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
-import org.apache.commons.lang3.NotImplementedException;
 
 import java.util.Optional;
 

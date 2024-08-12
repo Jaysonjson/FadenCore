@@ -1,10 +1,12 @@
 package net.fuchsia.common.init;
 
 import net.fuchsia.common.init.blocks.FadenBuildingBlocks;
+import net.fuchsia.common.init.items.FadenCraftingItems;
+import net.fuchsia.common.init.items.FadenGear;
+import net.fuchsia.common.init.items.FadenInstruments;
+import net.fuchsia.common.init.items.FadenItems;
 import net.fuchsia.common.objects.item.gear.bracelet.BraceletItem;
-import net.fuchsia.common.objects.item.cloth.Cloth;
 import net.fuchsia.common.objects.item.cloth.ClothItem;
-import net.fuchsia.common.objects.item.gear.Gear;
 import net.fuchsia.common.objects.item.gear.necklace.NecklaceItem;
 import net.fuchsia.datagen.holders.BuildingBlockDataEntry;
 import net.fuchsia.datagen.holders.FadenDataItem;
@@ -21,16 +23,15 @@ public class FadenTabs {
     public static final ItemGroup FADEN = Registry.register(Registries.ITEM_GROUP, FadenIdentifier.create("misc_tab"),
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.faden.misc")).icon(() -> new ItemStack(FadenItems.COPPER_COIN)).entries((displayContext, entries) -> {
                 for (FadenDataItem item : FadenItems.ITEMS) {
-                    if(item.item() instanceof Cloth || item.item() instanceof Gear) {
-                        continue;
+                    if(item.group() == FadenTabs.FADEN) {
+                        entries.add(item.item());
                     }
-                    entries.add(item.item());
                 }
             }).build());
 
     public static final ItemGroup FADEN_CLOTHES = Registry.register(Registries.ITEM_GROUP, FadenIdentifier.create("clothes_tab"),
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.faden.clothes")).icon(() -> new ItemStack(FadenItems.AMETHYST_COIN)).entries((displayContext, entries) -> {
-                for (ClothItem cloth : FadenCloths.CLOTHS) {
+                for (ClothItem cloth : FadenCloths.CLOTHES) {
                     entries.add(cloth);
                 }
             }).build());
@@ -46,10 +47,28 @@ public class FadenTabs {
                 }
             }).build());
 
-    public static final ItemGroup FADEN_BUILDING = Registry.register(Registries.ITEM_GROUP, FadenIdentifier.create("building_tabd"),
+    public static final ItemGroup FADEN_BUILDING = Registry.register(Registries.ITEM_GROUP, FadenIdentifier.create("building_tab"),
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.faden.building")).icon(() -> new ItemStack(FadenBuildingBlocks.GRANITE_BRICKS)).entries((displayContext, entries) -> {
                 for (BuildingBlockDataEntry buildingBlock : FadenBuildingBlocks.BUILDING_BLOCKS) {
                     entries.add(buildingBlock.block());
+                }
+            }).build());
+
+    public static final ItemGroup FADEN_INSTRUMENTS = Registry.register(Registries.ITEM_GROUP, FadenIdentifier.create("instrument_tab"),
+            FabricItemGroup.builder().displayName(Text.translatable("itemgroup.faden.instruments")).icon(() -> new ItemStack(FadenInstruments.LUTE)).entries((displayContext, entries) -> {
+                for (FadenDataItem item : FadenItems.ITEMS) {
+                    if(item.group() == FadenTabs.FADEN_INSTRUMENTS) {
+                        entries.add(item.item());
+                    }
+                }
+            }).build());
+
+    public static final ItemGroup FADEN_CRAFTING = Registry.register(Registries.ITEM_GROUP, FadenIdentifier.create("crafting_tab"),
+            FabricItemGroup.builder().displayName(Text.translatable("itemgroup.faden.crafting")).icon(() -> new ItemStack(FadenCraftingItems.BROWN_CLOTH)).entries((displayContext, entries) -> {
+                for (FadenDataItem item : FadenItems.ITEMS) {
+                    if(item.group() == FadenTabs.FADEN_CRAFTING) {
+                        entries.add(item.item());
+                    }
                 }
             }).build());
 

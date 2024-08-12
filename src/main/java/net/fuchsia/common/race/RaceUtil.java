@@ -25,11 +25,11 @@ public class RaceUtil {
         if(!skinId.isEmpty()) {
             PlayerData data = ServerPlayerDatas.getOrLoadPlayerData(player.getUuid());
             data.getRaceSaveData().setSkin(SkinProvider.getSkinIdentifier(skinId).toString());
-            data.getRaceSaveData().setRace(race.getId());
+            data.getRaceSaveData().setRace(race.getIdentifier().toString());
             data.getRaceSaveData().setRaceSub(sub_id);
             data.getRaceSaveData().setCosmetics(cosmetics);
             data.sync();
-            race.applyEntityAttributes(player);
+            race.applyStats(player);
             //FadenNetwork.Server.sendRace(player, player.getUuid(), race.getId(), sub_id, false);
         }
     }

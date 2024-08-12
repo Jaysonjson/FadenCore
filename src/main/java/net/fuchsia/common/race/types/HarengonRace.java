@@ -15,7 +15,7 @@ import org.joml.Vector3f;
 public class HarengonRace extends Race {
 
     public HarengonRace() {
-        super(FadenIdentifier.create("harengon"), new String[]{"brown", "black", "gold", "salt", "toast", "white", "white_splotched"}, new Vector3f(0.80f, 0.78f, 0.80f));
+        super(FadenIdentifier.create("harengon"), new String[]{"brown", "black", "gold", "salt", "toast", "white", "white_splotched"}, new Vector3f(0.77f, 0.72f, 0.77f));
     }
 
     @Override

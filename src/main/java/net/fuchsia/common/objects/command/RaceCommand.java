@@ -15,11 +15,13 @@ import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.client.ClientPlayerDatas;
 import net.fuchsia.util.PlayerDataUtil;
 import net.minecraft.command.argument.EntityArgumentType;
+import net.minecraft.command.argument.IdentifierArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 
 public class RaceCommand {
 
@@ -44,7 +46,7 @@ public class RaceCommand {
         PlayerData data = PlayerDataUtil.getClientOrServer(player.getUuid());
         if(data.getRaceSaveData().getRace() != null) {
             Race race = data.getRaceSaveData().getRace();
-            source.getSource().sendFeedback(() -> Text.literal("Race: " + race.getId() + " with SubId:" + data.getRaceSaveData().getRaceSub()), false);
+            source.getSource().sendFeedback(() -> Text.literal("Race: " + race.getIdentifier().toString() + " with SubId:" + data.getRaceSaveData().getRaceSub()), false);
         } else {
             source.getSource().sendFeedback(() -> Text.literal("Player does not have a race!"), false);
         }
@@ -54,7 +56,7 @@ public class RaceCommand {
     public static int setRace(CommandContext<ServerCommandSource> source) throws CommandSyntaxException {
         try {
             PlayerEntity player = EntityArgumentType.getPlayer(source, "player");
-            String race = StringArgumentType.getString(source, "race");
+            Identifier race = IdentifierArgumentType.getIdentifier(source, "race");
             String sub_id = StringArgumentType.getString(source, "sub_id");
             if(sub_id.equalsIgnoreCase("RANDOM")) {
                 RaceUtil.setPlayerRace((ServerPlayerEntity) player, FadenRaces.getRace(race));

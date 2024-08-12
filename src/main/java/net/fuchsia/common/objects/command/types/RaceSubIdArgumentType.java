@@ -13,6 +13,9 @@ import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import net.fuchsia.common.init.FadenRaces;
 import net.fuchsia.common.race.Race;
 import net.fuchsia.common.race.RaceEnum;
+import net.minecraft.command.argument.IdentifierArgumentType;
+import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.util.Identifier;
 
 public class RaceSubIdArgumentType implements ArgumentType<String> {
 
@@ -31,9 +34,9 @@ public class RaceSubIdArgumentType implements ArgumentType<String> {
 
     @Override
     public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> context, SuggestionsBuilder builder) {
-        String id = StringArgumentType.getString(context, "race");
+        Identifier id = IdentifierArgumentType.getIdentifier((CommandContext<ServerCommandSource>) context, "race");
         for (Race value : FadenRaces.getRegistry().values()) {
-            if(value.getId().equalsIgnoreCase(id)) {
+            if(value.getIdentifier().toString().equalsIgnoreCase(id.toString())) {
                 for (String s : value.subIds()) {
                     builder.suggest(s);
                 }

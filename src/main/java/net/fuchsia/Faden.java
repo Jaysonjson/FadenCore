@@ -5,19 +5,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
 
-import com.mojang.datafixers.DataFixer;
-import com.mojang.datafixers.DataFixerBuilder;
-import com.mojang.datafixers.DataFixerUpper;
-import me.shedaniel.cloth.clothconfig.shadowed.org.yaml.snakeyaml.events.MappingStartEvent;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fuchsia.common.events.FadenServerEvents;
 import net.fuchsia.common.init.*;
 import net.fuchsia.common.init.blocks.FadenBlocks;
 import net.fuchsia.common.init.blocks.FadenBuildingBlocks;
+import net.fuchsia.common.init.items.FadenCraftingItems;
+import net.fuchsia.common.init.items.FadenGear;
+import net.fuchsia.common.init.items.FadenInstruments;
+import net.fuchsia.common.init.items.FadenItems;
 import net.fuchsia.common.npc.NPCEntity;
+import net.fuchsia.common.objects.command.types.NPCArgumentType;
 import net.fuchsia.server.FadenData;
-import net.minecraft.world.ChunkSerializer;
-import net.minecraft.world.chunk.ChunkLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -102,6 +101,8 @@ public class Faden implements ModInitializer {
 		OnlineCapes.retrieve();
 		FadenEntities.register();
 		FadenBuildingBlocks.register();
+		FadenInstruments.register();
+		FadenCraftingItems.register();
 		entityAttributes();
 	}
 
@@ -113,6 +114,7 @@ public class Faden implements ModInitializer {
 		ArgumentTypeRegistry.registerArgumentType(FadenIdentifier.create("cape_argument"), CapeArgumentType.class, ConstantArgumentSerializer.of(CapeArgumentType::empty));
 		ArgumentTypeRegistry.registerArgumentType(FadenIdentifier.create("race_sub_id_argument"), RaceSubIdArgumentType.class, ConstantArgumentSerializer.of(RaceSubIdArgumentType::empty));
 		ArgumentTypeRegistry.registerArgumentType(FadenIdentifier.create("race_argument"), RaceArgumentType.class, ConstantArgumentSerializer.of(RaceArgumentType::empty));
+		ArgumentTypeRegistry.registerArgumentType(FadenIdentifier.create("npc_argument"), NPCArgumentType.class, ConstantArgumentSerializer.of(NPCArgumentType::empty));
 	}
 
 	public static Screen openConfig(Screen parent) {

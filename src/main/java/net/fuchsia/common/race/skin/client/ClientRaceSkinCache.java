@@ -45,7 +45,7 @@ public class ClientRaceSkinCache {
         return Identifier.of("missing");
     }
 
-    public static HashMap<String, Identifier> getSKINS() {
+    public static HashMap<String, Identifier> getSkins() {
         return SKINS;
     }
 

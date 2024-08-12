@@ -1,5 +1,6 @@
-package net.fuchsia.common.init;
+package net.fuchsia.common.init.items;
 
+import net.fuchsia.common.init.FadenTabs;
 import net.fuchsia.common.objects.item.gear.bracelet.BraceletItem;
 import net.fuchsia.common.objects.item.gear.bracelet.TestBracelet;
 import net.fuchsia.common.objects.item.gear.bracelet.WarriorBracelet;
@@ -28,7 +29,7 @@ public class FadenGear {
 
     private static <T extends BraceletItem> T registerBracelet(String name, T item, String texture, DataItemModel itemModel) {
         T i = Registry.register(Registries.ITEM, FadenIdentifier.create(name), item);
-        FadenItems.ITEMS.add(new FadenDataItem(i, texture, itemModel));
+        FadenItems.ITEMS.add(new FadenDataItem(i, texture, itemModel, FadenTabs.FADEN_GEAR));
         BRACELETS.add(i);
         return i;
     }
@@ -41,7 +42,7 @@ public class FadenGear {
 
     private static <T extends NecklaceItem> T registerNecklace(String name, T item, String texture, DataItemModel itemModel) {
         T i = Registry.register(Registries.ITEM, FadenIdentifier.create(name), item);
-        FadenItems.ITEMS.add(new FadenDataItem(i, texture, itemModel));
+        FadenItems.ITEMS.add(new FadenDataItem(i, texture, itemModel, FadenTabs.FADEN_GEAR));
         NECKLACES.add(i);
         return i;
     }

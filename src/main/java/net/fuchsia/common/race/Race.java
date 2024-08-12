@@ -45,8 +45,8 @@ public abstract class Race {
         this.identifier = identifier;
         this.subIds = subIds;
         this.size = size;
-        this.entityDimensions = EntityDimensions.changing(0.6F * size.x, 1.9F * size.y).withEyeHeight(1.62F).withAttachments(EntityAttachments.builder().add(EntityAttachmentType.VEHICLE, PlayerEntity.VEHICLE_ATTACHMENT_POS));
-        this.poseDimensions = ImmutableMap.builder().put(EntityPose.STANDING, dimensions()).put(EntityPose.SLEEPING, EntityDimensions.fixed(0.2F, 0.2F).withEyeHeight(0.2F)).put(EntityPose.FALL_FLYING, EntityDimensions.changing(0.6F, 0.6F).withEyeHeight(0.4F)).put(EntityPose.SWIMMING, EntityDimensions.changing(0.6F, 0.6F).withEyeHeight(0.4F)).put(EntityPose.SPIN_ATTACK, EntityDimensions.changing(0.6F, 0.6F).withEyeHeight(0.4F)).put(EntityPose.CROUCHING, EntityDimensions.changing(0.6F, 1.5F).withEyeHeight(1.27F).withAttachments(EntityAttachments.builder().add(EntityAttachmentType.VEHICLE, PlayerEntity.VEHICLE_ATTACHMENT_POS))).put(EntityPose.DYING, EntityDimensions.fixed(0.2F, 0.2F).withEyeHeight(1.62F)).build();
+        this.entityDimensions = EntityDimensions.changing(size.x == 1 ? 0.6F : 0.76F * size.x, size.x == 1 ? 1.9F : 1.95F * size.y).withEyeHeight(1.62F * size.y).withAttachments(EntityAttachments.builder().add(EntityAttachmentType.VEHICLE, PlayerEntity.VEHICLE_ATTACHMENT_POS));
+        this.poseDimensions = ImmutableMap.builder().put(EntityPose.STANDING, dimensions()).put(EntityPose.SLEEPING, EntityDimensions.fixed(0.2F * size.x, 0.2F * size.y).withEyeHeight(0.2F * size.y)).put(EntityPose.FALL_FLYING, EntityDimensions.changing(0.6F * size.x, 0.6F * size.y).withEyeHeight(0.4F * size.y)).put(EntityPose.SWIMMING, EntityDimensions.changing(0.6F * size.x, 0.6F * size.y).withEyeHeight(0.4F * size.y)).put(EntityPose.SPIN_ATTACK, EntityDimensions.changing(0.6F * size.x, 0.6F * size.y).withEyeHeight(0.4F * size.x)).put(EntityPose.CROUCHING, EntityDimensions.changing(size.x == 1 ? 0.6F : 0.76F * size.x, 1.5F * size.y).withEyeHeight(1.27F * size.y).withAttachments(EntityAttachments.builder().add(EntityAttachmentType.VEHICLE, PlayerEntity.VEHICLE_ATTACHMENT_POS))).put(EntityPose.DYING, EntityDimensions.fixed(0.2F * size.x, 0.2F * size.y).withEyeHeight(1.62F * size.y)).build();
     }
 
     public Identifier getIcon() {
@@ -57,9 +57,9 @@ public abstract class Race {
         return skinMap;
     }
 
-    public String getId() {
+    /*public String getId() {
         return identifier.getPath();
-    }
+    }*/
 
     public Identifier getIdentifier() {
         return identifier;
@@ -127,4 +127,12 @@ public abstract class Race {
 
     public abstract RaceCosmeticPalette getCosmeticPalette();
     public abstract RaceModelType model();
+
+    public void applyStats(ServerPlayerEntity player) {
+        applyEntityAttributes(player);
+        //A bit hacky, but re-makes dimensions
+        player.setSneaking(true);
+        player.setPose(EntityPose.CROAKING);
+    }
+
 }

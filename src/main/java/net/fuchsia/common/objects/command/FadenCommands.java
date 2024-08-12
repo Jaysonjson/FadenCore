@@ -2,6 +2,7 @@ package net.fuchsia.common.objects.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fuchsia.common.objects.command.types.NPCArgumentType;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.GiveCommand;
@@ -15,5 +16,6 @@ public class FadenCommands implements CommandRegistrationCallback {
         ReloadCommand.register(dispatcher);
         CapeCommand.register(dispatcher);
         ItemValueCommand.register(dispatcher, registryAccess);
+        NPCCommand.register(dispatcher);
     }
 }

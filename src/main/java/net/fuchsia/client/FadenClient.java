@@ -32,6 +32,8 @@ import net.fuchsia.network.FadenNetwork;
 import net.fuchsia.util.FadenCheckSum;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.entity.model.EntityModelLayers;
+import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.screen.PlayerScreenHandler;
 
@@ -89,10 +91,18 @@ public class FadenClient implements ClientModInitializer {
         HudRenderCallback.EVENT.register(new InstrumentMusicOverlay());
 
         registerModels();
-
-        EntityRendererRegistry.register(FadenEntities.NPC, (context) -> new NPCEntityRenderer(context, true));
+        EntityRendererRegistry.register(FadenEntities.NPC, (context) -> new NPCEntityRenderer(context));
         setBlockRenderMaps();
         registerParticles();
+
+        ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
+            if(PlayerModelCache.slimModel == null) {
+                PlayerModelCache.slimModel = PlayerModelCache.makeSlimModel();
+            }
+            if(PlayerModelCache.wideModel == null) {
+                PlayerModelCache.wideModel = PlayerModelCache.makeWideModel();
+            }
+        });
     }
 
     public void registerParticles() {

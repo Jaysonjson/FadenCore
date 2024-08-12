@@ -1,4 +1,4 @@
-package net.fuchsia.client.render.feature;
+package net.fuchsia.client.render.feature.player;
 
 import net.fuchsia.common.slot.ClothSlot;
 import net.fuchsia.mixin_interfaces.IClothInventory;

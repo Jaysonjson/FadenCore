@@ -13,6 +13,10 @@ import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
+import net.minecraft.server.network.EntityTrackerEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -21,7 +25,9 @@ import net.minecraft.world.World;
 
 public class NPCEntity extends PathAwareEntity {
 
-    private static final TrackedData<String> NPC_DATA;
+    public static final TrackedData<String> NPC_DATA;
+    /* Used for NPCUtil#Summon */
+    private static String preNpc = "";
     private INPC npc;
     static {
         NPC_DATA = DataTracker.registerData(NPCEntity.class, TrackedDataHandlerRegistry.STRING);
@@ -29,6 +35,10 @@ public class NPCEntity extends PathAwareEntity {
 
     public NPCEntity(World world) {
         super(FadenEntities.NPC, world);
+    }
+    public NPCEntity(World world, String npc) {
+        super(FadenEntities.NPC, world);
+        preNpc = npc;
     }
 
     @Override
@@ -39,17 +49,27 @@ public class NPCEntity extends PathAwareEntity {
     }
 
     @Override
+    public void tick() {
+        if(!preNpc.isBlank()) {
+            getDataTracker().set(NPC_DATA, preNpc);
+            preNpc = "";
+        }
+        super.tick();
+    }
+
+    @Override
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
-        builder.add(NPC_DATA, FadenNPCs.TEST.getId().toString());
+        builder.add(NPC_DATA, preNpc);
     }
 
     public INPC getNpc() {
+        if(getDataTracker().get(NPC_DATA).isBlank()) return null;
         if(npc == null) {
             for (INPC inpc : FadenNPCs.getNPCS()) {
                 if(inpc.getId().toString().equalsIgnoreCase(getDataTracker().get(NPC_DATA))) {
                     npc = inpc;
-                    break;
+                    return npc;
                 }
             }
         }
@@ -58,9 +78,8 @@ public class NPCEntity extends PathAwareEntity {
 
     @Override
     public boolean isInvisible() {
-        return true;
+        return false;
     }
-
 
     @Override
     public boolean canTakeDamage() {

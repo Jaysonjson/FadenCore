@@ -3,6 +3,7 @@ package net.fuchsia.common.init;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fuchsia.Faden;
+import net.fuchsia.common.init.items.FadenItems;
 import net.fuchsia.common.objects.item.cloth.ClothItem;
 import net.fuchsia.common.race.skin.client.SkinTexture;
 import net.fuchsia.common.race.skin.provider.SkinProvider;
@@ -20,14 +21,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FadenCloths {
-    public static List<ClothItem> CLOTHS = new ArrayList<>();
+    public static List<ClothItem> CLOTHES = new ArrayList<>();
 
     public static ClothItem TEST_CLOTH = registerItem("test_cloth", new ClothItem(new Item.Settings(), "test_cloth"), "ingots/silver_ingot");
 
     private static <T extends ClothItem> T registerItem(String name, T item, String texture, DataItemModel itemModel) {
         T i = Registry.register(Registries.ITEM, FadenIdentifier.create(name), item);
-        FadenItems.ITEMS.add(new FadenDataItem(i, texture, itemModel));
-        CLOTHS.add(i);
+        FadenItems.ITEMS.add(new FadenDataItem(i, texture, itemModel, FadenTabs.FADEN_CLOTHES));
+        CLOTHES.add(i);
         return i;
     }
 
@@ -41,7 +42,7 @@ public class FadenCloths {
         if(!loaded) {
             try {
                 Faden.LOGGER.debug("STARTING CLOTH LOADING");
-                for (ClothItem cloth : CLOTHS) {
+                for (ClothItem cloth : CLOTHES) {
                     byte[] data = SkinProvider.readSkin(Files.newInputStream(Faden.CONTAINER.findPath("assets/faden/textures/cloth/" + cloth.getFile() + ".png").get()));
                     SkinTexture skinTexture = new SkinTexture(cloth.getTexture());
                     skinTexture.setSkinData(data);

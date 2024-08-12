@@ -1,7 +1,11 @@
 package net.fuchsia.mixin.entity;
 
 import net.fuchsia.common.race.Race;
+import net.fuchsia.server.PlayerData;
+import net.fuchsia.server.client.ClientPlayerDatas;
 import net.fuchsia.util.PlayerDataUtil;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityPose;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -88,5 +92,4 @@ public abstract class LivingEntityMixin {
             }
         }
     }
-
 }

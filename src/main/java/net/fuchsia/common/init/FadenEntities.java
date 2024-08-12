@@ -12,10 +12,13 @@ import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.world.World;
 
 public class FadenEntities {
 
-    public static final EntityType<NPCEntity> NPC = registerEntity("npc", EntityType.Builder.create(SpawnGroup.MISC).dimensions(0.6F, 1.8F));
+    //public static final EntityType<NPCEntity> NPC = registerEntity("npc", EntityType.Builder.create(SpawnGroup.MISC).dimensions(0.6F, 1.8F));
+
+    public static final EntityType<NPCEntity> NPC = registerEntity("npc", SpawnGroup.MISC, (type, world) -> new NPCEntity(world), 0.6F, 1.8F);
 
     public static <T extends Entity> EntityType<T> registerEntity(String name, SpawnGroup spawnGroup, EntityType.EntityFactory<T> entity,
                                                                   float width, float height) {

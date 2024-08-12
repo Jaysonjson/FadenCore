@@ -48,7 +48,7 @@ public class FadenServerEvents {
 
         ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
             Race race = ServerPlayerDatas.getOrLoadPlayerData(newPlayer.getUuid()).getRaceSaveData().getRace();
-            if(race != null) race.applyEntityAttributes(newPlayer);
+            if(race != null) race.applyStats(newPlayer);
         });
 
         ServerPlayConnectionEvents.DISCONNECT.register((handler, sender) -> {

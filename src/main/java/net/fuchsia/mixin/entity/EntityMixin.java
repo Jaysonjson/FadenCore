@@ -2,8 +2,10 @@ package net.fuchsia.mixin.entity;
 
 import java.util.UUID;
 
-import net.fuchsia.server.PlayerData;
-import net.fuchsia.server.client.ClientPlayerDatas;
+import net.fuchsia.common.race.Race;
+import net.fuchsia.util.PlayerDataUtil;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.util.math.Box;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -11,8 +13,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fuchsia.Faden;
 import net.fuchsia.common.init.FadenDataComponents;
 import net.fuchsia.mixin_interfaces.IGearInventory;
@@ -44,10 +44,11 @@ public abstract class EntityMixin {
 
     @Shadow public abstract int getAir();
 
+    @Shadow private EntityDimensions dimensions;
     private Entity entity = ((Entity) ((Object) this));
 
 
-    @Environment(EnvType.CLIENT)
+    /*@Environment(EnvType.CLIENT)
     @Inject(at = @At("HEAD"), method = "getStandingEyeHeight", cancellable = true)
     private void eyeHeightClient(CallbackInfoReturnable<Float> cir) {
         if(entity instanceof PlayerEntity) {
@@ -67,7 +68,7 @@ public abstract class EntityMixin {
                 cir.setReturnValue(this.standingEyeHeight - (1 - data.getRaceSaveData().getRace().size().y * data.getRaceSaveData().getRace().size().y - data.getRaceSaveData().getRace().size().y / 10.0f));
             }
         }
-    }
+    }*/
 
 
     @Inject(at = @At("HEAD"), method = "updateSwimming", cancellable = true)
@@ -104,6 +105,16 @@ public abstract class EntityMixin {
                         cir.cancel();
                     }
                 }
+            }
+        }
+    }
+
+    @Inject(at = @At("HEAD"), method = "calculateBoundingBox", cancellable = true)
+    private void reinitDimensions(CallbackInfoReturnable<Box> cir) {
+        if(entity instanceof PlayerEntity player) {
+            Race race = PlayerDataUtil.getClientOrServer(player.getUuid()).getRaceSaveData().getRace();
+            if(race != null) {
+                cir.setReturnValue(race.dimensions().getBoxAt(player.getPos()));
             }
         }
     }

@@ -4,9 +4,9 @@ import net.fuchsia.client.PlayerModelCache;
 import net.fuchsia.common.race.Race;
 import net.fuchsia.mixin_interfaces.IClothInventory;
 import net.fuchsia.client.IPlayerEntityRenderer;
-import net.fuchsia.client.render.feature.ChestFeatureRenderer;
-import net.fuchsia.client.render.feature.ClothFeatureRenderer;
-import net.fuchsia.client.render.feature.HeadFeatureRenderer;
+import net.fuchsia.client.render.feature.player.ChestFeatureRenderer;
+import net.fuchsia.client.render.feature.player.ClothFeatureRenderer;
+import net.fuchsia.client.render.feature.player.HeadFeatureRenderer;
 import net.fuchsia.common.objects.item.cloth.ClothItem;
 import net.fuchsia.common.race.skin.client.ClientRaceSkinCache;
 import net.fuchsia.common.slot.ClothSlot;
@@ -52,12 +52,6 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
     public void constructorHead(EntityRendererFactory.Context ctx, boolean slim, CallbackInfo ci) {
         renderer.addFeature(new ChestFeatureRenderer(renderer));
         renderer.addFeature(new HeadFeatureRenderer(renderer));
-        if(PlayerModelCache.slimModel == null) {
-            PlayerModelCache.slimModel = new PlayerEntityModel(ctx.getPart(EntityModelLayers.PLAYER_SLIM), true);
-        }
-        if(PlayerModelCache.wideModel == null) {
-            PlayerModelCache.wideModel = new PlayerEntityModel(ctx.getPart(EntityModelLayers.PLAYER), false);
-        }
         clothFeatureRenderer = new ClothFeatureRenderer(this, this);
         renderer.addFeature(clothFeatureRenderer);
     }

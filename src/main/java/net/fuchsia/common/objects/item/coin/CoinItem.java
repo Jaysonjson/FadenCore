@@ -7,7 +7,7 @@ import org.joml.Matrix4f;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fuchsia.common.init.FadenItems;
+import net.fuchsia.common.init.items.FadenItems;
 import net.fuchsia.common.objects.item.ItemToolTipRenderer;
 import net.fuchsia.common.objects.tooltip.FadenTooltipComponent;
 import net.fuchsia.common.objects.tooltip.FadenTooltipData;

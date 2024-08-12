@@ -3,7 +3,7 @@ package net.fuchsia.common.objects;
 import java.util.Collections;
 import java.util.TreeMap;
 
-import net.fuchsia.common.init.FadenItems;
+import net.fuchsia.common.init.items.FadenItems;
 import net.fuchsia.common.objects.item.coin.CoinItem;
 import net.fuchsia.datagen.holders.FadenDataItem;
 import net.minecraft.item.Item;

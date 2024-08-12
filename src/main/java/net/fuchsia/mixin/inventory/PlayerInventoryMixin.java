@@ -6,6 +6,7 @@ import net.fuchsia.mixin_interfaces.IGearInventory;
 import net.fuchsia.common.slot.ClothSlot;
 import net.fuchsia.mixin_interfaces.IClothInventory;
 import net.fuchsia.common.objects.item.cloth.Cloth;
+import net.fuchsia.mixin_interfaces.IPlayerInventory;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -27,7 +28,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Mixin(PlayerInventory.class)
-public abstract class PlayerInventoryMixin implements IClothInventory, IGearInventory {
+public abstract class PlayerInventoryMixin implements IPlayerInventory {
 
     @Shadow @Final public PlayerEntity player;
     @Mutable

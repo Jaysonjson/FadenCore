@@ -19,8 +19,8 @@ public class FadenRaces {
     public static Race DWARF = register(new DwarfRace());
 
     private static Race register(Race race) {
-        RACES.put(Identifier.of(race.getId()), race);
-        return RACES.get(Identifier.of(race.getId()));
+        RACES.put(race.getIdentifier(), race);
+        return RACES.get(race.getIdentifier());
     }
 
     public static HashMap<Identifier, Race> getRegistry() {

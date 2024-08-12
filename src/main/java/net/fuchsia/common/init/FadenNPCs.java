@@ -3,6 +3,9 @@ package net.fuchsia.common.init;
 import net.fuchsia.common.npc.INPC;
 import net.fuchsia.common.npc.NPCTexture;
 import net.fuchsia.common.quest.FadenQuests;
+import net.fuchsia.common.race.Race;
+import net.fuchsia.server.PlayerData;
+import net.fuchsia.util.FadenIdentifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -20,12 +23,12 @@ public class FadenNPCs {
     public static INPC TEST = register(new INPC() {
         @Override
         public NPCTexture getTexture() {
-            return null;
+            return new NPCTexture("black_harengon", true, Identifier.of("faden:skin/black/black_harengon_default"));
         }
 
         @Override
         public Identifier getId() {
-            return Identifier.of("test");
+            return FadenIdentifier.create("test");
         }
 
         @Override
@@ -33,6 +36,23 @@ public class FadenNPCs {
             FadenQuests.TEST.startQuest(player.getUuid());
             player.sendMessage(Text.literal("test"), false);
             return ActionResult.CONSUME;
+        }
+
+        @Override
+        public Race getRace() {
+            return FadenRaces.HARENGON;
+        }
+
+        @Override
+        public String getRaceSub() {
+            return "black";
+        }
+
+        @Override
+        public PlayerData.RaceDataCosmetics getRaceCosmetics() {
+            PlayerData.RaceDataCosmetics cosmetics = new PlayerData.RaceDataCosmetics();
+            cosmetics.getHead().add("ear_0");
+            return cosmetics;
         }
     });
 

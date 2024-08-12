@@ -14,8 +14,9 @@ import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import net.fuchsia.common.init.FadenRaces;
 import net.fuchsia.common.race.Race;
 import net.fuchsia.common.race.RaceEnum;
+import net.minecraft.command.argument.IdentifierArgumentType;
 
-public class RaceArgumentType implements ArgumentType<String> {
+public class RaceArgumentType extends IdentifierArgumentType {
 
     public RaceArgumentType() {
     }
@@ -25,15 +26,10 @@ public class RaceArgumentType implements ArgumentType<String> {
     }
 
     @Override
-    public String parse(final StringReader reader) throws CommandSyntaxException {
-        return reader.readUnquotedString();
-    }
-
-    @Override
     public Collection<String> getExamples() {
         Collection<String> ex = new ArrayList<>();
         for (Race value : FadenRaces.getRegistry().values()) {
-            ex.add(value.getId());
+            ex.add(value.getIdentifier().toString());
         }
         return ex;
     }
@@ -41,7 +37,7 @@ public class RaceArgumentType implements ArgumentType<String> {
     @Override
     public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> context, SuggestionsBuilder builder) {
         for (Race value : FadenRaces.getRegistry().values()) {
-            builder.suggest(value.getId());
+            builder.suggest(value.getIdentifier().toString());
         }
         return builder.buildFuture();
     }
