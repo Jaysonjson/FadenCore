@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fuchsia.common.cape.FadenCoreCapes;
 import net.fuchsia.common.events.FadenCoreServerEvents;
 import net.fuchsia.common.init.*;
 import net.fuchsia.common.init.items.FadenCoreItems;

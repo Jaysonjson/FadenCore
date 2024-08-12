@@ -2,6 +2,7 @@ package net.fuchsia.common.init;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
 import net.fuchsia.FadenCore;
 import net.fuchsia.common.init.items.FadenCoreItems;
 import net.fuchsia.common.objects.item.cloth.ClothItem;
@@ -13,6 +14,7 @@ import net.fuchsia.util.FadenCoreIdentifier;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.util.Identifier;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -40,14 +42,15 @@ public class FadenCoreClothes {
             try {
                 FadenCore.LOGGER.debug("STARTING CLOTH LOADING");
                 for (ClothItem cloth : CLOTHES) {
-                    byte[] data = SkinProvider.readSkin(Files.newInputStream(FadenCore.CONTAINER.findPath("assets/faden/textures/cloth/" + cloth.getFile() + ".png").get()));
+                    Identifier id = Registries.ITEM.getId(cloth);
+                    byte[] data = SkinProvider.readSkin(Files.newInputStream(FabricLoader.getInstance().getModContainer(id.getNamespace()).get().findPath("assets/" + id.getNamespace() + "/textures/cloth/" + cloth.getFile() + ".png").get()));
                     SkinTexture skinTexture = new SkinTexture(cloth.getTexture());
                     skinTexture.setSkinData(data);
                     FadenCore.LOGGER.debug("BINDING {}", cloth.getTexture());
                     MinecraftClient.getInstance().getTextureManager().registerTexture(cloth.getTexture(), skinTexture);
                     MinecraftClient.getInstance().getTextureManager().bindTexture(cloth.getTexture());
 
-                    data = SkinProvider.readSkin(Files.newInputStream(FadenCore.CONTAINER.findPath("assets/faden/textures/cloth/" + cloth.getFile() + "_wide.png").get()));
+                    data = SkinProvider.readSkin(Files.newInputStream(FabricLoader.getInstance().getModContainer(id.getNamespace()).get().findPath("assets/" + id.getNamespace() + "/textures/cloth/" + cloth.getFile() + "_wide.png").get()));
                     skinTexture = new SkinTexture(cloth.getTextureWide());
                     skinTexture.setSkinData(data);
                     MinecraftClient.getInstance().getTextureManager().registerTexture(cloth.getTextureWide(), skinTexture);

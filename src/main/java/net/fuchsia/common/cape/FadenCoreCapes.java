@@ -7,20 +7,21 @@ import net.fuchsia.config.FadenCoreOptions;
 import net.fuchsia.server.PlayerData;
 import net.fuchsia.util.PlayerDataUtil;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 public class FadenCoreCapes {
 
     private static ArrayList<FadenCape> CAPES = new ArrayList<>();
 
-    public static FadenCape register(String id) {
-        FadenCape cape = new FadenCape(id, Text.translatable("cape.faden." + id), Text.translatable("cape.faden." + id + ".description"));
+    public static FadenCape register(Identifier id) {
+        FadenCape cape = new FadenCape(id, Text.translatable("cape." + id.getNamespace() + "." + id.getPath()), Text.translatable("cape." + id.getNamespace() + "." + id.getPath() + ".description"));
         CAPES.add(cape);
         return cape;
     }
 
-    public static FadenCape registerOnlineCape(String id) {
-        FadenCape cape = new FadenCape(id, Text.literal(id), Text.literal(id));
+    public static FadenCape registerOnlineCape(Identifier id) {
+        FadenCape cape = new FadenCape(id, Text.literal(id.getPath()), Text.literal(id.getPath()));
         CAPES.add(cape);
         return cape;
     }
@@ -41,7 +42,7 @@ public class FadenCoreCapes {
 
     public static FadenCape getCapeById(String name) {
         for (FadenCape cape : getCapes()) {
-            if(cape.getId().equalsIgnoreCase(name)) {
+            if(cape.getId().toString().equalsIgnoreCase(name)) {
                 return cape;
             }
         }

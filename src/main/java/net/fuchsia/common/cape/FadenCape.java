@@ -2,6 +2,7 @@ package net.fuchsia.common.cape;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
 import net.fuchsia.FadenCore;
 import net.fuchsia.common.race.skin.client.SkinTexture;
 import net.fuchsia.common.race.skin.provider.SkinProvider;
@@ -16,14 +17,14 @@ import java.nio.file.Files;
 public class FadenCape {
 
     private Identifier texture;
-    private String id;
+    private Identifier id;
     private Text name;
     private Text description;
     private boolean loaded = false;
     private byte[] textureData = null;
 
-    public FadenCape(String id, Text name, Text description) {
-        this.texture = FadenCoreIdentifier.create("cape/" + id);
+    public FadenCape(Identifier id, Text name, Text description) {
+        this.texture = Identifier.of(id.getNamespace(), "cape/" + id.getPath());
         this.id = id;
         this.name = name;
         this.description = description;
@@ -42,7 +43,7 @@ public class FadenCape {
     }
 
     public String getId() {
-        return id;
+        return id.getPath();
     }
 
     public void setTextureData(byte[] textureData) {
@@ -54,7 +55,7 @@ public class FadenCape {
         if(!loaded) {
             try {
                 if(textureData == null) {
-                    textureData = SkinProvider.readSkin(Files.newInputStream(FadenCore.CONTAINER.findPath("assets/faden/textures/cape/" + id + ".png").get()));
+                    textureData = SkinProvider.readSkin(Files.newInputStream(FabricLoader.getInstance().getModContainer(id.getNamespace()).get().findPath("assets/" + id.getNamespace() + "/textures/cape/" + id.getPath() + ".png").get()));
                 }
                 SkinTexture skinTexture = new SkinTexture(texture);
                 skinTexture.setSkinData(textureData);
