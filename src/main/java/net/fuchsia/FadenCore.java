@@ -75,7 +75,6 @@ public class FadenCore implements ModInitializer {
 	}
 
 	public static void init() {
-		CoinMap.reloadCoins();
 		FadenNetwork.registerC2S();
 		CommandRegistrationCallback.EVENT.register(new FadenCoreCommands());
 		FadenCoreDataComponents.register();
@@ -86,6 +85,7 @@ public class FadenCore implements ModInitializer {
 	public static void setupFadenAddon(String modId, CoinItem defaultCoin) {
 		FadenCoreItems.MAIN_COIN = defaultCoin;
 		RaceSkinMap.addSkins(modId, FabricLoader.getInstance().getModContainer(modId).get());
+		CoinMap.reloadCoins();
 	}
 
 	public static void entityAttributes() {
