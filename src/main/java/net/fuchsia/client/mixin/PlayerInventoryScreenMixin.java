@@ -2,7 +2,7 @@ package net.fuchsia.client.mixin;
 
 import net.fuchsia.mixin_interfaces.ExtraInventory;
 import net.fuchsia.common.slot.ISlot;
-import net.fuchsia.util.FadenIdentifier;
+import net.fuchsia.util.FadenCoreIdentifier;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
@@ -22,11 +22,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(InventoryScreen.class)
 public abstract class PlayerInventoryScreenMixin extends AbstractInventoryScreen<PlayerScreenHandler> implements RecipeBookProvider  {
 
-    private static Identifier CLOTH_BUTTON = FadenIdentifier.create("textures/gui/cloth_button.png");
-    private static Identifier CLOTH_BUTTON_SELECTED = FadenIdentifier.create("textures/gui/cloth_button_hovered.png");
+    private static Identifier CLOTH_BUTTON = FadenCoreIdentifier.create("textures/gui/cloth_button.png");
+    private static Identifier CLOTH_BUTTON_SELECTED = FadenCoreIdentifier.create("textures/gui/cloth_button_hovered.png");
 
-    private static Identifier GEAR_BUTTON = FadenIdentifier.create("textures/gui/gear_button.png");
-    private static Identifier GEAR_BUTTON_SELECTED = FadenIdentifier.create("textures/gui/gear_button_hovered.png");
+    private static Identifier GEAR_BUTTON = FadenCoreIdentifier.create("textures/gui/gear_button.png");
+    private static Identifier GEAR_BUTTON_SELECTED = FadenCoreIdentifier.create("textures/gui/gear_button_hovered.png");
 
     boolean clothSelected = false;
     boolean gearSelected = false;

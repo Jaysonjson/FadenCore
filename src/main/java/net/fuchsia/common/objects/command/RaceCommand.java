@@ -6,13 +6,12 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
-import net.fuchsia.common.init.FadenRaces;
+import net.fuchsia.common.init.FadenCoreRaces;
 import net.fuchsia.common.objects.command.types.RaceArgumentType;
 import net.fuchsia.common.objects.command.types.RaceSubIdArgumentType;
 import net.fuchsia.common.race.Race;
 import net.fuchsia.common.race.RaceUtil;
 import net.fuchsia.server.PlayerData;
-import net.fuchsia.server.client.ClientPlayerDatas;
 import net.fuchsia.util.PlayerDataUtil;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.command.argument.IdentifierArgumentType;
@@ -59,9 +58,9 @@ public class RaceCommand {
             Identifier race = IdentifierArgumentType.getIdentifier(source, "race");
             String sub_id = StringArgumentType.getString(source, "sub_id");
             if(sub_id.equalsIgnoreCase("RANDOM")) {
-                RaceUtil.setPlayerRace((ServerPlayerEntity) player, FadenRaces.getRace(race));
+                RaceUtil.setPlayerRace((ServerPlayerEntity) player, FadenCoreRaces.getRace(race));
             } else {
-                RaceUtil.setPlayerRace((ServerPlayerEntity) player, FadenRaces.getRace(race), sub_id);
+                RaceUtil.setPlayerRace((ServerPlayerEntity) player, FadenCoreRaces.getRace(race), sub_id);
             }
             source.getSource().sendFeedback(() -> Text.literal("Set Race to : " + race + " with SubId: " + sub_id), false);
         } catch (Exception e) {

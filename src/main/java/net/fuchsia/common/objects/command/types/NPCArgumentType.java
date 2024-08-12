@@ -3,7 +3,7 @@ package net.fuchsia.common.objects.command.types;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
-import net.fuchsia.common.init.FadenNPCs;
+import net.fuchsia.common.init.FadenCoreNPCs;
 import net.fuchsia.common.npc.INPC;
 import net.minecraft.command.argument.IdentifierArgumentType;
 
@@ -29,7 +29,7 @@ public class NPCArgumentType extends IdentifierArgumentType {
 
     @Override
     public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> context, SuggestionsBuilder builder) {
-        for (INPC npc : FadenNPCs.getNPCS()) {
+        for (INPC npc : FadenCoreNPCs.getNPCS()) {
             builder.suggest(npc.getId().toString());
         }
         return builder.buildFuture();

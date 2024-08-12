@@ -1,6 +1,6 @@
 package net.fuchsia.network;
 
-import net.fuchsia.Faden;
+import net.fuchsia.FadenCore;
 import net.minecraft.network.RegistryByteBuf;
 
 import java.io.ByteArrayInputStream;
@@ -21,7 +21,7 @@ public class PacketUtils {
             out.close();
             buf.writeString(new String(Base64.getEncoder().encode(bytes)));
         } catch (Exception e) {
-            Faden.LOGGER.error("Could not encode Packet - {}", e.getMessage());
+            FadenCore.LOGGER.error("Could not encode Packet - {}", e.getMessage());
             e.printStackTrace();
         }
     }
@@ -36,7 +36,7 @@ public class PacketUtils {
             byteOut.close();
             out.close();
         } catch (Exception e) {
-            Faden.LOGGER.error("Could not decode Packet - {}", e.getMessage());
+            FadenCore.LOGGER.error("Could not decode Packet - {}", e.getMessage());
             e.printStackTrace();
         }
         return t;

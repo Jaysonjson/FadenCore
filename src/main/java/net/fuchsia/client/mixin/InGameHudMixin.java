@@ -1,6 +1,6 @@
 package net.fuchsia.client.mixin;
 
-import net.fuchsia.config.FadenOptions;
+import net.fuchsia.config.FadenCoreOptions;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,21 +24,21 @@ public class InGameHudMixin {
 
     @Inject(at = @At("HEAD"), method = "renderHealthBar", cancellable = true)
     public void renderHealthBar(DrawContext context, PlayerEntity player, int x, int y, int lines, int regeneratingHeartIndex, float maxHealth, int lastHealth, int health, int absorption, boolean blinking, CallbackInfo ci) {
-        if(FadenOptions.getConfig().FADEN_HEALTH) {
+        if(FadenCoreOptions.getConfig().FADEN_HEALTH) {
             ci.cancel();
         }
     }
 
     @Inject(at = @At("HEAD"), method = "renderFood", cancellable = true)
     public void renderHealthBar(DrawContext context, PlayerEntity player, int top, int left, CallbackInfo ci) {
-        if(FadenOptions.getConfig().FADEN_HEALTH) {
+        if(FadenCoreOptions.getConfig().FADEN_HEALTH) {
             ci.cancel();
         }
     }
 
     @Inject(at = @At("HEAD"), method = "renderArmor", cancellable = true)
     private static void renderArmor(DrawContext context, PlayerEntity player, int i, int j, int k, int x, CallbackInfo ci) {
-        if(FadenOptions.getConfig().FADEN_HEALTH) {
+        if(FadenCoreOptions.getConfig().FADEN_HEALTH) {
             ci.cancel();
         }
     }

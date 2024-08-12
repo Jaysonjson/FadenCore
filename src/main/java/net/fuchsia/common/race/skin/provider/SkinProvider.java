@@ -1,6 +1,6 @@
 package net.fuchsia.common.race.skin.provider;
 
-import net.fuchsia.util.FadenIdentifier;
+import net.fuchsia.util.FadenCoreIdentifier;
 import net.minecraft.util.Identifier;
 
 import javax.imageio.ImageIO;
@@ -37,7 +37,7 @@ public class SkinProvider {
     }
 
     public static Identifier getSkinIdentifier(String id) {
-        return FadenIdentifier.create("skin/" + id);
+        return FadenCoreIdentifier.create("skin/" + id);
     }
 
 }

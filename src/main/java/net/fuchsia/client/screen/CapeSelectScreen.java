@@ -1,6 +1,5 @@
 package net.fuchsia.client.screen;
 
-import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.server.PlayerData;
 import net.fuchsia.util.PlayerDataUtil;
 import net.minecraft.client.gui.widget.CheckboxWidget;
@@ -22,8 +21,6 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.RotationAxis;
-
-import java.util.ArrayList;
 
 public class CapeSelectScreen extends Screen {
 

@@ -5,11 +5,10 @@ import java.util.Collection;
 import java.util.Optional;
 
 import net.minecraft.item.tooltip.TooltipData;
-import net.minecraft.server.world.ServerWorld;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import net.fuchsia.common.init.FadenDataComponents;
+import net.fuchsia.common.init.FadenCoreDataComponents;
 import net.fuchsia.common.objects.item.FadenItem;
 import net.fuchsia.common.objects.item.ItemTier;
 import net.fuchsia.common.objects.item.ItemToolTipEntryRenderer;
@@ -17,7 +16,7 @@ import net.fuchsia.common.objects.tooltip.FadenTooltipComponent;
 import net.fuchsia.common.objects.tooltip.FadenTooltipData;
 import net.fuchsia.common.objects.tooltip.ToolTipEntry;
 import net.fuchsia.common.slot.GearSlot;
-import net.fuchsia.util.FadenIdentifier;
+import net.fuchsia.util.FadenCoreIdentifier;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -39,8 +38,8 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
         ArrayList<ToolTipEntry> entries = new ArrayList<>();
         ItemStack itemStack = component.data.itemStack;
 
-        if(itemStack.contains(FadenDataComponents.ITEM_TIER)) {
-            ItemTier itemTier = ItemTier.valueOf(itemStack.get(FadenDataComponents.ITEM_TIER));
+        if(itemStack.contains(FadenCoreDataComponents.ITEM_TIER)) {
+            ItemTier itemTier = ItemTier.valueOf(itemStack.get(FadenCoreDataComponents.ITEM_TIER));
             entries.add(new ToolTipEntry() {
                 @Override
                 public @Nullable Identifier getTexture(FadenTooltipComponent component) {
@@ -67,14 +66,14 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
 
             @Override
             public @NotNull Identifier getTexture(FadenTooltipComponent component) {
-                return getGearType() == GearSlot.BRACELET ? FadenIdentifier.create("textures/item/empty_bracelet_slot.png") : getGearType() == GearSlot.BELT ? FadenIdentifier.create("textures/item/empty_belt_slot.png") : FadenIdentifier.create("textures/item/empty_necklace_slot.png");
+                return getGearType() == GearSlot.BRACELET ? FadenCoreIdentifier.create("textures/item/empty_bracelet_slot.png") : getGearType() == GearSlot.BELT ? FadenCoreIdentifier.create("textures/item/empty_belt_slot.png") : FadenCoreIdentifier.create("textures/item/empty_necklace_slot.png");
             }
         });
 
         //ADD COINS
         entries.addAll(super.getToolTipEntries(component));
 
-        if(itemStack.getOrDefault(FadenDataComponents.FREE_WATER_MOVEMENT, false)) {
+        if(itemStack.getOrDefault(FadenCoreDataComponents.FREE_WATER_MOVEMENT, false)) {
             entries.add(new ToolTipEntry() {
                 @Override
                 public @Nullable Item getItem(FadenTooltipComponent component) {
@@ -88,7 +87,7 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
             });
         }
 
-        if(itemStack.contains(FadenDataComponents.DAMAGE_INCREASE_VALUE)) {
+        if(itemStack.contains(FadenCoreDataComponents.DAMAGE_INCREASE_VALUE)) {
             entries.add(new ToolTipEntry() {
                 @Override
                 public @Nullable Item getItem(FadenTooltipComponent component) {
@@ -97,12 +96,12 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
 
                 @Override
                 public Text getText(FadenTooltipComponent component) {
-                    return Text.literal(Text.translatable("tooltip.faden.damage_increase_value").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenDataComponents.DAMAGE_INCREASE_VALUE, 0f))));
+                    return Text.literal(Text.translatable("tooltip.faden.damage_increase_value").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenCoreDataComponents.DAMAGE_INCREASE_VALUE, 0f))));
                 }
             });
         }
 
-        if(itemStack.contains(FadenDataComponents.DAMAGE_INCREASE_PERCENTAGE)) {
+        if(itemStack.contains(FadenCoreDataComponents.DAMAGE_INCREASE_PERCENTAGE)) {
             entries.add(new ToolTipEntry() {
                 @Override
                 public @Nullable Item getItem(FadenTooltipComponent component) {
@@ -111,12 +110,12 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
 
                 @Override
                 public Text getText(FadenTooltipComponent component) {
-                    return Text.literal(Text.translatable("tooltip.faden.damage_increase_percentage").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenDataComponents.DAMAGE_INCREASE_VALUE, 0f))));
+                    return Text.literal(Text.translatable("tooltip.faden.damage_increase_percentage").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenCoreDataComponents.DAMAGE_INCREASE_VALUE, 0f))));
                 }
             });
         }
 
-        if(itemStack.contains(FadenDataComponents.FALL_DAMAGE_DECREASE_PERCENTAGE)) {
+        if(itemStack.contains(FadenCoreDataComponents.FALL_DAMAGE_DECREASE_PERCENTAGE)) {
             entries.add(new ToolTipEntry() {
                 @Override
                 public @Nullable Item getItem(FadenTooltipComponent component) {
@@ -125,12 +124,12 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
 
                 @Override
                 public Text getText(FadenTooltipComponent component) {
-                    return Text.literal(Text.translatable("tooltip.faden.fall_damage_decrease_percentage").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenDataComponents.FALL_DAMAGE_DECREASE_PERCENTAGE, 0f))));
+                    return Text.literal(Text.translatable("tooltip.faden.fall_damage_decrease_percentage").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenCoreDataComponents.FALL_DAMAGE_DECREASE_PERCENTAGE, 0f))));
                 }
             });
         }
 
-        if(itemStack.contains(FadenDataComponents.FALL_DAMAGE_DECREASE_BLOCKS)) {
+        if(itemStack.contains(FadenCoreDataComponents.FALL_DAMAGE_DECREASE_BLOCKS)) {
             entries.add(new ToolTipEntry() {
                 @Override
                 public @Nullable Item getItem(FadenTooltipComponent component) {
@@ -139,12 +138,12 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
 
                 @Override
                 public Text getText(FadenTooltipComponent component) {
-                    return Text.literal(Text.translatable("tooltip.faden.fall_damage_decrease_blocks").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenDataComponents.FALL_DAMAGE_DECREASE_BLOCKS, 0f))));
+                    return Text.literal(Text.translatable("tooltip.faden.fall_damage_decrease_blocks").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenCoreDataComponents.FALL_DAMAGE_DECREASE_BLOCKS, 0f))));
                 }
             });
         }
 
-        if(itemStack.contains(FadenDataComponents.JUMP_INCREASE_VALUE)) {
+        if(itemStack.contains(FadenCoreDataComponents.JUMP_INCREASE_VALUE)) {
             entries.add(new ToolTipEntry() {
                 @Override
                 public @Nullable Item getItem(FadenTooltipComponent component) {
@@ -153,12 +152,12 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
 
                 @Override
                 public Text getText(FadenTooltipComponent component) {
-                    return Text.literal(Text.translatable("tooltip.faden.jump_increase_value").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenDataComponents.JUMP_INCREASE_VALUE, 0f) * 100f)));
+                    return Text.literal(Text.translatable("tooltip.faden.jump_increase_value").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenCoreDataComponents.JUMP_INCREASE_VALUE, 0f) * 100f)));
                 }
             });
         }
 
-        if(itemStack.contains(FadenDataComponents.JUMP_INCREASE_PERCENTAGE)) {
+        if(itemStack.contains(FadenCoreDataComponents.JUMP_INCREASE_PERCENTAGE)) {
             entries.add(new ToolTipEntry() {
                 @Override
                 public @Nullable Item getItem(FadenTooltipComponent component) {
@@ -167,7 +166,7 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
 
                 @Override
                 public Text getText(FadenTooltipComponent component) {
-                    return Text.literal(Text.translatable("tooltip.faden.jump_increase_percentage").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenDataComponents.JUMP_INCREASE_PERCENTAGE, 0f))));
+                    return Text.literal(Text.translatable("tooltip.faden.jump_increase_percentage").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenCoreDataComponents.JUMP_INCREASE_PERCENTAGE, 0f))));
                 }
             });
         }
@@ -205,11 +204,11 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
     public float onLivingDamaged(PlayerEntity player, LivingEntity livingEntity, ItemStack itemStack, float damageAmount) {
         float dmg = 0f;
         boolean damageItem = false;
-        if(itemStack.contains(FadenDataComponents.DAMAGE_INCREASE_VALUE)) {
-            dmg += itemStack.get(FadenDataComponents.DAMAGE_INCREASE_VALUE);
+        if(itemStack.contains(FadenCoreDataComponents.DAMAGE_INCREASE_VALUE)) {
+            dmg += itemStack.get(FadenCoreDataComponents.DAMAGE_INCREASE_VALUE);
             damageItem = true;
-        } else if(itemStack.contains(FadenDataComponents.DAMAGE_INCREASE_PERCENTAGE)) {
-            dmg = damageAmount + (damageAmount / 100.0f * itemStack.get(FadenDataComponents.DAMAGE_INCREASE_PERCENTAGE));
+        } else if(itemStack.contains(FadenCoreDataComponents.DAMAGE_INCREASE_PERCENTAGE)) {
+            dmg = damageAmount + (damageAmount / 100.0f * itemStack.get(FadenCoreDataComponents.DAMAGE_INCREASE_PERCENTAGE));
             damageItem = true;
         }
         if(damageItem) {
@@ -219,16 +218,16 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
     }
 
     public int onLivingFallDamage(PlayerEntity player, float fallDistance, LivingEntity livingEntity, ItemStack itemStack, int damageAmount) {
-        if(itemStack.contains(FadenDataComponents.FALL_DAMAGE_DECREASE_BLOCKS)) {
-            if(itemStack.get(FadenDataComponents.FALL_DAMAGE_DECREASE_BLOCKS) >= fallDistance) {
+        if(itemStack.contains(FadenCoreDataComponents.FALL_DAMAGE_DECREASE_BLOCKS)) {
+            if(itemStack.get(FadenCoreDataComponents.FALL_DAMAGE_DECREASE_BLOCKS) >= fallDistance) {
                 return 0;
             }
         }
 
         int dmg = damageAmount;
         boolean damageItem = false;
-        if(itemStack.contains(FadenDataComponents.FALL_DAMAGE_DECREASE_PERCENTAGE)) {
-            dmg = (int) (damageAmount - (damageAmount / 100.0f * itemStack.get(FadenDataComponents.FALL_DAMAGE_DECREASE_PERCENTAGE)));
+        if(itemStack.contains(FadenCoreDataComponents.FALL_DAMAGE_DECREASE_PERCENTAGE)) {
+            dmg = (int) (damageAmount - (damageAmount / 100.0f * itemStack.get(FadenCoreDataComponents.FALL_DAMAGE_DECREASE_PERCENTAGE)));
             damageItem = true;
         }
         if(damageItem) {
@@ -243,11 +242,11 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
     * */
     public float jumpVelocity(PlayerEntity player, ItemStack itemStack, float velocityAmount) {
         float strength = 0f;
-        if(itemStack.contains(FadenDataComponents.JUMP_INCREASE_VALUE)) {
-            strength += itemStack.get(FadenDataComponents.JUMP_INCREASE_VALUE);
+        if(itemStack.contains(FadenCoreDataComponents.JUMP_INCREASE_VALUE)) {
+            strength += itemStack.get(FadenCoreDataComponents.JUMP_INCREASE_VALUE);
             itemStack.damage(1, player, EquipmentSlot.CHEST);
-        } else if(itemStack.contains(FadenDataComponents.JUMP_INCREASE_PERCENTAGE)) {
-            strength = velocityAmount + (velocityAmount / 100.0f * itemStack.get(FadenDataComponents.JUMP_INCREASE_PERCENTAGE));
+        } else if(itemStack.contains(FadenCoreDataComponents.JUMP_INCREASE_PERCENTAGE)) {
+            strength = velocityAmount + (velocityAmount / 100.0f * itemStack.get(FadenCoreDataComponents.JUMP_INCREASE_PERCENTAGE));
             itemStack.damage(1, player, EquipmentSlot.CHEST);
         }
         return strength;

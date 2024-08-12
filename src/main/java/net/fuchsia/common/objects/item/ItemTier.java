@@ -1,16 +1,16 @@
 package net.fuchsia.common.objects.item;
 
-import net.fuchsia.util.FadenIdentifier;
+import net.fuchsia.util.FadenCoreIdentifier;
 import net.minecraft.util.Identifier;
 
 public enum ItemTier {
 
-    COMMON(FadenIdentifier.create("textures/item_tier/common.png"), 0xFFFFFFFF,1, 1),
-    UNCOMMON(FadenIdentifier.create("textures/item_tier/uncommon.png"), 0xFFFFFFFF,1.3f, 1.1f),
-    EPIC(FadenIdentifier.create("textures/item_tier/epic.png"), 0xFFFFFFFF,1.7f, 1.2f),
-    RARE(FadenIdentifier.create("textures/item_tier/rare.png"), 0xFFFFFFFF,2.0f, 1.3f),
-    LEGENDARY(FadenIdentifier.create("textures/item_tier/legendary.png"), 0xFFFFFFFF,2.3f, 1.4f),
-    MYTHIC(FadenIdentifier.create("textures/item_tier/mythic.png"), 0xFFFFFFFF,2.6f, 1.5f);
+    COMMON(FadenCoreIdentifier.create("textures/item_tier/common.png"), 0xFFFFFFFF,1, 1),
+    UNCOMMON(FadenCoreIdentifier.create("textures/item_tier/uncommon.png"), 0xFFFFFFFF,1.3f, 1.1f),
+    EPIC(FadenCoreIdentifier.create("textures/item_tier/epic.png"), 0xFFFFFFFF,1.7f, 1.2f),
+    RARE(FadenCoreIdentifier.create("textures/item_tier/rare.png"), 0xFFFFFFFF,2.0f, 1.3f),
+    LEGENDARY(FadenCoreIdentifier.create("textures/item_tier/legendary.png"), 0xFFFFFFFF,2.3f, 1.4f),
+    MYTHIC(FadenCoreIdentifier.create("textures/item_tier/mythic.png"), 0xFFFFFFFF,2.6f, 1.5f);
 
     Identifier icon;
     int color;

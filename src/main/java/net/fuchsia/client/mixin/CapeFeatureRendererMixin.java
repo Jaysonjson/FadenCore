@@ -6,8 +6,8 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 import net.fuchsia.client.screen.CapeSelectScreen;
 import net.fuchsia.common.cape.FadenCape;
-import net.fuchsia.common.cape.FadenCapes;
-import net.fuchsia.config.FadenOptions;
+import net.fuchsia.common.cape.FadenCoreCapes;
+import net.fuchsia.config.FadenCoreOptions;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
@@ -26,8 +26,8 @@ public class CapeFeatureRendererMixin {
             return vertexConsumerProvider.getBuffer(RenderLayer.getEntitySolid(CapeSelectScreen.PRE_SELECTED_CAPE.getTexture()));
         }
 
-        if(FadenOptions.getConfig().CUSTOM_CAPES) {
-            FadenCape cape = FadenCapes.getCapeForPlayer(abstractClientPlayerEntity.getUuid());
+        if(FadenCoreOptions.getConfig().CUSTOM_CAPES) {
+            FadenCape cape = FadenCoreCapes.getCapeForPlayer(abstractClientPlayerEntity.getUuid());
             if (cape != null) {
                 return vertexConsumerProvider.getBuffer(RenderLayer.getEntitySolid(cape.getTexture()));
             }
@@ -42,8 +42,8 @@ public class CapeFeatureRendererMixin {
             return new SkinTextures(CapeSelectScreen.PRE_SELECTED_CAPE.getTexture(), null, CapeSelectScreen.PRE_SELECTED_CAPE.getTexture(), null, null, false);
         }
 
-        if(FadenOptions.getConfig().CUSTOM_CAPES) {
-            FadenCape cape = FadenCapes.getCapeForPlayer(abstractClientPlayerEntity.getUuid());
+        if(FadenCoreOptions.getConfig().CUSTOM_CAPES) {
+            FadenCape cape = FadenCoreCapes.getCapeForPlayer(abstractClientPlayerEntity.getUuid());
             if (cape != null) {
                 return new SkinTextures(cape.getTexture(), null, cape.getTexture(), null, null, false);
             }

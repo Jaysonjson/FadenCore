@@ -1,7 +1,6 @@
 package net.fuchsia.common.npc;
 
 import net.fuchsia.common.race.Race;
-import net.fuchsia.common.race.RaceCosmetics;
 import net.fuchsia.server.PlayerData;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ActionResult;

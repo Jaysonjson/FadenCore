@@ -6,7 +6,7 @@ import net.fuchsia.common.race.cosmetic.RaceCosmetic;
 import net.fuchsia.common.race.cosmetic.RaceCosmeticSlot;
 import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.client.ClientPlayerDatas;
-import net.fuchsia.util.FadenRenderUtil;
+import net.fuchsia.util.FadenCoreRenderUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -17,7 +17,6 @@ import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.RotationAxis;
 
@@ -59,7 +58,7 @@ public class HeadFeatureRenderer<T extends LivingEntity> extends FeatureRenderer
                     ((ModelWithHead) this.getContextModel()).getHead().rotate(matrices);
                     model.getTransformation().getTransformation(ModelTransformationMode.HEAD).apply(false, matrices);
                     translate(matrices);
-                    FadenRenderUtil.renderBakedModel(matrices, vertexConsumers, model, (int) (light * 0.5f));
+                    FadenCoreRenderUtil.renderBakedModel(matrices, vertexConsumers, model, (int) (light * 0.5f));
                     matrices.pop();
                 }
             }

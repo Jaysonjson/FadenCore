@@ -1,20 +1,15 @@
 package net.fuchsia.common.objects.command;
 
-import java.util.ArrayList;
-import java.util.UUID;
-
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
-import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.common.objects.command.types.CapeArgumentType;
 import net.fuchsia.network.FadenNetwork;
 import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.ServerPlayerDatas;
-import net.fuchsia.util.PlayerDataUtil;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.CommandManager;
