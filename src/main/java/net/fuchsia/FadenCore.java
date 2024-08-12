@@ -3,11 +3,13 @@ package net.fuchsia;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fuchsia.common.events.FadenCoreServerEvents;
 import net.fuchsia.common.init.*;
+import net.fuchsia.common.init.items.FadenCoreItems;
 import net.fuchsia.common.npc.NPCEntity;
 import net.fuchsia.common.objects.command.types.NPCArgumentType;
 import net.fuchsia.common.objects.item.coin.CoinItem;
@@ -76,10 +78,14 @@ public class FadenCore implements ModInitializer {
 		CoinMap.reloadCoins();
 		FadenNetwork.registerC2S();
 		CommandRegistrationCallback.EVENT.register(new FadenCoreCommands());
-		RaceSkinMap.addSkins();
 		FadenCoreDataComponents.register();
 		FadenCoreEntities.register();
 		entityAttributes();
+	}
+
+	public static void setupFadenAddon(String modId, CoinItem defaultCoin) {
+		FadenCoreItems.MAIN_COIN = defaultCoin;
+		RaceSkinMap.addSkins(modId, FabricLoader.getInstance().getModContainer(modId).get());
 	}
 
 	public static void entityAttributes() {

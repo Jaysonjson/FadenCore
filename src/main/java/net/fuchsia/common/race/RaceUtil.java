@@ -24,7 +24,7 @@ public class RaceUtil {
         String skinId = RaceSkinMap.getRandomSkin(race, sub_id);
         if(!skinId.isEmpty()) {
             PlayerData data = ServerPlayerDatas.getOrLoadPlayerData(player.getUuid());
-            data.getRaceSaveData().setSkin(SkinProvider.getSkinIdentifier(skinId).toString());
+            data.getRaceSaveData().setSkin(skinId);
             data.getRaceSaveData().setRace(race.getIdentifier().toString());
             data.getRaceSaveData().setRaceSub(sub_id);
             data.getRaceSaveData().setCosmetics(cosmetics);

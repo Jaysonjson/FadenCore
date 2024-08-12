@@ -23,15 +23,14 @@ public class ClientRaceSkinCache {
      * */
     public static void add() {
         if(!added && FadenCoreOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
-            HashMap<String, byte[]> maps = RaceSkinMap.getAllMaps();
-            for (String s : maps.keySet()) {
+            HashMap<Identifier, byte[]> maps = RaceSkinMap.getAllMaps();
+            for (Identifier s : maps.keySet()) {
                 byte[] data = maps.get(s);
-                Identifier id = SkinProvider.getSkinIdentifier(s);
-                SkinTexture skinTexture = new SkinTexture(id);
+                SkinTexture skinTexture = new SkinTexture(s);
                 skinTexture.setSkinData(data);
-                MinecraftClient.getInstance().getTextureManager().registerTexture(id, skinTexture);
-                MinecraftClient.getInstance().getTextureManager().bindTexture(id);
-                SKINS.put(s, id);
+                MinecraftClient.getInstance().getTextureManager().registerTexture(s, skinTexture);
+                MinecraftClient.getInstance().getTextureManager().bindTexture(s);
+                SKINS.put(s.toString(), s);
             }
             added = true;
         }

@@ -30,7 +30,7 @@ public abstract class Race {
     protected Vector3f size = new Vector3f();
     protected EntityDimensions entityDimensions = EntityDimensions.changing(0.6F, 1.8F).withEyeHeight(1.62F).withAttachments(EntityAttachments.builder().add(EntityAttachmentType.VEHICLE, PlayerEntity.VEHICLE_ATTACHMENT_POS));
     protected ImmutableMap<Object, Object> poseDimensions;
-    protected HashMap<String, byte[]> skinMap = new HashMap<>();
+    protected HashMap<Identifier, byte[]> skinMap = new HashMap<>();
 
     public Race(Identifier identifier, String[] subIds, Vector3f size, EntityDimensions entityDimensions, ImmutableMap<Object, Object> poseDimensions) {
         this.identifier = identifier;
@@ -53,7 +53,7 @@ public abstract class Race {
         return null;
     }
 
-    public HashMap<String, byte[]> getSkinMap() {
+    public HashMap<Identifier, byte[]> getSkinMap() {
         return skinMap;
     }
 
