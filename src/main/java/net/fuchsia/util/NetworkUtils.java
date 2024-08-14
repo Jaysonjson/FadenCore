@@ -1,7 +1,7 @@
 package net.fuchsia.util;
 
 import net.fuchsia.common.data.ItemValues;
-import net.fuchsia.network.FadenNetwork;
+import net.fuchsia.network.FadenCoreNetwork;
 import net.fuchsia.server.ServerPlayerDatas;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -17,16 +17,16 @@ public class NetworkUtils {
             ServerPlayerDatas.getPlayerDatas().put(serverPlayerEntity.getUuid(), ServerPlayerDatas.getOrLoadPlayerData(serverPlayerEntity.getUuid()));
         }
 
-        FadenNetwork.Server.sendPlayerDatas(serverPlayerEntity);
+        FadenCoreNetwork.Server.sendPlayerDatas(serverPlayerEntity);
         syncPlayer(server, serverPlayerEntity);
-        FadenNetwork.Server.askItemValues(serverPlayerEntity);
+        FadenCoreNetwork.Server.askItemValues(serverPlayerEntity);
     }
 
     public static void syncPlayer(MinecraftServer server, ServerPlayerEntity serverPlayerEntity) {
-        FadenNetwork.Server.syncPlayerData(serverPlayerEntity, serverPlayerEntity.getUuid(), ServerPlayerDatas.getOrLoadPlayerData(serverPlayerEntity.getUuid()));
+        FadenCoreNetwork.Server.syncPlayerData(serverPlayerEntity, serverPlayerEntity.getUuid(), ServerPlayerDatas.getOrLoadPlayerData(serverPlayerEntity.getUuid()));
         for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
             if(player.getUuid().toString().equalsIgnoreCase(serverPlayerEntity.getUuid().toString())) continue;
-            FadenNetwork.Server.syncPlayerData(player, serverPlayerEntity.getUuid(), ServerPlayerDatas.getOrLoadPlayerData(serverPlayerEntity.getUuid()));
+            FadenCoreNetwork.Server.syncPlayerData(player, serverPlayerEntity.getUuid(), ServerPlayerDatas.getOrLoadPlayerData(serverPlayerEntity.getUuid()));
         }
     }
 

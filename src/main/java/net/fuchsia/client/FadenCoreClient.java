@@ -4,13 +4,10 @@ import com.google.common.reflect.TypeToken;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fuchsia.FadenCore;
 import net.fuchsia.client.handler.FadenItemModelHandler;
-import net.fuchsia.client.overlay.InstrumentMusicOverlay;
-import net.fuchsia.client.overlay.StatsOverlay;
 import net.fuchsia.client.registry.FadenItemModelRegistry;
 import net.fuchsia.common.cape.FadenCape;
 import net.fuchsia.common.cape.FadenCoreCapes;
@@ -20,7 +17,7 @@ import net.fuchsia.common.objects.music_instance.ClientMusicInstance;
 import net.fuchsia.common.objects.tooltip.FadenTooltipComponent;
 import net.fuchsia.common.objects.tooltip.FadenTooltipData;
 import net.fuchsia.common.race.skin.client.ClientRaceSkinCache;
-import net.fuchsia.network.FadenNetwork;
+import net.fuchsia.network.FadenCoreNetwork;
 import net.fuchsia.util.FadenCoreCheckSum;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.sound.PositionedSoundInstance;
@@ -38,7 +35,7 @@ public class FadenCoreClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        FadenNetwork.registerS2C();
+        FadenCoreNetwork.registerS2C();
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
             tryToLoadTextures(FadenCoreClothes::load, "CLOTH");
             tryToLoadTextures(ClientRaceSkinCache::add, "RACE SKINS");
@@ -71,8 +68,8 @@ public class FadenCoreClient implements ClientModInitializer {
         });
 
         /* Other Devs should implement it themselves if they want it */
-        HudRenderCallback.EVENT.register(new StatsOverlay());
-        HudRenderCallback.EVENT.register(new InstrumentMusicOverlay());
+        //HudRenderCallback.EVENT.register(new StatsOverlay());
+        //HudRenderCallback.EVENT.register(new InstrumentMusicOverlay());
 
         registerModels();
 

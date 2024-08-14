@@ -17,43 +17,57 @@ import net.fuchsia.FadenCore;
 public class FadenCoreOnlineUtil {
 
     public static String getJSONData(String requestURL) {
-        try (Scanner scanner = new Scanner(new URL(requestURL).openStream(), StandardCharsets.UTF_8.toString()))
-        {
+        try (Scanner scanner = new Scanner(new URL(requestURL).openStream(), StandardCharsets.UTF_8.toString())) {
             scanner.useDelimiter("\\A");
             return scanner.hasNext() ? scanner.next() : "";
         } catch (IOException e) {
-            e.printStackTrace();
+            FadenCore.LOGGER.error("Error fetching JSON data", e);
         }
         return "{}";
     }
 
     public static <T> T getDataOrCache(String requestURL, File file, String checksum) {
         try {
-            T t = null;
-            String json = "{}";
-            if(!file.exists()) {
-                //USE GITHUB JSON INSTEAD OF GSON, SO THE CHECKSUM MATCHES
-                json = FadenCoreOnlineUtil.getJSONData(requestURL);
-                t = FadenCore.GSON.fromJson(json, new TypeToken<T>(){}.getType());
-                FileWriter writer = new FileWriter(file);
-                writer.write(json);
-                writer.close();
+            if (!file.exists() || !isChecksumValid(file, checksum)) {
+                String json = fetchAndCacheData(requestURL, file);
+                return FadenCore.GSON.fromJson(json, new TypeToken<T>(){}.getType());
             } else {
-                InputStream inputStream = new FileInputStream(file);
-                t = FadenCore.GSON.fromJson(new FileReader(file), new TypeToken<T>(){}.getType());
-                if(!FadenCoreCheckSum.checkSum(inputStream).equals(checksum)) {
-                    FadenCore.LOGGER.warn("Mismatched Checksum for " + file + " - retrieving data again");
-                    json = FadenCoreOnlineUtil.getJSONData(requestURL);
-                    t = FadenCore.GSON.fromJson(json, new TypeToken<T>(){}.getType());
-                }
-                inputStream.close();
-                FileWriter writer = new FileWriter(file);
-                writer.write(json);
-                writer.close();
+                return readDataFromFile(file);
             }
-            return t;
         } catch (Exception e) {
-            e.printStackTrace();
+            FadenCore.LOGGER.error("Error fetching or caching data", e);
+        }
+        return null;
+    }
+
+    private static boolean isChecksumValid(File file, String checksum) {
+        try (InputStream inputStream = new FileInputStream(file)) {
+            return FadenCoreCheckSum.checkSum(inputStream).equals(checksum);
+        } catch (IOException e) {
+            FadenCore.LOGGER.error("Error checking checksum", e);
+        }
+        return false;
+    }
+
+    private static void writeToFile(File file, String data) {
+        try (FileWriter writer = new FileWriter(file)) {
+            writer.write(data);
+        } catch (IOException e) {
+            FadenCore.LOGGER.error("Error writing to file", e);
+        }
+    }
+
+    private static String fetchAndCacheData(String requestURL, File file) {
+        String json = getJSONData(requestURL);
+        writeToFile(file, json);
+        return json;
+    }
+
+    private static <T> T readDataFromFile(File file) {
+        try (FileReader fileReader = new FileReader(file)) {
+            return FadenCore.GSON.fromJson(fileReader, new TypeToken<T>(){}.getType());
+        } catch (IOException e) {
+            FadenCore.LOGGER.error("Error reading data from file", e);
         }
         return null;
     }
@@ -61,32 +75,15 @@ public class FadenCoreOnlineUtil {
     public static String getJSONDataOrCache(String requestURL, File file, String checksum) {
         try {
             String json = "{}";
-            if(!file.exists()) {
-                //USE GITHUB JSON INSTEAD OF GSON, SO THE CHECKSUM MATCHES
-                json = FadenCoreOnlineUtil.getJSONData(requestURL);
-                FileWriter writer = new FileWriter(file);
-                writer.write(json);
-                writer.close();
+            if (!file.exists() || !isChecksumValid(file, checksum)) {
+                json = fetchAndCacheData(requestURL, file);
+            } else {
+                json = readDataFromFile(file);
             }
-
-            if(!file.exists() || json.equalsIgnoreCase("{}")){
-                InputStream inputStream = new FileInputStream(file);
-                if(!FadenCoreCheckSum.checkSum(inputStream).equals(checksum) || json.equalsIgnoreCase("{}")) {
-                    FadenCore.LOGGER.warn("Mismatched Checksum for " + file + " - retrieving data again");
-                    json = FadenCoreOnlineUtil.getJSONData(requestURL);
-                    FileWriter writer = new FileWriter(file);
-                    writer.write(json);
-                    writer.close();
-                }
-                inputStream.close();
-            }
-
             return json;
         } catch (Exception e) {
-            e.printStackTrace();
+            FadenCore.LOGGER.error("Error fetching or caching JSON data", e);
         }
         return "{}";
     }
-
-
 }

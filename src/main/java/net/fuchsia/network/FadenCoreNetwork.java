@@ -1,6 +1,5 @@
 package net.fuchsia.network;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -17,7 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
 
-public class FadenNetwork {
+public class FadenCoreNetwork {
 
     public static void registerS2C() {
         ClientPlayNetworking.registerGlobalReceiver(SendPlayerDatasS2CPacket.ID, SendPlayerDatasS2CPacket::receive);

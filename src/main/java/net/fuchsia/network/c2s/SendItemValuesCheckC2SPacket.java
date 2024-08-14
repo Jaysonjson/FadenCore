@@ -2,7 +2,7 @@ package net.fuchsia.network.c2s;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fuchsia.FadenCore;
-import net.fuchsia.network.FadenNetwork;
+import net.fuchsia.network.FadenCoreNetwork;
 import net.fuchsia.util.FadenCoreCheckSum;
 import net.fuchsia.util.FadenCoreIdentifier;
 import net.fuchsia.util.NetworkUtils;
@@ -34,7 +34,7 @@ public record SendItemValuesCheckC2SPacket(String checksum) implements CustomPay
         String serverChecksum = FadenCoreCheckSum.checkSum(FadenCore.GSON.toJson(NetworkUtils.trimItemValueMap()));
         if(!checksum.equalsIgnoreCase(serverChecksum)) {
             FadenCore.LOGGER.debug("Updated Item Values for {} due to mismatched Checksum", context.player().getName());
-            FadenNetwork.Server.sendItemValues(context.player());
+            FadenCoreNetwork.Server.sendItemValues(context.player());
         }
     }
 }

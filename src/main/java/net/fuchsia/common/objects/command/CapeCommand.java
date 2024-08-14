@@ -7,7 +7,7 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
 import net.fuchsia.common.objects.command.types.CapeArgumentType;
-import net.fuchsia.network.FadenNetwork;
+import net.fuchsia.network.FadenCoreNetwork;
 import net.fuchsia.server.PlayerData;
 import net.fuchsia.server.ServerPlayerDatas;
 import net.minecraft.command.argument.EntityArgumentType;
@@ -45,7 +45,7 @@ public class CapeCommand {
             playerData.getCapes().add(cape);
         }
         for (ServerPlayerEntity serverPlayerEntity : source.getSource().getServer().getPlayerManager().getPlayerList()) {
-            FadenNetwork.Server.sendCapeUpdate(serverPlayerEntity, player.getUuid(), cape, false);
+            FadenCoreNetwork.Server.sendCapeUpdate(serverPlayerEntity, player.getUuid(), cape, false);
         }
         return 0;
     }
@@ -57,7 +57,7 @@ public class CapeCommand {
         PlayerData playerData = ServerPlayerDatas.getOrLoadPlayerData(player.getUuid());
         playerData.getCapes().remove(cape);
         for (ServerPlayerEntity serverPlayerEntity : source.getSource().getServer().getPlayerManager().getPlayerList()) {
-            FadenNetwork.Server.sendCapeUpdate(serverPlayerEntity, player.getUuid(), cape, true);
+            FadenCoreNetwork.Server.sendCapeUpdate(serverPlayerEntity, player.getUuid(), cape, true);
         }
         return 0;
     }

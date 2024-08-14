@@ -2,6 +2,7 @@ package net.fuchsia.common.objects.item.coin;
 
 import java.util.Optional;
 
+import net.fuchsia.common.objects.CoinMap;
 import net.minecraft.item.tooltip.TooltipData;
 import org.joml.Matrix4f;
 
@@ -58,7 +59,7 @@ public class CoinItem extends Item implements ItemToolTipRenderer {
     public void toolTipDrawItem(FadenTooltipComponent component, TextRenderer textRenderer, int x, int y, DrawContext context) {
         context.getMatrices().push();
         context.getMatrices().scale(0.5f, 0.5f,0.5f);
-        context.drawItem(FadenCoreItems.MAIN_COIN.getDefaultStack(), x * 2, y * 2);
+        context.drawItem(CoinMap.getLowestCoin().getDefaultStack(), x * 2, y * 2);
         context.getMatrices().pop();
     }
 

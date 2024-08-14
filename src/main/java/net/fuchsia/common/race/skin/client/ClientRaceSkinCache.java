@@ -2,6 +2,7 @@ package net.fuchsia.common.race.skin.client;
 
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 import net.fuchsia.common.race.RaceSkinMap;
 import net.fuchsia.common.race.skin.provider.SkinProvider;
@@ -12,9 +13,8 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.Identifier;
 
 public class ClientRaceSkinCache {
-    private static HashMap<String, Identifier> SKINS = new HashMap<>();
+    private static ConcurrentHashMap<String, Identifier> SKINS = new ConcurrentHashMap<>();
     private static boolean added = false;
-
 
     /*
      * I keep it with the added bool for now, and just put it into client world load,
@@ -22,7 +22,7 @@ public class ClientRaceSkinCache {
      *  ~Jayson
      * */
     public static void add() {
-        if(!added && FadenCoreOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
+        if (!added && FadenCoreOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
             HashMap<Identifier, byte[]> maps = RaceSkinMap.getAllMaps();
             for (Identifier s : maps.keySet()) {
                 byte[] data = maps.get(s);
@@ -38,19 +38,19 @@ public class ClientRaceSkinCache {
 
     public static Identifier getSkin(UUID playerUuid) {
         PlayerData data = ClientPlayerDatas.getPlayerData(playerUuid);
-        if(data != null) {
+        if (data != null) {
             return Identifier.of(data.getRaceSaveData().getSkin());
         }
         return Identifier.of("missing");
     }
 
-    public static HashMap<String, Identifier> getSkins() {
+    public static ConcurrentHashMap<String, Identifier> getSkins() {
         return SKINS;
     }
 
     public static boolean hasSkin(UUID playerUuid) {
         PlayerData data = ClientPlayerDatas.getPlayerData(playerUuid);
-        if(data != null) {
+        if (data != null) {
             return !data.getRaceSaveData().getSkin().isEmpty();
         }
         return false;

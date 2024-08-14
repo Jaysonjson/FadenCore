@@ -25,17 +25,22 @@ public class CurrencyUtil {
             add(world, pos, inventory, amount);
         }
 
+
+        public static void removeAll(Inventory inventory) {
+            for (int i = 0; i < inventory.size(); i++) {
+                if (inventory.getStack(i).getItem() instanceof CoinItem) {
+                    inventory.setStack(i, Items.AIR.getDefaultStack());
+                }
+            }
+        }
+
         /*
          * ordered is faster, but gives higher coins
          */
         public static void remove(World world, BlockPos pos, Inventory inventory, int amount, boolean order) {
             if (order) {
                 int currentAmount = count(inventory);
-                for (int i = 0; i < inventory.size(); i++) {
-                    if (inventory.getStack(i).getItem() instanceof CoinItem) {
-                        inventory.setStack(i, Items.AIR.getDefaultStack());
-                    }
-                }
+                removeAll(inventory);
                 add(world, pos, inventory, currentAmount - amount);
             } else {
                 for (int i = 0; i < inventory.size(); i++) {

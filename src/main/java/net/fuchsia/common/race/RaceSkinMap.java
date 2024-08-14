@@ -28,32 +28,30 @@ public class RaceSkinMap {
 
 	private static void loadSkin(Race race, String subId, String modId, ModContainer modContainer) {
 		String skinPath = getSkinPath(race, modId);
-		if(modContainer.findPath(skinPath + subId + "/").isEmpty()) {
+		Path skinDir = modContainer.findPath(skinPath + subId + "/").orElse(null);
+
+		if (skinDir == null) {
 			FadenCore.LOGGER.error("Could not find Race Skins for SubId " + subId + " for mod " + modId);
-			System.out.println("Could not find Race Skins for mod " + modId);
 			return;
 		}
-		Path skins = modContainer.findPath(skinPath + subId + "/").get();
+
 		try {
-			Path[] ar = Files.list(skins).toArray(Path[]::new);
-			for (int i = 0; i < ar.length; i++) {
-				InputStream inputStream = Files.newInputStream(ar[i]);
-				String id = ar[i].toString();
-				if(id.contains("/")) {
-					id = id.substring(ar[i].toString().lastIndexOf("/") + 1);
-				} else {
-					id = id.substring(ar[i].toString().lastIndexOf("\\") + 1);
-				}
-				id = id.substring(0, id.length() - 4);
-				race.getSkinMap().put(Identifier.of(modId, "skin/" + subId + "/" + id), SkinProvider.readSkin(inputStream));
-				FadenCore.LOGGER.debug("Loaded Skin: " + subId + "/" + id);
-				System.out.println("Loaded Skin: " + subId + "/" + id);
-			}
+			Files.walk(skinDir)
+					.filter(Files::isRegularFile)
+					.forEach(path -> {
+						try (InputStream inputStream = Files.newInputStream(path)) {
+							String id = path.getFileName().toString();
+							id = id.substring(0, id.lastIndexOf('.'));
+							race.getSkinMap().put(Identifier.of(modId, "skin/" + subId + "/" + id), SkinProvider.readSkin(inputStream));
+							FadenCore.LOGGER.debug("Loaded Skin: " + subId + "/" + id);
+						} catch (IOException e) {
+							FadenCore.LOGGER.error("Error loading skin from path: " + path, e);
+						}
+					});
 		} catch (IOException e) {
-			e.printStackTrace();
+			FadenCore.LOGGER.error("Error walking through skin directory: " + skinDir, e);
 		}
 	}
-
 
 	public static String getSkinPath(Race race, String modid) {
 		return "assets/" + modid + "/textures/skin/" + race.getIdentifier().getPath().toLowerCase() + "/";
@@ -82,18 +80,15 @@ public class RaceSkinMap {
 		Random random = new Random();
 		ArrayList<String> buffer = new ArrayList<>();
 		for (Identifier s : race.getSkinMap().keySet()) {
-			if(s.toString().contains("/")) {
-				String skinId = s.toString().substring(s.toString().indexOf('/') + 1);
-				System.out.println("S1: " + skinId);
-				skinId = skinId.substring(0, skinId.indexOf("/"));
-				System.out.println(skinId);
+			String[] parts = s.toString().split("/");
+			if (parts.length > 1) {
+				String skinId = parts[1];
 				if (skinId.equalsIgnoreCase(subId)) {
 					buffer.add(s.toString());
 				}
 			}
 		}
-		if(race.getSkinMap().isEmpty()) return "";
-		//return race.getSkinMap().keySet().toArray(new String[] {})[random.nextInt(race.getSkinMap().size())];
+		if (buffer.isEmpty()) return "";
 		return buffer.get(random.nextInt(buffer.size()));
 	}
 }

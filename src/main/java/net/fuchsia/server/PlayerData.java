@@ -8,7 +8,7 @@ import java.util.UUID;
 
 import net.fuchsia.common.init.FadenCoreRaces;
 import net.fuchsia.common.race.Race;
-import net.fuchsia.network.FadenNetwork;
+import net.fuchsia.network.FadenCoreNetwork;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.jetbrains.annotations.Nullable;
 
@@ -72,7 +72,7 @@ public class PlayerData implements Serializable {
     public void sync() {
         if(ServerPlayerDatas.SERVER != null) {
             for (ServerPlayerEntity serverPlayerEntity : ServerPlayerDatas.SERVER.getPlayerManager().getPlayerList()) {
-                FadenNetwork.Server.syncPlayerData(serverPlayerEntity, getUuid(), this);
+                FadenCoreNetwork.Server.syncPlayerData(serverPlayerEntity, getUuid(), this);
             }
         }
     }

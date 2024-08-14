@@ -25,5 +25,9 @@ public class CoinMap {
 		return COINS;
 	}
 
+	public static Item getLowestCoin() {
+		return getCoinMap().get(0);
+	}
+
 
 }

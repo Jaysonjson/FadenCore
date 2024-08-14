@@ -38,32 +38,34 @@ public abstract class FadenQuest implements IQuest {
         return getSteps().get(0);
     }
 
-    public void checkAndRewardStep(PlayerEntity player, Identifier stepId) {
-        IQuestStep step = null;
+    private IQuestStep getStep(Identifier stepId) {
         for (IQuestStep iQuestStep : getSteps()) {
-            if(iQuestStep.id().toString().equalsIgnoreCase(stepId.toString())) {
-                step = iQuestStep;
-                break;
+            if (iQuestStep.id().toString().equalsIgnoreCase(stepId.toString())) {
+                return iQuestStep;
             }
         }
-        if(step != null) {
-            if(QuestCache.stepActive(player.getUuid(), this, step)) {
-                step.rewardAndFinish(player);
-                for (IQuestStep iQuestStep : getSteps()) {
-                    if(step.nextStep() == null) {
-                        finishQuest(player);
-                        QuestCache.finishQuestLine(player.getUuid(), this, step);
-                    } else {
-                        if (iQuestStep.id().toString().equalsIgnoreCase(step.nextStep().toString())) {
-                            QuestCache.addOrUpdate(player.getUuid(), this, iQuestStep);
-                            break;
-                        }
-                    }
-                }
+        return null;
+    }
+
+    private void handleNextStep(PlayerEntity player, IQuestStep step) {
+        if (step.nextStep() == null) {
+            finishQuest(player);
+            QuestCache.finishQuestLine(player.getUuid(), this, step);
+        } else {
+            IQuestStep nextStep = getStep(step.nextStep());
+            if (nextStep != null) {
+                QuestCache.addOrUpdate(player.getUuid(), this, nextStep);
             }
         }
     }
 
+    public void checkAndRewardStep(PlayerEntity player, Identifier stepId) {
+        IQuestStep step = getStep(stepId);
+        if (step != null && QuestCache.stepActive(player.getUuid(), this, step)) {
+            step.rewardAndFinish(player);
+            handleNextStep(player, step);
+        }
+    }
 
     @Override
     public void startQuest(UUID player) {

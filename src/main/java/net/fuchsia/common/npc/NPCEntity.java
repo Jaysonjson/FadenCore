@@ -57,14 +57,13 @@ public class NPCEntity extends PathAwareEntity {
     }
 
     public INPC getNpc() {
-        if(getDataTracker().get(NPC_DATA).isBlank()) return null;
-        if(npc == null) {
-            for (INPC inpc : FadenCoreNPCs.getNPCS()) {
-                if(inpc.getId().toString().equalsIgnoreCase(getDataTracker().get(NPC_DATA))) {
-                    npc = inpc;
-                    return npc;
-                }
-            }
+        String npcData = getDataTracker().get(NPC_DATA);
+        if (npcData.isBlank()) return null;
+        if (npc == null) {
+            npc = FadenCoreNPCs.getNPCS().stream()
+                    .filter(inpc -> inpc.getId().toString().equalsIgnoreCase(npcData))
+                    .findFirst()
+                    .orElse(null);
         }
         return npc;
     }

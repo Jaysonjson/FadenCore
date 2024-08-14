@@ -14,7 +14,4 @@ import java.util.List;
 public class FadenCoreItems {
 
     public static List<FadenDataItem> ITEMS = new ArrayList<>();
-
-    public static Item MAIN_COIN = null;
-
 }

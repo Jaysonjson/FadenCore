@@ -3,17 +3,13 @@ package net.fuchsia;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Random;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.fuchsia.common.cape.FadenCoreCapes;
 import net.fuchsia.common.events.FadenCoreServerEvents;
 import net.fuchsia.common.init.*;
-import net.fuchsia.common.init.items.FadenCoreItems;
 import net.fuchsia.common.npc.NPCEntity;
 import net.fuchsia.common.objects.command.types.NPCArgumentType;
-import net.fuchsia.common.objects.item.coin.CoinItem;
 import net.fuchsia.server.FadenCoreData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +22,6 @@ import net.fabricmc.fabric.api.command.v2.ArgumentTypeRegistry;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
-import net.fuchsia.common.CheckSums;
 import net.fuchsia.common.objects.CoinMap;
 import net.fuchsia.common.objects.command.FadenCoreCommands;
 import net.fuchsia.common.objects.command.types.CapeArgumentType;
@@ -36,7 +31,7 @@ import net.fuchsia.common.race.RaceSkinMap;
 import net.fuchsia.config.FadenCoreConfig;
 import net.fuchsia.config.FadenCoreConfigScreen;
 import net.fuchsia.config.FadenCoreOptions;
-import net.fuchsia.network.FadenNetwork;
+import net.fuchsia.network.FadenCoreNetwork;
 import net.fuchsia.util.FadenCoreIdentifier;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.command.argument.serialize.ConstantArgumentSerializer;
@@ -49,7 +44,6 @@ public class FadenCore implements ModInitializer {
 	public static ModContainer CONTAINER;
 	public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 	public static final Random RANDOM = new Random();
-	public static CheckSums CHECKSUMS = new CheckSums();
 	public static FadenCoreData DATA = new FadenCoreData();
 
 	@Override
@@ -76,15 +70,14 @@ public class FadenCore implements ModInitializer {
 	}
 
 	public static void init() {
-		FadenNetwork.registerC2S();
+		FadenCoreNetwork.registerC2S();
 		CommandRegistrationCallback.EVENT.register(new FadenCoreCommands());
 		FadenCoreDataComponents.register();
 		FadenCoreEntities.register();
 		entityAttributes();
 	}
 
-	public static void setupFadenAddon(String modId, CoinItem defaultCoin) {
-		FadenCoreItems.MAIN_COIN = defaultCoin;
+	public static void setupFadenAddon(String modId) {
 		RaceSkinMap.addSkins(modId, FabricLoader.getInstance().getModContainer(modId).get());
 		CoinMap.reloadCoins();
 	}

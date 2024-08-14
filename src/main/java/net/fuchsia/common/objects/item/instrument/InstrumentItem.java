@@ -4,7 +4,7 @@ import net.fuchsia.common.init.FadenCoreDataComponents;
 import net.fuchsia.common.init.FadenCoreMusicInstances;
 import net.fuchsia.common.objects.music_instance.InstrumentedMusic;
 import net.fuchsia.common.objects.music_instance.MusicInstance;
-import net.fuchsia.network.FadenNetwork;
+import net.fuchsia.network.FadenCoreNetwork;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -61,7 +61,7 @@ public class InstrumentItem extends Item {
                 handItem.set(FadenCoreDataComponents.MUSIC_INSTANCE, uuid.toString());
                 user.setStackInHand(hand, handItem);
                 for (ServerPlayerEntity serverPlayerEntity : world.getServer().getPlayerManager().getPlayerList()) {
-                    FadenNetwork.Server.sendMusicInstance(serverPlayerEntity, musicInstance);
+                    FadenCoreNetwork.Server.sendMusicInstance(serverPlayerEntity, musicInstance);
                 }
             }
 
@@ -73,7 +73,7 @@ public class InstrumentItem extends Item {
                         instance.getInstruments().add(getInstrumentType());
                         //JUST SEND IT TO ALL, SO PLAYERS CAN JOIN
                         for (ServerPlayerEntity serverPlayerEntity : world.getServer().getPlayerManager().getPlayerList()) {
-                            FadenNetwork.Server.sendMusicInstance(serverPlayerEntity, instance);
+                            FadenCoreNetwork.Server.sendMusicInstance(serverPlayerEntity, instance);
                         }
                     }
                 }
@@ -95,7 +95,7 @@ public class InstrumentItem extends Item {
                     }
                     if(!world.isClient) {
                         for (ServerPlayerEntity serverPlayerEntity : world.getServer().getPlayerManager().getPlayerList()) {
-                            FadenNetwork.Server.sendMusicInstance(serverPlayerEntity, instance);
+                            FadenCoreNetwork.Server.sendMusicInstance(serverPlayerEntity, instance);
                         }
                     }
                     stack.remove(FadenCoreDataComponents.MUSIC_INSTANCE);

@@ -10,7 +10,7 @@ import org.joml.Vector3f;
 import net.fuchsia.client.PlayerModelCache;
 import net.fuchsia.client.screen.widgets.CapeListWidget;
 import net.fuchsia.common.cape.FadenCape;
-import net.fuchsia.network.FadenNetwork;
+import net.fuchsia.network.FadenCoreNetwork;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
@@ -41,7 +41,7 @@ public class CapeSelectScreen extends Screen {
         capes.setX(15);
         this.addDrawableChild(selectCapeWidget = ButtonWidget.builder(Text.translatable("button.faden.select_cape"), button -> {
                     if(PRE_SELECTED_CAPE != null) {
-                        FadenNetwork.Client.requestCapeUpdate(client.player.getUuid(), PRE_SELECTED_CAPE.getId());
+                        FadenCoreNetwork.Client.requestCapeUpdate(client.player.getUuid(), PRE_SELECTED_CAPE.getId());
                         close();
                     }
                 })
@@ -50,7 +50,7 @@ public class CapeSelectScreen extends Screen {
                 .build());
 
         this.addDrawableChild(ButtonWidget.builder(Text.translatable("button.faden.remove_cape"), button -> {
-                    FadenNetwork.Client.requestCapeUpdate(client.player.getUuid(), "");
+                    FadenCoreNetwork.Client.requestCapeUpdate(client.player.getUuid(), "");
                     close();
                 })
                 .position(14, client.getWindow().getScaledHeight() - 45)
