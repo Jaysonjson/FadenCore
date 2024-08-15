@@ -6,8 +6,10 @@ import java.io.IOException;
 import java.util.Random;
 
 import json.jayson.faden.core.common.cape.FadenCoreCape;
+import json.jayson.faden.core.common.init.FadenCoreBlocks;
 import json.jayson.faden.core.common.init.FadenCoreDataComponents;
 import json.jayson.faden.core.common.init.FadenCoreEntities;
+import json.jayson.faden.core.common.init.FadenCoreTabs;
 import json.jayson.faden.core.common.race.Race;
 import json.jayson.faden.core.common.race.RaceModelType;
 import json.jayson.faden.core.common.race.cosmetic.RaceCosmeticPalette;
@@ -80,11 +82,13 @@ public class FadenCore implements ModInitializer {
 	}
 
 	public static void init() {
+		FadenCoreBlocks.init();
 		FadenCoreRegistry.init();
 		FadenCoreNetwork.registerC2S();
 		CommandRegistrationCallback.EVENT.register(new FadenCoreCommands());
 		FadenCoreDataComponents.init();
 		FadenCoreEntities.init();
+		FadenCoreTabs.init();
 		entityAttributes();
 	}
 

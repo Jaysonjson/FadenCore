@@ -84,7 +84,13 @@ public class NPCEntity extends PathAwareEntity {
     }
 
     @Override
+    public boolean cannotDespawn() {
+        return true;
+    }
+
+    @Override
     public void readNbt(NbtCompound nbt) {
+        super.readNbt(nbt);
         getDataTracker().set(NPC_DATA, nbt.getString("npc"));
     }
 

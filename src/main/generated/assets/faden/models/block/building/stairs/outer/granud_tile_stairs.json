@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "faden:block/building/granud_tiles",
-    "side": "faden:block/building/granud_tiles",
-    "top": "faden:block/building/granud_tiles"
-  }
-}

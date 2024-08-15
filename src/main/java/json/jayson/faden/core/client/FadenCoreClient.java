@@ -4,9 +4,11 @@ import com.google.common.reflect.TypeToken;
 import json.jayson.faden.core.client.overlay.InstrumentMusicOverlay;
 import json.jayson.faden.core.client.overlay.StatsOverlay;
 import json.jayson.faden.core.client.render.entity.NPCEntityRenderer;
+import json.jayson.faden.core.common.init.FadenCoreBlocks;
 import json.jayson.faden.core.common.init.FadenCoreEntities;
 import json.jayson.faden.core.registry.FadenCoreRegistry;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -26,6 +28,7 @@ import json.jayson.faden.core.common.race.skin.client.ClientRaceSkinCache;
 import json.jayson.faden.core.network.FadenCoreNetwork;
 import json.jayson.faden.core.util.FadenCoreCheckSum;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.sound.PositionedSoundInstance;
 
 import java.io.File;
@@ -84,6 +87,12 @@ public class FadenCoreClient implements ClientModInitializer {
                 PlayerModelCache.wideModel = PlayerModelCache.makeWideModel();
             }
         });
+        setBlockRenderMaps();
+        loadClientItemValues();
+    }
+
+    public void setBlockRenderMaps() {
+        BlockRenderLayerMap.INSTANCE.putBlock(FadenCoreBlocks.NPC_SPAWNER_MARKER, RenderLayer.getCutout());
     }
 
     private static void tryToLoadTextures(Runnable action, String textureType) {

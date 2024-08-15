@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "faden:block/building/diorite_bricks",
-    "side": "faden:block/building/diorite_bricks",
-    "top": "faden:block/building/diorite_bricks"
-  }
-}

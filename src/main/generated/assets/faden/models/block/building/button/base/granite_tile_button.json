@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/button",
-  "textures": {
-    "texture": "faden:block/building/granite_tiles"
-  }
-}
