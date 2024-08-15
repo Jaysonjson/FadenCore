@@ -20,6 +20,7 @@ public class CurrencyUtil {
 
     public static class Currency {
         public static void sort(World world, BlockPos pos, Inventory inventory) {
+            if(CoinMap.getCoinMap().isEmpty()) return;
             int amount = count(inventory);
             remove(world, pos, inventory, amount, true);
             add(world, pos, inventory, amount);
@@ -38,6 +39,7 @@ public class CurrencyUtil {
          * ordered is faster, but gives higher coins
          */
         public static void remove(World world, BlockPos pos, Inventory inventory, int amount, boolean order) {
+            if(CoinMap.getCoinMap().isEmpty()) return;
             if (order) {
                 int currentAmount = count(inventory);
                 removeAll(inventory);
@@ -83,6 +85,7 @@ public class CurrencyUtil {
         }
 
         public static void add(World world, BlockPos pos, Inventory inventory, int amount) {
+            if(CoinMap.getCoinMap().isEmpty()) return;
             if(amount < 1) return;
             Map<Item, Integer> itemStacks = Coin.generateCoins(amount);
             boolean drop = false;
@@ -115,6 +118,7 @@ public class CurrencyUtil {
          * Counts Currency Value of the Inventory
          * */
         public static int count(Inventory inventory) {
+            if(CoinMap.getCoinMap().isEmpty()) return 0;
             int amount = 0;
             for (Item value : CoinMap.getCoinMap().values()) {
                 amount += inventory.count(value) * Coin.getValue(value);
@@ -127,6 +131,7 @@ public class CurrencyUtil {
 
     public static class Coin {
         public static void drop(World world, BlockPos pos, int amount) {
+            if(CoinMap.getCoinMap().isEmpty()) return;
             if(amount < 1) return;
             Map<Item, Integer> itemStacks = Coin.generateCoins(amount);
             for (Item item : itemStacks.keySet()) {
@@ -139,7 +144,8 @@ public class CurrencyUtil {
         /*
          * Counts which Coints and which Amount the player has in Inventory
          * */
-        public static TreeMap<Item, Integer> count(Inventory inventory){
+        public static TreeMap<Item, Integer> count(Inventory inventory) {
+            if(CoinMap.getCoinMap().isEmpty()) new TreeMap<>();
             TreeMap<Item, Integer> coinCounts = new TreeMap<>(Collections.reverseOrder());
             for (int i = 0; i < inventory.size(); i++) {
                 ItemStack itemStack = inventory.getStack(i);
@@ -160,6 +166,7 @@ public class CurrencyUtil {
          * Generates the ItemStacks of Coins given the Currency Amount
          * */
         public static Map<Item, Integer> generateCoins(int amount) {
+            if(CoinMap.getCoinMap().isEmpty()) return new HashMap<>();
             Map<Item, Integer> itemStacks = new HashMap<>();
             while(amount > 0) {
                 for (Integer i : CoinMap.getCoinMap().keySet()) {
