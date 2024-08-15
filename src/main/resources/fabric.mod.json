@@ -5,7 +5,7 @@
 	"name": "Faden Core",
 	"description": "Faden Core",
 	"authors": [
-		"Fuchsia, Jayson.json, Ginger, Frogrilla, Derpy_7, animecheeze, Angel Dust"
+		"Jayson.json, Ginger, Frogrila"
 	],
 	"contact": {
 		"homepage": "https://discord.gg/8kUVUTHapX",
@@ -18,16 +18,16 @@
 	"accessWidener": "fadencore.accesswidener",
 	"entrypoints": {
 		"main": [
-          "net.fuchsia.FadenCore"
+			"json.jayson.faden.core.FadenCore"
 		],
 		"fabric-datagen": [
-          "net.fuchsia.datagen.FadenCoreDataGen"
+			"json.jayson.faden.core.datagen.FadenCoreDataGen"
 		],
 		"client": [
-          "net.fuchsia.client.FadenCoreClient"
+			"json.jayson.faden.core.client.FadenCoreClient"
 		],
 		"modmenu": [
-			"net.fuchsia.compat.FadenCoreModMenu"
+			"json.jayson.faden.core.compat.FadenCoreModMenu"
 		]
 	},
 	"mixins": [
