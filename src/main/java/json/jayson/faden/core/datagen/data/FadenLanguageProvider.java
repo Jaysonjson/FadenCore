@@ -27,12 +27,14 @@ public class FadenLanguageProvider extends FabricLanguageProvider {
         for (BuildingBlockDataEntry buildingBlock : FadenCoreDataGen.BLOCKS) {
             if(!buildingBlock.language()) continue;
             Identifier id = Registries.BLOCK.getId(buildingBlock.block());
+            if(!FadenCoreDataGen.MOD_ID.isBlank() && !id.getNamespace().equalsIgnoreCase(FadenCoreDataGen.MOD_ID)) continue;
             if(Language.getInstance().hasTranslation(Registries.BLOCK.get(id).getTranslationKey())) continue;
             translationBuilder.add(buildingBlock.block(), capitaliseUnderscores(id.getPath()));
         }
 
         for (FadenDataItem item : FadenCoreDataGen.ITEMS) {
             Identifier id = Registries.ITEM.getId(item.item());
+            if(!FadenCoreDataGen.MOD_ID.isBlank() && !id.getNamespace().equalsIgnoreCase(FadenCoreDataGen.MOD_ID)) continue;
             if(Language.getInstance().hasTranslation(Registries.ITEM.get(id).getTranslationKey())) continue;
             translationBuilder.add(item.item(), capitaliseUnderscores(id.getPath()));
         }

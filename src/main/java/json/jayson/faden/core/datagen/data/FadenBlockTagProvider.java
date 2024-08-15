@@ -7,8 +7,10 @@ import json.jayson.faden.core.datagen.DataToolTier;
 import json.jayson.faden.core.datagen.DataToolType;
 import json.jayson.faden.core.datagen.holders.BuildingBlockDataEntry;
 import net.minecraft.block.Block;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.util.Identifier;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -20,6 +22,9 @@ public class FadenBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     @Override
     protected void configure(RegistryWrapper.WrapperLookup arg) {
         for (BuildingBlockDataEntry block : FadenCoreDataGen.BLOCKS) {
+            Identifier blockId = Registries.BLOCK.getId(block.block());
+            if(!FadenCoreDataGen.MOD_ID.isBlank() && !blockId.getNamespace().equalsIgnoreCase(FadenCoreDataGen.MOD_ID)) continue;
+
             doTags(block.block(), block.toolType(), block.toolTier());
 
             switch (block.blockType()) {

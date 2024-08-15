@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "fadencore:block/building/npc_spawner_marker"
+  }
+}

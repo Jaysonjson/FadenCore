@@ -22,6 +22,7 @@ public class FadenRecipeProvider extends FabricRecipeProvider {
     public void generate(RecipeExporter exporter) {
         for (BuildingBlockDataEntry buildingBlock : FadenCoreDataGen.BLOCKS) {
             if(buildingBlock.base() == null) continue;
+            if(!FadenCoreDataGen.MOD_ID.isBlank() && !Registries.BLOCK.getId(buildingBlock.block()).getNamespace().equalsIgnoreCase(FadenCoreDataGen.MOD_ID)) continue;
             switch (buildingBlock.blockType()) {
                 case SLAB -> {
                     slabRecipe(buildingBlock.block(), buildingBlock.base(), exporter);

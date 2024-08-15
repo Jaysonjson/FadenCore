@@ -24,6 +24,7 @@ public class FadenDataModelProvider extends FabricModelProvider {
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
         for (BuildingBlockDataEntry buildingBlock : FadenCoreDataGen.BLOCKS) {
             Identifier blockId = Registries.BLOCK.getId(buildingBlock.block());
+            if(!FadenCoreDataGen.MOD_ID.isBlank() && !blockId.getNamespace().equalsIgnoreCase(FadenCoreDataGen.MOD_ID)) continue;
             switch (buildingBlock.blockType()) {
                 case CUBE -> {
                     new Model(Optional.of(Identifier.of("block/cube_all")), Optional.empty()).upload(Identifier.of(blockId.getNamespace(), "block/building/" + blockId.getPath()), new TextureMap().register(TextureKey.of("all"), Identifier.of(blockId.getNamespace(), "block/building/" + blockId.getPath())), blockStateModelGenerator.modelCollector);
@@ -145,6 +146,7 @@ public class FadenDataModelProvider extends FabricModelProvider {
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         for (FadenDataItem item : FadenCoreDataGen.ITEMS) {
+            if(!FadenCoreDataGen.MOD_ID.isBlank() && !Registries.ITEM.getId(item.item()).getNamespace().equalsIgnoreCase(FadenCoreDataGen.MOD_ID)) continue;
             switch (item.itemModel()) {
                 case GENERATED -> addTexturedItem(item.item(), item.texture(), itemModelGenerator);
                 case HANDHELD -> addTexturedItemHandheld(item.item(), item.texture(), itemModelGenerator);
@@ -153,6 +155,7 @@ public class FadenDataModelProvider extends FabricModelProvider {
 
         for (BuildingBlockDataEntry buildingBlock : FadenCoreDataGen.BLOCKS) {
             Identifier blockId = Registries.BLOCK.getId(buildingBlock.block());
+            if(!FadenCoreDataGen.MOD_ID.isBlank() && !blockId.getNamespace().equalsIgnoreCase(FadenCoreDataGen.MOD_ID)) continue;
             switch (buildingBlock.blockType()) {
                 case CUBE -> itemModelGenerator.register(buildingBlock.item(), new Model(Optional.of(Identifier.of(blockId.getNamespace(),"block/building/" + blockId.getPath())), Optional.empty()));
                 case DOOR -> addTexturedItem(buildingBlock.item(), "building/door/" + blockId.getPath(), itemModelGenerator);
