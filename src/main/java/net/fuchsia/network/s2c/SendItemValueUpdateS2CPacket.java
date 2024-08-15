@@ -3,8 +3,7 @@ package net.fuchsia.network.s2c;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fuchsia.common.data.ItemValues;
 import net.fuchsia.common.objects.ItemWithValues;
-import net.fuchsia.mixin.ItemMixin;
-import net.fuchsia.util.FadenIdentifier;
+import net.fuchsia.util.FadenCoreIdentifier;
 import net.minecraft.item.Item;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
@@ -14,7 +13,7 @@ import net.minecraft.util.Identifier;
 
 public record SendItemValueUpdateS2CPacket(String item, int value) implements CustomPayload {
 
-    public static final CustomPayload.Id<SendItemValueUpdateS2CPacket> ID = new CustomPayload.Id<>(FadenIdentifier.create("send_item_value_update"));
+    public static final CustomPayload.Id<SendItemValueUpdateS2CPacket> ID = new CustomPayload.Id<>(FadenCoreIdentifier.create("send_item_value_update"));
     public static final PacketCodec<RegistryByteBuf, SendItemValueUpdateS2CPacket> CODEC = new PacketCodec<>() {
         @Override
         public SendItemValueUpdateS2CPacket decode(RegistryByteBuf buf) {

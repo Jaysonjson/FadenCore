@@ -1,11 +1,5 @@
 package net.fuchsia;
 
-import net.fuchsia.util.FadenIdentifier;
-import net.minecraft.block.BlockState;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
-
 import java.util.HashMap;
 
 @Deprecated

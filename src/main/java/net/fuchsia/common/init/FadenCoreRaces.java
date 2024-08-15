@@ -1,0 +1,32 @@
+package net.fuchsia.common.init;
+
+import net.fuchsia.common.race.Race;
+import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.HashMap;
+
+public class FadenCoreRaces {
+
+    private static HashMap<Identifier, Race> RACES = new HashMap<>();
+
+    public static Race register(Race race) {
+        RACES.put(race.getIdentifier(), race);
+        return RACES.get(race.getIdentifier());
+    }
+
+    public static HashMap<Identifier, Race> getRegistry() {
+        return RACES;
+    }
+
+    @Nullable
+    public static Race getRace(Identifier id) {
+        return RACES.getOrDefault(id, null);
+    }
+
+
+    @Nullable
+    public static Race getRace(String id) {
+        return getRace(Identifier.of(id));
+    }
+}

@@ -4,7 +4,7 @@ import org.jetbrains.annotations.Nullable;
 
 import net.fuchsia.common.quest.data.FadenQuest;
 import net.fuchsia.common.quest.data.IQuestStep;
-import net.fuchsia.util.FadenIdentifier;
+import net.fuchsia.util.FadenCoreIdentifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -13,7 +13,7 @@ public class TestQuest extends FadenQuest {
 
     @Override
     public Identifier id() {
-        return FadenIdentifier.create("test_quest");
+        return FadenCoreIdentifier.create("test_quest");
     }
 
     @Override
@@ -21,7 +21,7 @@ public class TestQuest extends FadenQuest {
         getSteps().add(new IQuestStep() {
             @Override
             public Identifier id() {
-                return FadenIdentifier.create("use_test_item");
+                return FadenCoreIdentifier.create("use_test_item");
             }
 
             @Override
@@ -31,14 +31,14 @@ public class TestQuest extends FadenQuest {
 
             @Override
             public @Nullable Identifier nextStep() {
-                return FadenIdentifier.create("use_coin");
+                return FadenCoreIdentifier.create("use_coin");
             }
         });
 
         getSteps().add(new IQuestStep() {
             @Override
             public Identifier id() {
-                return FadenIdentifier.create("use_coin");
+                return FadenCoreIdentifier.create("use_coin");
             }
 
             @Override

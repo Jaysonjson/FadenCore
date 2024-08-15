@@ -2,7 +2,7 @@ package net.fuchsia.datagen.data;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.fuchsia.common.init.blocks.FadenBuildingBlocks;
+import net.fuchsia.common.init.blocks.FadenCoreBlocks;
 import net.fuchsia.datagen.DataToolTier;
 import net.fuchsia.datagen.DataToolType;
 import net.fuchsia.datagen.holders.BuildingBlockDataEntry;
@@ -19,7 +19,7 @@ public class FadenBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup arg) {
-        for (BuildingBlockDataEntry block : FadenBuildingBlocks.BUILDING_BLOCKS) {
+        for (BuildingBlockDataEntry block : FadenCoreBlocks.BUILDING_BLOCKS) {
             doTags(block.block(), block.toolType(), block.toolTier());
 
             switch (block.blockType()) {

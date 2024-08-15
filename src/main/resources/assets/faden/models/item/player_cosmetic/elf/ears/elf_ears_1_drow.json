@@ -1,7 +1,0 @@
-{
-  "parent": "faden:item/player_cosmetic/elf/ears/elf_ears_0_pale",
-  "textures": {
-    "0": "faden:item/player_cosmetic/elf/drow/ear_1",
-    "particle": "faden:item/player_cosmetic/elf/drow/ear_1"
-  }
-}

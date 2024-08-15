@@ -2,14 +2,11 @@ package net.fuchsia.client.screen.widgets;
 
 import net.fuchsia.client.screen.ScreenUtil;
 import net.fuchsia.common.cape.FadenCape;
-import net.fuchsia.common.cape.FadenCapes;
 import net.fuchsia.server.PlayerData;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.widget.AlwaysSelectedEntryListWidget;
 import net.minecraft.text.Text;
-
-import java.util.ArrayList;
 
 public class CapeListEntry extends AlwaysSelectedEntryListWidget.Entry<CapeListEntry> {
 

@@ -1,7 +1,0 @@
-{
-  "parent": "faden:item/player_cosmetic/harengon/ears/harengon_ears_brown",
-  "textures": {
-    "0": "faden:item/player_cosmetic/harengon/white_splotched/ears",
-    "particle": "faden:item/player_cosmetic/harengon/white_splotched/ears"
-  }
-}

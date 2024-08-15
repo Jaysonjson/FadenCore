@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"id": "faden",
+	"id": "fadencore",
 	"version": "${version}",
 	"name": "Faden Core",
 	"description": "Faden Core",
@@ -15,24 +15,24 @@
 	"license": "MIT",
 	"icon": "assets/faden/icon.png",
 	"environment": "*",
-	"accessWidener": "faden.accesswidener",
+	"accessWidener": "fadencore.accesswidener",
 	"entrypoints": {
 		"main": [
-          "net.fuchsia.Faden"
+          "net.fuchsia.FadenCore"
 		],
 		"fabric-datagen": [
-			"net.fuchsia.datagen.FadenDataGen"
+          "net.fuchsia.datagen.FadenCoreDataGen"
 		],
 		"client": [
-			"net.fuchsia.client.FadenClient"
+          "net.fuchsia.client.FadenCoreClient"
 		],
 		"modmenu": [
-			"net.fuchsia.compat.FadenModMenu"
+			"net.fuchsia.compat.FadenCoreModMenu"
 		]
 	},
 	"mixins": [
-		"faden.mixins.json",
-		"faden.client.mixins.json"
+		"fadencore.mixins.json",
+		"fadencore.client.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.15.7",
