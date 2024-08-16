@@ -41,7 +41,11 @@ dependencies {
 make sure to change the version to the one you want to use
 
 
-# Further Questions
+# Further Questions/Wiki
+
+The Wiki is located in https://github.com/Jaysonjson/FadenCore/wiki
+
 You can ask any further questions inside the support tab of the Fuchsia Discord Server
 https://discord.gg/rRyQaVS3SC
-Feel free to ping Jayson.json
+or look at FadenServer: https://github.com/FuchsiaTeam/FadenServer \
+Feel free to ping Jayson.json inside the Discord
