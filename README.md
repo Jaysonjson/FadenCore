@@ -27,7 +27,7 @@ maven {
 	url = "https://maven.pkg.github.com/Jaysonjson/FadenCore"
 }
 ```
-this will require Github Authentication to work, you can create a Personal Access Token in your Github Account Settings and use it as the password in the gradle.properties file
+this will require Github Authentication to work, you can create a Personal Access Token in your Github Account Settings and use it as the password in the gradle.properties file (Not inside the Project but ~/.gradle/gradle.properties) or System Env.
 
 
 then you can implement it using this inside the dependencies block:
