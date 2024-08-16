@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
 
+import json.jayson.faden.core.common.data.listeners.InstrumentedMusicData;
+import json.jayson.faden.core.common.data.listeners.InstrumentedMusicDataListener;
 import json.jayson.faden.core.common.init.FadenCoreBlocks;
 import json.jayson.faden.core.common.init.FadenCoreDataComponents;
 import json.jayson.faden.core.common.init.FadenCoreEntities;
@@ -15,6 +17,8 @@ import json.jayson.faden.core.common.events.FadenCoreServerEvents;
 import json.jayson.faden.core.common.npc.NPCEntity;
 import json.jayson.faden.core.common.objects.command.types.NPCArgumentType;
 import json.jayson.faden.core.server.FadenCoreData;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.minecraft.resource.ResourceType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,7 +61,12 @@ public class FadenCore implements ModInitializer {
 		init();
         loadConfig();
 		FadenCoreServerEvents.init();
+		resourceReloadListener();
 		argumentTypes();
+	}
+
+	public void resourceReloadListener() {
+		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new InstrumentedMusicDataListener());
 	}
 
 	public static void loadConfig() {

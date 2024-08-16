@@ -1,5 +1,7 @@
 package json.jayson.faden.core.common.events;
 
+import json.jayson.faden.core.common.objects.item.instrument.InstrumentType;
+import json.jayson.faden.core.registry.FadenCoreRegistry;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;

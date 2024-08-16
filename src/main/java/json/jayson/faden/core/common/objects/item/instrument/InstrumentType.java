@@ -1,7 +1,18 @@
 package json.jayson.faden.core.common.objects.item.instrument;
 
-public enum InstrumentType {
+import json.jayson.faden.core.registry.FadenCoreRegistry;
 
-    LUTE, HURDY, PAN_FLUTE, DRUM
+import java.io.Serializable;
+
+public class InstrumentType implements Serializable {
+
+    private String typeId = "";
+    public InstrumentType(String typeId) {
+        this.typeId = typeId;
+    }
+
+    public String getTypeId() {
+        return typeId;
+    }
 
 }

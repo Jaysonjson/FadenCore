@@ -2,10 +2,8 @@ package json.jayson.faden.core.common.objects.item.instrument;
 
 import json.jayson.faden.core.common.init.FadenCoreDataComponents;
 import json.jayson.faden.core.common.init.FadenCoreMusicInstances;
-import json.jayson.faden.core.common.objects.music_instance.InstrumentedMusic;
 import json.jayson.faden.core.common.objects.music_instance.MusicInstance;
 import json.jayson.faden.core.network.FadenCoreNetwork;
-import json.jayson.faden.core.registry.FadenCoreRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -16,7 +14,6 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 
-import java.util.Random;
 import java.util.UUID;
 
 public class InstrumentItem extends Item {
@@ -50,34 +47,13 @@ public class InstrumentItem extends Item {
             }
 
             if(createInstance) {
-                UUID uuid = UUID.randomUUID();
-                MusicInstance musicInstance = new MusicInstance();
-                musicInstance.setUuid(uuid);
-                musicInstance.setPosition(user.getPos().toVector3f());
-                musicInstance.getInstruments().add(getInstrumentType());
-                InstrumentedMusic music = FadenCoreRegistry.INSTRUMENTED_MUSIC.get(new Random().nextInt(FadenCoreRegistry.INSTRUMENTED_MUSIC.size()));
-                for (InstrumentType type : music.getInstrumentTypes().keySet()) musicInstance.getSoundEvents().put(type, music.getInstrumentTypes().get(type).getId().toString());
-                musicInstance.setMusicId(music.getId());
-                FadenCoreMusicInstances.getInstances().put(uuid, musicInstance);
-                handItem.set(FadenCoreDataComponents.MUSIC_INSTANCE, uuid.toString());
+                handItem.set(FadenCoreDataComponents.MUSIC_INSTANCE, MusicInstance.createInstance(user, getInstrumentType()).getUuid().toString());
                 user.setStackInHand(hand, handItem);
-                for (ServerPlayerEntity serverPlayerEntity : world.getServer().getPlayerManager().getPlayerList()) {
-                    FadenCoreNetwork.Server.sendMusicInstance(serverPlayerEntity, musicInstance);
-                }
             }
 
             if(handItem.contains(FadenCoreDataComponents.MUSIC_INSTANCE)) {
                 MusicInstance instance = FadenCoreMusicInstances.getInstance(UUID.fromString(handItem.get(FadenCoreDataComponents.MUSIC_INSTANCE)));
-                if (instance != null) {
-                    System.out.println("Playing: " + instance.getUuid());
-                    if (!instance.getInstruments().contains(getInstrumentType())) {
-                        instance.getInstruments().add(getInstrumentType());
-                        //JUST SEND IT TO ALL, SO PLAYERS CAN JOIN
-                        for (ServerPlayerEntity serverPlayerEntity : world.getServer().getPlayerManager().getPlayerList()) {
-                            FadenCoreNetwork.Server.sendMusicInstance(serverPlayerEntity, instance);
-                        }
-                    }
-                }
+                if (instance != null) instance.addNewInstrument(getInstrumentType(), user);
             }
         }
         return super.use(world, user, hand);
@@ -90,9 +66,7 @@ public class InstrumentItem extends Item {
                 if(stack.contains(FadenCoreDataComponents.MUSIC_INSTANCE)) {
                     MusicInstance instance = FadenCoreMusicInstances.getInstance(UUID.fromString(stack.get(FadenCoreDataComponents.MUSIC_INSTANCE)));
                     if (instance != null) {
-                        if(instance.getInstruments().contains(getInstrumentType())) {
-                            instance.getInstruments().remove(getInstrumentType());
-                        }
+                        instance.getInstruments().remove(getInstrumentType().getTypeId());
                     }
                     if(!world.isClient) {
                         for (ServerPlayerEntity serverPlayerEntity : world.getServer().getPlayerManager().getPlayerList()) {
