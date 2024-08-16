@@ -5,24 +5,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
 
-import json.jayson.faden.core.common.cape.FadenCoreCape;
 import json.jayson.faden.core.common.init.FadenCoreBlocks;
 import json.jayson.faden.core.common.init.FadenCoreDataComponents;
 import json.jayson.faden.core.common.init.FadenCoreEntities;
 import json.jayson.faden.core.common.init.FadenCoreTabs;
-import json.jayson.faden.core.common.race.Race;
-import json.jayson.faden.core.common.race.RaceModelType;
-import json.jayson.faden.core.common.race.cosmetic.RaceCosmeticPalette;
 import json.jayson.faden.core.registry.FadenCoreRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import json.jayson.faden.core.common.events.FadenCoreServerEvents;
 import json.jayson.faden.core.common.npc.NPCEntity;
 import json.jayson.faden.core.common.objects.command.types.NPCArgumentType;
 import json.jayson.faden.core.server.FadenCoreData;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -90,9 +82,14 @@ public class FadenCore implements ModInitializer {
 		FadenCoreEntities.init();
 		FadenCoreTabs.init();
 		entityAttributes();
+		FabricLoader.getInstance().getEntrypointContainers("fadencore", FadenCoreApi.class).forEach(entrypoint -> {
+			String id = entrypoint.getProvider().getMetadata().getId();
+			FadenCoreApi fadenCoreApi = entrypoint.getEntrypoint();
+			setupFadenAddon(id);
+		});
 	}
 
-	public static void setupFadenAddon(String modId) {
+	private static void setupFadenAddon(String modId) {
 		RaceSkinMap.addSkins(modId, FabricLoader.getInstance().getModContainer(modId).get());
 		CoinMap.reloadCoins();
 	}

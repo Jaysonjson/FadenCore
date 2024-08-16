@@ -27,6 +27,7 @@ public class RaceSkinMap {
 	}
 
 	private static void loadSkin(Race race, String subId, String modId, ModContainer modContainer) {
+		if(!race.hasSkins()) return;
 		String skinPath = getSkinPath(race, modId);
 		Path skinDir = modContainer.findPath(skinPath + subId + "/").orElse(null);
 
@@ -77,6 +78,7 @@ public class RaceSkinMap {
 	 * Returns an empty string if no skin could be found
 	 */
 	public static String getRandomSkin(Race race, String subId) {
+		if(!race.hasSkins()) return "";
 		Random random = new Random();
 		ArrayList<String> buffer = new ArrayList<>();
 		for (Identifier s : race.getSkinMap().keySet()) {

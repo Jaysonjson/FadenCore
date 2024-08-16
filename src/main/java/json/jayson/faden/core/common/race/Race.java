@@ -133,4 +133,8 @@ public abstract class Race {
         player.setPose(EntityPose.CROAKING);
     }
 
+    public boolean hasSkins() {
+        return true;
+    }
+
 }
