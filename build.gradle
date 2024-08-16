@@ -133,5 +133,13 @@ publishing {
 		}
 	}
 	repositories {
+		maven {
+			name = "GitHubPackages"
+			url = "https://maven.pkg.github.com/Jaysonjson/FadenCore"
+			credentials {
+				username = "{$GITHUB_USER}"
+				password = "{$GITHUB_TOKEN}"
+			}
+		}
 	}
 }
