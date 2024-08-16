@@ -41,8 +41,8 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         PlayerData data = ClientPlayerDatas.getPlayerData(uuid);
         Race race = data.getRaceSaveData().getRace();
         if (race != null) {
-            if(race.poseDimensions() != null) {
-                cir.setReturnValue((EntityDimensions) race.poseDimensions().getOrDefault(pose, race.dimensions()));
+            if(race.getPoseDimensions() != null) {
+                cir.setReturnValue((EntityDimensions) race.getPoseDimensions().getOrDefault(pose, race.getDimensions()));
             }
         }
     }

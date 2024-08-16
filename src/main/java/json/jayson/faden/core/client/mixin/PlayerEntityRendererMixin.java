@@ -95,7 +95,7 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
         PlayerEntityModel<AbstractClientPlayerEntity> playerEntityModel = getModel();
         if (data != null && data.getRaceSaveData().getRace() != null) {
             Race race = data.getRaceSaveData().getRace();
-            switch (race.model()) {
+            switch (race.getModelType()) {
                 case SLIM -> {
                     playerEntityModel = PlayerModelCache.slimModel;
                     slim = true;
@@ -188,7 +188,7 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
         PlayerData data = ClientPlayerDatas.getPlayerData(abstractClientPlayerEntity.getUuid());
         if(data.getRaceSaveData().hasRace()) {
             Race race = data.getRaceSaveData().getRace();
-            matrixStack.scale(race.size().x, race.size().y, race.size().z);
+            matrixStack.scale(race.getSize().x, race.getSize().y, race.getSize().z);
         }
     }
 

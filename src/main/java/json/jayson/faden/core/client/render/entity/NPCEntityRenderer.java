@@ -37,7 +37,7 @@ public class NPCEntityRenderer extends LivingEntityRenderer<NPCEntity, PlayerEnt
         Vector3f scale = new Vector3f(0.9375f, 0.9375f, 0.9375f);
         if(livingEntity.getNpc() != null) {
             model = livingEntity.getNpc().getTexture().isSlim() ? slimModel : wideModel;
-            scale = livingEntity.getNpc().getRace().size();
+            scale = livingEntity.getNpc().getRace().getSize();
         }
 
         if(model != null) {

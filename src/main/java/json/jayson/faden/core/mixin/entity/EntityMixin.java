@@ -114,7 +114,7 @@ public abstract class EntityMixin {
         if(entity instanceof PlayerEntity player) {
             Race race = PlayerDataUtil.getClientOrServer(player.getUuid()).getRaceSaveData().getRace();
             if(race != null) {
-                cir.setReturnValue(race.dimensions().getBoxAt(player.getPos()));
+                cir.setReturnValue(race.getDimensions().getBoxAt(player.getPos()));
             }
         }
     }

@@ -5,6 +5,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 import json.jayson.faden.core.common.race.cosmetic.RaceCosmetic;
 import json.jayson.faden.core.common.race.cosmetic.RaceCosmeticPalette;
+import json.jayson.faden.core.common.race.cosmetic.RaceCosmeticSlot;
 import json.jayson.faden.core.registry.FadenCoreRegistry;
 import json.jayson.faden.core.server.PlayerData;
 import net.minecraft.entity.EntityAttachmentType;
@@ -14,15 +15,12 @@ import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import org.joml.Vector3f;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
 
 public abstract class Race {
 
@@ -44,7 +42,7 @@ public abstract class Race {
         this.subIds = subIds;
         this.size = size;
         this.entityDimensions = EntityDimensions.changing(size.x == 1 ? 0.6F : 0.76F * size.x, size.x == 1 ? 1.9F : 1.95F * size.y).withEyeHeight(1.62F * size.y).withAttachments(EntityAttachments.builder().add(EntityAttachmentType.VEHICLE, PlayerEntity.VEHICLE_ATTACHMENT_POS));
-        this.poseDimensions = ImmutableMap.builder().put(EntityPose.STANDING, dimensions()).put(EntityPose.SLEEPING, EntityDimensions.fixed(0.2F * size.x, 0.2F * size.y).withEyeHeight(0.2F * size.y)).put(EntityPose.FALL_FLYING, EntityDimensions.changing(0.6F * size.x, 0.6F * size.y).withEyeHeight(0.4F * size.y)).put(EntityPose.SWIMMING, EntityDimensions.changing(0.6F * size.x, 0.6F * size.y).withEyeHeight(0.4F * size.y)).put(EntityPose.SPIN_ATTACK, EntityDimensions.changing(0.6F * size.x, 0.6F * size.y).withEyeHeight(0.4F * size.x)).put(EntityPose.CROUCHING, EntityDimensions.changing(size.x == 1 ? 0.6F : 0.76F * size.x, 1.5F * size.y).withEyeHeight(1.27F * size.y).withAttachments(EntityAttachments.builder().add(EntityAttachmentType.VEHICLE, PlayerEntity.VEHICLE_ATTACHMENT_POS))).put(EntityPose.DYING, EntityDimensions.fixed(0.2F * size.x, 0.2F * size.y).withEyeHeight(1.62F * size.y)).build();
+        this.poseDimensions = ImmutableMap.builder().put(EntityPose.STANDING, getDimensions()).put(EntityPose.SLEEPING, EntityDimensions.fixed(0.2F * size.x, 0.2F * size.y).withEyeHeight(0.2F * size.y)).put(EntityPose.FALL_FLYING, EntityDimensions.changing(0.6F * size.x, 0.6F * size.y).withEyeHeight(0.4F * size.y)).put(EntityPose.SWIMMING, EntityDimensions.changing(0.6F * size.x, 0.6F * size.y).withEyeHeight(0.4F * size.y)).put(EntityPose.SPIN_ATTACK, EntityDimensions.changing(0.6F * size.x, 0.6F * size.y).withEyeHeight(0.4F * size.x)).put(EntityPose.CROUCHING, EntityDimensions.changing(size.x == 1 ? 0.6F : 0.76F * size.x, 1.5F * size.y).withEyeHeight(1.27F * size.y).withAttachments(EntityAttachments.builder().add(EntityAttachmentType.VEHICLE, PlayerEntity.VEHICLE_ATTACHMENT_POS))).put(EntityPose.DYING, EntityDimensions.fixed(0.2F * size.x, 0.2F * size.y).withEyeHeight(1.62F * size.y)).build();
     }
 
     public Identifier getIcon() {
@@ -67,15 +65,15 @@ public abstract class Race {
         return subIds;
     }
 
-    public Vector3f size() {
+    public Vector3f getSize() {
         return size;
     }
 
-    public EntityDimensions dimensions() {
+    public EntityDimensions getDimensions() {
         return entityDimensions;
     }
 
-    public ImmutableMap<Object, Object> poseDimensions() {
+    public ImmutableMap<Object, Object> getPoseDimensions() {
         return poseDimensions;
     }
 
@@ -89,42 +87,44 @@ public abstract class Race {
 
     public void applyEntityAttributes(ServerPlayerEntity serverPlayerEntity) {
         Multimap<RegistryEntry<EntityAttribute>, EntityAttributeModifier> attributeMap = MultimapBuilder.hashKeys().arrayListValues().build();
-        //System.out.println("Movement Speed1: " + serverPlayerEntity.getAttributes().getValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
         addEntityAttributes(attributeMap);
         serverPlayerEntity.getAttributes().addTemporaryModifiers(attributeMap);
-        //Attribute Listing test, can later be used for race selection just in a GUI
-        for (EntityAttribute entityAttribute : Registries.ATTRIBUTE) {
-            if(!serverPlayerEntity.getAttributes().hasAttribute(Registries.ATTRIBUTE.getEntry(entityAttribute))) continue;
-            //System.out.println(entityAttribute.getTranslationKey() + ":" + serverPlayerEntity.getAttributes().getValue(Registries.ATTRIBUTE.getEntry(entityAttribute)));
-            //System.out.println("water_movement: " + waterMovementSpeed());
+    }
+
+    public Map<RaceCosmeticSlot, List<RaceCosmetic>> categorizeCosmetics(List<RaceCosmetic> cosmetics) {
+        Map<RaceCosmeticSlot, List<RaceCosmetic>> categorizedCosmetics = new HashMap<>();
+        for (RaceCosmeticSlot slot : RaceCosmeticSlot.values()) {
+            categorizedCosmetics.put(slot, new ArrayList<>());
         }
+        for (RaceCosmetic cosmetic : cosmetics) {
+            categorizedCosmetics.get(cosmetic.getSlot()).add(cosmetic);
+        }
+        return categorizedCosmetics;
     }
 
     //Uses 1 single Cosmetic for each type, override for special races like the tabaxi
     public PlayerData.RaceDataCosmetics randomizeCosmetics(String subId) {
-        ArrayList<RaceCosmetic> headCosmetics = new ArrayList<>();
-        ArrayList<RaceCosmetic> chestCosmetics = new ArrayList<>();
-        ArrayList<RaceCosmetic> legCosmetics = new ArrayList<>();
-        ArrayList<RaceCosmetic> bootsCosmetics = new ArrayList<>();
-        for (RaceCosmetic cosmetic : getCosmeticPalette().getCosmetics(subId)) {
-            switch (cosmetic.getSlot()) {
-                case HEAD -> headCosmetics.add(cosmetic);
-                case CHEST -> chestCosmetics.add(cosmetic);
-                case LEG -> legCosmetics.add(cosmetic);
-                case BOOTS -> bootsCosmetics.add(cosmetic);
-            }
-        }
+        Map<RaceCosmeticSlot, List<RaceCosmetic>> categorizedCosmetics = categorizeCosmetics(getCosmeticPalette().getCosmetics(subId));
         Random random = new Random();
         PlayerData.RaceDataCosmetics dataCosmetics = new PlayerData.RaceDataCosmetics();
-        if(!headCosmetics.isEmpty()) dataCosmetics.getHead().add(headCosmetics.get(random.nextInt(headCosmetics.size())).getId());
-        if(!chestCosmetics.isEmpty()) dataCosmetics.getChest().add(chestCosmetics.get(random.nextInt(chestCosmetics.size())).getId());
-        if(!legCosmetics.isEmpty()) dataCosmetics.getLeg().add(legCosmetics.get(random.nextInt(legCosmetics.size())).getId());
-        if(!bootsCosmetics.isEmpty()) dataCosmetics.getBoots().add(bootsCosmetics.get(random.nextInt(bootsCosmetics.size())).getId());
+
+        categorizedCosmetics.forEach((slot, cosmetics) -> {
+            if (!cosmetics.isEmpty()) {
+                RaceCosmetic selectedCosmetic = cosmetics.get(random.nextInt(cosmetics.size()));
+                switch (slot) {
+                    case HEAD -> dataCosmetics.getHead().add(selectedCosmetic.getId());
+                    case CHEST -> dataCosmetics.getChest().add(selectedCosmetic.getId());
+                    case LEG -> dataCosmetics.getLeg().add(selectedCosmetic.getId());
+                    case BOOTS -> dataCosmetics.getBoots().add(selectedCosmetic.getId());
+                }
+            }
+        });
+
         return dataCosmetics;
     }
 
     public abstract RaceCosmeticPalette getCosmeticPalette();
-    public abstract RaceModelType model();
+    public abstract RaceModelType getModelType();
 
     public void applyStats(ServerPlayerEntity player) {
         applyEntityAttributes(player);
