@@ -36,6 +36,7 @@ public class InstrumentedMusicDataListener implements SimpleSynchronousResourceR
                 }
             } catch(Exception e) {
                 FadenCore.LOGGER.error("Could not load instrumented music data from {}", id, e);
+                FadenCoreRegistry.INSTRUMENT.freeze();
             }
         }
 
@@ -51,6 +52,7 @@ public class InstrumentedMusicDataListener implements SimpleSynchronousResourceR
                 }
             } catch(Exception e) {
                 FadenCore.LOGGER.error("Could not load instrumented music data from {}", id, e);
+                FadenCoreRegistry.INSTRUMENTED_MUSIC.freeze();
             }
         }
     }

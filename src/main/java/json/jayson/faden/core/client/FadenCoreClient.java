@@ -7,6 +7,7 @@ import json.jayson.faden.core.client.render.entity.NPCEntityRenderer;
 import json.jayson.faden.core.common.init.FadenCoreBlocks;
 import json.jayson.faden.core.common.init.FadenCoreEntities;
 import json.jayson.faden.core.registry.FadenCoreRegistry;
+import json.jayson.faden.core.util.SaveUtil;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -80,6 +81,7 @@ public class FadenCoreClient implements ClientModInitializer {
         registerModels();
 
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
+            loadClientItemValues();
             if(PlayerModelCache.slimModel == null) {
                 PlayerModelCache.slimModel = PlayerModelCache.makeSlimModel();
             }
@@ -88,7 +90,6 @@ public class FadenCoreClient implements ClientModInitializer {
             }
         });
         setBlockRenderMaps();
-        loadClientItemValues();
     }
 
     public void setBlockRenderMaps() {
@@ -112,8 +113,7 @@ public class FadenCoreClient implements ClientModInitializer {
     }
 
     public void loadClientItemValues() {
-        new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/client/" + FadenCore.MC_VERSION + "/").mkdirs();
-        File itemValues = new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/client/" + FadenCore.MC_VERSION + "/item_values.json");
+        File itemValues = new File(SaveUtil.getCurrentSaveFullClient() + "/item_values.json");
         if(itemValues.exists()) {
             try {
                 ItemValues.reload(FadenCore.GSON.fromJson(new FileReader(itemValues), new TypeToken<HashMap<String, Integer>>(){}.getType()));
@@ -124,8 +124,8 @@ public class FadenCoreClient implements ClientModInitializer {
     }
 
     public static String getItemValuesChecksum() {
-        if(!new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/client/" + FadenCore.MC_VERSION + "/item_values.json").exists()) return "";
-        return FadenCoreCheckSum.checkSum(new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/client/" + FadenCore.MC_VERSION + "/item_values.json"));
+        if(!new File(SaveUtil.getCurrentSaveFullClient() + "/item_values.json").exists()) return "";
+        return FadenCoreCheckSum.checkSum(new File(SaveUtil.getCurrentSaveFullClient() + "/item_values.json"));
     }
 
 

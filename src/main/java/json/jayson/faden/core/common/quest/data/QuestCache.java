@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.UUID;
 
+import json.jayson.faden.core.util.SaveUtil;
 import org.apache.commons.io.FileUtils;
 
 import net.fabricmc.loader.api.FabricLoader;
@@ -21,8 +22,8 @@ public class QuestCache {
 
     private static NbtCompound CACHE = new NbtCompound();
     private static PlayerQuests PLAYER_CACHE = new PlayerQuests();
-    private static final Path CACHE_PATH = new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + FadenCore.MC_VERSION + "/quests.nbt").toPath();
-    private static final Path PLAYER_CACHE_PATH = new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + FadenCore.MC_VERSION + "/quests_player.json").toPath();
+    private static final Path CACHE_PATH = new File(SaveUtil.getCurrentSaveFull() + "/quests.nbt").toPath();
+    private static final Path PLAYER_CACHE_PATH = new File(SaveUtil.getCurrentSaveFull() + "/quests_player.json").toPath();
 
     public static void load() {
         try {
@@ -97,8 +98,6 @@ public class QuestCache {
                 }
             }
             QuestCache.getPlayerCache().onGoing.put(uuid, onGoing);
-
-            new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + FadenCore.MC_VERSION + "/").mkdirs();
             try {
                 NbtIo.writeCompressed(CACHE, CACHE_PATH);
             } catch (Exception e) {
@@ -124,7 +123,6 @@ public class QuestCache {
     }
 
     public static void save() {
-        new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + FadenCore.MC_VERSION + "/").mkdirs();
         try {
             NbtIo.writeCompressed(CACHE,  CACHE_PATH);
             FileUtils.writeStringToFile(PLAYER_CACHE_PATH.toFile(), FadenCore.GSON.toJson(getPlayerCache()), StandardCharsets.UTF_8);

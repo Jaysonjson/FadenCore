@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.UUID;
 
+import json.jayson.faden.core.util.SaveUtil;
 import org.apache.commons.io.FileUtils;
 
 import net.fabricmc.loader.api.FabricLoader;
@@ -21,7 +22,7 @@ public class ServerPlayerDatas {
     public static void save() {
         for (UUID uuid : getPlayerDatas().keySet()) {
             try {
-                FileUtils.writeStringToFile(new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + FadenCore.MC_VERSION + "/player_datas/" + uuid + ".json"), FadenCore.GSON.toJson(getPlayerDatas().get(uuid)), StandardCharsets.UTF_8);
+                FileUtils.writeStringToFile(new File(SaveUtil.getCurrentSaveFull() + "/player_datas/" + uuid + ".json"), FadenCore.GSON.toJson(getPlayerDatas().get(uuid)), StandardCharsets.UTF_8);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -31,7 +32,7 @@ public class ServerPlayerDatas {
     public static void save(UUID uuid) {
         if(playerDatas.containsKey(uuid)) {
             try {
-                FileUtils.writeStringToFile(new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + FadenCore.MC_VERSION + "/player_datas/" + uuid + ".json"), FadenCore.GSON.toJson(getPlayerDatas().get(uuid)), StandardCharsets.UTF_8);
+                FileUtils.writeStringToFile(new File(SaveUtil.getCurrentSaveFull() + "/player_datas/" + uuid + ".json"), FadenCore.GSON.toJson(getPlayerDatas().get(uuid)), StandardCharsets.UTF_8);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -39,7 +40,7 @@ public class ServerPlayerDatas {
     }
 
     public static PlayerData load(UUID uuid) {
-        File dataFile = new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + FadenCore.MC_VERSION + "/player_datas/" + uuid.toString() + ".json");
+        File dataFile = new File(SaveUtil.getCurrentSaveFull() + "/player_datas/" + uuid.toString() + ".json");
         if(dataFile.exists()) {
             try {
                 return FadenCore.GSON.fromJson(new FileReader(dataFile), PlayerData.class);

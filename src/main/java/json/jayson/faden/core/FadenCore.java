@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
 
-import json.jayson.faden.core.common.data.listeners.InstrumentedMusicData;
 import json.jayson.faden.core.common.data.listeners.InstrumentedMusicDataListener;
 import json.jayson.faden.core.common.init.FadenCoreBlocks;
 import json.jayson.faden.core.common.init.FadenCoreDataComponents;
@@ -46,8 +45,7 @@ import net.minecraft.command.argument.serialize.ConstantArgumentSerializer;
 
 public class FadenCore implements ModInitializer {
 	public static final String MOD_ID = "fadencore";
-	public static final String MC_VERSION = "1.21";
-	public static final String FADEN_VERSION = "0.0.1";
+	//public static final String MC_VERSION = "1.21";
     public static final Logger LOGGER = LoggerFactory.getLogger("FadenCore");
 	public static ModContainer CONTAINER;
 	public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
@@ -58,9 +56,9 @@ public class FadenCore implements ModInitializer {
 	public void onInitialize() {
 		new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/client/");
 		CONTAINER = FabricLoader.getInstance().getModContainer(MOD_ID).get();
+		FadenCoreServerEvents.init();
 		init();
         loadConfig();
-		FadenCoreServerEvents.init();
 		resourceReloadListener();
 		argumentTypes();
 	}

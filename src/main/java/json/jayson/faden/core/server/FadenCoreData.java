@@ -1,5 +1,6 @@
 package json.jayson.faden.core.server;
 
+import json.jayson.faden.core.util.SaveUtil;
 import net.fabricmc.loader.api.FabricLoader;
 import json.jayson.faden.core.FadenCore;
 import org.apache.commons.io.FileUtils;
@@ -14,14 +15,14 @@ public class FadenCoreData {
 
     public void save() {
         try {
-            FileUtils.writeStringToFile(new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + FadenCore.MC_VERSION + "/faden.json"), FadenCore.GSON.toJson(FadenCore.DATA), StandardCharsets.UTF_8);
+            FileUtils.writeStringToFile(new File(SaveUtil.getCurrentSaveFull() + "/faden.json"), FadenCore.GSON.toJson(FadenCore.DATA), StandardCharsets.UTF_8);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void load() {
-        File dataFile = new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/" + FadenCore.MC_VERSION + "/faden.json");
+        File dataFile = new File(SaveUtil.getCurrentSaveFull() + "/faden.json");
         if(dataFile.exists()) {
             try {
                 FadenCore.DATA = FadenCore.GSON.fromJson(new FileReader(dataFile), FadenCoreData.class);
