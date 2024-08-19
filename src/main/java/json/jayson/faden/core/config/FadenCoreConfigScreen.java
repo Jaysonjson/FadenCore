@@ -29,6 +29,11 @@ public class FadenCoreConfigScreen {
                 .setDefaultValue(FadenCoreOptions.getConfig().ENABLE_PLAYER_RACE_SKINS)
                 .build();
 
+        BooleanListEntry enablePlayerRaceCosmetics = configEntryBuilder
+                .startBooleanToggle(Text.translatable("config.faden.enable_player_race_cosmetics"), FadenCoreOptions.getConfig().ENABLE_PLAYER_RACE_COSMETICS)
+                .setDefaultValue(FadenCoreOptions.getConfig().ENABLE_PLAYER_RACE_COSMETICS)
+                .build();
+
         BooleanListEntry enableCustomCapes = configEntryBuilder
                 .startBooleanToggle(Text.translatable("config.faden.enable_custom_capes"), FadenCoreOptions.getConfig().CUSTOM_CAPES)
                 .setDefaultValue(FadenCoreOptions.getConfig().CUSTOM_CAPES)
@@ -52,6 +57,7 @@ public class FadenCoreConfigScreen {
 
         ConfigCategory race = builder.getOrCreateCategory(Text.translatable("config.faden.category.race"));
         race.addEntry(enablePlayerRaceSkins);
+        race.addEntry(enablePlayerRaceCosmetics);
 
         ConfigCategory inter = builder.getOrCreateCategory(Text.translatable("config.faden.category.interface"));
         inter.addEntry(enableVanillaBlur);
@@ -61,23 +67,25 @@ public class FadenCoreConfigScreen {
         ConfigCategory vanilla = builder.getOrCreateCategory(Text.translatable("config.faden.category.vanilla"));
         vanilla.addEntry(enableVanillaBlur);
 
-        ConfigCategory faden = builder.getOrCreateCategory(Text.literal("Faden"));
+        ConfigCategory faden = builder.getOrCreateCategory(Text.literal("FadenCore"));
         faden.addEntry(enablePlayerRaceSkins);
+        faden.addEntry(enablePlayerRaceCosmetics);
         faden.addEntry(enableCustomCapes);
         faden.addEntry(fadenHealth);
 
 
         ConfigCategory client = builder.getOrCreateCategory(Text.literal("Client"));
         client.addEntry(enablePlayerRaceSkins);
+        client.addEntry(enablePlayerRaceCosmetics);
         client.addEntry(enableCustomCapes);
         client.addEntry(fadenHealth);
         client.addEntry(enableVanillaBlur);
         client.addEntry(enableMusicUI);
 
         builder.setSavingRunnable(() -> {
-            FadenCoreOptions.setConfig(new FadenCoreConfig(enablePlayerRaceSkins.getValue(),  enableVanillaBlur.getValue(), enableCustomCapes.getValue(), fadenHealth.getValue(), enableMusicUI.getValue()));
+            FadenCoreOptions.setConfig(new FadenCoreConfig(enablePlayerRaceSkins.getValue(),  enableVanillaBlur.getValue(), enableCustomCapes.getValue(), fadenHealth.getValue(), enableMusicUI.getValue(), enablePlayerRaceCosmetics.getValue()));
             try {
-                FileUtils.writeStringToFile(new File(FabricLoader.getInstance().getConfigDir().toFile() + "/faden.json"), FadenCore.GSON.toJson(FadenCoreOptions.getConfig()), StandardCharsets.UTF_8);
+                FileUtils.writeStringToFile(new File(FabricLoader.getInstance().getConfigDir().toFile() + "/fadencore.json"), FadenCore.GSON.toJson(FadenCoreOptions.getConfig()), StandardCharsets.UTF_8);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

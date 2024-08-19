@@ -4,6 +4,7 @@ import json.jayson.faden.core.common.npc.NPCEntity;
 import json.jayson.faden.core.common.race.Race;
 import json.jayson.faden.core.common.race.cosmetic.RaceCosmetic;
 import json.jayson.faden.core.common.race.cosmetic.RaceCosmeticSlot;
+import json.jayson.faden.core.config.FadenCoreOptions;
 import json.jayson.faden.core.server.PlayerData;
 import json.jayson.faden.core.server.client.ClientPlayerDatas;
 import json.jayson.faden.core.util.FadenCoreRenderUtil;
@@ -28,6 +29,7 @@ public class ChestFeatureRenderer<T extends LivingEntity> extends FeatureRendere
 
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
+        if(!FadenCoreOptions.getConfig().ENABLE_PLAYER_RACE_COSMETICS) return;
         if(!entity.isInvisible()) {
             Race race = null;
             String raceSub = "";

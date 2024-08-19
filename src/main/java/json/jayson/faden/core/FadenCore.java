@@ -69,8 +69,8 @@ public class FadenCore implements ModInitializer {
 
 	public static void loadConfig() {
 		try {
-			if(new File(FabricLoader.getInstance().getConfigDir().toFile() + "/faden.json").exists()) {
-				FadenCoreOptions.setConfig(GSON.fromJson(new FileReader(FabricLoader.getInstance().getConfigDir().toFile() + "/faden.json"), FadenCoreConfig.class));
+			if(new File(FabricLoader.getInstance().getConfigDir().toFile() + "/fadencore.json").exists()) {
+				FadenCoreOptions.setConfig(GSON.fromJson(new FileReader(FabricLoader.getInstance().getConfigDir().toFile() + "/fadencore.json"), FadenCoreConfig.class));
 			} else {
 				FadenCoreOptions.setConfig(new FadenCoreConfig());
 			}

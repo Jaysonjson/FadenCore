@@ -9,8 +9,8 @@
 	],
 	"contact": {
 		"homepage": "https://discord.gg/8kUVUTHapX",
-		"sources": "https://github.com/FuchsiaTeam/FadenServer",
-		"issues": "https://github.com/FuchsiaTeam/FadenServer/issues"
+		"sources": "https://github.com/Jaysonjson/FadenCore",
+		"issues": "https://github.com/Jaysonjson/FadenCore/issues"
 	},
 	"license": "MIT",
 	"icon": "assets/faden/icon.png",

@@ -1,9 +1,11 @@
 package json.jayson.faden.core.client.mixin;
 
+import json.jayson.faden.core.FadenCore;
 import json.jayson.faden.core.client.FadenCoreClient;
 import json.jayson.faden.core.client.registry.FadenItemModelRegistry;
 import json.jayson.faden.core.common.race.Race;
 import json.jayson.faden.core.common.race.cosmetic.RaceCosmetic;
+import json.jayson.faden.core.config.FadenCoreOptions;
 import json.jayson.faden.core.registry.FadenCoreRegistry;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.render.model.ModelLoader;
@@ -35,10 +37,12 @@ public abstract class ModelLoaderMixin {
             this.loadItemModel(new ModelIdentifier(Identifier.of(itemId.getNamespace(), data.getPath().isEmpty() ? "model/" + itemId.getPath() : data.getPath()), data.getVariant()));
         }
 
-        for (Race value : FadenCoreRegistry.RACE) {
-            for (ArrayList<RaceCosmetic> raceCosmetics : value.getCosmeticPalette().getCosmetics().values()) {
-                for (RaceCosmetic raceCosmetic : raceCosmetics) {
-                    this.loadItemModel(raceCosmetic.getModel());
+        if(FadenCoreOptions.getConfig().ENABLE_PLAYER_RACE_COSMETICS) {
+            for (Race value : FadenCoreRegistry.RACE) {
+                for (ArrayList<RaceCosmetic> raceCosmetics : value.getCosmeticPalette().getCosmetics().values()) {
+                    for (RaceCosmetic raceCosmetic : raceCosmetics) {
+                        this.loadItemModel(raceCosmetic.getModel());
+                    }
                 }
             }
         }
