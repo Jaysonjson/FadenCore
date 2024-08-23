@@ -26,6 +26,7 @@ public class QuestCache {
     private static final Path PLAYER_CACHE_PATH = new File(SaveUtil.getCurrentSaveFull() + "/quests_player.json").toPath();
 
     public static void load() {
+        if(!FadenCore.MODULES.quests) return;
         try {
             if(CACHE_PATH.toFile().exists()) {
                 CACHE = NbtIo.readCompressed(CACHE_PATH, NbtSizeTracker.ofUnlimitedBytes());
@@ -123,6 +124,7 @@ public class QuestCache {
     }
 
     public static void save() {
+        if(!FadenCore.MODULES.quests) return;
         try {
             NbtIo.writeCompressed(CACHE,  CACHE_PATH);
             FileUtils.writeStringToFile(PLAYER_CACHE_PATH.toFile(), FadenCore.GSON.toJson(getPlayerCache()), StandardCharsets.UTF_8);

@@ -30,13 +30,13 @@ public class RaceCommand {
                         .then(CommandManager.literal("set")
                                 .then(CommandManager.argument("player", EntityArgumentType.player())
                                         .then(CommandManager.argument("race", RaceArgumentType.empty()).then(CommandManager.argument("sub_id", RaceSubIdArgumentType.empty())
-                                                .executes(context -> setRace(context))))))
+                                                .executes(RaceCommand::setRace)))))
 
                         .then(CommandManager.literal("remove").then(CommandManager.argument("player", EntityArgumentType.player())
-                                        .executes(context -> removeRace(context))))
+                                        .executes(RaceCommand::removeRace)))
                         .then(CommandManager.literal("get")
                                 .then(CommandManager.argument("player", EntityArgumentType.player())
-                                        .executes(context -> getRace(context)))));
+                                        .executes(RaceCommand::getRace))));
         dispatcher.register(literalCommandNode);
     }
 

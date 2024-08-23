@@ -20,6 +20,7 @@ public class ServerPlayerDatas {
     public static MinecraftServer SERVER = null;
 
     public static void save() {
+        if(!FadenCore.MODULES.playerDatas) return;
         for (UUID uuid : getPlayerDatas().keySet()) {
             try {
                 FileUtils.writeStringToFile(new File(SaveUtil.getCurrentSaveFull() + "/player_datas/" + uuid + ".json"), FadenCore.GSON.toJson(getPlayerDatas().get(uuid)), StandardCharsets.UTF_8);
@@ -30,6 +31,7 @@ public class ServerPlayerDatas {
     }
 
     public static void save(UUID uuid) {
+        if(!FadenCore.MODULES.playerDatas) return;
         if(playerDatas.containsKey(uuid)) {
             try {
                 FileUtils.writeStringToFile(new File(SaveUtil.getCurrentSaveFull() + "/player_datas/" + uuid + ".json"), FadenCore.GSON.toJson(getPlayerDatas().get(uuid)), StandardCharsets.UTF_8);
@@ -40,6 +42,7 @@ public class ServerPlayerDatas {
     }
 
     public static PlayerData load(UUID uuid) {
+        if(!FadenCore.MODULES.playerDatas) return null;
         File dataFile = new File(SaveUtil.getCurrentSaveFull() + "/player_datas/" + uuid.toString() + ".json");
         if(dataFile.exists()) {
             try {

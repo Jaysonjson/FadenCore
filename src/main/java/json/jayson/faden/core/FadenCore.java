@@ -3,6 +3,7 @@ package json.jayson.faden.core;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Random;
 
 import json.jayson.faden.core.common.data.listeners.InstrumentedMusicDataListener;
@@ -51,6 +52,8 @@ public class FadenCore implements ModInitializer {
 	public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 	public static final Random RANDOM = new Random();
 	public static FadenCoreData DATA = new FadenCoreData();
+	public static final FadenCoreModules MODULES = new FadenCoreModules();
+	public static HashMap<String, FadenCoreApi> ADDONS = new HashMap<>();
 
 	@Override
 	public void onInitialize() {
@@ -76,7 +79,6 @@ public class FadenCore implements ModInitializer {
 			}
 		} catch (IOException e) {
 			FadenCoreOptions.setConfig(new FadenCoreConfig());
-			throw new RuntimeException(e);
 		}
 	}
 
@@ -92,6 +94,10 @@ public class FadenCore implements ModInitializer {
 		FabricLoader.getInstance().getEntrypointContainers("fadencore", FadenCoreApi.class).forEach(entrypoint -> {
 			String id = entrypoint.getProvider().getMetadata().getId();
 			FadenCoreApi fadenCoreApi = entrypoint.getEntrypoint();
+			fadenCoreApi.onInitalize();
+			if(fadenCoreApi.enablePlayerData()) MODULES.playerDatas = true;
+			if(fadenCoreApi.enableQuests()) MODULES.quests = true;
+			ADDONS.put(id, fadenCoreApi);
 			setupFadenAddon(id);
 		});
 	}
@@ -118,4 +124,10 @@ public class FadenCore implements ModInitializer {
 		}
 		return null;
 	}
+
+	public static class FadenCoreModules {
+		public boolean playerDatas = false;
+		public boolean quests = false;
+	}
+
 }

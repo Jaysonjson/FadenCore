@@ -9,6 +9,7 @@ import java.util.UUID;
 import json.jayson.faden.core.common.race.Race;
 import json.jayson.faden.core.network.FadenCoreNetwork;
 import json.jayson.faden.core.registry.FadenCoreRegistry;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
@@ -63,12 +64,7 @@ public class PlayerData implements Serializable {
 
     @Nullable
     public FadenCoreCape getSelectedCape() {
-        for (FadenCoreCape cape : FadenCoreRegistry.CAPE) {
-            if(cape.getIdentifier().toString().equalsIgnoreCase(selectedCape)) {
-                return cape;
-            }
-        }
-        return null;
+        return FadenCoreRegistry.CAPE.get(Identifier.of(selectedCape));
     }
 
     public void setSelectedCape(FadenCoreCape selectedCape) {
@@ -80,10 +76,12 @@ public class PlayerData implements Serializable {
     }
 
     public void sync() {
-        if(ServerPlayerDatas.SERVER != null) {
-            for (ServerPlayerEntity serverPlayerEntity : ServerPlayerDatas.SERVER.getPlayerManager().getPlayerList()) {
-                FadenCoreNetwork.Server.syncPlayerData(serverPlayerEntity, getUuid(), this);
-            }
+        if(ServerPlayerDatas.SERVER != null) sync(ServerPlayerDatas.SERVER);
+    }
+
+    public void sync(MinecraftServer server) {
+        for (ServerPlayerEntity serverPlayerEntity : server.getPlayerManager().getPlayerList()) {
+            FadenCoreNetwork.Server.syncPlayerData(serverPlayerEntity, getUuid(), this);
         }
     }
 
@@ -143,6 +141,7 @@ public class PlayerData implements Serializable {
     }
 
     public static class RaceDataCosmetics implements Serializable {
+        @Serial
         private static final long serialVersionUID = 0L;
         private ArrayList<String> head = new ArrayList<>();
         private ArrayList<String> chest = new ArrayList<>();

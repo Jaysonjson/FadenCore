@@ -8,6 +8,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
 import json.jayson.faden.core.common.objects.command.types.CapeArgumentType;
 import json.jayson.faden.core.network.FadenCoreNetwork;
+import json.jayson.faden.core.registry.FadenCoreRegistry;
 import json.jayson.faden.core.server.PlayerData;
 import json.jayson.faden.core.server.ServerPlayerDatas;
 import net.minecraft.command.argument.EntityArgumentType;
@@ -41,11 +42,15 @@ public class CapeCommand {
     public static int addCape(CommandContext<ServerCommandSource> source) throws CommandSyntaxException {
         PlayerEntity player = EntityArgumentType.getPlayer(source, "player");
         Identifier cape = IdentifierArgumentType.getIdentifier(source, "cape");
-        source.getSource().sendFeedback(() -> Text.literal("Gave Cape: " + cape), false);
-        PlayerData playerData = ServerPlayerDatas.getOrLoadPlayerData(player.getUuid());
-        playerData.addCape(cape);
-        for (ServerPlayerEntity serverPlayerEntity : source.getSource().getServer().getPlayerManager().getPlayerList()) {
-            FadenCoreNetwork.Server.sendCapeUpdate(serverPlayerEntity, player.getUuid(), cape.toString(), false);
+        if(FadenCoreRegistry.CAPE.containsId(cape)) {
+            source.getSource().sendFeedback(() -> Text.literal("Gave Cape: " + cape), false);
+            PlayerData playerData = ServerPlayerDatas.getOrLoadPlayerData(player.getUuid());
+            playerData.addCape(cape);
+            for (ServerPlayerEntity serverPlayerEntity : source.getSource().getServer().getPlayerManager().getPlayerList()) {
+                FadenCoreNetwork.Server.sendCapeUpdate(serverPlayerEntity, player.getUuid(), cape.toString(), false);
+            }
+        } else {
+            source.getSource().sendFeedback(() -> Text.literal("Cape not found: " + cape), false);
         }
         return 0;
     }

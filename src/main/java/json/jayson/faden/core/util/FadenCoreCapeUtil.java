@@ -11,15 +11,12 @@ public class FadenCoreCapeUtil {
     @Nullable
     public static FadenCoreCape getCapeForPlayer(UUID uuid) {
         PlayerData data = PlayerDataUtil.getClientOrServer(uuid);
-        if(data != null) {
-            return data.getSelectedCape();
-        }
-        return null;
+        return data.getSelectedCape();
     }
 
     public static boolean playerHasCape(UUID uuid) {
         PlayerData data = PlayerDataUtil.getClientOrServer(uuid);
-        return data != null && !data.getSelectedCapeId().isEmpty();
+        return !data.getSelectedCapeId().isEmpty();
     }
 
 }

@@ -23,15 +23,13 @@ import java.util.Collection;
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
 
-    @Shadow public abstract int unlockRecipes(Collection<RecipeEntry<?>> recipes);
-
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
 
     @Inject(at = @At("HEAD"), method = "isPartVisible", cancellable = true)
     public void isPartVisible(PlayerModelPart modelPart, CallbackInfoReturnable<Boolean> cir) {
-        if (FadenCoreCapeUtil.playerHasCape(uuid)) {
+        if (FadenCoreCapeUtil.playerHasCape(uuid) && modelPart.getName().equalsIgnoreCase("cape")) {
             cir.setReturnValue(true);
         }
     }
