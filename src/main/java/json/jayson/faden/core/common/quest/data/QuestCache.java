@@ -48,7 +48,7 @@ public class QuestCache {
         return PLAYER_CACHE;
     }
 
-    public static boolean stepActive(UUID uuid, IQuest quest, IQuestStep step) {
+    public static boolean stepActive(UUID uuid, FadenCoreQuest quest, IQuestStep step) {
         NbtCompound playerTag = get().getCompound(uuid.toString());
         if(playerTag.contains(quest.getIdentifier().toString())) {
             NbtCompound questTag = playerTag.getCompound(quest.getIdentifier().toString());
@@ -59,7 +59,7 @@ public class QuestCache {
         return false;
     }
 
-    public static Identifier currentStep(UUID uuid, IQuest quest) {
+    public static Identifier currentStep(UUID uuid, FadenCoreQuest quest) {
         NbtCompound playerTag = get().getCompound(uuid.toString());
         if(playerTag.contains(quest.getIdentifier().toString())) {
             NbtCompound questTag = playerTag.getCompound(quest.getIdentifier().toString());
@@ -70,7 +70,7 @@ public class QuestCache {
         return null;
     }
 
-    public static void finishQuestLine(UUID uuid, IQuest quest, IQuestStep step) {
+    public static void finishQuestLine(UUID uuid, FadenCoreQuest quest, IQuestStep step) {
         new Thread(() -> {
             NbtCompound playerTag = get().getCompound(uuid.toString());
             if(playerTag.contains(quest.getIdentifier().toString())) {
@@ -108,7 +108,7 @@ public class QuestCache {
         }).start();
     }
 
-    public static void addOrUpdate(UUID uuid, IQuest quest, IQuestStep step) {
+    public static void addOrUpdate(UUID uuid, FadenCoreQuest quest, IQuestStep step) {
         new Thread(() -> {
             NbtCompound tag = new NbtCompound();
             NbtCompound questTag = new NbtCompound();

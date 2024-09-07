@@ -1,5 +1,6 @@
 package json.jayson.faden.core.common.events;
 
+import json.jayson.faden.core.common.data.FadenCoreValueData;
 import json.jayson.faden.core.common.objects.item.instrument.InstrumentType;
 import json.jayson.faden.core.registry.FadenCoreRegistry;
 import json.jayson.faden.core.util.SaveUtil;
@@ -28,6 +29,7 @@ public class FadenCoreServerEvents {
             QuestCache.load();
             ItemValues.load();
             FadenCore.DATA.load();
+            FadenCore.VALUE_DATA.load();
         });
 
         ServerLifecycleEvents.AFTER_SAVE.register((server, flush, force) -> {
@@ -35,6 +37,7 @@ public class FadenCoreServerEvents {
             ServerPlayerDatas.save();
             ItemValues.save();
             FadenCore.DATA.save();
+            FadenCore.VALUE_DATA.save();
         });
 
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {

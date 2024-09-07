@@ -27,6 +27,7 @@ public class ItemValues {
      */
 
     public static void load() {
+        if(!FadenCore.MODULES.itemValues) return;
         if(!new File(SaveUtil.getCurrentSaveFull() + "/item_values.json").exists()) {
             save();
         }
@@ -39,6 +40,7 @@ public class ItemValues {
     }
 
     public static void save() {
+        if(!FadenCore.MODULES.itemValues) return;
         try {
             HashMap<String, Integer> map = new HashMap<>();
             for (Item item : VALUES.keySet()) {
@@ -51,6 +53,7 @@ public class ItemValues {
     }
 
     public static void saveClient() {
+        if(!FadenCore.MODULES.itemValues) return;
         try {
             HashMap<String, Integer> map = new HashMap<>();
             for (Item item : ItemValues.VALUES.keySet()) {
@@ -64,6 +67,7 @@ public class ItemValues {
 
     public static void reload(HashMap<String, Integer> map) {
         VALUES.clear();
+        if(!FadenCore.MODULES.itemValues) return;
         for (String s : map.keySet()) {
             Identifier id = Identifier.of(s);
             if(Registries.ITEM.containsId(id)) {

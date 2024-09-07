@@ -9,7 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 
-public abstract class FadenCoreQuest implements IQuest {
+public abstract class FadenCoreQuest {
 
     public List<IQuestStep> steps = new ArrayList<>();
 
@@ -17,21 +17,21 @@ public abstract class FadenCoreQuest implements IQuest {
         setupQuestSteps();
     }
 
+    public abstract void setupQuestSteps();
+    public abstract void finishQuest(PlayerEntity player);
+
     public List<IQuestStep> getSteps() {
         return steps;
     }
 
-    @Override
     public Identifier getIdentifier() {
         return FadenCoreRegistry.QUEST.getId(this);
     }
 
-    @Override
     public int getMaxSteps() {
         return getSteps().size();
     }
 
-    @Override
     public IQuestStep getCurrentStep(UUID player) {
         Identifier id = QuestCache.currentStep(player, this);
         if(id != null) {
@@ -73,7 +73,6 @@ public abstract class FadenCoreQuest implements IQuest {
         }
     }
 
-    @Override
     public void startQuest(UUID player) {
         if(QuestCache.getPlayerCache().newQuestForPlayer(player, this)) {
             QuestCache.addOrUpdate(player, this, getSteps().get(0));

@@ -1,6 +1,6 @@
 package json.jayson.faden.core.client.render.feature.player;
 
-import json.jayson.faden.core.common.npc.NPCEntity;
+import json.jayson.faden.core.common.npc.entity.NPCEntity;
 import json.jayson.faden.core.common.race.Race;
 import json.jayson.faden.core.common.race.cosmetic.RaceCosmetic;
 import json.jayson.faden.core.common.race.cosmetic.RaceCosmeticSlot;
@@ -43,7 +43,7 @@ public class ChestFeatureRenderer<T extends LivingEntity> extends FeatureRendere
                 }
             } if (entity instanceof NPCEntity npc) {
                 if(npc.getNpc() != null) {
-                    race = npc.getNpc().getRace();
+                    if(npc.getNpc().getRace().isPresent()) race = npc.getNpc().getRace().get();
                     raceSub = npc.getNpc().getRaceSub();
                     raceDataCosmetics = npc.getNpc().getRaceCosmetics();
                 }

@@ -23,6 +23,8 @@ public class FadenCoreDataComponents {
 
     public static final ComponentType<String> MUSIC_INSTANCE = register("music_instance", (builder) -> builder.codec(Codecs.ESCAPED_STRING).packetCodec(PacketCodecs.STRING));
 
+    public static final ComponentType<String> NPC_ID = register("npc", (builder) -> builder.codec(Codecs.ESCAPED_STRING).packetCodec(PacketCodecs.STRING));
+
     public static <T> ComponentType<T> register(String id, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
         return (ComponentType<T>) Registry.register(Registries.DATA_COMPONENT_TYPE, FadenCoreIdentifier.create(id), ((ComponentType.Builder)builderOperator.apply(ComponentType.builder())).build());
     }

@@ -1,7 +1,10 @@
-package json.jayson.faden.core.common.npc;
+package json.jayson.faden.core.common.npc.entity;
 
+import com.mojang.serialization.Dynamic;
 import json.jayson.faden.core.common.init.FadenCoreEntities;
+import json.jayson.faden.core.common.npc.NPC;
 import json.jayson.faden.core.registry.FadenCoreRegistry;
+import net.minecraft.entity.ai.brain.Brain;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
 import net.minecraft.entity.damage.DamageSource;
@@ -20,51 +23,30 @@ public class NPCEntity extends PathAwareEntity {
 
     public static final TrackedData<String> NPC_DATA;
     /* Used for NPCUtil#Summon */
-    private static String preNpc = "";
     private NPC npc;
     static {
         NPC_DATA = DataTracker.registerData(NPCEntity.class, TrackedDataHandlerRegistry.STRING);
     }
 
+    public void setNpc(NPC npc) {
+        this.npc = npc;
+        npc.initGoals(this.goalSelector, this);
+    }
+
     public NPCEntity(World world) {
         super(FadenCoreEntities.NPC, world);
-    }
-    public NPCEntity(World world, String npc) {
-        super(FadenCoreEntities.NPC, world);
-        preNpc = npc;
-    }
-
-    @Override
-    protected void initGoals() {
-        this.goalSelector.add(1, new LookAtEntityGoal(this, PlayerEntity.class, 9.0F));
-        this.goalSelector.add(8, new LookAroundGoal(this));
-        super.initGoals();
-    }
-
-    @Override
-    public void tick() {
-        if(!preNpc.isBlank()) {
-            getDataTracker().set(NPC_DATA, preNpc);
-            preNpc = "";
-        }
-        super.tick();
     }
 
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
-        builder.add(NPC_DATA, preNpc);
+        builder.add(NPC_DATA, "");
     }
 
     public NPC getNpc() {
         String npcData = getDataTracker().get(NPC_DATA);
         if (npcData.isBlank()) return null;
-        if (npc == null) {
-            npc = FadenCoreRegistry.NPC.stream()
-                    .filter(inpc -> inpc.getIdentifier().toString().equalsIgnoreCase(npcData))
-                    .findFirst()
-                    .orElse(null);
-        }
+        checkNPCData(npcData);
         return npc;
     }
 
@@ -75,12 +57,12 @@ public class NPCEntity extends PathAwareEntity {
 
     @Override
     public boolean canTakeDamage() {
-        return false;
+        return npc != null && npc.isInvulnerable();
     }
 
     @Override
     public boolean isInvulnerableTo(DamageSource damageSource) {
-        return true;
+        return npc != null && npc.isInvulnerable();
     }
 
     @Override
@@ -88,15 +70,44 @@ public class NPCEntity extends PathAwareEntity {
         return true;
     }
 
+    public void checkNPCData(String npcData) {
+        if (npc == null) {
+            npc = FadenCoreRegistry.NPC.stream()
+                    .filter(inpc -> inpc.getIdentifier().toString().equalsIgnoreCase(npcData))
+                    .findFirst()
+                    .orElse(null);
+        }
+    }
+
+    @Override
+    protected Brain<?> deserializeBrain(Dynamic<?> dynamic) {
+        return npc != null ? npc.deserializeBrain(dynamic, this) : super.deserializeBrain(dynamic);
+    }
+
+    @Override
+    protected Brain.Profile<?> createBrainProfile() {
+        return npc != null ? npc.createBrainProfile(this) : super.createBrainProfile();
+    }
+
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
-        getDataTracker().set(NPC_DATA, nbt.getString("npc"));
+        String npcData = nbt.getString("npc");
+        getDataTracker().set(NPC_DATA, npcData);
+        checkNPCData(npcData);
+        if(npc != null) {
+            npc.initGoals(this.goalSelector, this);
+            npc.initBrain(this);
+        }
     }
 
     @Override
     public NbtCompound writeNbt(NbtCompound nbt) {
-        nbt.putString("npc", getDataTracker().get(NPC_DATA));
+        if(npc != null) {
+            nbt.putString("npc", npc.getIdentifier().toString());
+        } else {
+            nbt.putString("npc", getDataTracker().get(NPC_DATA));
+        }
         return super.writeNbt(nbt);
     }
 

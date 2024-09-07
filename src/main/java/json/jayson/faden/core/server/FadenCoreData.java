@@ -11,11 +11,10 @@ import java.nio.charset.StandardCharsets;
 
 public class FadenCoreData {
 
-    public int BUY_MULTIPLIER = 9;
 
     public void save() {
         try {
-            FileUtils.writeStringToFile(new File(SaveUtil.getCurrentSaveFull() + "/fadencore.json"), FadenCore.GSON.toJson(FadenCore.DATA), StandardCharsets.UTF_8);
+            //FileUtils.writeStringToFile(new File(SaveUtil.getCurrentSaveFull() + "/fadencore.json"), FadenCore.GSON.toJson(FadenCore.DATA), StandardCharsets.UTF_8);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -25,7 +24,7 @@ public class FadenCoreData {
         File dataFile = new File(SaveUtil.getCurrentSaveFull() + "/fadencore.json");
         if(dataFile.exists()) {
             try {
-                FadenCore.DATA = FadenCore.GSON.fromJson(new FileReader(dataFile), FadenCoreData.class);
+                //FadenCore.DATA = FadenCore.GSON.fromJson(new FileReader(dataFile), FadenCoreData.class);
             } catch (Exception e) {
                 e.printStackTrace();
             }

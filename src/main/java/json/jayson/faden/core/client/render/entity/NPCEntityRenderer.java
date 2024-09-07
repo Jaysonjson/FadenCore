@@ -3,7 +3,7 @@ package json.jayson.faden.core.client.render.entity;
 import json.jayson.faden.core.client.PlayerModelCache;
 import json.jayson.faden.core.client.render.feature.player.ChestFeatureRenderer;
 import json.jayson.faden.core.client.render.feature.player.HeadFeatureRenderer;
-import json.jayson.faden.core.common.npc.NPCEntity;
+import json.jayson.faden.core.common.npc.entity.NPCEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
@@ -37,7 +37,9 @@ public class NPCEntityRenderer extends LivingEntityRenderer<NPCEntity, PlayerEnt
         Vector3f scale = new Vector3f(0.9375f, 0.9375f, 0.9375f);
         if(livingEntity.getNpc() != null) {
             model = livingEntity.getNpc().getTexture().isSlim() ? slimModel : wideModel;
-            scale = livingEntity.getNpc().getRace().getSize();
+            if(livingEntity.getNpc().getRace().isPresent()) {
+                scale = livingEntity.getNpc().getRace().get().getSize();
+            }
         }
 
         if(model != null) {

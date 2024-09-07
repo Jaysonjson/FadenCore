@@ -1,7 +1,7 @@
 package json.jayson.faden.core.common.init;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import json.jayson.faden.core.common.npc.NPCEntity;
+import json.jayson.faden.core.common.npc.entity.NPCEntity;
 import json.jayson.faden.core.util.FadenCoreIdentifier;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
