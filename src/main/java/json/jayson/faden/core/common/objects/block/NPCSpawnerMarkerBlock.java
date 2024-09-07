@@ -9,6 +9,7 @@ import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -20,12 +21,18 @@ public class NPCSpawnerMarkerBlock extends Block implements BlockEntityProvider 
     }
 
 
-    /*
-    * Will be called when placed in the world by the player but most importantly world gen, should be mainly used for world gen
-    * */
     @Override
     protected void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
-        if(oldState.getBlock() == Blocks.BARRIER || oldState.getBlock() != Blocks.AIR) {
+        if (oldState.getBlock() == Blocks.BARRIER || oldState.getBlock() != Blocks.AIR) {
+            if (world.getBlockEntity(pos) instanceof NPCSpawnerMarkerBlockEntity blockEntity) {
+                world.setBlockState(pos, Blocks.BARRIER.getDefaultState());
+            }
+        }
+    }
+
+    @Override
+    protected void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        if(newState.getBlock() == Blocks.BARRIER) {
             if (world.getBlockEntity(pos) instanceof NPCSpawnerMarkerBlockEntity blockEntity) {
                 String npc = blockEntity.npc;
                 if (FadenCoreRegistry.NPC.containsId(Identifier.of(npc))) {
@@ -39,6 +46,7 @@ public class NPCSpawnerMarkerBlock extends Block implements BlockEntityProvider 
             }
         }
     }
+
 
     @Override
     public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {

@@ -8,7 +8,7 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.math.BlockPos;
 
 public class NPCSpawnerMarkerBlockEntity extends BlockEntity {
-    public String npc = "fadencore:test";
+    public String npc = "";
 
     public NPCSpawnerMarkerBlockEntity(BlockPos pos, BlockState state) {
         super(FadenCoreBlockEntities.NPC_SPAWNER_MARKER, pos, state);
@@ -16,8 +16,8 @@ public class NPCSpawnerMarkerBlockEntity extends BlockEntity {
 
     @Override
     protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
-        super.readNbt(nbt, registryLookup);
         npc = nbt.getString("npc");
+        super.readNbt(nbt, registryLookup);
     }
 
     @Override
