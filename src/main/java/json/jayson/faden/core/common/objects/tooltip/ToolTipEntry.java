@@ -56,4 +56,69 @@ public interface ToolTipEntry {
     }
 
 
+    static ToolTipEntry of(Text text) {
+        return component -> text;
+    }
+
+    static ToolTipEntry of(Text text, int color) {
+        return new ToolTipEntry() {
+            @Override
+            public Text getText(FadenTooltipComponent component) {
+                return text;
+            }
+
+            @Override
+            public int getTextColor(FadenTooltipComponent component) {
+                return color;
+            }
+        };
+    }
+
+    static ToolTipEntry of(Text text, Item item) {
+        return new ToolTipEntry() {
+            @Override
+            public Text getText(FadenTooltipComponent component) {
+                return text;
+            }
+
+            @Override
+            public @Nullable Item getItem(FadenTooltipComponent component) {
+                return item;
+            }
+        };
+    }
+
+    static ToolTipEntry of(Text text, Identifier texture) {
+        return new ToolTipEntry() {
+            @Override
+            public Text getText(FadenTooltipComponent component) {
+                return text;
+            }
+
+            @Override
+            public @Nullable Identifier getTexture(FadenTooltipComponent component) {
+                return texture;
+            }
+        };
+    }
+
+    static ToolTipEntry of(Text text, Identifier texture, int scale) {
+        return new ToolTipEntry() {
+            @Override
+            public Text getText(FadenTooltipComponent component) {
+                return text;
+            }
+
+            @Override
+            public @Nullable Identifier getTexture(FadenTooltipComponent component) {
+                return texture;
+            }
+
+            @Override
+            public int getTextureScale() {
+                return scale;
+            }
+        };
+    }
+
 }

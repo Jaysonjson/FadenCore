@@ -30,22 +30,7 @@ public class FadenItem extends Item implements ItemToolTipEntryRenderer {
             if (component.data.itemStack.getItem() instanceof ItemWithValues itemWithValues) {
                 LinkedHashMap<Item, Integer> values = itemWithValues.getValues(component.data.itemStack);
                 for (Item item : values.keySet()) {
-                    entries.add(new ToolTipEntry() {
-                        @Override
-                        public @Nullable Item getItem(FadenTooltipComponent component) {
-                            return item;
-                        }
-
-                        @Override
-                        public @Nullable Identifier getTexture(FadenTooltipComponent component) {
-                            return null;
-                        }
-
-                        @Override
-                        public Text getText(FadenTooltipComponent component) {
-                            return Text.literal(String.valueOf(values.get(item)));
-                        }
-                    });
+                    entries.add(ToolTipEntry.of(Text.literal(String.valueOf(values.get(item))), item));
                 }
                 if (component.data.itemStack.getItem() instanceof IValue value) {
                     int val = value.getValue(component.data.itemStack);

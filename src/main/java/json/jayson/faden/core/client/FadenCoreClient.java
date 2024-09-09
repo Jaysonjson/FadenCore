@@ -3,7 +3,9 @@ package json.jayson.faden.core.client;
 import com.google.common.reflect.TypeToken;
 import json.jayson.faden.core.client.overlay.InstrumentMusicOverlay;
 import json.jayson.faden.core.client.overlay.StatsOverlay;
+import json.jayson.faden.core.client.render.blockentity.NPCSpawnerMarkerBlockEntityRenderer;
 import json.jayson.faden.core.client.render.entity.NPCEntityRenderer;
+import json.jayson.faden.core.common.init.FadenCoreBlockEntities;
 import json.jayson.faden.core.common.init.FadenCoreBlocks;
 import json.jayson.faden.core.common.init.FadenCoreEntities;
 import json.jayson.faden.core.registry.FadenCoreRegistry;
@@ -30,6 +32,8 @@ import json.jayson.faden.core.network.FadenCoreNetwork;
 import json.jayson.faden.core.util.FadenCoreCheckSum;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.sound.PositionedSoundInstance;
 
 import java.io.File;
@@ -90,6 +94,9 @@ public class FadenCoreClient implements ClientModInitializer {
             }
         });
         setBlockRenderMaps();
+
+        BlockEntityRendererFactories.register(FadenCoreBlockEntities.NPC_SPAWNER_MARKER, (BlockEntityRendererFactory.Context context) -> new NPCSpawnerMarkerBlockEntityRenderer());
+
     }
 
     public void setBlockRenderMaps() {
@@ -100,7 +107,7 @@ public class FadenCoreClient implements ClientModInitializer {
         try {
             action.run();
         } catch (Exception e) {
-            FadenCore.LOGGER.error("Error trying to load textures for: " + textureType, e);
+            FadenCore.LOGGER.error("Error trying to load textures for: {}", textureType, e);
         }
     }
 

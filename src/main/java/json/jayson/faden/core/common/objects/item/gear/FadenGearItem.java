@@ -58,117 +58,37 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
             });
         }
 
-        entries.add(new ToolTipEntry() {
-            @Override
-            public Text getText(FadenTooltipComponent component) {
-                return getGearType() == GearSlot.BRACELET ? Text.translatable("tooltip.faden.bracelet") : getGearType() == GearSlot.BELT ? Text.translatable("tooltip.faden.belt") : Text.translatable("tooltip.faden.necklace");
-            }
-
-            @Override
-            public @NotNull Identifier getTexture(FadenTooltipComponent component) {
-                return getGearType() == GearSlot.BRACELET ? FadenCoreIdentifier.create("textures/item/empty_bracelet_slot.png") : getGearType() == GearSlot.BELT ? FadenCoreIdentifier.create("textures/item/empty_belt_slot.png") : FadenCoreIdentifier.create("textures/item/empty_necklace_slot.png");
-            }
-        });
+        entries.add(ToolTipEntry.of(getGearType() == GearSlot.BRACELET ? Text.translatable("tooltip.faden.bracelet") : getGearType() == GearSlot.BELT ? Text.translatable("tooltip.faden.belt") : Text.translatable("tooltip.faden.necklace"), getGearType() == GearSlot.BRACELET ? FadenCoreIdentifier.create("textures/item/empty_bracelet_slot.png") : getGearType() == GearSlot.BELT ? FadenCoreIdentifier.create("textures/item/empty_belt_slot.png") : FadenCoreIdentifier.create("textures/item/empty_necklace_slot.png")));
 
         //ADD COINS
         entries.addAll(super.getToolTipEntries(component));
 
         if(itemStack.getOrDefault(FadenCoreDataComponents.FREE_WATER_MOVEMENT, false)) {
-            entries.add(new ToolTipEntry() {
-                @Override
-                public @Nullable Item getItem(FadenTooltipComponent component) {
-                    return Items.WATER_BUCKET;
-                }
-
-                @Override
-                public Text getText(FadenTooltipComponent component) {
-                    return Text.translatable("tooltip.faden.free_water_movement");
-                }
-            });
+            entries.add(ToolTipEntry.of(Text.translatable("tooltip.faden.free_water_movement"), Items.WATER_BUCKET));
         }
 
         if(itemStack.contains(FadenCoreDataComponents.DAMAGE_INCREASE_VALUE)) {
-            entries.add(new ToolTipEntry() {
-                @Override
-                public @Nullable Item getItem(FadenTooltipComponent component) {
-                    return Items.IRON_SWORD;
-                }
-
-                @Override
-                public Text getText(FadenTooltipComponent component) {
-                    return Text.literal(Text.translatable("tooltip.faden.damage_increase_value").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenCoreDataComponents.DAMAGE_INCREASE_VALUE, 0f))));
-                }
-            });
+            entries.add(ToolTipEntry.of(Text.literal(Text.translatable("tooltip.faden.damage_increase_value").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenCoreDataComponents.DAMAGE_INCREASE_VALUE, 0f), Items.IRON_SWORD)))));
         }
 
         if(itemStack.contains(FadenCoreDataComponents.DAMAGE_INCREASE_PERCENTAGE)) {
-            entries.add(new ToolTipEntry() {
-                @Override
-                public @Nullable Item getItem(FadenTooltipComponent component) {
-                    return Items.IRON_SWORD;
-                }
-
-                @Override
-                public Text getText(FadenTooltipComponent component) {
-                    return Text.literal(Text.translatable("tooltip.faden.damage_increase_percentage").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenCoreDataComponents.DAMAGE_INCREASE_VALUE, 0f))));
-                }
-            });
+            entries.add(ToolTipEntry.of(Text.literal(Text.translatable("tooltip.faden.damage_increase_percentage").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenCoreDataComponents.DAMAGE_INCREASE_VALUE, 0f), Items.IRON_SWORD));
         }
 
         if(itemStack.contains(FadenCoreDataComponents.FALL_DAMAGE_DECREASE_PERCENTAGE)) {
-            entries.add(new ToolTipEntry() {
-                @Override
-                public @Nullable Item getItem(FadenTooltipComponent component) {
-                    return Items.DIAMOND_BOOTS;
-                }
-
-                @Override
-                public Text getText(FadenTooltipComponent component) {
-                    return Text.literal(Text.translatable("tooltip.faden.fall_damage_decrease_percentage").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenCoreDataComponents.FALL_DAMAGE_DECREASE_PERCENTAGE, 0f))));
-                }
-            });
+            entries.add(ToolTipEntry.of(Text.literal(Text.translatable("tooltip.faden.fall_damage_decrease_percentage").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenCoreDataComponents.FALL_DAMAGE_DECREASE_PERCENTAGE, 0f), Items.DIAMOND_BOOTS));
         }
 
         if(itemStack.contains(FadenCoreDataComponents.FALL_DAMAGE_DECREASE_BLOCKS)) {
-            entries.add(new ToolTipEntry() {
-                @Override
-                public @Nullable Item getItem(FadenTooltipComponent component) {
-                    return Items.DIAMOND_BOOTS;
-                }
-
-                @Override
-                public Text getText(FadenTooltipComponent component) {
-                    return Text.literal(Text.translatable("tooltip.faden.fall_damage_decrease_blocks").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenCoreDataComponents.FALL_DAMAGE_DECREASE_BLOCKS, 0f))));
-                }
-            });
+            entries.add(ToolTipEntry.of(Text.literal(Text.translatable("tooltip.faden.fall_damage_decrease_blocks").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenCoreDataComponents.FALL_DAMAGE_DECREASE_BLOCKS, 0f), Items.DIAMOND_BOOTS)))));
         }
 
         if(itemStack.contains(FadenCoreDataComponents.JUMP_INCREASE_VALUE)) {
-            entries.add(new ToolTipEntry() {
-                @Override
-                public @Nullable Item getItem(FadenTooltipComponent component) {
-                    return Items.RABBIT_FOOT;
-                }
-
-                @Override
-                public Text getText(FadenTooltipComponent component) {
-                    return Text.literal(Text.translatable("tooltip.faden.jump_increase_value").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenCoreDataComponents.JUMP_INCREASE_VALUE, 0f) * 100f)));
-                }
-            });
+            entries.add(ToolTipEntry.of(Text.literal(Text.translatable("tooltip.faden.jump_increase_value").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenCoreDataComponents.JUMP_INCREASE_VALUE, 0f) * 100f))), Items.RABBIT_FOOT));
         }
 
         if(itemStack.contains(FadenCoreDataComponents.JUMP_INCREASE_PERCENTAGE)) {
-            entries.add(new ToolTipEntry() {
-                @Override
-                public @Nullable Item getItem(FadenTooltipComponent component) {
-                    return Items.RABBIT_FOOT;
-                }
-
-                @Override
-                public Text getText(FadenTooltipComponent component) {
-                    return Text.literal(Text.translatable("tooltip.faden.jump_increase_percentage").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenCoreDataComponents.JUMP_INCREASE_PERCENTAGE, 0f))));
-                }
-            });
+            entries.add(ToolTipEntry.of(Text.literal(Text.translatable("tooltip.faden.jump_increase_percentage").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenCoreDataComponents.JUMP_INCREASE_PERCENTAGE, 0f), Items.RABBIT_FOOT)))));
         }
 
         if(itemStack.contains(DataComponentTypes.MAX_DAMAGE)) {
