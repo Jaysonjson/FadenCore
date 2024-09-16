@@ -1,14 +1,10 @@
 package json.jayson.faden.core.common.events;
 
-import json.jayson.faden.core.common.data.FadenCoreValueData;
-import json.jayson.faden.core.common.objects.item.instrument.InstrumentType;
-import json.jayson.faden.core.registry.FadenCoreRegistry;
 import json.jayson.faden.core.util.SaveUtil;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
-import net.fabricmc.loader.api.FabricLoader;
 import json.jayson.faden.core.FadenCore;
 import json.jayson.faden.core.common.data.ItemValues;
 import json.jayson.faden.core.common.race.Race;
@@ -24,8 +20,8 @@ public class FadenCoreServerEvents {
     public static void init() {
         ServerLifecycleEvents.SERVER_STARTING.register(server -> {
             ServerPlayerDatas.SERVER = server;
-            new File(SaveUtil.getCurrentSaveFull() + "/player_datas/").mkdirs();
-            new File(SaveUtil.getCurrentSaveFull()).mkdirs();
+            new File(SaveUtil.getFolder() + "/player_datas/").mkdirs();
+            new File(SaveUtil.getFolder()).mkdirs();
             QuestCache.load();
             ItemValues.load();
             FadenCore.DATA.load();

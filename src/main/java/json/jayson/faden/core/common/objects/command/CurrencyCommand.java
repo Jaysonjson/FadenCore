@@ -52,7 +52,7 @@ public class CurrencyCommand {
     public static int giveCurrency(CommandContext<ServerCommandSource> source) throws CommandSyntaxException {
         PlayerEntity player = EntityArgumentType.getPlayer(source, "player");
         int amount = IntegerArgumentType.getInteger(source, "amount");
-        CurrencyUtil.Currency.add(player.getWorld(), player.getBlockPos(), player.getInventory(), amount);
+        CurrencyUtil.Currency.add(player, amount);
         source.getSource().sendFeedback(() -> Text.literal("Gave: " + amount), false);
         return 0;
     }

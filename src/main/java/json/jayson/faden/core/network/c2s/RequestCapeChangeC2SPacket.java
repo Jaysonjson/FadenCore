@@ -37,11 +37,10 @@ public record RequestCapeChangeC2SPacket(UUID uuid, String capeId) implements Cu
         if(capeId.isEmpty()) {
             data.setSelectedCape("");
         } else {
-            for (String s : data.getCapes()) {
-                if (s.equalsIgnoreCase(capeId)) {
-                    data.setSelectedCape(capeId);
-                }
-            }
+            data.getCapes().stream()
+                    .filter(s -> s.equalsIgnoreCase(capeId))
+                    .findFirst()
+                    .ifPresent(s -> data.setSelectedCape(capeId));
         }
         ServerPlayerDatas.getPlayerDatas().put(uuid, data);
         NetworkUtils.syncPlayer(context.server(), context.player());

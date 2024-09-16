@@ -8,7 +8,6 @@ import java.util.HashMap;
 import com.google.gson.reflect.TypeToken;
 
 import json.jayson.faden.core.util.SaveUtil;
-import net.fabricmc.loader.api.FabricLoader;
 import json.jayson.faden.core.FadenCore;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -28,11 +27,11 @@ public class ItemValues {
 
     public static void load() {
         if(!FadenCore.MODULES.itemValues) return;
-        if(!new File(SaveUtil.getCurrentSaveFull() + "/item_values.json").exists()) {
+        if(!new File(SaveUtil.getFolder() + "/item_values.json").exists()) {
             save();
         }
         try {
-            HashMap<String, Integer> map  = FadenCore.GSON.fromJson(new FileReader(SaveUtil.getCurrentSaveFull() + "/item_values.json"), new TypeToken<HashMap<String, Integer>>() {}.getType());
+            HashMap<String, Integer> map  = FadenCore.GSON.fromJson(new FileReader(SaveUtil.getFolder() + "/item_values.json"), new TypeToken<HashMap<String, Integer>>() {}.getType());
             reload(map);
         } catch (Exception e) {
             e.printStackTrace();
@@ -46,7 +45,7 @@ public class ItemValues {
             for (Item item : VALUES.keySet()) {
                 map.put(Registries.ITEM.getId(item).toString(), VALUES.get(item));
             }
-            FileUtils.writeStringToFile(new File(SaveUtil.getCurrentSaveFull() + "/item_values.json"), FadenCore.GSON.toJson(map), StandardCharsets.UTF_8);
+            FileUtils.writeStringToFile(new File(SaveUtil.getFolder() + "/item_values.json"), FadenCore.GSON.toJson(map), StandardCharsets.UTF_8);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -59,7 +58,7 @@ public class ItemValues {
             for (Item item : ItemValues.VALUES.keySet()) {
                 map.put(Registries.ITEM.getId(item).toString(), ItemValues.VALUES.get(item));
             }
-            FileUtils.writeStringToFile(new File(SaveUtil.getCurrentSaveFullClient() + "/item_values.json"), FadenCore.GSON.toJson(map), StandardCharsets.UTF_8);
+            FileUtils.writeStringToFile(new File(SaveUtil.getClientFolder() + "/item_values.json"), FadenCore.GSON.toJson(map), StandardCharsets.UTF_8);
         } catch (Exception e) {
             e.printStackTrace();
         }

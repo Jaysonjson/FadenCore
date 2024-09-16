@@ -3,13 +3,8 @@ package json.jayson.faden.core;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Optional;
 import java.util.Random;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
-import com.mojang.datafixers.util.Pair;
 import json.jayson.faden.core.common.cape.FadenCoreCape;
 import json.jayson.faden.core.common.data.FadenCoreValueData;
 import json.jayson.faden.core.common.data.listeners.InstrumentedMusicDataListener;
@@ -23,28 +18,15 @@ import json.jayson.faden.core.common.npc.entity.NPCEntity;
 import json.jayson.faden.core.common.objects.command.types.NPCArgumentType;
 import json.jayson.faden.core.server.FadenCoreData;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnGroup;
-import net.minecraft.entity.ai.brain.*;
-import net.minecraft.entity.ai.brain.sensor.Sensor;
-import net.minecraft.entity.ai.brain.sensor.SensorType;
-import net.minecraft.entity.ai.brain.task.*;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registry;
 import net.minecraft.resource.ResourceType;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.village.VillagerProfession;
-import net.minecraft.village.raid.Raid;
-import net.minecraft.world.poi.PointOfInterestTypes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -158,7 +140,6 @@ public class FadenCore implements ModInitializer {
 	private static void registerCustomCapes() {
 		Registry.register(FadenCoreRegistry.CAPE, FadenCoreIdentifier.create("developer"), new FadenCoreCape(Text.literal("Developer"), Text.literal("")));
 	}
-
 
 	private static void registerTestingObjects() {
 		if(FabricLoader.getInstance().isDevelopmentEnvironment()) {

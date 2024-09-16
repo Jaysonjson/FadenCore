@@ -8,7 +8,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.util.WorldSavePath;
-import net.minecraft.world.World;
 
 public class SaveUtil {
 
@@ -24,19 +23,19 @@ public class SaveUtil {
         return getCurrentSaveName(ServerPlayerDatas.SERVER);
     }
 
-    public static String getCurrentSaveFull(MinecraftServer server) {
+    public static String getFolder(MinecraftServer server) {
         return server.getSavePath(WorldSavePath.ROOT) + "/fadencore/";
     }
 
-    public static String getCurrentSaveFull() {
-        return getCurrentSaveFull(ServerPlayerDatas.SERVER);
+    public static String getFolder() {
+        return getFolder(ServerPlayerDatas.SERVER);
     }
 
 
     @Environment(EnvType.CLIENT)
-    public static String getCurrentSaveFullClient() {
+    public static String getClientFolder() {
         if(MinecraftClient.getInstance().isInSingleplayer()) {
-            return getCurrentSaveFull(MinecraftClient.getInstance().getServer());
+            return getFolder(MinecraftClient.getInstance().getServer());
         }
         return FabricLoader.getInstance().getGameDir() + "/" + MinecraftClient.getInstance().getCurrentServerEntry().address.replaceAll(".","") + "/fadencore/";
     }

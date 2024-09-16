@@ -72,11 +72,11 @@ public abstract class FadenGearItem extends FadenItem implements Gear, ItemToolT
         }
 
         if(itemStack.contains(FadenCoreDataComponents.DAMAGE_INCREASE_PERCENTAGE)) {
-            entries.add(ToolTipEntry.of(Text.literal(Text.translatable("tooltip.faden.damage_increase_percentage").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenCoreDataComponents.DAMAGE_INCREASE_VALUE, 0f), Items.IRON_SWORD));
+            entries.add(ToolTipEntry.of(Text.literal(Text.translatable("tooltip.faden.damage_increase_percentage").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenCoreDataComponents.DAMAGE_INCREASE_VALUE, 0f), Items.IRON_SWORD)))));
         }
 
         if(itemStack.contains(FadenCoreDataComponents.FALL_DAMAGE_DECREASE_PERCENTAGE)) {
-            entries.add(ToolTipEntry.of(Text.literal(Text.translatable("tooltip.faden.fall_damage_decrease_percentage").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenCoreDataComponents.FALL_DAMAGE_DECREASE_PERCENTAGE, 0f), Items.DIAMOND_BOOTS));
+            entries.add(ToolTipEntry.of(Text.literal(Text.translatable("tooltip.faden.fall_damage_decrease_percentage").getString().replaceAll("%s", String.format("%.02f", component.data.itemStack.getOrDefault(FadenCoreDataComponents.FALL_DAMAGE_DECREASE_PERCENTAGE, 0f), Items.DIAMOND_BOOTS)))));
         }
 
         if(itemStack.contains(FadenCoreDataComponents.FALL_DAMAGE_DECREASE_BLOCKS)) {

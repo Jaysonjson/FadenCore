@@ -11,7 +11,6 @@ import java.util.UUID;
 import json.jayson.faden.core.util.SaveUtil;
 import org.apache.commons.io.FileUtils;
 
-import net.fabricmc.loader.api.FabricLoader;
 import json.jayson.faden.core.FadenCore;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtIo;
@@ -22,8 +21,8 @@ public class QuestCache {
 
     private static NbtCompound CACHE = new NbtCompound();
     private static PlayerQuests PLAYER_CACHE = new PlayerQuests();
-    private static final Path CACHE_PATH = new File(SaveUtil.getCurrentSaveFull() + "/quests.nbt").toPath();
-    private static final Path PLAYER_CACHE_PATH = new File(SaveUtil.getCurrentSaveFull() + "/quests_player.json").toPath();
+    private static final Path CACHE_PATH = new File(SaveUtil.getFolder() + "/quests.nbt").toPath();
+    private static final Path PLAYER_CACHE_PATH = new File(SaveUtil.getFolder() + "/quests_player.json").toPath();
 
     public static void load() {
         if(!FadenCore.MODULES.quests) return;

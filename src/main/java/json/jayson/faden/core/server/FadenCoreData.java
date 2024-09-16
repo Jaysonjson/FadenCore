@@ -1,13 +1,8 @@
 package json.jayson.faden.core.server;
 
 import json.jayson.faden.core.util.SaveUtil;
-import net.fabricmc.loader.api.FabricLoader;
-import json.jayson.faden.core.FadenCore;
-import org.apache.commons.io.FileUtils;
 
 import java.io.File;
-import java.io.FileReader;
-import java.nio.charset.StandardCharsets;
 
 public class FadenCoreData {
 
@@ -21,7 +16,7 @@ public class FadenCoreData {
     }
 
     public void load() {
-        File dataFile = new File(SaveUtil.getCurrentSaveFull() + "/fadencore.json");
+        File dataFile = new File(SaveUtil.getFolder() + "/fadencore.json");
         if(dataFile.exists()) {
             try {
                 //FadenCore.DATA = FadenCore.GSON.fromJson(new FileReader(dataFile), FadenCoreData.class);

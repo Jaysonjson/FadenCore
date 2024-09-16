@@ -3,6 +3,7 @@ package json.jayson.faden.core.util;
 import json.jayson.faden.core.common.objects.CoinMap;
 import json.jayson.faden.core.common.objects.item.coin.CoinItem;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
@@ -82,6 +83,10 @@ public class CurrencyUtil {
                     }
                 }
             }
+        }
+
+        public static void add(PlayerEntity player, int amount) {
+            add(player.getWorld(), player.getBlockPos(), player.getInventory(), amount);
         }
 
         public static void add(World world, BlockPos pos, Inventory inventory, int amount) {

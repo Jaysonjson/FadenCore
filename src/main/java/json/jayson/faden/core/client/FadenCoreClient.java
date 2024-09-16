@@ -17,7 +17,6 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
-import net.fabricmc.loader.api.FabricLoader;
 import json.jayson.faden.core.FadenCore;
 import json.jayson.faden.core.client.handler.FadenItemModelHandler;
 import json.jayson.faden.core.client.registry.FadenItemModelRegistry;
@@ -120,7 +119,7 @@ public class FadenCoreClient implements ClientModInitializer {
     }
 
     public void loadClientItemValues() {
-        File itemValues = new File(SaveUtil.getCurrentSaveFullClient() + "/item_values.json");
+        File itemValues = new File(SaveUtil.getClientFolder() + "/item_values.json");
         if(itemValues.exists()) {
             try {
                 ItemValues.reload(FadenCore.GSON.fromJson(new FileReader(itemValues), new TypeToken<HashMap<String, Integer>>(){}.getType()));
@@ -131,8 +130,8 @@ public class FadenCoreClient implements ClientModInitializer {
     }
 
     public static String getItemValuesChecksum() {
-        if(!new File(SaveUtil.getCurrentSaveFullClient() + "/item_values.json").exists()) return "";
-        return FadenCoreCheckSum.checkSum(new File(SaveUtil.getCurrentSaveFullClient() + "/item_values.json"));
+        if(!new File(SaveUtil.getClientFolder() + "/item_values.json").exists()) return "";
+        return FadenCoreCheckSum.checkSum(new File(SaveUtil.getClientFolder() + "/item_values.json"));
     }
 
 
