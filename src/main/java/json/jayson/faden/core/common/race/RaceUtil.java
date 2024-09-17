@@ -21,6 +21,7 @@ public class RaceUtil {
 
     public static void setPlayerRace(ServerPlayerEntity player, Race race, String sub_id, PlayerData.RaceDataCosmetics cosmetics) {
         String skinId = RaceSkinMap.getRandomSkin(race, sub_id);
+        System.out.println(skinId + " : SKIN ID");
         if(!skinId.isEmpty()) {
             PlayerData data = ServerPlayerDatas.getOrLoadPlayerData(player.getUuid());
             data.getRaceSaveData().setSkin(skinId);
@@ -28,6 +29,7 @@ public class RaceUtil {
             data.getRaceSaveData().setRaceSub(sub_id);
             data.getRaceSaveData().setCosmetics(cosmetics);
             data.sync();
+            ServerPlayerDatas.save(player.getUuid());
             race.applyStats(player);
             //FadenNetwork.Server.sendRace(player, player.getUuid(), race.getId(), sub_id, false);
         }

@@ -5,10 +5,13 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 
 import json.jayson.faden.core.registry.FadenCoreRegistry;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
@@ -43,7 +46,11 @@ public class RaceSkinMap {
 						try (InputStream inputStream = Files.newInputStream(path)) {
 							String id = path.getFileName().toString();
 							id = id.substring(0, id.lastIndexOf('.'));
-							race.getSkinMap().put(Identifier.of(modId, "skin/" + subId + "/" + id), SkinProvider.readSkin(inputStream));
+							if(FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+								race.getSkinMap().put(Identifier.of(modId, "skin/" + subId + "/" + id), SkinProvider.readSkin(inputStream));
+							} else {
+								race.getSkinMap().put(Identifier.of(modId, "skin/" + subId + "/" + id), new byte[0]);
+							}
 							FadenCore.LOGGER.debug("Loaded Skin: " + subId + "/" + id);
 						} catch (IOException e) {
 							FadenCore.LOGGER.error("Error loading skin from path: " + path, e);
@@ -81,8 +88,10 @@ public class RaceSkinMap {
 		if(!race.hasSkins()) return "";
 		Random random = new Random();
 		ArrayList<String> buffer = new ArrayList<>();
+		System.out.println(race.getSkinMap().size() + " : SKINS");
 		for (Identifier s : race.getSkinMap().keySet()) {
 			String[] parts = s.toString().split("/");
+			System.out.println("Skin: " + s + " length: " + parts.length);
 			if (parts.length > 1) {
 				String skinId = parts[1];
 				if (skinId.equalsIgnoreCase(subId)) {

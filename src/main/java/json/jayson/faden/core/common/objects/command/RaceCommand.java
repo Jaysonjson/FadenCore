@@ -62,7 +62,7 @@ public class RaceCommand {
             } else {
                 RaceUtil.setPlayerRace((ServerPlayerEntity) player, FadenCoreRegistry.getRace(race), sub_id);
             }
-            source.getSource().sendFeedback(() -> Text.literal("Set Race to : " + race + " with SubId: " + sub_id), false);
+            source.getSource().sendFeedback(() -> Text.literal("Set Race to: " + race + " with SubId: " + sub_id), false);
         } catch (Exception e) {
             e.printStackTrace();
         }

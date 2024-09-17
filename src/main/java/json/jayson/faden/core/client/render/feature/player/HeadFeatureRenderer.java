@@ -1,5 +1,6 @@
 package json.jayson.faden.core.client.render.feature.player;
 
+import json.jayson.faden.core.client.interfaces.IModelTransformation;
 import json.jayson.faden.core.common.npc.entity.NPCEntity;
 import json.jayson.faden.core.common.race.Race;
 import json.jayson.faden.core.common.race.cosmetic.RaceCosmetic;
@@ -58,7 +59,7 @@ public class HeadFeatureRenderer<T extends LivingEntity> extends FeatureRenderer
                     matrices.push();
                     BakedModel model = MinecraftClient.getInstance().getBakedModelManager().getModel(cosmetic.getModel());
                     ((ModelWithHead) this.getContextModel()).getHead().rotate(matrices);
-                    model.getTransformation().getTransformation(ModelTransformationMode.HEAD).apply(false, matrices);
+                    if(model.getTransformation() instanceof IModelTransformation transformation && transformation.getCosmetic() != null) transformation.getCosmetic().apply(false, matrices);
                     translate(matrices);
                     FadenCoreRenderUtil.renderBakedModel(matrices, vertexConsumers, model, (int) (light * 0.5f));
                     matrices.pop();

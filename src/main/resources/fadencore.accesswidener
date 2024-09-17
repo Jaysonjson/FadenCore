@@ -19,3 +19,4 @@ accessible field net/minecraft/client/sound/Source pointer I
 accessible field net/minecraft/client/gui/screen/SplashTextRenderer text Ljava/lang/String;
 accessible method net/minecraft/entity/player/PlayerEntity updatePose ()V
 accessible field net/minecraft/registry/SimpleRegistry frozen Z
+accessible class net/minecraft/client/render/model/json/ModelTransformation$Deserializer

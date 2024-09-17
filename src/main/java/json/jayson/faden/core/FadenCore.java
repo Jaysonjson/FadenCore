@@ -1,13 +1,16 @@
 package json.jayson.faden.core;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Random;
 
 import json.jayson.faden.core.common.cape.FadenCoreCape;
 import json.jayson.faden.core.common.data.FadenCoreValueData;
 import json.jayson.faden.core.common.data.listeners.InstrumentedMusicDataListener;
+import json.jayson.faden.core.common.data.listeners.RaceSkinMapResourceListener;
 import json.jayson.faden.core.common.init.*;
 import json.jayson.faden.core.common.npc.NPC;
 import json.jayson.faden.core.common.npc.NPCTexture;
@@ -18,9 +21,11 @@ import json.jayson.faden.core.common.npc.entity.NPCEntity;
 import json.jayson.faden.core.common.objects.command.types.NPCArgumentType;
 import json.jayson.faden.core.server.FadenCoreData;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.minecraft.client.gui.screen.SplashOverlay;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registry;
+import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -61,6 +66,7 @@ public class FadenCore implements ModInitializer {
 	public static final Random RANDOM = new Random();
 	public static FadenCoreData DATA = new FadenCoreData();
 	public static FadenCoreValueData VALUE_DATA = new FadenCoreValueData();
+	public static HashMap<String, FadenCoreApi> ADDONS = new HashMap<>();
 
 	public static final FadenCoreModules MODULES = new FadenCoreModules();
 
@@ -77,6 +83,8 @@ public class FadenCore implements ModInitializer {
 
 	public void resourceReloadListener() {
 		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new InstrumentedMusicDataListener());
+		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new RaceSkinMapResourceListener());
+
 	}
 
 	public static void loadConfig() {
@@ -108,15 +116,11 @@ public class FadenCore implements ModInitializer {
 			if(fadenCoreApi.enablePlayerData()) MODULES.playerDatas = true;
 			if(fadenCoreApi.enableQuests()) MODULES.quests = true;
 			if(fadenCoreApi.enableItemValues()) MODULES.itemValues = true;
-			setupFadenAddon(id);
+			ADDONS.put(id, fadenCoreApi);
+			CoinMap.reloadCoins();
 		});
 		registerCustomCapes();
 		registerTestingObjects();
-	}
-
-	private static void setupFadenAddon(String modId) {
-		RaceSkinMap.addSkins(modId, FabricLoader.getInstance().getModContainer(modId).get());
-		CoinMap.reloadCoins();
 	}
 
 	public static void entityAttributes() {

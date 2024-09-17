@@ -1,5 +1,6 @@
 package json.jayson.faden.core.client.render.feature.player;
 
+import json.jayson.faden.core.client.interfaces.IModelTransformation;
 import json.jayson.faden.core.common.npc.entity.NPCEntity;
 import json.jayson.faden.core.common.race.Race;
 import json.jayson.faden.core.common.race.cosmetic.RaceCosmetic;
@@ -57,18 +58,18 @@ public class ChestFeatureRenderer<T extends LivingEntity> extends FeatureRendere
                     matrices.push();
                     BakedModel model = MinecraftClient.getInstance().getBakedModelManager().getModel(cosmetic.getModel());
                     if (!entity.isSneaking()) {
-                        model.getTransformation().getTransformation(ModelTransformationMode.HEAD).apply(false, matrices);
+                        if(model.getTransformation() instanceof IModelTransformation transformation && transformation.getCosmetic() != null) transformation.getCosmetic().apply(false, matrices);
                         matrices.translate(-0.31, 0.82f, 0.45);
                         matrices.scale(0.625F, -0.625F, -0.625F);
                     } else {
                         if (entity.isOnGround()) {
-                            model.getTransformation().getTransformation(ModelTransformationMode.HEAD).apply(false, matrices);
+                            if(model.getTransformation() instanceof IModelTransformation transformation && transformation.getCosmetic() != null) transformation.getCosmetic().apply(false, matrices);
                             matrices.translate(-0.31, 0.82f, 0.45);
                             matrices.scale(0.625F, -0.625F, -0.625F);
                             matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(25));
                             matrices.translate(0, 0.11, -0.32);
                         } else {
-                            model.getTransformation().getTransformation(ModelTransformationMode.HEAD).apply(false, matrices);
+                            if(model.getTransformation() instanceof IModelTransformation transformation && transformation.getCosmetic() != null) transformation.getCosmetic().apply(false, matrices);
                             matrices.translate(-0.31, 0.82f, 0.45);
                             matrices.scale(0.625F, -0.625F, -0.625F);
                         }

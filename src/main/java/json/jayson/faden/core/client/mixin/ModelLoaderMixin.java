@@ -9,6 +9,7 @@ import json.jayson.faden.core.config.FadenCoreOptions;
 import json.jayson.faden.core.registry.FadenCoreRegistry;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.render.model.ModelLoader;
+import net.minecraft.client.render.model.UnbakedModel;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -29,6 +30,10 @@ public abstract class ModelLoaderMixin {
     @Shadow
     protected abstract void loadItemModel(ModelIdentifier modelId);
 
+    @Shadow abstract UnbakedModel getOrLoadModel(Identifier id);
+
+    @Shadow protected abstract void add(ModelIdentifier id, UnbakedModel model);
+
     @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiler/Profiler;swap(Ljava/lang/String;)V", ordinal = 1, shift = At.Shift.AFTER, by = 1))
     public void addModels(BlockColors blockColors, Profiler profiler, Map jsonUnbakedModels, Map blockStates, CallbackInfo ci) {
         for (Item item : FadenCoreClient.getItemModels().getModels().keySet()) {
@@ -41,11 +46,16 @@ public abstract class ModelLoaderMixin {
             for (Race value : FadenCoreRegistry.RACE) {
                 for (ArrayList<RaceCosmetic> raceCosmetics : value.getCosmeticPalette().getCosmetics().values()) {
                     for (RaceCosmetic raceCosmetic : raceCosmetics) {
-                        this.loadItemModel(raceCosmetic.getModel());
+                        loadModel(raceCosmetic.getModel());
                     }
                 }
             }
         }
     }
 
+    public void loadModel(ModelIdentifier id) {
+        Identifier identifier = id.id().withPrefixedPath("cosmetic/");
+        UnbakedModel unbakedModel = getOrLoadModel(identifier);
+        add(id, unbakedModel);
+    }
 }
