@@ -2,6 +2,7 @@ package json.jayson.faden.core.registry;
 
 import json.jayson.faden.core.common.cape.FadenCoreCape;
 import json.jayson.faden.core.common.npc.NPC;
+import json.jayson.faden.core.common.objects.cloth.FadenCoreCloth;
 import json.jayson.faden.core.common.objects.item.instrument.InstrumentType;
 import json.jayson.faden.core.common.objects.music_instance.InstrumentedMusic;
 import json.jayson.faden.core.common.quest.data.FadenCoreQuest;
@@ -35,6 +36,10 @@ public class FadenCoreRegistry {
             .buildAndRegister();
 
     public static SimpleRegistry<InstrumentType> INSTRUMENT = FabricRegistryBuilder.createSimple(FadenCoreRegistryKeys.INSTRUMENT_KEY)
+            .attribute(RegistryAttribute.SYNCED)
+            .buildAndRegister();
+
+    public static SimpleRegistry<FadenCoreCloth> CLOTH = FabricRegistryBuilder.createSimple(FadenCoreRegistryKeys.CLOTH_KEY)
             .attribute(RegistryAttribute.SYNCED)
             .buildAndRegister();
 

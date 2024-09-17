@@ -1,9 +1,9 @@
 package json.jayson.faden.core.client.render.feature.player;
 
+import json.jayson.faden.core.common.objects.item.IClothItem;
 import json.jayson.faden.core.common.slot.ClothSlot;
 import json.jayson.faden.core.mixin_interfaces.IClothInventory;
 import json.jayson.faden.core.client.IPlayerEntityRenderer;
-import json.jayson.faden.core.common.objects.item.cloth.ClothItem;
 import net.minecraft.client.render.*;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
@@ -38,11 +38,11 @@ public class ClothFeatureRenderer <T extends LivingEntity, M extends BipedEntity
             IClothInventory playerInventory = (IClothInventory) player.getInventory();
             ItemStack itemStack = playerInventory.getClothOrArmor(armorSlot, ClothSlot.fromEquipment(armorSlot));
             Item item = itemStack.getItem();
-            if (item instanceof ClothItem clothItem) {
+            if (item instanceof IClothItem clothItem) {
                 PlayerEntityModel playerEntityModel = playerEntityRenderer.getPlayerModel();
                 this.getContextModel().copyBipedStateTo(playerEntityModel);
                 this.setVisible(playerEntityModel, armorSlot);
-                this.renderArmorParts(matrices, vertexConsumers, light, playerEntityModel, 1, 1, 1, playerEntityRenderer.slim() ? clothItem.getTexture() : clothItem.getTextureWide());
+                this.renderArmorParts(matrices, vertexConsumers, light, playerEntityModel, 1, 1, 1, playerEntityRenderer.slim() ? clothItem.getCloth().getTexture().getLeft() : clothItem.getCloth().getTexture().getRight());
             }
         }
     }

@@ -37,10 +37,7 @@ public class ClientRaceSkinCache {
 
     public static Identifier getSkin(UUID playerUuid) {
         PlayerData data = ClientPlayerDatas.getPlayerData(playerUuid);
-        if (data != null) {
-            return Identifier.of(data.getRaceSaveData().getSkin());
-        }
-        return Identifier.of("missing");
+        return Identifier.of(data.getRaceSaveData().getSkin());
     }
 
     public static ConcurrentHashMap<String, Identifier> getSkins() {

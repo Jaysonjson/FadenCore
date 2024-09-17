@@ -1,10 +1,10 @@
 package json.jayson.faden.core.mixin.inventory;
 
 import com.mojang.datafixers.util.Pair;
+import json.jayson.faden.core.common.objects.item.IClothItem;
 import json.jayson.faden.core.common.objects.item.gear.Gear;
 import json.jayson.faden.core.common.slot.ClothSlot;
 import json.jayson.faden.core.mixin_interfaces.ExtraInventory;
-import json.jayson.faden.core.common.objects.item.cloth.Cloth;
 import json.jayson.faden.core.common.slot.GearSlot;
 import json.jayson.faden.core.util.FadenCoreIdentifier;
 import net.minecraft.entity.player.PlayerEntity;
@@ -55,7 +55,7 @@ public abstract class PlayerScreenHandlerMixin extends ScreenHandler{
                 }
 
                 public boolean canInsert(ItemStack stack) {
-                    if(stack.getItem() instanceof Cloth cloth) {
+                    if(stack.getItem() instanceof IClothItem cloth) {
                         return cloth.getClothType() == equipmentSlot;
                     }
                     return false;
@@ -110,7 +110,7 @@ public abstract class PlayerScreenHandlerMixin extends ScreenHandler{
         if (slot2.hasStack()) {
             ItemStack itemStack2 = slot2.getStack();
             itemStack = itemStack2.copy();
-            if(itemStack.getItem() instanceof Cloth cloth) {
+            if(itemStack.getItem() instanceof IClothItem cloth) {
                 ClothSlot clothSlot = cloth.getClothType();
                 if(!(this.slots.get(ExtraInventory.CLOTH_END - 1 - clothSlot.getEntitySlotId())).hasStack()) {
                     int i = ExtraInventory.CLOTH_END - 1 - clothSlot.getEntitySlotId();

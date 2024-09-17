@@ -1,13 +1,13 @@
 package json.jayson.faden.core.client.mixin;
 
 import json.jayson.faden.core.client.PlayerModelCache;
+import json.jayson.faden.core.common.objects.item.IClothItem;
 import json.jayson.faden.core.common.race.Race;
 import json.jayson.faden.core.mixin_interfaces.IClothInventory;
 import json.jayson.faden.core.client.IPlayerEntityRenderer;
 import json.jayson.faden.core.client.render.feature.player.ChestFeatureRenderer;
 import json.jayson.faden.core.client.render.feature.player.ClothFeatureRenderer;
 import json.jayson.faden.core.client.render.feature.player.HeadFeatureRenderer;
-import json.jayson.faden.core.common.objects.item.cloth.ClothItem;
 import json.jayson.faden.core.common.race.skin.client.ClientRaceSkinCache;
 import json.jayson.faden.core.common.slot.ClothSlot;
 import json.jayson.faden.core.config.FadenCoreOptions;
@@ -155,11 +155,10 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
                     IClothInventory playerInventory = (IClothInventory) player.getInventory();
                     ItemStack itemStack = playerInventory.getClothOrArmor(EquipmentSlot.CHEST, ClothSlot.CHEST);
                     Item item = itemStack.getItem();
-                    if (item instanceof ClothItem clothItem) {
-                        playerEntityModel.rightArm.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityCutout(slim() ? clothItem.getTexture() : clothItem.getTextureWide())), light, OverlayTexture.DEFAULT_UV);
-                        playerEntityModel.rightSleeve.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityCutout(slim() ? clothItem.getTexture() : clothItem.getTextureWide())), light, OverlayTexture.DEFAULT_UV);
+                    if (item instanceof IClothItem clothItem) {
+                        playerEntityModel.leftArm.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityCutout(slim() ? clothItem.getCloth().getTexture().getLeft() : clothItem.getCloth().getTexture().getRight())), light, OverlayTexture.DEFAULT_UV);
+                        playerEntityModel.leftSleeve.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityCutout(slim() ? clothItem.getCloth().getTexture().getLeft() : clothItem.getCloth().getTexture().getRight())), light, OverlayTexture.DEFAULT_UV);
                     }
-
                 } else {
                     playerEntityModel.leftArm.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntitySolid(identifier)), light, OverlayTexture.DEFAULT_UV);
                     playerEntityModel.leftSleeve.pitch = 0.0F;
@@ -169,11 +168,10 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
                     IClothInventory playerInventory = (IClothInventory) player.getInventory();
                     ItemStack itemStack = playerInventory.getClothOrArmor(EquipmentSlot.CHEST, ClothSlot.CHEST);
                     Item item = itemStack.getItem();
-                    if (item instanceof ClothItem clothItem) {
-                        playerEntityModel.leftArm.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityCutout(slim() ? clothItem.getTexture() : clothItem.getTextureWide())), light, OverlayTexture.DEFAULT_UV);
-                        playerEntityModel.leftSleeve.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityCutout(slim() ? clothItem.getTexture() : clothItem.getTextureWide())), light, OverlayTexture.DEFAULT_UV);
+                    if (item instanceof IClothItem clothItem) {
+                        playerEntityModel.leftArm.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityCutout(slim() ? clothItem.getCloth().getTexture().getLeft() : clothItem.getCloth().getTexture().getRight())), light, OverlayTexture.DEFAULT_UV);
+                        playerEntityModel.leftSleeve.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityCutout(slim() ? clothItem.getCloth().getTexture().getLeft() : clothItem.getCloth().getTexture().getRight())), light, OverlayTexture.DEFAULT_UV);
                     }
-
                 }
 
 

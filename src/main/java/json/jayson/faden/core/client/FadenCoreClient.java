@@ -5,6 +5,7 @@ import json.jayson.faden.core.client.overlay.InstrumentMusicOverlay;
 import json.jayson.faden.core.client.overlay.StatsOverlay;
 import json.jayson.faden.core.client.render.blockentity.NPCSpawnerMarkerBlockEntityRenderer;
 import json.jayson.faden.core.client.render.entity.NPCEntityRenderer;
+import json.jayson.faden.core.common.data.listeners.ClothResourceListener;
 import json.jayson.faden.core.common.init.FadenCoreBlockEntities;
 import json.jayson.faden.core.common.init.FadenCoreBlocks;
 import json.jayson.faden.core.common.init.FadenCoreEntities;
@@ -22,18 +23,19 @@ import json.jayson.faden.core.client.handler.FadenItemModelHandler;
 import json.jayson.faden.core.client.registry.FadenItemModelRegistry;
 import json.jayson.faden.core.common.cape.FadenCoreCape;
 import json.jayson.faden.core.common.data.ItemValues;
-import json.jayson.faden.core.common.init.FadenCoreClothes;
 import json.jayson.faden.core.common.objects.music_instance.ClientMusicInstance;
 import json.jayson.faden.core.common.objects.tooltip.FadenTooltipComponent;
 import json.jayson.faden.core.common.objects.tooltip.FadenTooltipData;
 import json.jayson.faden.core.common.race.skin.client.ClientRaceSkinCache;
 import json.jayson.faden.core.network.FadenCoreNetwork;
 import json.jayson.faden.core.util.FadenCoreCheckSum;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.sound.PositionedSoundInstance;
+import net.minecraft.resource.ResourceType;
 
 import java.io.File;
 import java.io.FileReader;
@@ -48,7 +50,6 @@ public class FadenCoreClient implements ClientModInitializer {
     public void onInitializeClient() {
         FadenCoreNetwork.registerS2C();
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
-            tryToLoadTextures(FadenCoreClothes::load, "CLOTH");
             tryToLoadTextures(ClientRaceSkinCache::add, "RACE SKINS");
             tryToLoadTextures(() -> {
                 for (FadenCoreCape cape : FadenCoreRegistry.CAPE) {
@@ -93,7 +94,7 @@ public class FadenCoreClient implements ClientModInitializer {
             }
         });
         setBlockRenderMaps();
-
+        ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new ClothResourceListener());
         BlockEntityRendererFactories.register(FadenCoreBlockEntities.NPC_SPAWNER_MARKER, (BlockEntityRendererFactory.Context context) -> new NPCSpawnerMarkerBlockEntityRenderer());
 
     }

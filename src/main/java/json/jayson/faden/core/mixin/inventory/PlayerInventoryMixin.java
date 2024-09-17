@@ -1,9 +1,9 @@
 package json.jayson.faden.core.mixin.inventory;
 
 import com.google.common.collect.ImmutableList;
+import json.jayson.faden.core.common.objects.item.IClothItem;
 import json.jayson.faden.core.mixin_interfaces.ExtraInventory;
 import json.jayson.faden.core.common.slot.ClothSlot;
-import json.jayson.faden.core.common.objects.item.cloth.Cloth;
 import json.jayson.faden.core.mixin_interfaces.IPlayerInventory;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
@@ -88,7 +88,7 @@ public abstract class PlayerInventoryMixin implements IPlayerInventory {
     @Override
     public ItemStack getClothOrArmor(EquipmentSlot slot, ClothSlot clothSlot) {
         ItemStack stack = armor.get(slot.getEntitySlotId());
-        if(stack.getItem() instanceof Cloth) {
+        if(stack.getItem() instanceof IClothItem) {
            return stack;
         }  else {
             return clothes.get(clothSlot.getEntitySlotId());
