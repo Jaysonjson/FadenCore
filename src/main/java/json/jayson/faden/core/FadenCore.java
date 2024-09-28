@@ -1,6 +1,5 @@
 package json.jayson.faden.core;
 
-import java.awt.*;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,6 +13,10 @@ import json.jayson.faden.core.common.data.listeners.RaceSkinMapResourceListener;
 import json.jayson.faden.core.common.init.*;
 import json.jayson.faden.core.common.npc.NPC;
 import json.jayson.faden.core.common.npc.NPCTexture;
+import json.jayson.faden.core.common.objects.cloth.FadenCoreCloth;
+import json.jayson.faden.core.common.objects.item.FadenCoreClothItem;
+import json.jayson.faden.core.common.objects.race.FadenCoreTestRace;
+import json.jayson.faden.core.common.slot.ClothSlot;
 import json.jayson.faden.core.registry.FadenCoreRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import json.jayson.faden.core.common.events.FadenCoreServerEvents;
@@ -21,16 +24,17 @@ import json.jayson.faden.core.common.npc.entity.NPCEntity;
 import json.jayson.faden.core.common.objects.command.types.NPCArgumentType;
 import json.jayson.faden.core.server.FadenCoreData;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.minecraft.client.gui.screen.SplashOverlay;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
 import net.minecraft.util.math.Vec3d;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +52,6 @@ import json.jayson.faden.core.common.objects.command.FadenCoreCommands;
 import json.jayson.faden.core.common.objects.command.types.CapeArgumentType;
 import json.jayson.faden.core.common.objects.command.types.RaceArgumentType;
 import json.jayson.faden.core.common.objects.command.types.RaceSubIdArgumentType;
-import json.jayson.faden.core.common.race.RaceSkinMap;
 import json.jayson.faden.core.config.FadenCoreConfig;
 import json.jayson.faden.core.config.FadenCoreConfigScreen;
 import json.jayson.faden.core.config.FadenCoreOptions;
@@ -72,7 +75,6 @@ public class FadenCore implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		new File(FabricLoader.getInstance().getGameDir().toString() + "/faden/cache/client/");
 		CONTAINER = FabricLoader.getInstance().getModContainer(MOD_ID).get();
 		FadenCoreServerEvents.init();
 		init();
@@ -146,7 +148,7 @@ public class FadenCore implements ModInitializer {
 	}
 
 	private static void registerTestingObjects() {
-		if(FabricLoader.getInstance().isDevelopmentEnvironment()) {
+		//if(FabricLoader.getInstance().isDevelopmentEnvironment()) {
 			Registry.register(FadenCoreRegistry.NPC, FadenCoreIdentifier.create("test"), new NPC() {
 				@Override
 				public NPCTexture getTexture() {
@@ -165,7 +167,23 @@ public class FadenCore implements ModInitializer {
 					goalSelector.add(1, new GoToVillageGoal(entity, 50000));
 				}
 			});
-		}
+
+			Registry.register(FadenCoreRegistry.CLOTH, FadenCoreIdentifier.create("test"), new FadenCoreCloth() {
+				@Override
+				public Pair<Identifier, Identifier> getTexture() {
+					return new Pair<>(FadenCoreIdentifier.create("cloth/test_cloth"), FadenCoreIdentifier.create("cloth/test_cloth_wide"));
+				}
+
+				@Override
+				public boolean renderDefaultSecondLayer() {
+					return false;
+				}
+			});
+
+			Registry.register(Registries.ITEM, FadenCoreIdentifier.create("test_cloth"), new FadenCoreClothItem(new Item.Settings(), FadenCoreRegistry.CLOTH.get(FadenCoreIdentifier.create("test")), ClothSlot.CHEST));
+
+			Registry.register(FadenCoreRegistry.RACE, FadenCoreIdentifier.create("test"), new FadenCoreTestRace());
+		//}
 	}
 
 	public static class FadenCoreModules {

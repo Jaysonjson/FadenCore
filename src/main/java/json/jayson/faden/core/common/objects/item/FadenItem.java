@@ -3,18 +3,16 @@ package json.jayson.faden.core.common.objects.item;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 import json.jayson.faden.core.FadenCore;
 import json.jayson.faden.core.common.objects.item.coin.IValue;
-import org.jetbrains.annotations.Nullable;
+import json.jayson.faden.core.common.objects.tooltip.ItemToolTipEntryRenderer;
 
 import json.jayson.faden.core.common.objects.ItemWithValues;
 import json.jayson.faden.core.common.objects.tooltip.FadenTooltipComponent;
 import json.jayson.faden.core.common.objects.tooltip.ToolTipEntry;
 import net.minecraft.item.Item;
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 
 public class FadenItem extends Item implements ItemToolTipEntryRenderer {
 

@@ -1,6 +1,6 @@
 package json.jayson.faden.core.mixin.entity;
 
-import json.jayson.faden.core.common.race.Race;
+import json.jayson.faden.core.common.race.FadenCoreRace;
 import json.jayson.faden.core.util.PlayerDataUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -44,11 +44,11 @@ public abstract class LivingEntityMixin {
     @ModifyVariable(method = "travel", at = @At(value = "STORE"), ordinal = 1)
     public float travel(float value) {
         if(entity instanceof PlayerEntity player) {
-            Race race = PlayerDataUtil.getClientOrServer(player.getUuid()).getRaceSaveData().getRace();
-            if(race != null) {
-                if(race.waterMovementSpeed() != 0) {
+            FadenCoreRace fadenCoreRace = PlayerDataUtil.getClientOrServer(player.getUuid()).getRaceSaveData().getRace();
+            if(fadenCoreRace != null) {
+                if(fadenCoreRace.waterMovementSpeed() != 0) {
                     if(player.isInFluid()) {
-                        return race.waterMovementSpeed();
+                        return fadenCoreRace.waterMovementSpeed();
                     }
                 }
             }

@@ -11,7 +11,7 @@ public class NPCSpawnerMarkerBlockEntity extends BlockEntity {
     public String npc = "";
 
     public NPCSpawnerMarkerBlockEntity(BlockPos pos, BlockState state) {
-        super(FadenCoreBlockEntities.NPC_SPAWNER_MARKER, pos, state);
+        super(null, pos, state);
     }
 
     @Override

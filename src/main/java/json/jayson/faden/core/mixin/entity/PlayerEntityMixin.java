@@ -1,7 +1,7 @@
 package json.jayson.faden.core.mixin.entity;
 
 import json.jayson.faden.core.util.FadenCoreCapeUtil;
-import json.jayson.faden.core.common.race.Race;
+import json.jayson.faden.core.common.race.FadenCoreRace;
 import json.jayson.faden.core.server.PlayerData;
 import json.jayson.faden.core.server.client.ClientPlayerDatas;
 import net.minecraft.entity.EntityDimensions;
@@ -10,15 +10,11 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerModelPart;
-import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.util.Collection;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
@@ -37,10 +33,10 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @Inject(at = @At("HEAD"), method = "getBaseDimensions", cancellable = true)
     public void baseDimensions(EntityPose pose, CallbackInfoReturnable<EntityDimensions> cir) {
         PlayerData data = ClientPlayerDatas.getPlayerData(uuid);
-        Race race = data.getRaceSaveData().getRace();
-        if (race != null) {
-            if(race.getPoseDimensions() != null) {
-                cir.setReturnValue((EntityDimensions) race.getPoseDimensions().getOrDefault(pose, race.getDimensions()));
+        FadenCoreRace fadenCoreRace = data.getRaceSaveData().getRace();
+        if (fadenCoreRace != null) {
+            if(fadenCoreRace.getPoseDimensions() != null) {
+                cir.setReturnValue((EntityDimensions) fadenCoreRace.getPoseDimensions().getOrDefault(pose, fadenCoreRace.getDimensions()));
             }
         }
     }

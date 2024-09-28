@@ -58,6 +58,7 @@ public class FadenCoreCape {
                 }
                 SkinTexture skinTexture = new SkinTexture(texture);
                 skinTexture.setSkinData(textureData);
+                MinecraftClient.getInstance().getTextureManager().destroyTexture(texture);
                 MinecraftClient.getInstance().getTextureManager().registerTexture(texture, skinTexture);
                 MinecraftClient.getInstance().getTextureManager().bindTexture(texture);
                 textureData = null;

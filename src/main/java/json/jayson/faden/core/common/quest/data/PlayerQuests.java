@@ -10,7 +10,6 @@ import java.util.UUID;
 * */
 public class PlayerQuests {
 
-    //WHOOPS NEED TO UPDATE THIS LATER; THIS ONLY WORKS FOR 1 PLAYERL MAO
     public HashMap<UUID, ArrayList<String>> done = new HashMap<>();
     public HashMap<UUID, ArrayList<String>> onGoing = new HashMap<>();
 

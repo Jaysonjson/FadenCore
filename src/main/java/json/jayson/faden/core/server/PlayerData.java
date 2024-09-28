@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import json.jayson.faden.core.common.race.Race;
+import json.jayson.faden.core.common.race.FadenCoreRace;
 import json.jayson.faden.core.network.FadenCoreNetwork;
 import json.jayson.faden.core.registry.FadenCoreRegistry;
 import net.minecraft.server.MinecraftServer;
@@ -44,6 +44,10 @@ public class PlayerData implements Serializable {
         if(!getCapes().contains(cape.toString())) {
             getCapes().add(cape.toString());
         }
+    }
+
+    public void addCape(FadenCoreCape cape) {
+        addCape(cape.getIdentifier());
     }
 
     public void removeCape(Identifier cape) {
@@ -89,7 +93,7 @@ public class PlayerData implements Serializable {
         @Serial
         private static final long serialVersionUID = 0L;
 
-        private transient Race raceObj;
+        private transient FadenCoreRace fadenCoreRaceObj;
         private String skin = "";
         private String race = "";
         private String raceSub = "";
@@ -116,11 +120,11 @@ public class PlayerData implements Serializable {
         }
 
         @Nullable
-        public Race getRace() {
-            if(raceObj == null) {
-                raceObj = FadenCoreRegistry.getRace(Identifier.of(race));
+        public FadenCoreRace getRace() {
+            if(fadenCoreRaceObj == null) {
+                fadenCoreRaceObj = FadenCoreRegistry.getRace(Identifier.of(race));
             }
-            return raceObj;
+            return fadenCoreRaceObj;
         }
 
         public String getRaceId() {

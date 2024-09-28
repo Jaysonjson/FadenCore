@@ -20,5 +20,6 @@ public class RaceSkinMapResourceListener implements SimpleSynchronousResourceRel
             RaceSkinMap.addSkins(s, FabricLoader.getInstance().getModContainer(s).get());
             System.out.println("Loaded Skin Map for " + s);
         }
+        RaceSkinMap.addSkins(FadenCore.MOD_ID, FadenCore.CONTAINER);
     }
 }

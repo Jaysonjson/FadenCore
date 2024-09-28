@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -22,16 +21,16 @@ import json.jayson.faden.core.common.race.skin.provider.SkinProvider;
 public class RaceSkinMap {
 
 	public static void addSkins(String modId, ModContainer modContainer) {
-		for (Race value : FadenCoreRegistry.RACE) {
+		for (FadenCoreRace value : FadenCoreRegistry.RACE) {
 			for (String s : value.subIds()) {
 				if(!s.isEmpty()) loadSkin(value, s, modId, modContainer);
 			}
 		}
 	}
 
-	private static void loadSkin(Race race, String subId, String modId, ModContainer modContainer) {
-		if(!race.hasSkins()) return;
-		String skinPath = getSkinPath(race, modId);
+	private static void loadSkin(FadenCoreRace fadenCoreRace, String subId, String modId, ModContainer modContainer) {
+		if(!fadenCoreRace.hasSkins()) return;
+		String skinPath = getSkinPath(fadenCoreRace, modId);
 		Path skinDir = modContainer.findPath(skinPath + subId + "/").orElse(null);
 
 		if (skinDir == null) {
@@ -47,9 +46,9 @@ public class RaceSkinMap {
 							String id = path.getFileName().toString();
 							id = id.substring(0, id.lastIndexOf('.'));
 							if(FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
-								race.getSkinMap().put(Identifier.of(modId, "skin/" + subId + "/" + id), SkinProvider.readSkin(inputStream));
+								fadenCoreRace.getSkinMap().put(Identifier.of(modId, "skin/" + subId + "/" + id), SkinProvider.readSkin(inputStream));
 							} else {
-								race.getSkinMap().put(Identifier.of(modId, "skin/" + subId + "/" + id), new byte[0]);
+								fadenCoreRace.getSkinMap().put(Identifier.of(modId, "skin/" + subId + "/" + id), new byte[0]);
 							}
 							FadenCore.LOGGER.debug("Loaded Skin: " + subId + "/" + id);
 						} catch (IOException e) {
@@ -61,13 +60,13 @@ public class RaceSkinMap {
 		}
 	}
 
-	public static String getSkinPath(Race race, String modid) {
-		return "assets/" + modid + "/textures/skin/" + race.getIdentifier().getPath().toLowerCase() + "/";
+	public static String getSkinPath(FadenCoreRace fadenCoreRace, String modid) {
+		return "assets/" + modid + "/textures/skin/" + fadenCoreRace.getIdentifier().getPath().toLowerCase() + "/";
 	}
 
 	@Nullable
 	public static byte[] getSkin(String name) {
-		for (Race value : FadenCoreRegistry.RACE) {
+		for (FadenCoreRace value : FadenCoreRegistry.RACE) {
 			if(value.getSkinMap().containsKey(name)) return value.getSkinMap().get(name);
 		}
 		return null;
@@ -75,7 +74,7 @@ public class RaceSkinMap {
 
 	public static HashMap<Identifier, byte[]> getAllMaps() {
 		HashMap<Identifier, byte[]> skins = new HashMap<>();
-		for (Race value : FadenCoreRegistry.RACE) {
+		for (FadenCoreRace value : FadenCoreRegistry.RACE) {
 			skins.putAll(value.getSkinMap());
 		}
 		return skins;
@@ -84,12 +83,12 @@ public class RaceSkinMap {
 	/**
 	 * Returns an empty string if no skin could be found
 	 */
-	public static String getRandomSkin(Race race, String subId) {
-		if(!race.hasSkins()) return "";
+	public static String getRandomSkin(FadenCoreRace fadenCoreRace, String subId) {
+		if(!fadenCoreRace.hasSkins()) return "";
 		Random random = new Random();
 		ArrayList<String> buffer = new ArrayList<>();
-		System.out.println(race.getSkinMap().size() + " : SKINS");
-		for (Identifier s : race.getSkinMap().keySet()) {
+		System.out.println(fadenCoreRace.getSkinMap().size() + " : SKINS");
+		for (Identifier s : fadenCoreRace.getSkinMap().keySet()) {
 			String[] parts = s.toString().split("/");
 			System.out.println("Skin: " + s + " length: " + parts.length);
 			if (parts.length > 1) {

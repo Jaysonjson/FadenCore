@@ -6,7 +6,7 @@ import json.jayson.faden.core.common.objects.cloth.FadenCoreCloth;
 import json.jayson.faden.core.common.objects.item.instrument.InstrumentType;
 import json.jayson.faden.core.common.objects.music_instance.InstrumentedMusic;
 import json.jayson.faden.core.common.quest.data.FadenCoreQuest;
-import json.jayson.faden.core.common.race.Race;
+import json.jayson.faden.core.common.race.FadenCoreRace;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 import net.fabricmc.fabric.api.event.registry.RegistryAttribute;
 import net.minecraft.registry.Registry;
@@ -15,7 +15,7 @@ import net.minecraft.util.Identifier;
 
 public class FadenCoreRegistry {
 
-    public static Registry<Race> RACE = FabricRegistryBuilder.createSimple(FadenCoreRegistryKeys.RACE_KEY)
+    public static Registry<FadenCoreRace> RACE = FabricRegistryBuilder.createSimple(FadenCoreRegistryKeys.RACE_KEY)
             .attribute(RegistryAttribute.SYNCED)
             .buildAndRegister();
 
@@ -43,7 +43,7 @@ public class FadenCoreRegistry {
             .attribute(RegistryAttribute.SYNCED)
             .buildAndRegister();
 
-    public static Race getRace(Identifier id) {
+    public static FadenCoreRace getRace(Identifier id) {
         return RACE.get(id);
     }
 

@@ -3,7 +3,6 @@ package json.jayson.faden.core.common.objects.tooltip;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
 
-import json.jayson.faden.core.common.objects.item.ItemToolTipEntryRenderer;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.VertexConsumerProvider;

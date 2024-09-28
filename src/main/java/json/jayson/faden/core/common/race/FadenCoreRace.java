@@ -22,7 +22,7 @@ import org.joml.Vector3f;
 
 import java.util.*;
 
-public abstract class Race {
+public abstract class FadenCoreRace {
 
     protected String[] subIds = new String[0];
     protected Vector3f size = new Vector3f();
@@ -30,7 +30,7 @@ public abstract class Race {
     protected ImmutableMap<Object, Object> poseDimensions;
     protected HashMap<Identifier, byte[]> skinMap = new HashMap<>();
 
-    public Race(String[] subIds, Vector3f size, EntityDimensions entityDimensions, ImmutableMap<Object, Object> poseDimensions) {
+    public FadenCoreRace(String[] subIds, Vector3f size, EntityDimensions entityDimensions, ImmutableMap<Object, Object> poseDimensions) {
         this.subIds = subIds;
         this.size = size;
         this.entityDimensions = entityDimensions;
@@ -38,7 +38,7 @@ public abstract class Race {
     }
 
 
-    public Race(String[] subIds, Vector3f size) {
+    public FadenCoreRace(String[] subIds, Vector3f size) {
         this.subIds = subIds;
         this.size = size;
         this.entityDimensions = EntityDimensions.changing(size.x == 1 ? 0.6F : 0.76F * size.x, size.x == 1 ? 1.9F : 1.95F * size.y).withEyeHeight(1.62F * size.y).withAttachments(EntityAttachments.builder().add(EntityAttachmentType.VEHICLE, PlayerEntity.VEHICLE_ATTACHMENT_POS));

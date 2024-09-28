@@ -8,7 +8,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
 import json.jayson.faden.core.common.objects.command.types.RaceArgumentType;
 import json.jayson.faden.core.common.objects.command.types.RaceSubIdArgumentType;
-import json.jayson.faden.core.common.race.Race;
+import json.jayson.faden.core.common.race.FadenCoreRace;
 import json.jayson.faden.core.common.race.RaceUtil;
 import json.jayson.faden.core.registry.FadenCoreRegistry;
 import json.jayson.faden.core.server.PlayerData;
@@ -44,8 +44,8 @@ public class RaceCommand {
         PlayerEntity player = EntityArgumentType.getPlayer(source, "player");
         PlayerData data = PlayerDataUtil.getClientOrServer(player.getUuid());
         if(data.getRaceSaveData().getRace() != null) {
-            Race race = data.getRaceSaveData().getRace();
-            source.getSource().sendFeedback(() -> Text.literal("Race: " + race.getIdentifier().toString() + " with SubId:" + data.getRaceSaveData().getRaceSub()), false);
+            FadenCoreRace fadenCoreRace = data.getRaceSaveData().getRace();
+            source.getSource().sendFeedback(() -> Text.literal("Race: " + fadenCoreRace.getIdentifier().toString() + " with SubId:" + data.getRaceSaveData().getRaceSub()), false);
         } else {
             source.getSource().sendFeedback(() -> Text.literal("Player does not have a race!"), false);
         }

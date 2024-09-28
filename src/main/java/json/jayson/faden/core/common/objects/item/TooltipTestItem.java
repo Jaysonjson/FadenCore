@@ -3,6 +3,7 @@ package json.jayson.faden.core.common.objects.item;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import json.jayson.faden.core.common.objects.tooltip.ItemToolTipEntryRenderer;
 import org.jetbrains.annotations.Nullable;
 
 import json.jayson.faden.core.common.objects.tooltip.FadenTooltipComponent;

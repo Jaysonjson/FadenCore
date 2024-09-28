@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Dynamic;
 import json.jayson.faden.core.common.init.FadenCoreEntities;
 import json.jayson.faden.core.common.npc.entity.NPCEntity;
-import json.jayson.faden.core.common.race.Race;
+import json.jayson.faden.core.common.race.FadenCoreRace;
 import json.jayson.faden.core.registry.FadenCoreRegistry;
 import json.jayson.faden.core.server.PlayerData;
 import net.minecraft.entity.EntityType;
@@ -21,7 +21,7 @@ import java.util.Optional;
 public abstract class NPC {
 
     public abstract NPCTexture getTexture();
-    public Optional<Race> getRace() { return Optional.empty(); }
+    public Optional<FadenCoreRace> getRace() { return Optional.empty(); }
     public String getRaceSub() { return ""; }
     public PlayerData.RaceDataCosmetics getRaceCosmetics() { return new PlayerData.RaceDataCosmetics(); }
 

@@ -10,4 +10,10 @@ public abstract class FadenCoreCloth {
     * */
     public abstract Pair<Identifier, Identifier> getTexture();
 
+    /*
+    * if the players default second layer should be rendered
+    * */
+    public boolean renderDefaultSecondLayer() {
+        return true;
+    }
 }
