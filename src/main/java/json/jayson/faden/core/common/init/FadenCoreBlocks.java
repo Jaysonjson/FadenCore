@@ -17,8 +17,8 @@ import net.minecraft.registry.Registry;
 
 public class FadenCoreBlocks {
 
-    public static Block NPC_SPAWNER_MARKER = register("npc_spawner_marker", new NPCSpawnerMarkerBlock(AbstractBlock.Settings.create()));
-    public static BlockItem NPC_SPAWNER_MARKER_ITEM = registerBlockItem("npc_spawner_marker", new NPCSpawnerMarkerBlockItem(NPC_SPAWNER_MARKER, new Item.Settings()));
+    //public static Block NPC_SPAWNER_MARKER = register("npc_spawner_marker", new NPCSpawnerMarkerBlock(AbstractBlock.Settings.create()));
+    //public static BlockItem NPC_SPAWNER_MARKER_ITEM = registerBlockItem("npc_spawner_marker", new NPCSpawnerMarkerBlockItem(NPC_SPAWNER_MARKER, new Item.Settings()));
 
     private static Block register(String name, Block block) {
         return register(name, block, new BlockItem(block, new Item.Settings()));

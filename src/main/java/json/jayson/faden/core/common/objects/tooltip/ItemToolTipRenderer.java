@@ -1,8 +1,7 @@
-package json.jayson.faden.core.common.objects.item;
+package json.jayson.faden.core.common.objects.tooltip;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import json.jayson.faden.core.common.objects.tooltip.FadenTooltipComponent;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.VertexConsumerProvider;

@@ -8,7 +8,7 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 
-import json.jayson.faden.core.common.race.Race;
+import json.jayson.faden.core.common.race.FadenCoreRace;
 import json.jayson.faden.core.registry.FadenCoreRegistry;
 import net.minecraft.command.argument.IdentifierArgumentType;
 
@@ -32,7 +32,7 @@ public class RaceArgumentType extends IdentifierArgumentType {
 
     @Override
     public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> context, SuggestionsBuilder builder) {
-        for (Race value : FadenCoreRegistry.RACE) {
+        for (FadenCoreRace value : FadenCoreRegistry.RACE) {
             builder.suggest(value.getIdentifier().toString());
         }
         return builder.buildFuture();

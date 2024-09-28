@@ -3,6 +3,7 @@ package json.jayson.faden.core.common.objects.item;
 import json.jayson.faden.core.util.FadenCoreIdentifier;
 import net.minecraft.util.Identifier;
 
+//TODO EXTRACT FROM ENUM
 public enum ItemTier {
 
     COMMON(FadenCoreIdentifier.create("textures/item_tier/common.png"), 0xFFFFFFFF,1, 1),

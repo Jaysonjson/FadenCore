@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 
-import json.jayson.faden.core.common.objects.item.ItemToolTipEntryRenderer;
-import json.jayson.faden.core.common.objects.item.ItemToolTipRenderer;
 import org.joml.Matrix4f;
 
 import json.jayson.faden.core.common.objects.CoinMap;

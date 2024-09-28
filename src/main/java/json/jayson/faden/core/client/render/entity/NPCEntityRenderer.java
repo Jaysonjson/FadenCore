@@ -27,7 +27,7 @@ public class NPCEntityRenderer extends LivingEntityRenderer<NPCEntity, PlayerEnt
     @Override
     public Identifier getTexture(NPCEntity entity) {
         if(entity.getNpc() != null) {
-            return entity.getNpc().getTexture().getTexture();
+            return entity.getNpc().getTexture().getLocation();
         }
         return Identifier.of("missing");
     }

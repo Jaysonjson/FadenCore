@@ -8,19 +8,14 @@ import org.joml.Matrix4f;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import json.jayson.faden.core.common.objects.item.ItemToolTipRenderer;
+import json.jayson.faden.core.common.objects.tooltip.ItemToolTipRenderer;
 import json.jayson.faden.core.common.objects.tooltip.FadenTooltipComponent;
 import json.jayson.faden.core.common.objects.tooltip.FadenTooltipData;
-import json.jayson.faden.core.util.FadenCoreIdentifier;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.world.World;
 
 public class CoinItem extends Item implements ItemToolTipRenderer {
     private final int value;

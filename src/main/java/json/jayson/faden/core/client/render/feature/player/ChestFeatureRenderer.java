@@ -2,7 +2,7 @@ package json.jayson.faden.core.client.render.feature.player;
 
 import json.jayson.faden.core.client.interfaces.IModelTransformation;
 import json.jayson.faden.core.common.npc.entity.NPCEntity;
-import json.jayson.faden.core.common.race.Race;
+import json.jayson.faden.core.common.race.FadenCoreRace;
 import json.jayson.faden.core.common.race.cosmetic.RaceCosmetic;
 import json.jayson.faden.core.common.race.cosmetic.RaceCosmeticSlot;
 import json.jayson.faden.core.config.FadenCoreOptions;
@@ -16,7 +16,6 @@ import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.render.model.BakedModel;
-import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.RotationAxis;
@@ -32,28 +31,28 @@ public class ChestFeatureRenderer<T extends LivingEntity> extends FeatureRendere
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
         if(!FadenCoreOptions.getConfig().ENABLE_PLAYER_RACE_COSMETICS) return;
         if(!entity.isInvisible()) {
-            Race race = null;
+            FadenCoreRace fadenCoreRace = null;
             String raceSub = "";
             PlayerData.RaceDataCosmetics raceDataCosmetics = null;
             if(entity instanceof AbstractClientPlayerEntity) {
                 PlayerData data = ClientPlayerDatas.getPlayerData(entity.getUuid());
                 if (data.getRaceSaveData().hasRace()) {
-                    race = data.getRaceSaveData().getRace();
+                    fadenCoreRace = data.getRaceSaveData().getRace();
                     raceSub = data.getRaceSaveData().getRaceSub();
                     raceDataCosmetics = data.getRaceSaveData().getCosmetics();
                 }
             } if (entity instanceof NPCEntity npc) {
                 if(npc.getNpc() != null) {
-                    if(npc.getNpc().getRace().isPresent()) race = npc.getNpc().getRace().get();
+                    if(npc.getNpc().getRace().isPresent()) fadenCoreRace = npc.getNpc().getRace().get();
                     raceSub = npc.getNpc().getRaceSub();
                     raceDataCosmetics = npc.getNpc().getRaceCosmetics();
                 }
             }
 
-            if (race != null && raceDataCosmetics != null && !raceSub.isBlank()) {
-                ArrayList<RaceCosmetic> cosmetics = race.getCosmeticPalette().getCosmetics(raceSub);
+            if (fadenCoreRace != null && raceDataCosmetics != null && !raceSub.isBlank()) {
+                ArrayList<RaceCosmetic> cosmetics = fadenCoreRace.getCosmeticPalette().getCosmetics(raceSub);
                 for (String s : raceDataCosmetics.getChest()) {
-                    RaceCosmetic cosmetic = race.getCosmeticPalette().getCosmetic(cosmetics, RaceCosmeticSlot.CHEST, s);
+                    RaceCosmetic cosmetic = fadenCoreRace.getCosmeticPalette().getCosmetic(cosmetics, RaceCosmeticSlot.CHEST, s);
                     if (cosmetic == null) continue;
                     matrices.push();
                     BakedModel model = MinecraftClient.getInstance().getBakedModelManager().getModel(cosmetic.getModel());

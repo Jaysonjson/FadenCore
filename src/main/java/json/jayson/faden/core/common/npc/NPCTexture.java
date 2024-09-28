@@ -17,7 +17,7 @@ public class NPCTexture {
 		this.texture = texture;
 	}
 
-	public Identifier getTexture() {
+	public Identifier getLocation() {
 		return texture;
 	}
 

@@ -1,5 +1,6 @@
 package json.jayson.faden.core.common.events;
 
+import json.jayson.faden.core.common.race.FadenCoreRace;
 import json.jayson.faden.core.util.SaveUtil;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -7,7 +8,6 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import json.jayson.faden.core.FadenCore;
 import json.jayson.faden.core.common.data.ItemValues;
-import json.jayson.faden.core.common.race.Race;
 import json.jayson.faden.core.common.quest.data.QuestCache;
 import json.jayson.faden.core.server.ServerPlayerDatas;
 import json.jayson.faden.core.util.NetworkUtils;
@@ -42,8 +42,8 @@ public class FadenCoreServerEvents {
         });
 
         ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
-            Race race = ServerPlayerDatas.getOrLoadPlayerData(newPlayer.getUuid()).getRaceSaveData().getRace();
-            if(race != null) race.applyStats(newPlayer);
+            FadenCoreRace fadenCoreRace = ServerPlayerDatas.getOrLoadPlayerData(newPlayer.getUuid()).getRaceSaveData().getRace();
+            if(fadenCoreRace != null) fadenCoreRace.applyStats(newPlayer);
         });
 
         ServerPlayConnectionEvents.DISCONNECT.register((handler, sender) -> {

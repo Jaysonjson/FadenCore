@@ -9,7 +9,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 
-import json.jayson.faden.core.common.race.Race;
+import json.jayson.faden.core.common.race.FadenCoreRace;
 import json.jayson.faden.core.registry.FadenCoreRegistry;
 import net.minecraft.command.argument.IdentifierArgumentType;
 import net.minecraft.server.command.ServerCommandSource;
@@ -33,7 +33,7 @@ public class RaceSubIdArgumentType implements ArgumentType<String> {
     @Override
     public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> context, SuggestionsBuilder builder) {
         Identifier id = IdentifierArgumentType.getIdentifier((CommandContext<ServerCommandSource>) context, "race");
-        for (Race value : FadenCoreRegistry.RACE) {
+        for (FadenCoreRace value : FadenCoreRegistry.RACE) {
             if(value.getIdentifier().toString().equalsIgnoreCase(id.toString())) {
                 for (String s : value.subIds()) {
                     builder.suggest(s);

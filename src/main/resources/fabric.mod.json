@@ -34,6 +34,11 @@
 		"fadencore.mixins.json",
 		"fadencore.client.mixins.json"
 	],
+	"custom": {
+		"loom:injected_interfaces": {
+			"net/minecraft/class_7438": ["json/jayson/faden/core/mixin_interfaces/IChatMessagePacket"]
+		}
+	},
 	"depends": {
 		"fabricloader": ">=0.15.7",
 		"minecraft": "~1.21",

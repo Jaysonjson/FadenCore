@@ -4,20 +4,18 @@ import json.jayson.faden.core.FadenCore;
 import json.jayson.faden.core.common.init.FadenCoreBlocks;
 import json.jayson.faden.core.common.init.FadenCoreDataComponents;
 import json.jayson.faden.core.common.objects.blockentity.NPCSpawnerMarkerBlockEntity;
-import json.jayson.faden.core.common.objects.item.ItemToolTipEntryRenderer;
+import json.jayson.faden.core.common.objects.tooltip.ItemToolTipEntryRenderer;
 import json.jayson.faden.core.common.objects.tooltip.FadenTooltipComponent;
 import json.jayson.faden.core.common.objects.tooltip.ToolTipEntry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -49,7 +47,7 @@ public class NPCSpawnerMarkerBlockItem extends BlockItem implements ItemToolTipE
         ArrayList<ToolTipEntry> entries = new ArrayList<>();
         ItemStack stack = component.data.itemStack;
         if(stack.contains(FadenCoreDataComponents.NPC_ID)) {
-            entries.add(ToolTipEntry.of(Text.of("NPC ID: " + stack.get(FadenCoreDataComponents.NPC_ID)), FadenCoreBlocks.NPC_SPAWNER_MARKER_ITEM));
+            //entries.add(ToolTipEntry.of(Text.of("NPC ID: " + stack.get(FadenCoreDataComponents.NPC_ID)), FadenCoreBlocks.NPC_SPAWNER_MARKER_ITEM));
         }
         return entries;
     }

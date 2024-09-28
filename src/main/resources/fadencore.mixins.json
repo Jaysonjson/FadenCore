@@ -10,6 +10,7 @@
     "inventory.PlayerInventoryMixin",
     "inventory.PlayerScreenHandlerMixin",
     "inventory.SlotMixin",
+    "packet.ChatMessageS2CPacketMixin",
     "packet.StringEncodingMixin"
   ],
   "injectors": {

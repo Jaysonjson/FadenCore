@@ -1,13 +1,11 @@
-package json.jayson.faden.core.common.data.listeners;
+package json.jayson.faden.core.client.data.listeners;
 
 import json.jayson.faden.core.FadenCore;
-import json.jayson.faden.core.common.objects.cloth.FadenCoreCloth;
+import json.jayson.faden.core.common.cloth.FadenCoreCloth;
 import json.jayson.faden.core.common.race.skin.client.SkinTexture;
 import json.jayson.faden.core.common.race.skin.provider.SkinProvider;
 import json.jayson.faden.core.registry.FadenCoreRegistry;
 import json.jayson.faden.core.util.FadenCoreIdentifier;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
@@ -28,6 +26,8 @@ public class ClothResourceListener implements SimpleSynchronousResourceReloadLis
                 byte[] data = SkinProvider.readSkin(Files.newInputStream(modContainer.findPath("assets/" + id.getNamespace() + "/textures/" + id.getPath() + ".png").get()));
                 SkinTexture skinTexture = new SkinTexture(id);
                 skinTexture.setSkinData(data);
+                //Destroy just in case
+                MinecraftClient.getInstance().getTextureManager().destroyTexture(id);
                 MinecraftClient.getInstance().getTextureManager().registerTexture(id, skinTexture);
                 MinecraftClient.getInstance().getTextureManager().bindTexture(id);
             } else {
@@ -48,7 +48,6 @@ public class ClothResourceListener implements SimpleSynchronousResourceReloadLis
         try {
             FadenCore.LOGGER.debug("STARTING CLOTH LOADING");
             for (FadenCoreCloth cloth : FadenCoreRegistry.CLOTH) {
-                Identifier id = FadenCoreRegistry.CLOTH.getId(cloth);
                 if(cloth.getTexture().getLeft() != null) {
                     loadTexture(cloth.getTexture().getLeft());
                 }

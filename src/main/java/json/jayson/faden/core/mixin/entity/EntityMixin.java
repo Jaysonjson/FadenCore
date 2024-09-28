@@ -2,7 +2,7 @@ package json.jayson.faden.core.mixin.entity;
 
 import java.util.UUID;
 
-import json.jayson.faden.core.common.race.Race;
+import json.jayson.faden.core.common.race.FadenCoreRace;
 import json.jayson.faden.core.util.PlayerDataUtil;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.util.math.Box;
@@ -112,9 +112,9 @@ public abstract class EntityMixin {
     @Inject(at = @At("HEAD"), method = "calculateBoundingBox", cancellable = true)
     private void reinitDimensions(CallbackInfoReturnable<Box> cir) {
         if(entity instanceof PlayerEntity player) {
-            Race race = PlayerDataUtil.getClientOrServer(player.getUuid()).getRaceSaveData().getRace();
-            if(race != null) {
-                cir.setReturnValue(race.getDimensions().getBoxAt(player.getPos()));
+            FadenCoreRace fadenCoreRace = PlayerDataUtil.getClientOrServer(player.getUuid()).getRaceSaveData().getRace();
+            if(fadenCoreRace != null) {
+                cir.setReturnValue(fadenCoreRace.getDimensions().getBoxAt(player.getPos()));
             }
         }
     }

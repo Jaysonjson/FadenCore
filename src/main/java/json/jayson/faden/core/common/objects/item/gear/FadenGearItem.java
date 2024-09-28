@@ -5,13 +5,12 @@ import java.util.Collection;
 import java.util.Optional;
 
 import net.minecraft.item.tooltip.TooltipData;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import json.jayson.faden.core.common.init.FadenCoreDataComponents;
 import json.jayson.faden.core.common.objects.item.FadenItem;
 import json.jayson.faden.core.common.objects.item.ItemTier;
-import json.jayson.faden.core.common.objects.item.ItemToolTipEntryRenderer;
+import json.jayson.faden.core.common.objects.tooltip.ItemToolTipEntryRenderer;
 import json.jayson.faden.core.common.objects.tooltip.FadenTooltipComponent;
 import json.jayson.faden.core.common.objects.tooltip.FadenTooltipData;
 import json.jayson.faden.core.common.objects.tooltip.ToolTipEntry;

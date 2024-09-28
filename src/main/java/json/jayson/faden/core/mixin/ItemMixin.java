@@ -20,7 +20,7 @@ import json.jayson.faden.core.common.data.ItemValues;
 import json.jayson.faden.core.common.init.FadenCoreDataComponents;
 import json.jayson.faden.core.common.objects.ItemWithValues;
 import json.jayson.faden.core.common.objects.item.ItemTier;
-import json.jayson.faden.core.common.objects.item.ItemToolTipEntryRenderer;
+import json.jayson.faden.core.common.objects.tooltip.ItemToolTipEntryRenderer;
 import json.jayson.faden.core.common.objects.item.coin.IValue;
 import json.jayson.faden.core.common.objects.tooltip.FadenTooltipComponent;
 import json.jayson.faden.core.common.objects.tooltip.FadenTooltipData;
