@@ -5,6 +5,8 @@ import json.jayson.faden.core.client.data.listeners.CapeResourceListener;
 import json.jayson.faden.core.client.overlay.InstrumentMusicOverlay;
 import json.jayson.faden.core.client.render.entity.NPCEntityRenderer;
 import json.jayson.faden.core.client.data.listeners.ClothResourceListener;
+import json.jayson.faden.core.common.init.FadenCoreBlockEntities;
+import json.jayson.faden.core.common.init.FadenCoreBlocks;
 import json.jayson.faden.core.common.init.FadenCoreEntities;
 import json.jayson.faden.core.util.SaveUtil;
 import net.fabricmc.api.ClientModInitializer;
