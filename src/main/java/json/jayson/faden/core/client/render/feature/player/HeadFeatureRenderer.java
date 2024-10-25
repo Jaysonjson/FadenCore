@@ -12,10 +12,15 @@ import json.jayson.faden.core.util.FadenCoreRenderUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer;
+import net.minecraft.client.render.entity.feature.CapeFeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
+import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.ModelWithHead;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
+import net.minecraft.client.render.entity.state.BipedEntityRenderState;
+import net.minecraft.client.render.entity.state.EntityRenderState;
 import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
@@ -23,15 +28,23 @@ import net.minecraft.util.math.RotationAxis;
 
 import java.util.ArrayList;
 
-public class HeadFeatureRenderer<T extends LivingEntity> extends FeatureRenderer<T, PlayerEntityModel<T>> {
-    public HeadFeatureRenderer(FeatureRendererContext<T, PlayerEntityModel<T>> context) {
+public class HeadFeatureRenderer<S extends BipedEntityRenderState, M extends EntityModel<S>> extends FeatureRenderer<S, M> {
+
+    public HeadFeatureRenderer(FeatureRendererContext<S, M> context) {
         super(context);
     }
 
+
+    public static void translate(MatrixStack matrices) {
+        matrices.translate(0.31F, 0F, -0.30F);
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0F));
+        matrices.scale(0.625F, -0.625F, -0.625F);
+    }
+
     @Override
-    public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
+    public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, S state, float limbAngle, float limbDistance) {
         if(!FadenCoreOptions.getConfig().ENABLE_PLAYER_RACE_COSMETICS) return;
-        if(!entity.isInvisible()) {
+        if(!state.invisible) {
             FadenCoreRace fadenCoreRace = null;
             String raceSub = "";
             PlayerData.RaceDataCosmetics raceDataCosmetics = null;
@@ -64,15 +77,7 @@ public class HeadFeatureRenderer<T extends LivingEntity> extends FeatureRenderer
                     matrices.pop();
                 }
             }
-
         }
-    }
-
-
-    public static void translate(MatrixStack matrices) {
-        matrices.translate(0.31F, 0F, -0.30F);
-        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0F));
-        matrices.scale(0.625F, -0.625F, -0.625F);
     }
 }
 

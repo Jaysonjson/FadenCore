@@ -1,6 +1,6 @@
 package json.jayson.faden.core.client.render.feature.player.mixin;
 
-import json.jayson.faden.core.common.objects.cloth.FadenCoreCloth;
+import json.jayson.faden.core.common.cloth.FadenCoreCloth;
 import json.jayson.faden.core.common.objects.item.IClothItem;
 import json.jayson.faden.core.common.slot.ClothSlot;
 import json.jayson.faden.core.mixin_interfaces.IClothInventory;

@@ -7,13 +7,13 @@ import java.util.HashMap;
 import java.util.Random;
 
 import json.jayson.faden.core.common.cape.FadenCoreCape;
+import json.jayson.faden.core.common.cloth.FadenCoreCloth;
 import json.jayson.faden.core.common.data.FadenCoreValueData;
 import json.jayson.faden.core.common.data.listeners.InstrumentedMusicDataListener;
 import json.jayson.faden.core.common.data.listeners.RaceSkinMapResourceListener;
 import json.jayson.faden.core.common.init.*;
 import json.jayson.faden.core.common.npc.NPC;
 import json.jayson.faden.core.common.npc.NPCTexture;
-import json.jayson.faden.core.common.objects.cloth.FadenCoreCloth;
 import json.jayson.faden.core.common.objects.item.FadenCoreClothItem;
 import json.jayson.faden.core.common.objects.race.FadenCoreTestRace;
 import json.jayson.faden.core.common.slot.ClothSlot;
@@ -57,7 +57,7 @@ import json.jayson.faden.core.config.FadenCoreConfigScreen;
 import json.jayson.faden.core.config.FadenCoreOptions;
 import json.jayson.faden.core.network.FadenCoreNetwork;
 import json.jayson.faden.core.util.FadenCoreIdentifier;
-import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.Screen; 
 import net.minecraft.command.argument.serialize.ConstantArgumentSerializer;
 
 public class FadenCore implements ModInitializer {

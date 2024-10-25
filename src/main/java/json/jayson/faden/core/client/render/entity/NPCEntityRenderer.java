@@ -8,6 +8,8 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
+import net.minecraft.client.render.entity.state.EntityRenderState;
+import net.minecraft.client.render.entity.state.LivingEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import org.joml.Vector3f;
@@ -25,12 +27,10 @@ public class NPCEntityRenderer extends LivingEntityRenderer<NPCEntity, PlayerEnt
     }
 
     @Override
-    public Identifier getTexture(NPCEntity entity) {
-        if(entity.getNpc() != null) {
-            return entity.getNpc().getTexture().getLocation();
-        }
-        return Identifier.of("missing");
+    public EntityRenderState createRenderState() {
+        return null;
     }
+
 
     @Override
     public void render(NPCEntity livingEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
@@ -48,5 +48,13 @@ public class NPCEntityRenderer extends LivingEntityRenderer<NPCEntity, PlayerEnt
             super.render(livingEntity, f, g, matrixStack, vertexConsumerProvider, i);
             matrixStack.pop();
         }
+    }
+
+    @Override
+    public Identifier getTexture(LivingEntityRenderState state) {
+        if(entity.getNpc() != null) {
+            return entity.getNpc().getTexture().getLocation();
+        }
+        return Identifier.of("missing");
     }
 }

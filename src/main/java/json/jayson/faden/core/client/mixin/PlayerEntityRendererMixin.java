@@ -41,9 +41,9 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
     @Unique
     private boolean slim = false;
     @Unique
-    private PlayerEntityModel<AbstractClientPlayerEntity> slimModel;
+    private PlayerEntityModel slimModel;
     @Unique
-    private PlayerEntityModel<AbstractClientPlayerEntity> wideModel;
+    private PlayerEntityModel wideModel;
     @Unique
     private boolean defaultSlim = false;
     protected PlayerEntityRendererMixin(EntityRendererFactory.Context ctx) {
@@ -67,18 +67,6 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
         		cir.setReturnValue(ClientRaceSkinCache.getSkin(abstractClientPlayerEntity.getUuid()));
         	}
         }
-    }
-
-    @Inject(at = @At("HEAD"), method = "render(Lnet/minecraft/client/network/AbstractClientPlayerEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V")
-    private void render(AbstractClientPlayerEntity player, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
-        //THIS DOESNT WORK
-        this.model = getPlayerModel(player.getUuid());
-        //THIS WORKS
-        /*if(player.getUuid().toString().equalsIgnoreCase("bee2920e-f065-4ae6-b00c-3f2c1ed38031")) {
-            this.model = wideModel;
-        } else {
-            this.model = slimModel;
-        }*/
     }
 
     @Inject(at = @At("TAIL"), method = "setModelPose")
