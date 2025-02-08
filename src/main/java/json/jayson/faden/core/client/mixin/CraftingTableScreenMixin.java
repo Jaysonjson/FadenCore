@@ -21,7 +21,7 @@ public class CraftingTableScreenMixin extends Screen {
     @Inject(at = @At("HEAD"), method = "render", cancellable = true)
     private void size(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         if(FadenCoreOptions.getConfig().VANILLA_BLUR) {
-            applyBlur(delta);
+            applyBlur();
         }
     }
 

@@ -5,7 +5,6 @@ import json.jayson.faden.core.common.slot.ISlot;
 import json.jayson.faden.core.util.FadenCoreIdentifier;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.gui.screen.recipebook.RecipeBookProvider;
 import net.minecraft.entity.player.PlayerEntity;
@@ -20,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(InventoryScreen.class)
-public abstract class PlayerInventoryScreenMixin extends AbstractInventoryScreen<PlayerScreenHandler> implements RecipeBookProvider  {
+public abstract class PlayerInventoryScreenMixin extends InventoryScreen implements RecipeBookProvider  {
 
     private static Identifier CLOTH_BUTTON = FadenCoreIdentifier.create("textures/gui/cloth_button.png");
     private static Identifier CLOTH_BUTTON_SELECTED = FadenCoreIdentifier.create("textures/gui/cloth_button_hovered.png");

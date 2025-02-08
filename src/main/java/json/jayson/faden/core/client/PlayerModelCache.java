@@ -13,11 +13,11 @@ public class PlayerModelCache {
     public static ElytraEntityModel elytraEntityModel = null;
 
     public static PlayerEntityModel makeSlimModel() {
-        return new PlayerEntityModel(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(EntityModelLayers.PLAYER_SLIM), true);
+        return new PlayerEntityModel(MinecraftClient.getInstance().getLoadedEntityModels().getModelPart(EntityModelLayers.PLAYER_SLIM), true);
     }
 
     public static PlayerEntityModel makeWideModel() {
-        return new PlayerEntityModel(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(EntityModelLayers.PLAYER), false);
+        return new PlayerEntityModel(MinecraftClient.getInstance().getLoadedEntityModels().getModelPart(EntityModelLayers.PLAYER), false);
     }
 
 }

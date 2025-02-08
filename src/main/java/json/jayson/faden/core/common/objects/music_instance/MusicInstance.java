@@ -68,7 +68,7 @@ public class MusicInstance implements Serializable {
         musicInstance.setPosition(user.getPos().toVector3f());
         musicInstance.getInstruments().put(firstInstrument.getTypeId(), user.getId());
         InstrumentedMusic music = FadenCoreRegistry.INSTRUMENTED_MUSIC.get(new Random().nextInt(FadenCoreRegistry.INSTRUMENTED_MUSIC.size()));
-        for (InstrumentType type : music.getInstrumentTypes().keySet()) musicInstance.getSoundEvents().put(type, music.getInstrumentTypes().get(type).getId().toString());
+        for (InstrumentType type : music.getInstrumentTypes().keySet()) musicInstance.getSoundEvents().put(type, music.getInstrumentTypes().get(type).id().toString());
         musicInstance.setMusicId(music.getId());
         FadenCoreMusicInstances.getInstances().put(uuid, musicInstance);
         for (ServerPlayerEntity serverPlayerEntity : user.getServer().getPlayerManager().getPlayerList()) {

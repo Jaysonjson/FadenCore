@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.8-SNAPSHOT'
+	id 'fabric-loom' version '1.9-SNAPSHOT'
 	id 'maven-publish'
 	id 'java'
 }
@@ -103,16 +103,6 @@ publishing {
 	publications {
 		mavenJava(MavenPublication) {
 			from components.java
-		}
-	}
-	repositories {
-		maven {
-			name = "GitHubPackages"
-			url = "https://maven.pkg.github.com/Jaysonjson/FadenCore"
-			credentials {
-				username = "{$GITHUB_USER}"
-				password = "{$GITHUB_TOKEN}"
-			}
 		}
 	}
 }

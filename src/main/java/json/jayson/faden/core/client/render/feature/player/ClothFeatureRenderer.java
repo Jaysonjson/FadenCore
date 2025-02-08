@@ -26,13 +26,6 @@ public class ClothFeatureRenderer <T extends LivingEntity, M extends BipedEntity
         this.playerEntityRenderer = playerEntityRenderer;
     }
 
-    public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, T livingEntity, float f, float g, float h, float j, float k, float l) {
-        this.renderArmor(matrixStack, vertexConsumerProvider, livingEntity, EquipmentSlot.HEAD, i);
-        this.renderArmor(matrixStack, vertexConsumerProvider, livingEntity, EquipmentSlot.CHEST, i);
-        this.renderArmor(matrixStack, vertexConsumerProvider, livingEntity, EquipmentSlot.LEGS, i);
-        this.renderArmor(matrixStack, vertexConsumerProvider, livingEntity, EquipmentSlot.FEET, i);
-    }
-
     private void renderArmor(MatrixStack matrices, VertexConsumerProvider vertexConsumers, T entity, EquipmentSlot armorSlot, int light) {
         if(entity instanceof PlayerEntity player) {
             IClothInventory playerInventory = (IClothInventory) player.getInventory();
@@ -40,7 +33,7 @@ public class ClothFeatureRenderer <T extends LivingEntity, M extends BipedEntity
             Item item = itemStack.getItem();
             if (item instanceof IClothItem clothItem) {
                 PlayerEntityModel playerEntityModel = playerEntityRenderer.getPlayerModel(player.getUuid());
-                this.getContextModel().copyBipedStateTo(playerEntityModel);
+                this.getContextModel().copyTransforms(playerEntityModel);
                 this.setVisible(playerEntityModel, armorSlot);
                 this.renderArmorParts(matrices, vertexConsumers, light, playerEntityModel, 1, 1, 1, playerEntityRenderer.isSlim() ? clothItem.getCloth().getTexture().getLeft() : clothItem.getCloth().getTexture().getRight());
             }
@@ -88,5 +81,13 @@ public class ClothFeatureRenderer <T extends LivingEntity, M extends BipedEntity
         model.rightSleeve.translate(new Vector3f(0.25f, 0f, 0f));
         model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 0xFFFFFFFF);
         matrices.pop();
+    }
+
+    @Override
+    public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T state, float limbAngle, float limbDistance) {
+        this.renderArmor(matrices, vertexConsumers, state, EquipmentSlot.HEAD, light);
+        this.renderArmor(matrices, vertexConsumers, state, EquipmentSlot.CHEST, light);
+        this.renderArmor(matrices, vertexConsumers, state, EquipmentSlot.LEGS, light);
+        this.renderArmor(matrices, vertexConsumers, state, EquipmentSlot.FEET, light);
     }
 }

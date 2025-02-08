@@ -60,7 +60,6 @@ public class FadenCoreCape {
                 skinTexture.setSkinData(textureData);
                 MinecraftClient.getInstance().getTextureManager().destroyTexture(texture);
                 MinecraftClient.getInstance().getTextureManager().registerTexture(texture, skinTexture);
-                MinecraftClient.getInstance().getTextureManager().bindTexture(texture);
                 textureData = null;
             } catch (IOException e) {
                 FadenCore.LOGGER.error("{} failed to load", "Cape " + getName().getString(), e);

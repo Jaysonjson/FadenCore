@@ -7,6 +7,6 @@ import java.util.UUID;
 
 public interface IPlayerEntityRenderer {
 
-    PlayerEntityModel<AbstractClientPlayerEntity> getPlayerModel(UUID playerUUID);
+    PlayerEntityModel getPlayerModel(UUID playerUUID);
     boolean isSlim();
 }

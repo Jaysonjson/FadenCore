@@ -1,7 +1,7 @@
 package json.jayson.faden.core.client.registry;
 
-import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.item.Item;
+import net.minecraft.item.ModelTransformationMode;
 
 import java.util.HashMap;
 import java.util.Map;

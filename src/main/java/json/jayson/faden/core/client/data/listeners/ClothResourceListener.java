@@ -29,7 +29,6 @@ public class ClothResourceListener implements SimpleSynchronousResourceReloadLis
                 //Destroy just in case
                 MinecraftClient.getInstance().getTextureManager().destroyTexture(id);
                 MinecraftClient.getInstance().getTextureManager().registerTexture(id, skinTexture);
-                MinecraftClient.getInstance().getTextureManager().bindTexture(id);
             } else {
                 System.out.println("Path {assets/" + id.getNamespace() + "/textures/" + id.getPath() + ".png} not Present!");
             }

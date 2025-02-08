@@ -70,7 +70,7 @@ public class FadenCoreClient implements ClientModInitializer {
 
         //HudRenderCallback.EVENT.register(new StatsOverlay());
         HudRenderCallback.EVENT.register(new InstrumentMusicOverlay());
-        EntityRendererRegistry.register(FadenCoreEntities.NPC, (context) -> new NPCEntityRenderer(context));
+        EntityRendererRegistry.register(FadenCoreEntities.NPC, NPCEntityRenderer::new);
         registerModels();
 
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
