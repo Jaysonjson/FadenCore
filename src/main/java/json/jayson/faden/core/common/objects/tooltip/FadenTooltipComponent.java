@@ -59,7 +59,7 @@ public class FadenTooltipComponent implements TooltipComponent {
     }
 
     @Override
-    public int getHeight() {
+    public int getHeight(TextRenderer textRenderer) {
         int height = 0;
         boolean changesHeight = false;
         if(data.itemStack.getItem() instanceof ItemToolTipRenderer itemToolTipRenderer) {

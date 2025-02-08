@@ -121,7 +121,8 @@ public class CapeSelectScreen extends Screen {
                 context.getMatrices().scale(55, 55, 55);
                 context.getMatrices().multiply(RotationAxis.POSITIVE_Y.rotationDegrees(45));
                 context.getMatrices().translate(-5, 1.25f, 12.5);
-                PlayerModelCache.wideModel.renderCape(context.getMatrices(), context.getVertexConsumers().getBuffer(RenderLayer.getEntitySolid(cape.getTexture())), 15728880, OverlayTexture.DEFAULT_UV);
+                //TODO LOST DUE 1.21.4 PORT
+                //PlayerModelCache.wideModel.renderCape(context.getMatrices(), context.getVertexConsumers().getBuffer(RenderLayer.getEntitySolid(cape.getTexture())), 15728880, OverlayTexture.DEFAULT_UV);
                 context.getMatrices().pop();
             }
 
@@ -130,7 +131,8 @@ public class CapeSelectScreen extends Screen {
                 context.getMatrices().scale(55, 55, 55);
                 context.getMatrices().multiply(RotationAxis.POSITIVE_Y.rotationDegrees(45));
                 context.getMatrices().translate(-5, 2, 12.5);
-                PlayerModelCache.elytraEntityModel.render(context.getMatrices(), ItemRenderer.getArmorGlintConsumer(context.getVertexConsumers(), RenderLayer.getArmorCutoutNoCull(cape.getTexture()), false), 15728880, OverlayTexture.DEFAULT_UV, 0xFFFFFFFF);
+                //TODO LOST DUE 1.21.4 PORT
+                //PlayerModelCache.elytraEntityModel.render(context.getMatrices(), ItemRenderer.getArmorGlintConsumer(context.getVertexConsumers(), RenderLayer.getArmorCutoutNoCull(cape.getTexture()), false), 15728880, OverlayTexture.DEFAULT_UV, 0xFFFFFFFF);
                 context.getMatrices().pop();
             }
         }

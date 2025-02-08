@@ -7,7 +7,6 @@ import json.jayson.faden.core.common.race.cosmetic.RaceCosmetic;
 import json.jayson.faden.core.config.FadenCoreOptions;
 import json.jayson.faden.core.registry.FadenCoreRegistry;
 import net.minecraft.client.color.block.BlockColors;
-import net.minecraft.client.render.model.ModelLoader;
 import net.minecraft.client.render.model.UnbakedModel;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.item.Item;
