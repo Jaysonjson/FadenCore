@@ -1,6 +1,7 @@
 package json.jayson.faden.core.client.render.feature.player;
 
 import json.jayson.faden.core.client.interfaces.IModelTransformation;
+import json.jayson.faden.core.client.render.feature.player.mixin.PlayerEntityRendererHelper;
 import json.jayson.faden.core.common.npc.entity.NPCEntity;
 import json.jayson.faden.core.common.race.FadenCoreRace;
 import json.jayson.faden.core.common.race.cosmetic.RaceCosmetic;
@@ -14,7 +15,10 @@ import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
+import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
+import net.minecraft.client.render.entity.state.BipedEntityRenderState;
+import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
 import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
@@ -22,14 +26,18 @@ import net.minecraft.util.math.RotationAxis;
 
 import java.util.ArrayList;
 
-public class ChestFeatureRenderer<T extends LivingEntity> extends FeatureRenderer<T, PlayerEntityModel<T>> {
-    public ChestFeatureRenderer(FeatureRendererContext<T, PlayerEntityModel<T>> context) {
+public class ChestFeatureRenderer<S extends BipedEntityRenderState, M extends BipedEntityModel<S>, A extends BipedEntityModel<S>> extends FeatureRenderer<S, M> {
+
+
+    public ChestFeatureRenderer(FeatureRendererContext<S, M> context) {
         super(context);
     }
 
     @Override
-    public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
+    public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, S state, float limbAngle, float limbDistance) {
         if(!FadenCoreOptions.getConfig().ENABLE_PLAYER_RACE_COSMETICS) return;
+        LivingEntity entity = MinecraftClient.getInstance().player.getWorld().getEntityById(state.id);
+        MinecraftClient.getInstance().player.getWorld().getEntityById(state);
         if(!entity.isInvisible()) {
             FadenCoreRace fadenCoreRace = null;
             String raceSub = "";

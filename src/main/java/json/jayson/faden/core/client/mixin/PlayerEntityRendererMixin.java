@@ -19,8 +19,8 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
+import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.UUID;
 
 @Mixin(PlayerEntityRenderer.class)
-public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixin<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> implements IPlayerEntityRenderer {
+public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixin<AbstractClientPlayerEntity, PlayerEntityRenderState, PlayerEntityModel> implements IPlayerEntityRenderer {
     @Unique
     private PlayerEntityRenderer renderer = ((PlayerEntityRenderer) ((Object) this));
     //RECENTLY MADE STATIC, IF BROKE: REMOVE STATIC TO FIX!
@@ -60,22 +60,25 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
         defaultSlim = slim;
     }
 
-    @Inject(at = @At("HEAD"), method = "getTexture(Lnet/minecraft/client/network/AbstractClientPlayerEntity;)Lnet/minecraft/util/Identifier;", cancellable = true)
-    private void getTextureAbstractPlayer(AbstractClientPlayerEntity abstractClientPlayerEntity, CallbackInfoReturnable<Identifier> cir) {
+    @Inject(at = @At("HEAD"), method = "getTexture(Lnet/minecraft/client/render/entity/state/PlayerEntityRenderState;)Lnet/minecraft/util/Identifier;", cancellable = true)
+    private void getTextureAbstractPlayer(PlayerEntityRenderState playerEntityRenderState, CallbackInfoReturnable<Identifier> cir) {
         if(FadenCoreOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
-            if(ClientRaceSkinCache.hasSkin(abstractClientPlayerEntity.getUuid())) {
-        		cir.setReturnValue(ClientRaceSkinCache.getSkin(abstractClientPlayerEntity.getUuid()));
-        	}
+            AbstractClientPlayerEntity player = PlayerEntityRendererHelper.getPlayer(playerEntityRenderState);
+            if(player != null) {
+                if (ClientRaceSkinCache.hasSkin(player.getUuid())) {
+                    cir.setReturnValue(ClientRaceSkinCache.getSkin(player.getUuid()));
+                }
+            }
         }
     }
 
-    @Inject(at = @At("TAIL"), method = "setModelPose")
-    private void setModelPose(AbstractClientPlayerEntity player, CallbackInfo ci) {
-        PlayerEntityRendererHelper.hideSecondLayer(player, this.model);
+    @Inject(at = @At("TAIL"), method = "setupTransforms(Lnet/minecraft/client/render/entity/state/PlayerEntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;FF)V")
+    private void setModelPose(PlayerEntityRenderState playerEntityRenderState, MatrixStack matrixStack, float f, float g, CallbackInfo ci) {
+        PlayerEntityRendererHelper.hideSecondLayer(playerEntityRenderState, this.model);
     }
 
     @ModifyVariable(method = "renderArm", at = @At("STORE"), ordinal = 0)
-    private Identifier renderArm(Identifier x, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve) {
+    private Identifier renderArm(Identifier x, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, Identifier skinTexture, ModelPart arm, boolean sleeveVisible) {
         Identifier identifier = x;
         if(FadenCoreOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
             ClientPlayerEntity clientPlayer = MinecraftClient.getInstance().player;
@@ -87,12 +90,12 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
     }
 
     @Inject(at = @At("TAIL"), method = "renderArm")
-    private void renderClothArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve, CallbackInfo ci) {
-        PlayerEntityRendererHelper.renderArms(arm, sleeve, slim, player, this.model, matrices, vertexConsumers, light);
+    private void renderClothArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, Identifier skinTexture, ModelPart arm, boolean sleeveVisible, CallbackInfo ci) {
+        PlayerEntityRendererHelper.renderArms(arm, slim, this.model, matrices, vertexConsumers, light);
     }
 
     @Inject(at = @At("HEAD"), method = "renderArm")
-    private void renderArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, ModelPart arm, ModelPart sleeve, CallbackInfo ci) {
+    private void renderArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, Identifier skinTexture, ModelPart arm, boolean sleeveVisible, CallbackInfo ci) {
         if(FadenCoreOptions.getConfig().ENABLE_PLAYER_RACE_SKINS) {
             this.model = getPlayerModel(MinecraftClient.getInstance().player.getUuid());
         }
@@ -104,9 +107,9 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
     }
 
     @Override
-    public PlayerEntityModel<AbstractClientPlayerEntity> getPlayerModel(UUID playerUuid) {
+    public PlayerEntityModel getPlayerModel(UUID playerUuid) {
         PlayerData data = ClientPlayerDatas.getPlayerData(playerUuid);
-        PlayerEntityModel<AbstractClientPlayerEntity> playerEntityModel = defaultSlim ? slimModel : wideModel;
+        PlayerEntityModel playerEntityModel = defaultSlim ? slimModel : wideModel;
         if (data.getRaceSaveData().getRace() != null) {
             FadenCoreRace fadenCoreRace = data.getRaceSaveData().getRace();
             switch (fadenCoreRace.getModelType()) {
@@ -136,7 +139,9 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
         return playerEntityModel;
     }
 
-    @Inject(at = @At("HEAD"), method = "render(Lnet/minecraft/client/network/AbstractClientPlayerEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", cancellable = true)
+
+    //TODO REMOVED SIZE INJECTION DUE TO 1.21.4 PORT, MAYBE REMOVE IT AND JUST USE MCS ATTRIBUTES?
+    /*@Inject(at = @At("HEAD"), method = "render(Lnet/minecraft/client/network/AbstractClientPlayerEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", cancellable = true)
     private void size(AbstractClientPlayerEntity abstractClientPlayerEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
         matrixStack.push();
         PlayerData data = ClientPlayerDatas.getPlayerData(abstractClientPlayerEntity.getUuid());
@@ -149,6 +154,6 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRendererMixi
     @Inject(at = @At("TAIL"), method = "render(Lnet/minecraft/client/network/AbstractClientPlayerEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", cancellable = true)
     private void sizeEnd(AbstractClientPlayerEntity abstractClientPlayerEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
         matrixStack.pop();
-    }
+    }*/
 
 }

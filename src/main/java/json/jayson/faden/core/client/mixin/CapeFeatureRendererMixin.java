@@ -1,5 +1,7 @@
 package json.jayson.faden.core.client.mixin;
 
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -19,36 +21,26 @@ import net.minecraft.client.util.math.MatrixStack;
 @Mixin(CapeFeatureRenderer.class)
 public class CapeFeatureRendererMixin {
 
-    @ModifyVariable(method = "render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/client/network/AbstractClientPlayerEntity;FFFFFF)V", at = @At("STORE"), ordinal = 0)
-    private VertexConsumer injected(VertexConsumer x, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, AbstractClientPlayerEntity abstractClientPlayerEntity, float f, float g, float h, float j, float k, float l) {
-
-        if(CapeSelectScreen.PRE_SELECTED_CAPE != null) {
-            return vertexConsumerProvider.getBuffer(RenderLayer.getEntitySolid(CapeSelectScreen.PRE_SELECTED_CAPE.getTexture()));
-        }
-
-        if(FadenCoreOptions.getConfig().CUSTOM_CAPES) {
-            FadenCoreCape cape = FadenCoreCapeUtil.getCapeForPlayer(abstractClientPlayerEntity.getUuid());
+    @ModifyVariable(method = "render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/client/render/entity/state/PlayerEntityRenderState;FF)V", at = @At("STORE"), ordinal = 0)
+    private VertexConsumer injected(VertexConsumer consumer, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, PlayerEntityRenderState playerEntityRenderState, float f, float g) {
+        if(MinecraftClient.getInstance().player != null && MinecraftClient.getInstance().player.getWorld().getEntityById(playerEntityRenderState.id) instanceof AbstractClientPlayerEntity player) {
+            FadenCoreCape cape = FadenCoreCapeUtil.getCapeForPlayer(player.getUuid());
             if (cape != null) {
                 return vertexConsumerProvider.getBuffer(RenderLayer.getEntitySolid(cape.getTexture()));
             }
         }
-        return x;
+        return consumer;
     }
 
-
-    @ModifyVariable(method = "render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/client/network/AbstractClientPlayerEntity;FFFFFF)V", at = @At("STORE"), ordinal = 0)
-    private SkinTextures injected(SkinTextures x, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, AbstractClientPlayerEntity abstractClientPlayerEntity, float f, float g, float h, float j, float k, float l) {
-        if(CapeSelectScreen.PRE_SELECTED_CAPE != null) {
-            return new SkinTextures(CapeSelectScreen.PRE_SELECTED_CAPE.getTexture(), null, CapeSelectScreen.PRE_SELECTED_CAPE.getTexture(), null, null, false);
-        }
-
-        if(FadenCoreOptions.getConfig().CUSTOM_CAPES) {
-            FadenCoreCape cape = FadenCoreCapeUtil.getCapeForPlayer(abstractClientPlayerEntity.getUuid());
+    @ModifyVariable(method = "render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/client/render/entity/state/PlayerEntityRenderState;FF)V", at = @At("STORE"), ordinal = 0)
+    private SkinTextures injected(SkinTextures consumer, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, PlayerEntityRenderState playerEntityRenderState, float f, float g) {
+        if(MinecraftClient.getInstance().player != null && MinecraftClient.getInstance().player.getWorld().getEntityById(playerEntityRenderState.id) instanceof AbstractClientPlayerEntity player) {
+            FadenCoreCape cape = FadenCoreCapeUtil.getCapeForPlayer(player.getUuid());
             if (cape != null) {
                 return new SkinTextures(cape.getTexture(), null, cape.getTexture(), null, null, false);
             }
         }
-        return x;
+        return consumer;
     }
 
 
